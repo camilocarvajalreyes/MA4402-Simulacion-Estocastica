@@ -6,63 +6,50 @@
 % clase 19 ajustar
 
 
-
-Se busca definir una función real de al variable $t \in \mathbb{R}_{+}$ (interpretada como tiempo), que sea continua y que sea \textit{} forma de darle sentido a lo anterior es mediante un \textbf{paseo aleatorio}:
-sean 
+% corregir redacción
+Se busca definir una función real de al variable $t \in \mathbb{R}_{+}$ (interpretada como tiempo), que sea continua y que sea \textit{} forma de darle sentido a lo anterior es mediante un \textbf{paseo aleatorio}: sean 
 \begin{itemize}
 \item $X_1, X_2, X_3, \ldots $ variables aleatorias independientes e idénticamente distribuidas tales que 
     \begin{equation*}
-            \P(X_{i} = -1) = \P(X_i = 1) = \frac{1}{2}
+            \P(X_{i} = -1) = \P(X_i = 1) = \frac{1}{2}\,.
     \end{equation*}
  \item $\forall  n \in \N$,
      \begin{equation*}
-             S_n := \sum_{i=1}^{n} X_i, ~ ~ ~ \text{ con } S_0 = 0
+             S_n := \sum_{i=1}^{n} X_i, ~ ~ ~ \text{ con } S_0 = 0\,.
      \end{equation*}
  \item $\forall t\in \mathbb{R}_{+}$, $S_t$ es la interpolación lineal de la colección $(S_{n})_{n \in \N}$.
 \end{itemize}
 
 %Para $t$ lo suficientemente grande y escalando tiempo y espacio adecuadamente, gráfico de $S_t$ pasa a ser análogo al de la figura (\ref{fig:c6_1}).
-
+% corregir redacción
 Específicamente, el escalamiento es: $\forall a >0$, definimos:
 \begin{equation*}
     B_t^{(a)} = \sqrt{\frac{t}{n}}   S_n = \sqrt{t}
-    \underbrace{\frac{1}{\sqrt{n} } \sum_{i=1}^{n} X_i}_{\substack{\text{aprox. } \mathcal{N}(0,1) \\ \text{ por TCL.}}}
+    \underbrace{\frac{1}{\sqrt{n} } \sum_{i=1}^{n} X_i}_{\substack{\text{aprox. } \mathcal{N}(0,1) \\ \text{ por TCL.}}}\,.
 \end{equation*}
 
-con lo que se tiene que $B_t^{(a)} \approx \mathcal{N}(0,t)$. También es directo ver que para $m > n$ enteros,
-$S_m - S_n$ es independiente de $S_n$, es decir, $(S_n)_{n \in \N}$ tiene \textbf{incrementos independientes},
-lo cual se manifiesta también en $(B_{t}^{(a)})_{t \geq 0}$. Esto motiva:
+con lo que se tiene que $B_t^{(a)} \approx \mathcal{N}(0,t)$. También es directo ver que para $m > n$ enteros, $S_m - S_n$ es independiente de $S_n$, es decir, $(S_n)_{n \in \N}$ tiene \textbf{incrementos independientes}, lo cual se manifiesta también en $(B_{t}^{(a)})_{t \geq 0}$. Esto motiva:
 
 \begin{definition}[Movimiento Browniano]
         \label{def:mb}
-        Un movimiento browniano es un proceso estocástico (es decir, una colección de variables 
-        aleatorias indexadas por $t \geq 0$) denotado $(B_t)_{T \geq 0}$, que satisface:
-        
-        \renewcommand{\labelenumi}{\roman{enumi})}
-        \begin{enumerate}
-                \item $B_0 = 0$ casi seguramente.
-                \item Tiene \textbf{incrementos independientes}: $\forall  t\geq 0$,
-                        \begin{equation*}
-                                (B_{t+s} - B_t)_{s \geq 0}, \text{ es
-                                independiente de } (B_{s})_{0 \leq s \leq t}
-                        \end{equation*}
-                \item Tiene \textbf{incrementos normales}: $\forall  t,s \geq 0$,
-                        \begin{equation*}
-                                B_{t+s} - B_t \sim \mathcal{N}(0,s)
-                        \end{equation*}
-                \item Es un proceso \textbf{continuo}: con probabilidad $1$, la función $t \mapsto B_t$ es 
-                        continua en $t$.
-        \end{enumerate}
+        Un movimiento browniano es un proceso estocástico (es decir, una colección de variables aleatorias indexadas por $t \geq 0$) denotado $(B_t)_{T \geq 0}$, que satisface:     
+\renewcommand{\labelenumi}{\roman{enumi})}
+\begin{enumerate}
+    \item $B_0 = 0$ casi seguramente.
+    \item Tiene \textbf{incrementos independientes}: $\forall  t\geq 0$,
+        \begin{equation*}
+                (B_{t+s} - B_t)_{s \geq 0}, \text{ es independiente de } (B_{s})_{0 \leq s \leq t}\,.
+        \end{equation*}
+    \item Tiene \textbf{incrementos normales}:\espacio $\forall  t,s \geq 0$,
+        \begin{equation*}
+                B_{t+s} - B_t \sim \mathcal{N}(0,s)\,.
+        \end{equation*}
+    \item Es un proceso \textbf{continuo}: con probabilidad $1$, la función $t \mapsto B_t$ es continua en $t$.
+\end{enumerate}
 \end{definition}
 
-La ley del proceso $(B_{t}^{(a)})_{t \geq 0}$ converge, cuando $a \rightarrow \infty$, a la ley del 
-movimiento browniano $(B_t)_{t \geq 0}$, en un sentido adecuado (esto se llama \textit{teorema de Donsker}). 
-Por otra parte, $(B_t)_{t \geq 0}$ también se conoce como \textbf{Proceso de
-Wiener}. El nombre \textit{browniano} proviene del botánico Robert Brown, quien
-observó el movimiento errático de partículas de polen en el agua. Posteriormente, Einstein explicó este 
-movimiento como resultado de muchas pequeñas colisiones del polen con las moléculas de agua circundantes.
-
-Dado lo anterior surge la pregunta: ¿ Existe un proceso cumpliendo las condiciones de la definición anterior?
+La ley del proceso $(B_{t}^{(a)})_{t \geq 0}$ converge, cuando $a \rightarrow \infty$, a la ley del movimiento browniano $(B_t)_{t \geq 0}$, en un sentido adecuado (esto se llama \textit{teorema de Donsker}). Por otra parte, $(B_t)_{t \geq 0}$ también se conoce como \textbf{Proceso de Wiener}. El nombre \textit{browniano} proviene del botánico Robert Brown, quien observó el movimiento errático de partículas de polen en el agua. Posteriormente, Einstein explicó este movimiento como resultado de muchas pequeñas colisiones del polen con las moléculas de agua circundantes.
+\newp Dado lo anterior surge la pregunta: ¿ Existe un proceso cumpliendo las condiciones de la definición anterior?
 
 \begin{theorem}
     \label{teo:mb}
@@ -73,8 +60,8 @@ La demostración queda pendiente. Por ahora veamos algunas propiedades básicas 
 \begin{proposition}
 $\forall ~ 0 = t_0 < t_1 < \ldots < t_n$ , la colección 
 \begin{equation*}
-        \left( \frac{B_{t_i} - B_{t_{i-1}}}{\sqrt{t_i - t_{i-1}} }
-        \right)_{i = 1, \ldots,n}, \text{ es i.i.d } \sim \mathcal{N}(0,1)
+    \left( \frac{B_{t_i} - B_{t_{i-1}}}{\sqrt{t_i - t_{i-1}} }
+    \right)_{i = 1, \ldots,n} \text{ es i.i.d } \sim \mathcal{N}(0,1)\,.
 \end{equation*}
 \end{proposition}
 \begin{proof}
@@ -83,81 +70,62 @@ Directa de la definición.
 \negro
 \end{proof}
 
-Esto da lugar a un método sencillo para generar un movimiento browniano
-discretizado: para un horizonte $T > 0$ y $n \in \N$, sea $\Delta t = \frac{T}{n}$, y $t_i = i \Delta t$. 
-Dadas $Z_1, \ldots, Z_n$ i.i.d. $\mathcal{N}(0,1)$, entonces el proceso $(Y_{t})_{t \in [0,T]}$: 
+Esto da lugar a un método sencillo para generar un movimiento browniano discretizado: para un horizonte $T > 0$ y $n \in \N$, sea $\Delta t = \frac{T}{n}$, y $t_i = i \Delta t$.  Dadas $Z_1, \ldots, Z_n$ i.i.d. $\mathcal{N}(0,1)$, entonces el proceso $(Y_{t})_{t \in [0,T]}$: 
 \begin{equation*}
     Y_{t_i} := \sqrt{\Delta t} \sum_{j=1}^{i} Z_j
 \end{equation*}
-interpolado linealmente entre $t_i$'s, es una aproximación de $(B_t)_{t \in
-[0,T]}$ (de hecho, tiene exactamente la misma ley en la malla $0 = t_0 < t_1 < \ldots < t_n = T$). 
+interpolado linealmente entre $t_i$'s, es una aproximación de $(B_t)_{t \in [0,T]}$ (de hecho, tiene exactamente la misma ley en la malla $0 = t_0 < t_1 < \ldots < t_n = T$). 
 
 \begin{proposition}
-        Se tienen las siguientes proposiciones:
-        \begin{enumerate}
-                \item \label{prop1:a} $\forall  t_0 > 0$, el proceso $X_t := B_{t + t_0} -
-                        B_{t_0}$ es un movimiento browniano.
-                \item \label{prop1:b} $\forall c > 1$, el proceso $X_t :=
-                        \frac{1}{\sqrt{c}} B_{ct}$ es un movimiento browniano.
-                \item \label{prop1:c} El proceso $X_t := B_1 - B_{1-t}$ es
-                        un movimiento browniano en $[0,1]$.
-                \item \label{prop1:d} El proceso $X_t := t B_{\frac{1}{t}}$
-                        es un movimiento browniano. ($X_0 = 0$)
-                \item \label{prop1:e} El proceso $X_t := -B_{t}$ es un movimiento browniano.
-        \end{enumerate}
+Se tienen las siguientes proposiciones:
+\begin{enumerate}
+    \item \label{prop1:a} $\forall  t_0 > 0$, el proceso $X_t := B_{t + t_0} - B_{t_0}$ es un movimiento browniano.
+    \item \label{prop1:b} $\forall c > 1$, el proceso $X_t := \frac{1}{\sqrt{c}} B_{ct}$ es un movimiento browniano.
+    \item \label{prop1:c} El proceso $X_t := B_1 - B_{1-t}$ es un movimiento browniano en $[0,1]$.
+    \item \label{prop1:d} El proceso $X_t := t B_{\frac{1}{t}}$ es un movimiento browniano. ($X_0 = 0$)
+    \item \label{prop1:e} El proceso $X_t := -B_{t}$ es un movimiento browniano.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
 \gris
-Probemos  \ref{prop1:b}, el resto queda propuesto. Debemos probar que
-$X_t = \frac{1}{\sqrt{c}} B_{ct}$ cumple con las condiciones de la
-definición (\ref{def:mb}). Es claro 
-que las condiciones I,II y IV son directas del hecho que $(B_t)_{t \geq
-0}$ es un movimiento browniano. Además: 
-
+Probemos \ref{prop1:b}, el resto queda propuesto como \ejercicio \gris. Debemos probar que $X_t = \frac{1}{\sqrt{c}} B_{ct}$ cumple con las condiciones de la definición (\ref{def:mb}). Es claro  que las condiciones I,II y IV son directas del hecho que $(B_t)_{t \geq 0}$ es un movimiento browniano. Además: 
 \begin{equation*}
-        X_{t+s} - X_t = \underbrace{\frac{1}{\sqrt{c} } \left( B_{ct + cs} - B_{ct}
-        \right)}_{\mathcal{N}(0,cs)} \sim  \mathcal{N}(0,s)
+    X_{t+s} - X_t = \underbrace{\frac{1}{\sqrt{c} } \left( B_{ct + cs} - B_{ct} \right)}_{\mathcal{N}(0,cs)} \sim  \mathcal{N}(0,s)\,.
 \end{equation*}
 \findem
 \negro
 \end{proof}
 
 A pesar de que son continuas, las \textbf{trayectorias} de un movimiento browniano son bastante irregulares. La trayectoria de un movimiento browniano es la función aleatoria:
- \begin{equation*}
-         t \mapsto B_t
- \end{equation*}
+\begin{equation*}
+     t \mapsto B_t
+\end{equation*}
 
- \begin{theorem}
-         $\P( \exists t \geq 0 \text{ tal que } B_t \text{ es derivable en } t) = 0$
- \end{theorem}
+\begin{theorem}
+$$\P( \exists t \geq 0 \text{ tal que } B_t \text{ es derivable en } t) = 0 \,.$$
+\end{theorem}
 
- La demostración de dicho teorema escapa a los contenidos del curso. 
+La demostración de dicho teorema escapa a los contenidos del curso. 
 
-\newp El comportamiento de las \textbf{oscilaciones} del movimiento browniano cerca de $t=0$ y $t=\infty$ queda 
- descrito por el siguiente reusltado:
+\newp El comportamiento de las \textbf{oscilaciones} del movimiento browniano cerca de $t=0$ y $t=\infty$ queda descrito por el siguiente resultado:
 
- \begin{theorem}[Ley del Logaritmo Iterado]
-         $\P$- casi seguramente se cumple:
-        \renewcommand{\labelenumi}{\roman{enumi})}
-         \begin{enumerate}
-                 \item \label{lli:1} $\limsup_{t \searrow 0} \frac{B_t}{\sqrt{ 2t \log \log {1/t}}} = 1$
-                 \item \label{lli:2} $\liminf_{t \searrow 0} \frac{B_t}{\sqrt{ 2t \log \log {1/t}}} = -1$
-                 \item \label{lli:3} $\limsup_{t \rightarrow \infty} \frac{B_t}{\sqrt{ 2t \log \log {t}}} = 1$
-                 \item \label{lli:4} $\liminf_{t \rightarrow \infty} \frac{B_t}{\sqrt{ 2t \log \log {t}}} = -1$
-         \end{enumerate}
- \end{theorem}
+\begin{theorem}[Ley del Logaritmo Iterado]
+$\P$- casi seguramente se cumple:
+% \renewcommand{\labelenumi}{\roman{enumi})}
+\begin{enumerate}
+     \item \label{lli:1} $\limsup_{t \searrow 0} \frac{B_t}{\sqrt{ 2t \log \log {1/t}}} = 1$
+     \item \label{lli:2} $\liminf_{t \searrow 0} \frac{B_t}{\sqrt{ 2t \log \log {1/t}}} = -1$
+     \item \label{lli:3} $\limsup_{t \rightarrow \infty} \frac{B_t}{\sqrt{ 2t \log \log {t}}} = 1$
+     \item \label{lli:4} $\liminf_{t \rightarrow \infty} \frac{B_t}{\sqrt{ 2t \log \log {t}}} = -1$
+\end{enumerate}
+\end{theorem}
 
-\newp La demostración de este resultado utiliza herramientas fuera del alcance del curso. Gráficamente  \ref{lli:1}
- y \ref{lli:2} significa que la trayectoria de $(B_{t})_{t \geq 0}$ pasa cerca (o cruza) del gráfico de la 
- función $f(t) = \sqrt{2t \log \log (t)} $ infinitas veces cuando $t \rightarrow \infty$, y lo mismo para 
- $-f(t)$. 
+\newp La demostración de este resultado utiliza herramientas fuera del alcance del curso. Gráficamente  \ref{lli:1} y \ref{lli:2} significa que la trayectoria de $(B_{t})_{t \geq 0}$ cruza o pasa cerca del gráfico de la función $f(t) = \sqrt{2t \log \log (t)} $ infinitas veces cuando $t \rightarrow \infty$, y lo mismo para $-f(t)$. 
 
-
- \begin{proposition}
-         $\operatorname{cov}(B_t,B_s) = t \wedge s := \min(t,s)$. 
- \end{proposition}
-
+\begin{proposition}
+     $$\operatorname{Cov}(B_t,B_s) = t \wedge s := \min(t,s)\,.$$ 
+\end{proposition}
 \begin{proof}
 \gris
  Para $0 \leq s \leq t$ tenemos: 
@@ -172,19 +140,14 @@ A pesar de que son continuas, las \textbf{trayectorias} de un movimiento brownia
 \negro
 \end{proof}
 
-
 \subsection{Martingalas}
-
 Para definir lo que es una martingala y otros conceptos relacionados se requiere del siguiente concepto:
-
+% def repetida
 \begin{definition}[Filtración]
-        Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$, una \textbf{filtración} es una 
-        colección $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$ de sub $\sigma$-álgebras de $\mathcal{F}$ 
-        que es \textbf{creciente}, es decir, $\mathcal{F}_t \subseteq \mathcal{F}_s$, $\forall s \leq s$.
+Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$, una \textbf{filtración} es una colección $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$ de sub $\sigma$-álgebras de $\mathcal{F}$ que es \textbf{creciente}, es decir, $\mathcal{F}_t \subseteq \mathcal{F}_s$, $\forall s \leq s$.
 \end{definition}
 
-$\mathcal{F}_t$ representa la \textbf{información} disponible en momento $t$, es decir, la colección 
-de eventos de $\mathcal{F}$ que pueden definirse a partid e la información hasta $t$. 
+$\mathcal{F}_t$ representa la \textbf{información} disponible en momento $t$, es decir, la colección de eventos de $\mathcal{F}$ que pueden definirse a partid e la información hasta $t$. 
 
 \newp Dado un proceso estocástico $(X_t)_{t \geq 0}$, definimos su \textbf{filtración natural} como 
 \begin{equation*}
@@ -192,32 +155,27 @@ de eventos de $\mathcal{F}$ que pueden definirse a partid e la información hast
 \end{equation*}
 
 \newp Decimos que un proceso $(X_{t})_{t \geq 0}$ es \textbf{adaptado} a una filtración $(\mathcal{F}_t)_{t \geq 0}$ 
-si $X_t$ es $\mathcal{F}_t$ medible $\forall t$. En general se asume que los
-procesos con los que se trabaja son adaptados. Evidentemente, $(X_t)_{t \geq 0}$ es $(\mathcal{F}^X_t)_{t \geq 0}$ - adaptado.
+si $X_t$ es $\mathcal{F}_t$ medible $\forall t$. En general se asume que los procesos con los que se trabaja son adaptados. Evidentemente, $(X_t)_{t \geq 0}$ es $(\mathcal{F}^X_t)_{t \geq 0}$ - adaptado.
 
-\newp Cuando trabajamos con un proceso (por ejemplo un movimiento browniano y no se
-menciona la filtración, esta implícito que se usa la filtración natural. 
+\newp Cuando trabajamos con un proceso (por ejemplo un movimiento browniano y no se menciona la filtración, esta implícito que se usa la filtración natural. 
 
-\newp Para comprender el concepto de martingala es provechoso reflexionar sobre el siguiente ejemplo: si 
-$X_t$ representa la riqueza de una persona en el instante $t$, la cual evoluciona de acuerdo a 
-reglas aleatorias de un cierto \textit{juego} (ejemplo: apuestas, fluctuaciones de la bolsa), 
-entendemos que el juego es \textbf{justo} si la riqueza futura no crece ni decrece, en esperanza.
-
+\newp Para comprender el concepto de martingala es provechoso reflexionar sobre el siguiente ejemplo: si $X_t$ representa la riqueza de una persona en el instante $t$, la cual evoluciona de acuerdo a reglas aleatorias de un cierto \textit{juego} (ejemplo: apuestas, fluctuaciones de la bolsa), entendemos que el juego es \textbf{justo} si la riqueza futura no crece ni decrece, en esperanza.
+% def repetida
 \begin{definition}[Martingala]
-        Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$ con
-        filtración $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$, una \textbf{martingala} es un proceso 
-        $(X_t)_{t \geq 0}$ adaptado tal que:
-
-        \begin{itemize}
-                \item $\forall  t \geq 0$, $X_t \in L^{1}$, es decir, $\E \abs{X_t} < \infty$.
-                \item $\forall s \leq t$, 
-                        \begin{equation*}
-                                \E \left( X_t \mid \mathcal{F}_s \right)  = X_s, ~ ~ ~ \text{casi seguramente}
-                        \end{equation*}
-        \end{itemize}
+Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$ con filtración $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$, una \textbf{martingala} es un proceso $(X_t)_{t \geq 0}$ adaptado tal que:
+\begin{itemize}
+    \item $\forall  t \geq 0$, $X_t \in L^{1}$, es decir, $\E \abs{X_t} < \infty$.
+    \item $\forall s \leq t$, 
+            \begin{equation*}
+                    \E \left( X_t \mid \mathcal{F}_s \right)  = X_s, \espacio \text{casi seguramente}\,.
+            \end{equation*}
+\end{itemize}
 \end{definition}
 
-Notemos que entonces $\E(X_t) = \E(X_0)$ que es constante para todo $t$. El concepto de martingala está 
+Notemos que entonces $\E(X_t) = \E(X_0)$ que es constante para todo $t$. 
+
+\iffalse  % esto ya se repasó en la sub-unidad dedicada a esperanzas condicionales
+\newp El concepto de martingala está 
 íntimamente relacionado con el calculo de esperanzas condicionales. A continuación se revisan algunas 
 de las propiedades  necesarias en cuanto a este último concepto. 
 
@@ -234,13 +192,12 @@ es la única (casi seguramente) variable aleatoria $\mathcal{G}$-medible tal que
         \item Si $Z$ es $\mathcal{G}$ - medible, entonces $\E(ZX \mid G) = Z\E(X \mid \mathcal{G})$ casi 
                 seguramente.
 \end{itemize}
+\fi
 
-Cuando hay una filtración subyacente, se hace necesario re-definir el concepto de movimiento browniano:
+\newp Cuando hay una filtración subyacente, se hace necesario re-definir el concepto de movimiento browniano:
 
-\begin{definition}[Movimiento Browniano]
-Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$, 
-un \textbf{movimiento browniano} es un proceso $(B_t)_{t\geq 0}$ adaptado que satisfiace:
-
+\begin{definition}[Movimiento Browniano para un espacio filtrado]
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$, un \textbf{movimiento browniano} es un proceso $(B_t)_{t\geq 0}$ adaptado que satisface:
 \renewcommand{\labelenumi}{\roman{enumi})}
 \begin{enumerate}
         \item   $B_0 = 0$, casi seguramente. 
@@ -271,261 +228,204 @@ Comenzamos por \ref{mba:1}:
     \E(B_t \mid \mathcal{F}_s ) &= \E (B_t - B_s \mid \mathcal{F}_s)
         + \E(B_s \mid \mathcal{F}_s) \\
         &= \E(B_t - B_s) + B_s \\ 
-        &= B_s 
+        &= B_s \,.
 \end{align*}
-
 Por otra parte, para \ref{mba:2}: 
 \begin{align*}
 \E(B_t^2 \mid \mathcal{F}_s) 
 &=  \E \left( (B_{t} - B_{s}) \mid \mathcal{F}_s \right) + \E(B_s \mid
 \mathcal{F}_s) - 2 \E \left( (B_t - B_s)B_s \mid \mathcal{F}_s \right) \\ 
 &= \E\left( (B_t - B_s)^2 \right) + B_s^2 -2 \E \left((B_t - B_s) \mid \mathcal{F}_s\right)\\
-&= t - s + B_s^2
+&= t - s + B_s^2\,.
 \end{align*}
 Finalmente para \ref{mba:3}, recordemos que si $X \sim \mathcal{N}(\mu, \tau^2)$, entonces 
 \begin{equation*}
-        \E (e^{\lambda X}) = \exp\{\lambda \mu + \frac{\lambda^2 \tau^2}{2}\}
+        \E (e^{\lambda X}) = \exp\{\lambda \mu + \frac{\lambda^2 \tau^2}{2}\}\,.
 \end{equation*}
-
 Con esto 
 \begin{align*}
         \E \left( e^{\sigma B_t} \mid \mathcal{F}_s \right) 
         &= \E \left( e^{\sigma (B_t - B_s)} e^{\sigma \B_s} \mid \mathcal{F}_s\right) \\
         &= e^{\sigma B_s} \E \left(e^{\sigma(B_t - B_s)} \mid \mathcal{F}_s\right) \\ 
         &= e^{\sigma B_s} \E \left( e^{\sigma(B_t - B_s)} \right) \\ 
-        &= e^{\sigma B_s} e^{\sigma^2(t-s)/2}
+        &= e^{\sigma B_s} e^{\sigma^2(t-s)/2}\,.
 \end{align*}
 \findem
 \negro
 \end{proof}
 
 \subsection{Tiempos de Parada}
-
-Buscamos definir tiempo aleatorios que \textbf{no utilicen información futura},
-solamente lo que a ocurrido hasta el momento. 
-
+Buscamos definir tiempo aleatorios que \textbf{no utilicen información futura}, solamente lo que a ocurrido hasta el momento.
+% def repetida
 \begin{definition}[Tiempo de parada]
-       Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$, 
-        un \textbf{tiempo de parada} es una variable aleatoria $T \in [0, \infty]$ tal que 
-        \begin{equation*}
-                \{ T \leq t \} \in \mathcal{F}_t, ~ ~ ~ \forall  t
-        \end{equation*}
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$, un \textbf{tiempo de parada} es una variable aleatoria $T \in [0, \infty]$ tal que 
+\begin{equation*}
+    \{ T \leq t \} \in \mathcal{F}_t, ~ ~ ~ \forall  t \,.
+\end{equation*}
 \end{definition}
 
 \begin{example}
 Para ilustrar la definición anterior, se estudian los siguientes ejemplos:
-        \begin{itemize}
-                        \item  Si se define $T_b := \inf \{t\geq 0 : B_t =
-                                b \}$ como \textit{la primera vez que} $B$
-                                \textit{llega a} $b$, se tiene entonces que $T_b$ es un tiempo de parada. 
-                        \item Si se define $S_0 := \{ t \in [0,1]: B_t = 0 \}$ como 
-                                \textit{la última vez antes de} $t=1$ \textit{que} $B$ \textit{toca a} $0$. 
-                                Entonces $S_0$ no es u tiempo de parada. 
-        \end{itemize}
-        Veamos que $T_b$ es un tiempo de parada:
-
-        \begin{align*}
-                \{ T_b \leq t \} 
-                &= \{\exists s \in [0,1]: B_s = b \} \\
-                &= \{\forall n \in \N, \exists r \in [0,1] \cap \mathbb{Q}, \abs{B_r -v} \leq \frac{1}{n}\}\\
-                &= \bigcap_{n \in \N} \bigcup_{r \in [0,1] \cap \mathbb{Q}} \{
-                        \abs{B_r -b} \leq \frac{1}{n} \} \in \mathcal{F}_{t}
-        \end{align*}
-        Lo que comprueba dicha afirmación.
+\begin{itemize}
+    \item  Si se define $T_b := \inf \{t\geq 0 : B_t =
+            b \}$ como \textit{la primera vez que} $B$ \textit{llega a} $b$, se tiene entonces que $T_b$ es un tiempo de parada. 
+    \item Si se define $S_0 := \{ t \in [0,1]: B_t = 0 \}$ como \textit{la última vez antes de} $t=1$ \textit{que} $B$ \textit{toca a} $0$. 
+            Entonces $S_0$ no es tiempo de parada. 
+\end{itemize}
 \end{example}
+\begin{proof}
+\gris
+Veamos que $T_b$ es un tiempo de parada:
+\begin{align*}
+    \{ T_b \leq t \} 
+    &= \{\exists s \in [0,1]: B_s = b \} \\
+    &= \{\forall n \in \N, \exists r \in [0,1] \cap \mathbb{Q}, \abs{B_r -v} \leq \frac{1}{n}\}\\
+    &= \bigcap_{n \in \N} \bigcup_{r \in [0,1] \cap \mathbb{Q}} \{
+            \abs{B_r -b} \leq \frac{1}{n} \} \in \mathcal{F}_{t} \,.
+\end{align*}
+Lo que comprueba dicha afirmación. \findem
+\negro
+\end{proof}
 
-Surge la pregunta, cuando $(X_t)_{t \geq 0}$ es una martingala (es decir, un juego justo). Si uno detiene 
+\newp Surge la pregunta, cuando $(X_t)_{t \geq 0}$ es una martingala (es decir, un juego justo). Si uno detiene 
 el juego en un tiempo aleatorio con la información disponible hasta el momento,
 ¿será posible obtener un beneficio de aquello? 
 
 \newp Bajo cierta condición en el tiempo de parada, la respuesta será \textbf{no}. Para especificar lo anterior, 
 necesitamos definir la $\sigma$-álgebra correspondiente a la información disponible hasta cierto 
 tiempo de parada. 
-
 \begin{definition}
-        Dado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y un tiempo de parada $T$, la 
-        $\sigma$-álgebra asociada a $T$ es:
-        \begin{equation*}
-                \mathcal{F}_T := \{ A \in \mathcal{F}: \forall t \geq 0, ~ A \cap
-                \{T\leq t\} \in \mathcal{F}_t \}
-        \end{equation*}
+Dado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y un tiempo de parada $T$, la 
+$\sigma$-álgebra asociada a $T$ es:
+\begin{equation*}
+        \mathcal{F}_T := \{ A \in \mathcal{F}: \forall t \geq 0, ~ A \cap
+        \{T\leq t\} \in \mathcal{F}_t \}
+\end{equation*}
 \end{definition}
-
-\begin{ejer}
-        Probar que $\mathcal{F}_T$ es $\sigma$-álgebra. 
-\end{ejer}
+\ejercicio  \gris : Probar que $\mathcal{F}_T$ es $\sigma$-álgebra. \negro
 
 \begin{theorem}[Muestreo opcional de Doob]
-        Dados $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y una martingala $(X_t)_{t \geq 0}$, 
-        sean $T$, $S$ tiempos de parada tales que $S \leq T \le K$ con $K>0$ una constante. Entonces 
-        \begin{equation*}
-                \E \left[ X_t \mid  \mathcal{F}_s \right]  = X_s,  ~ ~ ~ \text{c.s.}
-        \end{equation*}
+Dados $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y una martingala $(X_t)_{t \geq 0}$, 
+sean $T$, $S$ tiempos de parada tales que $S \leq T \le K$ con $K>0$ una constante. Entonces 
+\begin{equation*}
+        \E \left[ X_t \mid  \mathcal{F}_s \right]  = X_s,  ~ ~ ~ \text{c.s.}\,.
+\end{equation*}
 \end{theorem}
-
 La demostración de este teorema utiliza herramientas fuera del alcance del curso. 
 
-\newp El resultado anterior es útil para algunos cálculos sobre tiempos de parada. La condición de $T$ acotado 
-suele ser demasiado restrictiva. Para $T$ tiempo de parada no acotado, se trabaja con $T \wedge n$ y 
-luego se hace $n \to \infty$. Esta técnica se denomina \textbf{localización}. Veamos un ejemplo:
+\newp El resultado anterior es útil para algunos cálculos sobre tiempos de parada. La condición de $T$ acotado suele ser demasiado restrictiva. Para $T$ tiempo de parada no acotado, se trabaja con $T \wedge n$ y luego se hace $n \to \infty$. Esta técnica se denomina \textbf{localización}. Veamos un ejemplo:
 
 \begin{proposition}
-        Para $a \in \mathbb{R}$, sea $T_a = \inf \{ t \ge 0: B_t = a \}$. Entonces $T_a < \infty$ casi seguramente 
-        y su ley viene dada por su transformada de Laplace.
-        \begin{equation*}
-                \E \left( e^{-\lambda T_{a}} \right)  = e^{-\sqrt{2\lambda} \abs{a} }
-        \end{equation*}
-        o equivalente, su densidad es 
-        \begin{equation*}
-                f_{T_{a}} = \frac{\abs{a}}{\sqrt{ 2 \pi x^3}} \exp({{-a^2}/{2x}}), ~ ~ ~ \forall x > 0
-        \end{equation*}
+Para $a \in \mathbb{R}$, sea $T_a = \inf \{ t \ge 0: B_t = a \}$. Entonces $T_a < \infty$ casi seguramente y su ley viene dada por su transformada de Laplace.
+\begin{equation*}
+        \E \left( e^{-\lambda T_{a}} \right)  = e^{-\sqrt{2\lambda} \abs{a} }\,,
+\end{equation*}
+o equivalente, su densidad es 
+\begin{equation*}
+        f_{T_{a}} = \frac{\abs{a}}{\sqrt{ 2 \pi x^3}} \exp({{-a^2}/{2x}}), ~ ~ ~ \forall x > 0\,.
+\end{equation*}
 \end{proposition}
 \begin{proof}
 \gris
-Sea $a>0$. Sea además la martingala $X_t = \exp(\sigma B_t - \frac{\sigma^2}{2}t)$ y usemos el  
-teorema al tiempo de parada acotado $T_a \wedge n$, para $n \in \N$. Luego $\E (X_{T_a \wedge n}) 
-= \E(X_0) = 1$. Queremos  hacer $n \to \infty$. Notemos que:
+Sea $a>0$. Sea además la martingala $X_t = \exp(\sigma B_t - \frac{\sigma^2}{2}t)$ y usemos el teorema al tiempo de parada acotado $T_a \wedge n$, para $n \in \N$. Luego $\E (X_{T_a \wedge n}) = \E(X_0) = 1$. Queremos  hacer $n \to \infty$. Notemos que:
 \begin{itemize}
 \item $X_{T_{a} \wedge n} = \exp\left(\sigma B_{T_{a} \wedge n} - \frac{\sigma^{2}}{2} 
-        T_a \wedge n \right)  \le e^{\sigma a}$, es decir, la sucesión $(X_{T_a \wedge n})_{n \in \N}$
-        está dominada por $e^{\sigma a}$.
+        T_a \wedge n \right)  \le e^{\sigma a}$, es decir, la sucesión $(X_{T_a \wedge n})_{n \in \N}$ está dominada por $e^{\sigma a}$.
 \item En $\{T_a < \infty \}$, $X_{T_a \wedge n} \xrightarrow[n]{} X_{T_a}$
-\item En $\{T_a = \infty \}$, $X_{T_a \wedge n} = X_n = \exp\left( \sigma B_n - \frac{\sigma^2 n}{2}
-        \right)  \xrightarrow[n]{} 0$.
+\item En $\{T_a = \infty \}$, $X_{T_a \wedge n} = X_n = \exp\left( \sigma B_n - \frac{\sigma^2 n}{2} \right)  \xrightarrow[n]{} 0$.  % n\to\infty % ????
 \end{itemize}
 Luego, usando el teorema de convergencia dominada: 
 \begin{align*}
-        1 
-        &= \lim_n \E(X_{T_{a} \wedge n}) \\ 
-        &\stackrel{\text{TCD}}{=} \E\left(\lim_n X_{T_a \wedge n} \right)\\
-        &= \E \left( \lim_n \mathbbm{1}_{\{T_a < \infty\}} X_{T_a \wedge n} + 
-        \lim_n \mathbbm{1}_{\{T_{a} = \infty\}} X_{T_a \wedge n} \right)\\
-        &= \E \left( \mathbbm{1}_{\{ T_a < \infty \}}  X_{T_a}  \right) 
-            = \E \left( \mathbbm{1}_{\{T_a < \infty \}} \exp( \sigma B_{T_a} 
-                - \frac{\sigma^2 T_a}{2}) \right)
+    1 &= \lim_n \E(X_{T_{a} \wedge n}) \\ 
+    &\stackrel{\text{TCD}}{=} \E\left(\lim_n X_{T_a \wedge n} \right)\\
+    &= \E \left( \lim_n \mathbbm{1}_{\{T_a < \infty\}} X_{T_a \wedge n} + 
+    \lim_n \mathbbm{1}_{\{T_{a} = \infty\}} X_{T_a \wedge n} \right)\\
+    &= \E \left( \mathbbm{1}_{\{ T_a < \infty \}}  X_{T_a}  \right)  = \E \left( \mathbbm{1}_{\{T_a < \infty \}} \exp( \sigma B_{T_a} - \frac{\sigma^2 T_a}{2}) \right)\,.
 \end{align*}
 Es decir, 
 \begin{equation*}
-        \E \left[ \mathbbm{1}_{\{T_a < \infty \}} \exp(-\sigma^2 T_a / 2) \right] = e^{-\sigma a}
+    \E \left[ \mathbbm{1}_{\{T_a < \infty \}} \exp(-\sigma^2 T_a / 2) \right] = e^{-\sigma a}
 \end{equation*}
-
-Haciendo $\sigma \to 0$, se obtiene $\P(T_a < \infty) = 1$. Tomando $\sigma = \sqrt{2\lambda}$,
-se llega a lo deseado. El caso $a < 0$ se deduce directamente pues $-B_t$ es también un movimiento
-browniano.\findem
+Haciendo $\sigma \to 0$, se obtiene $\P(T_a < \infty) = 1$. Tomando $\sigma = \sqrt{2\lambda}$, se llega a lo deseado. El caso $a < 0$ se deduce directamente pues $-B_t$ es también un movimiento browniano.\findem
 \negro
 \end{proof}
 
 \newp La siguiente desigualdad también es útil:
 \begin{theorem}[Desigualdad de Doob]
-    Si $(X_t)_{t \in [0,T]}$ es una martingala continua, entonces 
-    \begin{equation*}
-            \E \left[ \sup_{0 \le  t \le  T} \abs{X_t}^2 \right] \le 4 \E \left[ \abs{X_T}^2 \right]
-    \end{equation*}
-        
+Si $(X_t)_{t \in [0,T]}$ es una martingala continua, entonces 
+\begin{equation*}
+    \E \left[ \sup_{0 \le  t \le  T} \abs{X_t}^2 \right] \le 4 \E \left[ \abs{X_T}^2 \right]\,.
+\end{equation*}
 \end{theorem}
 
 \subsection{Integral Estocástica y Cálculo de It\^{o}}
-
-Como motivación consideremos $(X_t)_{t \ge 0}$ un proceso con trayectorias continuas y derivables. 
-Se puede definir la \textbf{integral} de $f$ con respecto a $X$ como
-
+Como motivación consideremos $(X_t)_{t \ge 0}$ un proceso con trayectorias continuas y derivables. Se puede definir la \textbf{integral} de $f$ con respecto a $X$ como
 \begin{equation*}
-        \int_{0}^{t} f(s) dX_s := \int_{0}^{t} f(s) \frac{dX_s}{ds} ds 
+        \int_{0}^{t} f(s) dX_s := \int_{0}^{t} f(s) \frac{dX_s}{ds} ds \,.
 \end{equation*}
 
-Lamentablemente, no podemos hacer los mismo con $(B_t)_{t \ge 0}$ un movimiento browniano, pues 
-$\frac{dB_t}{dt}$ \textbf{no existe}. Luego, para definir 
+Lamentablemente, no podemos hacer los mismo con un movimiento browniano $(B_t)_{t \ge 0}$, pues $\displaystyle\frac{dB_t}{dt}$ \textbf{no existe}. Luego, si queremos definir 
 \begin{equation*}
         \int_{0}^{t} f(s) dB_s
 \end{equation*}
-
-Tendremos que seguir un enfoque distinto. Integrales de este tipo son muy útiles; por ejemplo, 
-para definir ecuaciones diferenciales estocásticas. 
-
-\begin{remark}
-        Permitiremos que el integrando $f(s)$ también sea un proceso: definiremos $\int_{0}^{t} X_s dB_s$. 
-\end{remark}
+tendremos que seguir un enfoque distinto. Integrales de este tipo son muy útiles; por ejemplo, para definir ecuaciones diferenciales estocásticas. 
+\newp Permitiremos que el integrando $f(s)$ también sea un proceso, i.e., definiremos 
+$$\int_{0}^{t} X_s dB_s \,.$$ 
 
 \subsubsection{Construcción}
-
-Sea $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ un espacio filtrado, sea $(B_t)_t{t \ge 0}$ un 
-movimiento browniano con respecto a este espacio. En primer lugar, definiremos
-la integral con respecto a $B$ para una cierta clase de procesos, llamados \textbf{procesos simples 
-predecibles}:
-
+Sea $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ un espacio filtrado, sea $(B_t)_t{t \ge 0}$ un movimiento browniano con respecto a este espacio. En primer lugar, definiremos la integral con respecto a $B$ para una cierta clase de procesos, llamados \textbf{procesos simples predecibles}:
 \begin{definition}[Proceso Simple Predecible]
-        Un proceso $(H_t)_{0 \le  t \le T}$ se dice \textbf{simple predecible} si se escribe de la forma 
-        \begin{equation*}
-                H_t = \sum_{i=1}^{k} A_i \mathbbm{1}_{\{ t_{i-1}, t_i \}} (t)
-        \end{equation*}
-        para ciertos instantes $0 = t_0 < t_1 < \ldots, t_k = T$, $(A_i)_{i=1}^{k}$ son variables 
-        aleatorias $\mathcal{F}_{t_{i -1}}$ - medibles, y tales que $H$ cumple $\E(
-        \int_{0}^{T} H_s^{2} ds) < \infty$.
+Un proceso $(H_t)_{0 \le  t \le T}$ se dice simple predecible si se escribe de la forma 
+\begin{equation*}
+    H_t = \sum_{i=1}^{k} A_i \mathbbm{1}_{\{ t_{i-1}, t_i \}} (t)\,.
+\end{equation*}
+para ciertos instantes $0 = t_0 < t_1 < \ldots, t_k = T$, $(A_i)_{i=1}^{k}$ son variables aleatorias $\mathcal{F}_{t_{i -1}}$ - medibles, y tales que $H$ cumple $\E(\int_{0}^{T} H_s^{2} ds) < \infty$.
 \end{definition}
 
 \begin{definition}[Integral Estocástica]
-        Dado un tal $H$, la \textbf{integral estocástica} de $H$ con respecto a
-        $B$ es el proceso $\left(I(H)_t \right)_{t \in [0,T]}$. Definido como 
-        \begin{equation*}
-                I(H)_t = \sum_{i=1}^{k} A_i \left( B_{t_i \wedge n} - B_{t_{i-1} \wedge t} \right) 
-                =: \int_{0}^{t} H_s dB_s
-        \end{equation*}
-        Es decir, para $t \in (t_j, t_{j+1}]$ 
-        \begin{equation*}
-                I(H)_t = \sum_{i=1}^{j} A_i\left( B_{t_i} - B_{t_{i-1}}  \right) + A_{j+1}(B_t - B_{t_{j}})
-        \end{equation*}
+Dado un tal $H$, la \textbf{integral estocástica} de $H$ con respecto a $B$ es el proceso $\left(I(H)_t \right)_{t \in [0,T]}$. Definido como 
+\begin{equation*}
+    I(H)_t = \sum_{i=1}^{k} A_i \left( B_{t_i \wedge n} - B_{t_{i-1} \wedge t} \right) =: \int_{0}^{t} H_s dB_s\,.
+\end{equation*}
+Es decir, para $t \in (t_j, t_{j+1}]$ 
+\begin{equation*}
+    I(H)_t = \sum_{i=1}^{j} A_i\left( B_{t_i} - B_{t_{i-1}}  \right) + A_{j+1}(B_t - B_{t_{j}})\,.
+\end{equation*}
 \end{definition}
+Notar que $I(H)_t$ es continuo en $t$ (ejercicio). $I(H)_{t}$ corresponde a la trayectoria de $B_t$, donde cada tramo está ponderado por el $A_i$ correspondiente. 
 
-Notar que $I(H)_t$ es continuo en $t$ (ejercicio). $I(H)_{t}$ corresponde a la trayectoria de $B_t$, donde 
-cada tramo está ponderad por el $A_i$ correspondiente. 
-
-\newp La idea ahora es extender esta definición a una clase más general de procesos. Para ello, la siguiente
-proposición es fundamental. 
-
+\newp La idea ahora es extender esta definición a una clase más general de procesos. Para ello, la siguiente proposición es fundamental. 
 \begin{proposition}
-        Sea $(H_t)_{t \in [0,T]} $ un proceso simple predecible. Entonces
-        \begin{enumerate}
-                \item \label{ie:i}$(I(H)_t)_{t \in [0,T]}$ es una martingala continua. 
-                \item \label{ie:ii} $\E \left( \left[ \int_{0}^{t} H_s dB_s   \right]^{2} \right)
-                        = \E \left( \int_{0}^{t} H^2_s ds\right)$
-                \item \label{ie:iii} $\E \left( \sup_{0 \le  t \le T} \abs{
-                                \int_{0}^{t} H_s dB_s}^{2} \right)   \le  4 \E
-                        \left( \int_{0}^{T} H^2_s ds \right)  $  
-        \end{enumerate}
+Sea $(H_t)_{t \in [0,T]} $ un proceso simple predecible. Entonces
+\begin{enumerate}
+    \item \label{ie:i}$(I(H)_t)_{t \in [0,T]}$ es una martingala continua. 
+    \item \label{ie:ii} $\E \left( \left[ \int_{0}^{t} H_s dB_s   \right]^{2} \right) = \E \left( \int_{0}^{t} H^2_s ds\right)$
+    \item \label{ie:iii} $\E \left( \sup_{0 \le  t \le T} \abs{\int_{0}^{t} H_s dB_s}^{2} \right)   \le  4 \E\left( \int_{0}^{T} H^2_s ds \right)  $  
+\end{enumerate}
 \end{proposition}
-
 \begin{proof}
 \gris
 Para demostrar \ref{ie:i} se requiere que $\forall s < t$
 \begin{equation*}
-        \E \left( \int_{0}^{t} H_u dB_u  \mid  \mathcal{F}_s \right)  = \int_{0}^{s} H_u dB_u
+        \E \left( \int_{0}^{t} H_u dB_u  \mid  \mathcal{F}_s \right)  = \int_{0}^{s} H_u dB_u\,.
 \end{equation*}
-Sin pérdida de generalidad, podemos asumir que $s = t_{l} < t_m < t$ para ciertos $l,m$ (
-en caso contrario, $t$ y $s$ se pueden incluir en la partición $0 = t_0 < t_1, \ldots, t_k = T$
-y el proceso $H$ obtenido seguirá siendo simple predecible). Tenemos:
-
+Sin pérdida de generalidad, podemos asumir que $s = t_{l} < t_m < t$ para ciertos $l,m$ (en caso contrario, $t$ y $s$ se pueden incluir en la partición $0 = t_0 < t_1, \ldots, t_k = T$ y el proceso $H$ obtenido seguirá siendo simple predecible). Tenemos:
 \begin{equation*}
-        \label{eq:*}
-        \tag{*}
-        \E \left[ \int_{0}^{t_m} H_u dB_u \mid \mathcal{F}_{t_l} \right] 
-        = \sum_{i=1}^{m} \E \left( A_i (B_{t_i} - B_{t_{i-1}}) \mid  \mathcal{F}_{t_l} \right) 
+    \label{eq:*}
+    \tag{*}
+    \E \left[ \int_{0}^{t_m} H_u dB_u \mid \mathcal{F}_{t_l} \right] = \sum_{i=1}^{m} \E \left( A_i (B_{t_i} - B_{t_{i-1}}) \mid  \mathcal{F}_{t_l} \right)\,. 
 \end{equation*}
 Para $i \ge  l+1$: $\mathcal{F}_{t_{i-1}} \supseteq \mathcal{F}_{t_l}$, luego 
 \begin{align*}
-        \E \left[ A_i (B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_l} \right]  
-        &= \E \left[ \E (A_{i}(B_{t_i} - B_{t_{i-1}})  \mid
-        \mathcal{F}_{t_{i-1}}  \mid  \mathcal{F}_{t_l}  \right]  \\ 
-        &= \E \left[ A_{i} \E( B_{t_i} - B_{t_{i-1}})
-        \mid \mathcal{F}_{t_l}\right] = 0
+    \E \left[ A_i (B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_l} \right]  
+    &= \E \left[ \E (A_{i}(B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_{i-1}}  \mid  \mathcal{F}_{t_l}  \right]  \\ 
+    &= \E \left[ A_{i} \E( B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_l}\right] = 0\,.
 \end{align*}
-
 Luego en (\ref{eq:*}) quedan sólo los términos $i \le l$, y la esperanza condicional desaparece pues
 los términos dentro son $\mathcal{F}_{t_l}$-medibles. Luego
 \begin{equation*}
-        \E \left[ \int_{0}^{t_m} H_u dB_u  \mid \mathcal{F}_{t_l} \right]
-        = \sum_{i=1}^{l} A_i (B_{t_i} -B_{t_{i-1}}) = \int_{0}^{t_l} H_u dB_u 
+    \E \left[ \int_{0}^{t_m} H_u dB_u  \mid \mathcal{F}_{t_l} \right] = \sum_{i=1}^{l} A_i (B_{t_i} -B_{t_{i-1}}) = \int_{0}^{t_l} H_u dB_u \,.
 \end{equation*}
-
 Para \ref{ie:ii}, sin pérdida de generalidad se asume nuevamente $t=t_m$ para cierto $m$. Se tiene 
 así:
 \begin{align*}
@@ -533,440 +433,370 @@ así:
         = \E \left( \left[ \sum_{i=1}^{m} A_i(B_{t_i} -B_{t_{i-1}}\right]^2 \right) \\ 
         &= \sum_{i=1}^{m}\E\left[ A^2_i(B_{t_i} - B_{t_{i-1}})^2
         \right] + 2 \sum_{i<j}^{m} \E \left[ A_i A_j (B_{t_i}
-        -B_{t_{i-1}})(B_{t_j} - B_{t_{j-1}} )  \right] 
+        -B_{t_{i-1}})(B_{t_j} - B_{t_{j-1}} )  \right] \,.
 \end{align*}
-
-Por independencia: $\E[A_i^{2} (B_{t_i} - B_{t_{i-1}})^2 ] =
-\E[A_i^2]\E\left[(B_{t_i} - B_{t_{i-1}})^2\right] = \E [A_i^2](t_{i}
-- t_{i-1})$. Para el término cruzado:
+Por independencia: $\E[A_i^{2} (B_{t_i} - B_{t_{i-1}})^2 ] = \E[A_i^2]\E\left[(B_{t_i} - B_{t_{i-1}})^2\right] = \E [A_i^2](t_{i} - t_{i-1})$. 
+\\ Para el término cruzado:
 \begin{align*}
-        \E (A_i A_j \Delta B_i \Delta B_j) 
-        &= \E \left[ \E (A_i A_j \Delta B_i \Delta B_j) \mid \mathcal{F}_{t_{j-1}}\right] \\
-        &= \E \left[ A_i A_j \Delta B_i ~ \E (\Delta B_j) \right] = 0
+    \E (A_i A_j \Delta B_i \Delta B_j) 
+    &= \E \left[ \E (A_i A_j \Delta B_i \Delta B_j) \mid \mathcal{F}_{t_{j-1}}\right] \\
+    &= \E \left[ A_i A_j \Delta B_i ~ \E (\Delta B_j) \right] = 0\,.
 \end{align*}
-
 Por lo tanto:
 \begin{equation*}
         \E \left( \left[ \int_{0}^{t} H_s dB_s \right]^2  \right) =
-        \E \left[ \sum_{i=1}^{m} A_i^2 \Delta t_i \right] = \E \left[
-                \int_{0}^{t} H_s^2 ds \right]
+        \E \left[ \sum_{i=1}^{m} A_i^2 \Delta t_i \right] = \E \left[\int_{0}^{t} H_s^2 ds \right]\,.
 \end{equation*}
-
 Finalemente, para \ref{ie:iii} basta utilizar la desigualdad de Doob.\findem
 \negro
 \end{proof}
-
+\begin{notation}
+    La propiedad càglàd corresponde a tener continuidad a la derecha con límites izquierdos.
+\end{notation}
 \newp El objetivo ahora consiste en extender $I$. Para ello, sean 
 \begin{itemize}
-    \item $\mathcal{H} := \left\{ \text{Procesos } (X_t)_{t \in [0,T]}
-            \text{ adaptados caglad, tales que } \E \left[ \int_{0}^{T}
-            X^2_t dt < \infty \right] \right\}$, con la norma 
-            $\abs{X}^2 = \E \left[ \int_{0}^{T} X^2_t dt \right]$.
-    \item $\mathcal{M}  := \left\{ \text{Martingalas continuas } (M_t)_{t \in [0,T]} 
-            \text{ tales que } \E\left[ \sup_{t \in [0,T] \abs{M_t}^2} \right] < \infty \right\}$, 
-            con la norma $ \|M\|^2 = \E \left[\sup_{t \in [0,T]} \abs{M_t}^2 \right]$.
+    \item $\mathcal{H} := \left\{ \text{Procesos } (X_t)_{t \in [0,T]} \text{ adaptados càglàd, tales que } \E \left[ \int_{0}^{T} X^2_t dt < \infty \right] \right\}$, 
+    \\ con la norma $\abs{X}^2 = \E \left[ \int_{0}^{T} X^2_t dt \right]$.
+    \item $\mathcal{M}  := \left\{ \text{Martingalas continuas } (M_t)_{t \in [0,T]} \text{ tales que } \E\left[ \sup_{t \in [0,T] \abs{M_t}^2} \right] < \infty \right\}$, 
+    \\ con la norma $ \|M\|^2 = \E \left[\sup_{t \in [0,T]} \abs{M_t}^2 \right]$.
     \item $\mathcal{S} := \left\{\text{Procesos simples predecibles} \right\} \subseteq \mathcal{H}$
 \end{itemize}
 
 \begin{remark}
-        $(\mathcal{H},\abs{\cdot})$ y $(\mathcal{M}, \|\cdot\|)$ son espacios vectoriales normados completos 
-        con la convecnción usual de identificar $X$ e $Y$ como el mismo proceso
-        si $X \equiv Y$ casi seguramente.
+    $(\mathcal{H},\abs{\cdot})$ y $(\mathcal{M}, \|\cdot\|)$ son espacios vectoriales normados completos con la convención usual de identificar $X$ e $Y$ como el mismo proceso si $X \equiv Y$ casi seguramente.
 \end{remark}
 
 Gracias a la proposición anterior, tenemos que 
 \begin{align*}
-        I: & \mathcal{S} \to \mathcal{M} \\ 
+        I: \espacio & \mathcal{S} \to \mathcal{M} \\ 
            & H \to I(H) = \int_{0}^{\cdot} H_s dB_s 
 \end{align*}
-
-Es un operador lineal y continuo: 
+es un operador lineal y continuo: 
 \begin{align*}
         \| I (H) \|^{2} &= \E \left[ \sup_{t \in [0,T]} \abs{\int_{0}^t H_s dB_s}^2 \right]\\
-        &\le 4 \E \left[ \int_{0}^{T} H_s^2 ds \right] = 4 \abs{H}^2
+        &\le 4 \E \left[ \int_{0}^{T} H_s^2 ds \right] = 4 \abs{H}^2\,.
 \end{align*}
-
 Luego puede extenderse de manera continua a un operador definido en la adherencia de $\mathcal{S}$. 
 
 \begin{proposition}
-        $\mathcal{S}$ es denso en $\mathcal{H}$
+    $\mathcal{S}$ es denso en $\mathcal{H}$
 \end{proposition}
 
-Utilizando la proposición anterior se ha demostrado:
-
+Utilizando la proposición anterior se ha demostrado el siguiente resultado:
 \begin{proposition}
-        Existe un operador que extiende $I:\mathcal{S} \to \mathcal{M}$ a todo
-        $\mathcal{H}$, que también denotaremos $I$. Dicho operador se denomina
-        \textbf{integral estocástica}:
-        \begin{equation*}
-                \forall x \in \mathcal{H}, ~ ~ ~ \int_{0}^{t} X_s dB_s  := I(X)_t
-        \end{equation*}
+    Existe un operador que extiende $I:\mathcal{S} \to \mathcal{M}$ a todo $\mathcal{H}$, que también denotaremos $I$. Dicho operador se denomina \textbf{integral estocástica}:
+    \begin{equation*}
+            \forall x \in \mathcal{H}, ~ ~ ~ \int_{0}^{t} X_s dB_s  := I(X)_t \,.
+    \end{equation*}
 Se cumple: 
-
 \begin{enumerate}
-        \item \label{IE:i} $\forall x \in \mathcal{H},~ \forall t \in [0,T], ~
-                \E \left( \left[ \int_{0}^{t} X_s dB_s \right]^2  \right) =
-                \E \left[ \int_{0}^{t} X_s^2 ds  \right]$.
-        \item $\label{IE:ii}\forall x \in \mathcal{H}$, 
-                \begin{equation*}
-                        \E \left[ \sum_{t \in [0,T]} \abs{\int_{0}^{t} X_s
-                        dB_s}^2  \right] \le 4 \E \left[ \int_{0}^{T} X_s^2 ds \right]
-                \end{equation*}
-        \item  \label{IE:iii} $\forall  x \in \mathcal{H}$, $\left(
-                \int_{0}^{t} X_s dB_s \right)_{t \in [0,T]}$ es una martingala continua. 
+    \item \label{IE:i} $\forall x \in \mathcal{H},~ \forall t \in [0,T], ~ \E \left( \left[ \int_{0}^{t} X_s dB_s \right]^2  \right) = \E \left[ \int_{0}^{t} X_s^2 ds  \right]$.
+    \item $\label{IE:ii}\forall x \in \mathcal{H}$, 
+        \begin{equation*}
+            \E \left[ \sum_{t \in [0,T]} \abs{\int_{0}^{t} X_s dB_s}^2  \right] \le 4 \E \left[ \int_{0}^{T} X_s^2 ds \right]\,.
+        \end{equation*}
+    \item  \label{IE:iii} $\forall  x \in \mathcal{H}$, $\left(\int_{0}^{t} X_s dB_s \right)_{t \in [0,T]}$ es una martingala continua. 
 \end{enumerate}
-
 \end{proposition}
 \begin{proof}
 \gris
-La demostración de \ref{IE:ii} viene simplemente del hecho que la extensión de $I_4$ preserva la
-norma. \ref{IE:iii} es por construcción. Probemos \ref{IE:i}: 
-
-Por definición de $I$ y por densidad, $\exists X^n \in \mathcal{S}$ tal que $\abs{X^{n} - X} 
-\xrightarrow[n]{} 0$, y luego $\|I(X^n) - I(X)\| \xrightarrow[n]{} 0$. Ahora $t \in [0,T]$ fijo,
-tenemos: 
-
+La demostración de \ref{IE:ii} viene simplemente del hecho que la extensión de $I_4$ preserva la norma. \ref{IE:iii} es por construcción. Probemos \ref{IE:i}: 
+\\ Por definición de $I$ y por densidad, $\exists X^n \in \mathcal{S}$ tal que $\abs{X^{n} - X} 
+\xrightarrow[n]{} 0$, y luego $\|I(X^n) - I(X)\| \xrightarrow[n]{} 0$. Ahora para  $t \in [0,T]$ fijo, tenemos: 
 \begin{align*}
-        \E \left[ \abs{I(X^{n}) - I(X)_t}^2 \right]
-        &\le \E \left[ \sup_{s \in [0,T]} \abs{I(X^n)_s - I(X)_s}^2 \right]\\ 
-        &= \|I(X^n) - I(X) \|^2 \xrightarrow[n]{} 0 
+    \E \left[ \abs{I(X^{n}) - I(X)_t}^2 \right] & \le \E \left[ \sup_{s \in [0,T]} \abs{I(X^n)_s - I(X)_s}^2 \right]\\ 
+    &= \|I(X^n) - I(X) \|^2 \xrightarrow[n]{} 0 \,.
 \end{align*}
 
 Es decir, $I(X^n)_t \xrightarrow[n]{} 0$ en $L^2(d\P)$. Esto implica que $\|I(X^{n})\|_{L^2(d\P)}$ 
 Pero como $X^n \in \mathcal{S}$, sabemos que 
 \begin{equation*}
-        \|I(X^n)_t\|^2_{L^2(d\P)} = \E \left( \left[\int_{0}^t X_s^n dB_s \right]^2 \right)
-        = \E \left[ \int_{0}^t \abs{X_s^n}^2 ds \right]
+    \|I(X^n)_t\|^2_{L^2(d\P)} = \E \left( \left[\int_{0}^t X_s^n dB_s \right]^2 \right)
+    = \E \left[ \int_{0}^t \abs{X_s^n}^2 ds \right]\,.
 \end{equation*}
 Similarmente 
 \begin{equation*}
-        \E \left[ \int_{0}^{t} \abs{X_s^n - X_s}^2 ds \right] \le \E
-                \left[ \int_{0}^{T} \abs{X_s^n - X_s}^2 ds \right] =
-                \abs{X^n - X}^2 \xrightarrow[n]{} 0
+    \E \left[ \int_{0}^{t} \abs{X_s^n - X_s}^2 ds \right] \le \E \left[ \int_{0}^{T} \abs{X_s^n - X_s}^2 ds \right] = \abs{X^n - X}^2 \xrightarrow[n]{} 0 \,.
 \end{equation*}
-
 Luego $X^n \to X$ en $L^2(\Omega \times [0,t], d\P \otimes ds)$ lo cual implica 
 \begin{equation*}
         \|X^n\|_{L^2(d\P \otimes ds)} \to \|X\|_{L^2(d\P \otimes ds)} 
-        = \E \left[ \int_{0}^t \abs{X_s}^2 ds \right]
+        = \E \left[ \int_{0}^t \abs{X_s}^2 ds \right]\,.
 \end{equation*}
-
 Con esto hemos probado:
-
 \begin{align*}
-        \E \left( \left[ \int_{0}^{t} X_s dB_s \right] \right) 
-        &= \|I(X)_{t}\|_{L^2(d\P)} \\
-        &= \lim_{n} \|I(X^n)_t\|_{L^2(d\P)} = \lim_{n} \E \left[
-                \int_{0}^{t} \abs{X_s}^2 ds \right] \\
-        &= \E \left[\int_{0}^{t} \abs{X_s}^2 ds \right]
+    \E \left( \left[ \int_{0}^{t} X_s dB_s \right] \right) 
+    &= \|I(X)_{t}\|_{L^2(d\P)} \\
+    &= \lim_{n} \|I(X^n)_t\|_{L^2(d\P)} = \lim_{n} \E \left[\int_{0}^{t} \abs{X_s}^2 ds \right] \\
+    &= \E \left[\int_{0}^{t} \abs{X_s}^2 ds \right]\,.
 \end{align*}
 \findem
 \negro
 \end{proof}
+
 \begin{remark}
-    En general, la integral $\int_{0}^{t}X_s dB_s$ \textbf{no es un limite trayectorial}, es decir, no 
-    se obtiene $w$ por $w$ como el limite de una secesión $\int_{0}^{t} X_s^n dB_s$, sin embargo, como 
-    acabamos de mostrar, se tiene la siguiente proposición.
+    En general, la integral $\int_{0}^{t}X_s dB_s$ \textbf{no es un limite trayectorial}, es decir, no se obtiene $w$ por $w$ como el limite de una secesión $\int_{0}^{t} X_s^n dB_s$, sin embargo, como acabamos de mostrar, se tiene la siguiente proposición.
 \end{remark}
 \begin{proposition}
-        dado $x \in \mathcal{H}$ y $X^n \in \mathcal{S}$ tal que $\abs{X^n - X} \xrightarrow[n]{} 0$, 
-        $\forall t \in [0,T]$ se tiene 
-        \begin{equation*}
-                \int_{0}^{t} X_s^n dB_s \xrightarrow[n \to \infty]{L^2(\P)} \int_{0}^{t}X_s dB_s
-        \end{equation*}
+    Dado $x \in \mathcal{H}$ y $X^n \in \mathcal{S}$ tal que $\abs{X^n - X} \xrightarrow[n]{} 0$, $\forall t \in [0,T]$ se tiene 
+    \begin{equation*}
+        \int_{0}^{t} X_s^n dB_s \xrightarrow[n \to \infty]{L^2(\P)} \int_{0}^{t}X_s dB_s\,.
+    \end{equation*}
 \end{proposition}
 
-Otra propiedad útil: 
-
+A continuación se presenta otra propiedad útil.
 \begin{proposition}
-        $\forall  x \in \mathcal{H}$, $\forall \tau$ tiempo de parada,
-        \begin{equation*}
-                \int_{0}^{\tau} X_s dB_s = \int_{0}^{T} \mathbbm{1}_{\{s \le \tau \}} X_s dB_s 
-        \end{equation*}
-        casi seguramente.
+$\forall  x \in \mathcal{H}$, $\forall \tau$ tiempo de parada,
+\begin{equation*}
+    \int_{0}^{\tau} X_s dB_s = \int_{0}^{T} \mathbbm{1}_{\{s \le \tau \}} X_s dB_s\,.
+\end{equation*}
+casi seguramente.
 \end{proposition}
 
-Para hacer cálculos más explicitos, necesitaremos el siguiente resultado de aproximación. Puede 
-verse como una versión levemente restringinda del hecho que $\mathcal{S}$ es denso en $\mathcal{H}$, 
-aunque más epxlicita: 
-
+Para hacer cálculos más explícitos, necesitaremos el siguiente resultado de aproximación. Puede verse como una versión levemente restringida del hecho que $\mathcal{S}$ es denso en $\mathcal{H}$, aunque más explicita: 
 \begin{proposition}
-        Sea $x \in \mathcal{H}$ tal que $\E\{ \sup_{t \in [0,T]} \abs{X_t}^2 \} < \infty$. Sea 
-        $(\pi^n)_{n \in \N}$ una colección de particiones de $[0,T]$, $\pi^{n} = \{ 0= t_0^{n}< 
-        t_{1}^n< \ldots, < t_{k_n}^{n} = T\}$ tal que 
-        \begin{equation*}
-                \|\pi^n\| := \sup_{i = 1, \ldots, k_n} \abs{t_i^n -
-                t_{i-1}^{n}} \xrightarrow[n \to \infty]{} 0
-        \end{equation*}
-
-        Sea
-        \begin{equation*}
-                X_t^n := \sum_{i=1}^{k_n} X_{t_{i-1}^n} \mathbbm{1}_{(t_{i-1}^n, t_{i}^{n}]}(t) \in \mathcal{S}
-        \end{equation*}
-        Entonces $\abs{X^n - X} \xrightarrow[n]{} 0$, y consecuentemente
-        $\|I(X^n) - I(X)\| \xrightarrow[n]{} 0$.
+Sea $x \in \mathcal{H}$ tal que $\E\{ \sup_{t \in [0,T]} \abs{X_t}^2 \} < \infty$. Sea $(\pi^n)_{n \in \N}$ una colección de particiones de $[0,T]$, $\pi^{n} = \{ 0= t_0^{n}< t_{1}^n< \ldots, < t_{k_n}^{n} = T\}$ tal que 
+\begin{equation*}
+    \|\pi^n\| := \sup_{i = 1, \ldots, k_n} \abs{t_i^n - t_{i-1}^{n}} \xrightarrow[n \to \infty]{} 0 \,.
+\end{equation*}
+Sea
+\begin{equation*}
+    X_t^n := \sum_{i=1}^{k_n} X_{t_{i-1}^n} \mathbbm{1}_{(t_{i-1}^n, t_{i}^{n}]}(t) \in \mathcal{S}\,,
+\end{equation*}
+entonces $\abs{X^n - X} \xrightarrow[n]{} 0$, y consecuentemente $\|I(X^n) - I(X)\| \xrightarrow[n]{} 0$\,.
 \end{proposition}
 \begin{proof}
 \gris
-    fijemos $t \in [0,T]$, y $\forall n \in \N$, sea $i_n$ tal que $t \in (t_{i_n -1}^n, t_{i_n}^n]$. 
-    Luego, $X_{t}^{n} = X_{t_{i_n -1}^n}$, y entonces 
-    \begin{align*}
-            \lim_{n \to \infty} X_{t}^{n} 
-            &= \lim_{n \to \infty} X_{t_{i_n} - 1}^n \\
-            &= \lim_{s \to t^{-}} X_s = X_t 
-    \end{align*}
-    Donde se utiliza $t_{i_n - 1}^n \to t^{-}$ y que $X$ es continuo a la izquierda (caglad). Además 
-    \begin{align*}
-            \abs{X^n_s - X_s} 
-            &\le 2 \abs{X_{s}^n} ds + 2 \abs{X_s}^2\\
-            &\le 4 \sum_{s \in [0,T]} \abs{X_s}^2 \in L^{1}(d\P \otimes ds) 
-    \end{align*}
-    Luego por el teorema de convergencia dominada:
+Fijemos $t \in [0,T]$, y $\forall n \in \N$, sea $i_n$ tal que $t \in (t_{i_n -1}^n, t_{i_n}^n]$. 
+Luego, $X_{t}^{n} = X_{t_{i_n -1}^n}$, y entonces 
+\begin{align*}
+        \lim_{n \to \infty} X_{t}^{n} 
+        &= \lim_{n \to \infty} X_{t_{i_n} - 1}^n \\
+        &= \lim_{s \to t^{-}} X_s = X_t \,,
+\end{align*}
+donde se utiliza $t_{i_n - 1}^n \to t^{-}$ y que $X$ es continuo a la izquierda (càglàd). Además 
+\begin{align*}
+        \abs{X^n_s - X_s} 
+        &\le 2 \abs{X_{s}^n} ds + 2 \abs{X_s}^2\\
+        &\le 4 \sum_{s \in [0,T]} \abs{X_s}^2 \in L^{1}(d\P \otimes ds) \,.
+\end{align*}
+Luego por el teorema de convergencia dominada:
 \begin{equation*}
-    \abs{X^n - X}^2 = \E\left[ \int_{0}^{T} \abs{X_s^n - X_s}^2 ds \right]
-    \xrightarrow[n \to \infty]{}  0
+    \abs{X^n - X}^2 = \E\left[ \int_{0}^{T} \abs{X_s^n - X_s}^2 ds \right] \xrightarrow[n \to \infty]{}  0\,.
 \end{equation*}
 \findem
 \negro
 \end{proof}
 \begin{remark}
-    La condición $\E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty$ se cumple, por ejemplo, si $X$ es un proceso acotado, o si $X$ es una martingala continua con $\E [\abs{X_T}^2] < \infty$ (como el movimiento browniano), por la desgualdad de Doob.
+La condición $\E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty$ se cumple, por ejemplo, si $X$ es un proceso acotado, o si $X$ es una martingala continua con $\E [\abs{X_T}^2] < \infty$ (como el movimiento browniano), por la desgualdad de Doob.
 \end{remark}
 
 \begin{example}
-        Mostrar que $\int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t$.
-        Veamos: sea $(\pi^{n})_{n \in \N}$ secuencia de particiones de $[0,t]$ como en la proposición. 
-        (para $t >0$ fijo), luego, por dicha proposición y por lo hecho previamente:
-        \begin{equation*}
-                \int_{0}^{t} B_s dB_s = \lim_{n \to \infty} \int_{0}^{t} B_s^n ds ~ ~ ~ \text{en } L^{2}(d\P)
-        \end{equation*}
-Donde 
-\begin{align*}
-        \int_{0}^{t} B_s^n dBs 
-        &= \sum_{i=1}^{k_n} B_{t_{i-1}^n}(B_{t_{i}^n} - B_{t_{i-1}^n}) \\ 
-        &= \frac{1}{2} \sum_{i=1}^{k_n} (B_{t_{i}^n}^2 - B_{t_{i-1}^n}^2) -
-        \frac{1}{2} \sum_{i=1}^{k_n} (\Delta B_i)^2
-\end{align*}
-        Pero es fácil ver que $\sum_{i=1}^{k_n} (\Delta B_i^2)^2 \xrightarrow[n \to \infty]{} t$ en 
-        $L^2(d\P)$: 
-
-        \begin{align*}
-                \E &\left[ \left( \sum_{i=1}^{k_n} (\Delta B_i)^2 - t \right)^2 \right]
-                = \E \left[ \left( \sum_{i=1}^{k_n} ((\Delta B_i)^2 - \Delta t_i)  \right)^2 \right] \\
-                &= \E \left[ \sum_{i=1}^{k_n} \left( (\Delta B_i)^2 - \Delta t_i  \right)^2 \right] 
-                   + \E \left[ \sum_{i \neq j} \left( (\Delta B_i)^2 - \Delta t_i \right) 
-                                               \left( (\Delta B_j)^2 - \Delta t_j \right) 
-                                               \right] \\
-                &= \sum_{i=1}^{k_n} \left( \E \left[ (\Delta B_i)^4 \right] + (\Delta t_i)^2  
-                             -2\Delta t_i \E \left[ (\Delta B_i)^2 \right] \right)
-        \end{align*}
-
-        Luego, $\E \left[ \left( \sum_{i=1}^{k_n} (\Delta B_i )^2 - t \right)  \right] = 2 \sum_{i=1}^{k_n}
-        (\Delta t_i)^2 \xrightarrow[n \to \infty]{} 0$, pues $\|\pi^n\| \xrightarrow[n]{} n$. Como todos 
-        estos limites son en $L^2(d\P)$, se tiene:
-        \begin{equation*}
-                \label{eq:ej}
-                \tag{*}
-                \int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t
-        \end{equation*}
+Podemos usar lo anterior para comprobar que 
+$$\int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t \,.$$
 \end{example}
+\gris
+\begin{proof}
+Sea $(\pi^{n})_{n \in \N}$ secuencia de particiones de $[0,t]$ como en la proposición. (para $t >0$ fijo), luego, por dicha proposición y por lo hecho previamente:
+\begin{equation*}
+    \int_{0}^{t} B_s dB_s = \lim_{n \to \infty} \int_{0}^{t} B_s^n ds ~ ~ ~ \text{en } L^{2}(d\P)\,,
+\end{equation*}
+donde 
+\begin{align*}
+    \int_{0}^{t} B_s^n dBs 
+    &= \sum_{i=1}^{k_n} B_{t_{i-1}^n}(B_{t_{i}^n} - B_{t_{i-1}^n}) \\ 
+    &= \frac{1}{2} \sum_{i=1}^{k_n} (B_{t_{i}^n}^2 - B_{t_{i-1}^n}^2) -
+    \frac{1}{2} \sum_{i=1}^{k_n} (\Delta B_i)^2\,.
+\end{align*}
+Pero es fácil ver que $\displaystyle\sum_{i=1}^{k_n} (\Delta B_i^2)^2 \xrightarrow[n \to \infty]{} t$ en 
+$L^2(d\P)$: 
+\begin{align*}
+    \E \left[ \left( \sum_{i=1}^{k_n} (\Delta B_i)^2 - t \right)^2 \right]
+    & = \E \left[ \left( \sum_{i=1}^{k_n} ((\Delta B_i)^2 - \Delta t_i)  \right)^2 \right] \\
+    &= \E \left[ \sum_{i=1}^{k_n} \left( (\Delta B_i)^2 - \Delta t_i  \right)^2 \right] + \E \left[ \sum_{i \neq j} \left( (\Delta B_i)^2 - \Delta t_i \right) \left( (\Delta B_j)^2 - \Delta t_j \right) \right] \\
+    &= \sum_{i=1}^{k_n} \left( \E \left[ (\Delta B_i)^4 \right] + (\Delta t_i)^2 -2\Delta t_i \E \left[ (\Delta B_i)^2 \right] \right)\,.
+\end{align*}
+Luego, $\displaystyle \E \left[ \left( \sum_{i=1}^{k_n} (\Delta B_i )^2 - t \right)  \right] = 2 \sum_{i=1}^{k_n} (\Delta t_i)^2 \xrightarrow[n \to \infty]{} 0$, pues $\|\pi^n\| \xrightarrow[n]{} n$. Como todos estos limites son en $L^2(d\P)$, se tiene:
+\begin{equation*}
+    \label{eq:ej}
+    \tag{*}
+    \int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t \,.
+\end{equation*}
+\findem
+\negro
+\end{proof}
 
 \begin{remark}
-        Si $(A_t)_{t \ge 0}$ es un procesos con trayectorias derivables y $A_0 = 0$, 
-        \begin{equation*}
-                \int_{0}^{t} A_s dA_s = \int_{0}^{t} A_s \frac{dA_s}{ds} ds = \frac{1}{2} A^2_t
-        \end{equation*}
-        lo vual difiere de (\ref{eq:ej}). Esto se debe a que el proceso $A$ tiene \textbf{variación 
-        cuadrática} $0$ por tener trayectorias suaves, es decir, 
-        \begin{equation*}
-                \lim_{n} \sum_{i=1}^{k_n} (\Delta A_i)^2 = 0
-        \end{equation*}
-        la formula (\ref{eq:ej}) es un caso particular de la \textbf{formula de It\^{o}}
+Si $(A_t)_{t \ge 0}$ es un procesos con trayectorias derivables y $A_0 = 0$, 
+\begin{equation*}
+    \int_{0}^{t} A_s dA_s = \int_{0}^{t} A_s \frac{dA_s}{ds} ds = \frac{1}{2} A^2_t\,,
+\end{equation*}
+lo cual difiere de (\ref{eq:ej}). Esto se debe a que el proceso $A$ tiene \textbf{variación cuadrática} $0$ por tener trayectorias suaves, es decir, 
+\begin{equation*}
+    \lim_{n} \sum_{i=1}^{k_n} (\Delta A_i)^2 = 0\,,
+\end{equation*}
+la formula (\ref{eq:ej}) es un caso particular de la \textbf{formula de It\^{o}}.
 \end{remark}
 
 \subsubsection{Cálculo de It\^{o}}
 
 Notemos que (\ref{eq:ej}) puede escribirse como
 \begin{equation*}
-        \label{eq:ito_cal_1}
-        \tag{**}
-        f(B_t) = \int_{0}^t f'(B_s) dB_s + \frac{1}{2} \int_{0}^{t} f''(B_s) ds
+    \label{eq:ito_cal_1}
+    \tag{**}
+    f(B_t) = \int_{0}^t f'(B_s) dB_s + \frac{1}{2} \int_{0}^{t} f''(B_s) ds\,.
 \end{equation*}
-
-Para $f(x) = x^2$. Queremos deducir (\ref{eq:ito_cal_1}) para funciones de clase $\mathcal{C}^2$ generales, 
-y para procesos $X$ más generales que el movimiento browniano $B$. 
-
+Para $f(x) = x^2$. Queremos deducir (\ref{eq:ito_cal_1}) para funciones de clase $\mathcal{C}^2$ generales, y para procesos $X$ más generales que el movimiento browniano $B$. 
 \begin{definition}[Proceso de It\^{o}]
-        Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y 
-        un movimiento browniano $(B_t)_{t \ge 0}$ definido sobre él. Decimos
-        que un proceso $(X_t)_{t \in [0,T]}$ es un \textbf{proceso de It\^{o}} si se escribe como:
-        \begin{equation*}
-                \label{eq:ito_cal_2}
-                \tag{***}
-        X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s ~ ~ ~ \forall t \in [0,T]
-        \end{equation*}
-        Donde:
-        \begin{itemize}
-                        \item $X_0$ es $\mathcal{F}_0$-medible. 
-                        \item $(K_t)_{t \in [0,T]}$, $(H_t)_{t \in [0,T]}$ son adaptados. 
-                        \item $\int_{0}^{T} \abs{K_s} ds < \infty$, $\int_{0}^{T} \abs{H_s}^2 ds < \infty$ 
-                                casi seguramente.
-        \end{itemize}
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y 
+un movimiento browniano $(B_t)_{t \ge 0}$ definido sobre él. Decimos
+que un proceso $(X_t)_{t \in [0,T]}$ es un \textbf{proceso de It\^{o}} si se escribe como:
+\begin{equation*}
+    \label{eq:ito_cal_2}
+    \tag{***}
+    X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s ~ ~ ~ \forall t \in [0,T]
+\end{equation*}
+Donde:
+\begin{itemize}
+    \item $X_0$ es $\mathcal{F}_0$-medible. 
+    \item $(K_t)_{t \in [0,T]}$, $(H_t)_{t \in [0,T]}$ son adaptados. 
+    \item $\int_{0}^{T} \abs{K_s} ds < \infty$, $\int_{0}^{T} \abs{H_s}^2 ds < \infty$ casi seguramente.
+\end{itemize}
 \end{definition}
 
 \begin{remark}
-        Puede probarse que la escritura (\ref{eq:ito_cal_2}) es única, es decir, si $\tilde{K}, \tilde{H}$ 
-        también cumplen (\ref{eq:ito_cal_2}), entonces $K \equiv \tilde{K}$, $H \equiv \tilde{H}$ casi 
-        seguramente con respecto a $ds \otimes d\P$. 
+    Puede probarse que la escritura (\ref{eq:ito_cal_2}) es única, es decir, si $\tilde{K}, \tilde{H}$        también cumplen (\ref{eq:ito_cal_2}), entonces $K \equiv \tilde{K}$, $H \equiv \tilde{H}$ casi seguramente con respecto a $ds \otimes d\P$. 
 \end{remark}
 
 \begin{definition}[Variación Cuadrática]
-        Dado un proceso de It\^{o} $(X_t)_{t \ge 0}$ con descomposición (\ref{eq:ito_cal_2}), su 
-        \textbf{variación cuadrática} se define como el proceso $\langle X \rangle_t$ dado por
-        \begin{equation*}
-                \langle X \rangle_t ~ := \int_{0}^{t} H^2_s ds
-        \end{equation*}
+Dado un proceso de It\^{o} $(X_t)_{t \ge 0}$ con descomposición (\ref{eq:ito_cal_2}), su \textbf{variación cuadrática} se define como el proceso $\langle X \rangle_t$ dado por
+\begin{equation*}
+        \langle X \rangle_t ~ := \int_{0}^{t} H^2_s ds \,.
+\end{equation*}
 \end{definition}
 \begin{remark}
-        Puede probarse que 
-        \begin{equation*}
-                \langle X,Y \rangle_t = \lim_{n} \sum_{i=1}^{k_n} (\Delta X_i)^2, ~ ~ \text{ en } L^2{d\P}
-        \end{equation*}
-        Donde $(\pi^{n})_{n \ge 1}$ es una secuencia de particiones de $[0,T]$ como antes. Esto 
-        justifica el nombre \textit{variación cuadrática}.
+    Puede probarse que 
+    \begin{equation*}
+        \langle X,Y \rangle_t = \lim_{n} \sum_{i=1}^{k_n} (\Delta X_i)^2, ~ ~ \text{ en } L^2({d\P})
+    \end{equation*}
+    Donde $(\pi^{n})_{n \ge 1}$ es una secuencia de particiones de $[0,T]$ como antes. Esto justifica el nombre \textit{variación cuadrática}.
 \end{remark}
 
 \begin{theorem}[Lema de It\^{o}, Regla de It\^{o}, Fórmula de It\^{0}]
-        Sea $(X_t)_{t \ge 0}$ un proceso de It\^{0} con descomposición (\ref{eq:ito_cal_2}), 
-        y $f: \mathbb{R} \to  \mathbb{R}$ una función $\mathcal{C}^2$. Entonces 
-        \begin{equation*}
-                \label{eq:ito_cal_3}
-                \tag{$\star$}
-                f(X_t)  = f(X_0) + \int_{0}^{t} f'(X_s) dX_s +  \frac{1}{2}
-                \int_{0}^{t} f''(X_s) d \langle X \rangle_s
-        \end{equation*}
+Sea $(X_t)_{t \ge 0}$ un proceso de It\^{0} con descomposición (\ref{eq:ito_cal_2}), y $f: \mathbb{R} \to  \mathbb{R}$ una función $\mathcal{C}^2$. Entonces 
+\begin{equation*}
+    \label{eq:ito_cal_3}
+    \tag{$\star$}
+    f(X_t)  = f(X_0) + \int_{0}^{t} f'(X_s) dX_s +  \frac{1}{2}\int_{0}^{t} f''(X_s) d \langle X \rangle_s\,.
+\end{equation*}
 \end{theorem}
 
 \begin{remark}
-        (\ref{eq:ito_cal_3}) suele escribirse en \textit{forma diferencial}, la cual es más fácil de 
-        recordar: 
-        \begin{equation*}
-                \label{eq:ito_cal_3b}
-                \tag{$\square$}
-                df(X_t) = f'(X_t)dX_t + \frac{1}{2} f''(X_t)d\langle X \rangle_t
-        \end{equation*}
-        Alternativamente, usando las definiciones de $\langle X \rangle_t$  y $\int_{0}^{t} f'(X_s) dX_s$, 
-        se tiene 
-        \begin{align*}
-                df(X_t) 
-                &= f'(X_t) K_t dt + f'(X_t) H_t dB_t + \frac{1}{2} f''(X_t) H^2_t dt \\ 
-                &= \left[ f'(X_t) K_t + \frac{1}{2} f''(X_t) H_t^2 \right] dt + f'(X_t) H_t dB_t
-        \end{align*}
-        Lo cual muestra que $f(X_t)$ es un proceso de It\^{o} y nos entrega su descomposición.
+(\ref{eq:ito_cal_3}) suele escribirse en \textit{forma diferencial}, la cual es más fácil de 
+recordar: 
+\begin{equation*}
+    \label{eq:ito_cal_3b}
+    \tag{$\square$}
+    df(X_t) = f'(X_t)dX_t + \frac{1}{2} f''(X_t)d\langle X \rangle_t\,.
+\end{equation*}
+Alternativamente, usando las definiciones de $\langle X \rangle_t$  y $\int_{0}^{t} f'(X_s) dX_s$, se tiene 
+\begin{align*}
+    df(X_t) 
+    &= f'(X_t) K_t dt + f'(X_t) H_t dB_t + \frac{1}{2} f''(X_t) H^2_t dt \\ 
+    &= \left[ f'(X_t) K_t + \frac{1}{2} f''(X_t) H_t^2 \right] dt + f'(X_t) H_t dB_t \,.
+\end{align*}
+Lo cual muestra que $f(X_t)$ es un proceso de It\^{o} y nos entrega su descomposición.
 \end{remark}
 \begin{remark}
-        La regla de It\^{o} también se conoce como \textit{regla de la cadena estocástica}, la cual se 
-        justifica al observar (\ref{eq:ito_cal_3b}). Notar que $\frac{1}{2}f''(X_t) d\langle X \rangle_t$ 
-        es una \text{novedad} en el sentido de que no aparece en cálculo clásico. 
+    La regla de It\^{o} también se conoce como \textit{regla de la cadena estocástica}, la cual se justifica al observar (\ref{eq:ito_cal_3b}). Notar que $\frac{1}{2}f''(X_t) d\langle X \rangle_t$ es una \text{novedad} en el sentido de que no aparece en cálculo clásico. 
 \end{remark}
 \begin{example}
-        Para $X = B$, $f(x) = x^2$, tenemos 
-        \begin{equation*}
-                dB_t^2 = 2B_t dB_t + \frac{1}{2} 2 d \langle B \rangle_t = 2B_t dB_t - dt
-        \end{equation*}
-        Lo cual es exactamente (\ref{eq:ej}) escrito en forma diferencial. 
+    Para $X = B$, $f(x) = x^2$, tenemos 
+    \begin{equation*}
+            dB_t^2 = 2B_t dB_t + \frac{1}{2} 2 d \langle B \rangle_t = 2B_t dB_t - dt\,.
+    \end{equation*}
+    Lo cual es exactamente (\ref{eq:ej}) escrito en forma diferencial. 
 \end{example}
 
 \begin{example}[Movimeinto Browniano Geométrico]
-        Dados $\mu \in \mathbb{R}$ un \textit{coeficiente de drift}, $\sigma > 0$  \textit{volatilidad}. 
-        Decimos que $(S_t)_{t \ge 0}$ es un movimiento browniano \textit{geométrico} si 
-        cumple: 
-        \begin{equation*}
-                \label{eq:ito_cal_ej}
-                \tag{$\triangle$}
-                dS_t = \mu dS_t dt + \sigma S_t dB_t
-        \end{equation*}
-        Para resolver esto, sea $(X_t)_{t \ge 0}$ dado por 
-        \begin{equation*}
-                dX_t = (\mu - \frac{1}{2} \sigma^2) dt + \sigma d B_t
-        \end{equation*}
-        y definimos $S_t = S_0 e^{X_t}$. Verificamos que $S$ cumple (\ref{eq:ito_cal_ej}): 
-        usando la regla de It\^{o}, 
-        \begin{align*}
-                dS_t 
-                &= S_0 \left[e^{X_t} dX_t + \frac{1}{2} e^{X_t} d \langle X  \rangle_t \right] \\
-                &= S_0 \left[e^{X_t} (\mu - \frac{1}{2} \sigma^2)dt + e^{X_t} \sigma dB_t + \frac{1}{2} 
-                    e^{X_t} \sigma^2 dt    \right] \\
-                &= S_0 e^{X_t} \mu dt + S_0 e^{X_t} \sigma dB_t = \mu S_t dt + \sigma S_t dB_t
-        \end{align*}
-
-        el movimiento browniano geométrico es un modelo simple de precios de acciones.
+Dados $\mu \in \mathbb{R}$ un \textit{coeficiente de drift}, $\sigma > 0$  \textit{volatilidad}. Decimos que $(S_t)_{t \ge 0}$ es un movimiento browniano \textit{geométrico} si cumple: 
+\begin{equation*}
+    \label{eq:ito_cal_ej}
+    \tag{$\triangle$}
+    dS_t = \mu dS_t dt + \sigma S_t dB_t\,.
+\end{equation*}
+Para resolver esto, sea $(X_t)_{t \ge 0}$ dado por 
+\begin{equation*}
+        dX_t = (\mu - \frac{1}{2} \sigma^2) dt + \sigma d B_t\,.
+\end{equation*}
+y definimos $S_t = S_0 e^{X_t}$. Verificamos que $S$ cumple (\ref{eq:ito_cal_ej}): usando la regla de It\^{o}, 
+\begin{align*}
+    dS_t &= S_0 \left[e^{X_t} dX_t + \frac{1}{2} e^{X_t} d \langle X  \rangle_t \right] \\
+    &= S_0 \left[e^{X_t} (\mu - \frac{1}{2} \sigma^2)dt + e^{X_t} \sigma dB_t + \frac{1}{2} e^{X_t} \sigma^2 dt    \right] \\
+    &= S_0 e^{X_t} \mu dt + S_0 e^{X_t} \sigma dB_t = \mu S_t dt + \sigma S_t dB_t\,.
+\end{align*}
+% arreglar redacción ??
+El movimiento browniano geométrico es un modelo simple de precios de acciones.
 \end{example}
-\begin{definition}[Covariacón Cuadrática]
-        Dados dos procesos de It\^{o} $X,Y$ con descomposición
-        \begin{align*}
-                \label{eq:ito_cal_4}
-                \tag{$\star\star$}
-                dXt &= K_t dt + H_t dB_t \\ 
-                dY_t&= \tilde{K} _t dt + \tilde{H}_t dB_t
-        \end{align*}
 
-        Su \textbf{covariación cuadrática} es el proceso $(\langle X,Y \rangle)_{t \ge  0}$, 
-        \begin{equation*}
-                \langle X,Y \rangle_t := \int_{0}^{t} H_s \tilde{H} _s  ds
-        \end{equation*}
+\begin{definition}[Covariación Cuadrática]
+Sean dos procesos de It\^{o} $X,Y$ con descomposición
+\begin{align*}
+    \label{eq:ito_cal_4}
+    \tag{$\star\star$}
+    dXt &= K_t dt + H_t dB_t \\ 
+    dY_t&= \tilde{K} _t dt + \tilde{H}_t dB_t \,.
+\end{align*}
+Su \textbf{covariación cuadrática} es el proceso $(\langle X,Y \rangle)_{t \ge  0}$, 
+\begin{equation*}
+    \langle X,Y \rangle_t := \int_{0}^{t} H_s \tilde{H} _s  ds\,.
+\end{equation*}
 \end{definition}
 
 \begin{remark}
-        Puede probarse que 
-        \begin{equation*}
-                \langle X,Y \rangle = \lim_{n} \sum_{i} (\Delta X_i)(\Delta Y_i) 
-        \end{equation*}
-
+Puede probarse que 
+\begin{equation*}
+    \langle X,Y \rangle = \lim_{n} \sum_{i} (\Delta X_i)(\Delta Y_i) 
+\end{equation*}
 \end{remark}
-        La siguiente propiedad completa lo básico del calculo estocástico:
-\begin{proposition}[Integración por Partes]
-        Dados $X,Y$ proceso de It\^{o} con descomposición (\ref{eq:ito_cal_4}),se tiene 
-        \begin{equation*}
-                X_t Y_t = X_0 Y_0 + \int_{0}^{t} X_s dY_s + \int_{0}^{t} Y dX_s + \langle X,Y \rangle_t
-        \end{equation*}
-        o en forma diferencial 
-        \begin{equation*}
-                d(X_t, Y_t) = X_t dY_t + Y_t dX_t + \langle X,Y \rangle_t
-        \end{equation*}
-\end{proposition}
 
+La siguiente propiedad completa lo básico del calculo estocástico:
+\begin{proposition}[Integración por Partes]
+Dados $X,Y$ proceso de It\^{o} con descomposición (\ref{eq:ito_cal_4}),se tiene 
+\begin{equation*}
+    X_t Y_t = X_0 Y_0 + \int_{0}^{t} X_s dY_s + \int_{0}^{t} Y dX_s + \langle X,Y \rangle_t
+\end{equation*}
+o en forma diferencial 
+\begin{equation*}
+    d(X_t, Y_t) = X_t dY_t + Y_t dX_t + \langle X,Y \rangle_t
+\end{equation*}
+\end{proposition}
 \begin{proof}
 \gris
 Por la regla de It\^{o} 
 \begin{align*}
-        \label{eq:ito_cal_5_1}
-        \tag{1}
-        X^2_{t} &= X^2_{0} + \int_{0}^{t} 2 X_s dX_s 
-                           + \int_{0}^{t} \frac{1}{2} 2 d \langle X \rangle_s\\
-                &= X^2_{0} + 2 \int_{0}^{t} X_s d X_s + \int_{0}^{t} H_s^2 ds
+    \label{eq:ito_cal_5_1}
+    \tag{1}
+    X^2_{t} &= X^2_{0} + \int_{0}^{t} 2 X_s dX_s + \int_{0}^{t} \frac{1}{2} 2 d \langle X \rangle_s\\
+            &= X^2_{0} + 2 \int_{0}^{t} X_s d X_s + \int_{0}^{t} H_s^2 ds \,.
 \end{align*}
 Análogamente
-
 \begin{equation*}
-        \label{eq:ito_cal_5_2}
-        \tag{2}
-        Y^2_{t} = Y^2_{0} + 2 \int_{0}^{t} Y_s d Y_s + \int_{0}^{t} \tilde{H}_s^2 ds
+    \label{eq:ito_cal_5_2}
+    \tag{2}
+    Y^2_{t} = Y^2_{0} + 2 \int_{0}^{t} Y_s d Y_s + \int_{0}^{t} \tilde{H}_s^2 ds \,.
 \end{equation*}
 
 La descomposición de $X + Y$ claramente es: 
 \begin{equation*}
-        d(X +Y) = (K_t + \tilde{K}_t) dt + (H_t + \tilde{H}_t) dB_t
+        d(X +Y) = (K_t + \tilde{K}_t) dt + (H_t + \tilde{H}_t) dB_t \,.
 \end{equation*}
 Luego 
 \begin{align*}
-        (&X_t + Y_t)^2 = (X_0 + Y_0)^2 + \int_{0}^{t} 2 (X_s + Y_s) d(X_s + Y_s)
-                      + \frac{1}{2} \int_{0}^{t} 2d \langle X + Y \rangle_2\\
-        (3) &=X_0^2 + Y_0^2 + 2X_0Y_0 + 2 \int_{0}^{t} X_s dX_s + 2 \int_{0}^{t} Y_s dY_s  \\
-            &+ 2 \int_{0}^{t} X_s dY_s + 2 \int_{0}^{t} Y_s dX_s + \int_{0}^{t} H_s^2 ds 
-            + \int_{0}^{t} \tilde{H}_s^2 ds + 2 \int_{0}^{t} H_s \tilde{H}_s ds 
+    (X_t + Y_t)^2 & = (X_0 + Y_0)^2 + \int_{0}^{t} 2 (X_s + Y_s) d(X_s + Y_s) + \frac{1}{2} \int_{0}^{t} 2d \langle X + Y \rangle_2 \\
+    &=X_0^2 + Y_0^2 + 2X_0Y_0 + 2 \int_{0}^{t} X_s dX_s + 2 \int_{0}^{t} Y_s dY_s  \\
+    &+ 2 \int_{0}^{t} X_s dY_s + 2 \int_{0}^{t} Y_s dX_s + \int_{0}^{t} H_s^2 ds + \int_{0}^{t} \tilde{H}_s^2 ds + 2 \int_{0}^{t} H_s \tilde{H}_s ds \,.
 \end{align*}
-
 Haciendo $\frac{1}{2} ( (3) - (1) - (2) )$ se tiene el resultado.\findem
 \negro
 \end{proof}
