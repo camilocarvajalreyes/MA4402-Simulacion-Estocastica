@@ -1,0 +1,86 @@
+\vspace{0.3cm}
+\begin{center}
+{\huge \textbf{Reducción de varianza y cadenas de Markov}}
+\end{center}
+
+\subsection*{Problema 1: Reducción de varianza}
+Considere la cantidad
+
+$$ \alpha = \EE [ e^{bZ}\boldsymbol{1}_{Z>0}],$$
+
+donde $Z$ es una variable normal estándar y $b\in\RR$ es una constante. Supondremos para este problema que la normal estándar es la única variable eficientemente simulable. Se desea aproximar $\alpha$ mediante un algoritmo de Monte Carlo con baja varianza.
+
+\begin{enumerate}
+	\item Proponga un método de muestreo preferencial.
+	
+	\item Sabiendo que $\EE \exp(b Z) = \exp(b^2/2)$, proponga un método de variable de control.
+	
+	\item Mejore el método del ítem anterior usando una variable antitética.
+\end{enumerate}
+
+Disponemos entonces de cuatro métodos de Monte Carlo para aproximar $\alpha$: usando directamente la ecuación para $\alpha$, y los tres métodos anteriores propuestos por usted. En lo que sigue, trabaje con $b=2$.
+
+\begin{enumerate} \setcounter{enumi}{3}
+	
+	\item Aproxime numéricamente la raíz de la varianza de la variable aleatoria que da lugar a cada uno de los cuatro métodos, para distintos tamaños de muestras, y grafique. Obtenga una estimación de la raíz de la varianza en cada caso.
+	
+	\item Usando la estimación de la raíz de la varianza del punto previo y aproximando con el TCL, calcule el tamaño de muestra necesario para cada método de modo de que el error obtenido sea inferior a $\varepsilon = 0.02$ con probabilidad de $95\%$. Comente.
+	
+	\item Sea $N_\text{max}$ el tamaño de muestra máximo entre los calculados en el ítem anterior para los tres métodos propuestos por usted (es decir, excluyendo el método que usa directamente la ecuación para $\alpha$). Para distintos tamaños de muestra crecientes hasta $N_\text{max}$, obtenga la estimación de $\alpha$ de cada uno de los cuatro métodos y grafique.
+	
+	\item En base a lo obtenido en los puntos previos, ¿cuál método es el mejor y cuál el peor? Obtenga el valor exacto de $\alpha$ usando una herramienta adecuada (por ejemplo: \url{www.wolframalpha.com}), y compare con el valor entregado por los cuatro métodos, usando el mismo $N_\text{max}$ para todos. Comente.
+		
+\end{enumerate}
+
+\subsection*{Problema 2: Simulación de cadenas de Markov y flujos Markovianos. }
+
+ Sea $E$ un conjunto finito que supondremos sin perder generalidad  igual a $ \{1,\ldots,N\}$, donde  $N\in\mathbb{N}$ está fijo. Sea $f:E\times [0,1]\rightarrow E$ una función, $X_{0}$ una v.a. con ley $\mu $ y $(U_{n})_{n\geq 1}$ una colección de v.a.'s i.i.d.\ uniformes en $[0,1]$, independientes de $X_{0}$.  Para $n\geq 0$ se define por recurrencia la sucesión aleatoria
+
+ $$ X_{n+1}=f(X_n,U_{n+1}). $$
+
+ Se sabe del curso  que $(X_n)_{n\geq 1}$ es una cadena de Markov homogénea.
+	
+\begin{enumerate}
+	\item  1 - Sea $P$ una matriz estocástica  indexada por $E$. Si	$f$ es tal que $ \mathbb{P}(f(x,U)=y)= P_{xy} $ para todo $x,y\in E$, diremos que es una  \textit{función de transición} asociada a la matriz $P$. Muestre que $f(x,u): = \inf \{y\in E : \sum_{z=1}^y P_{xz}\geq u\}$ cumple esa condición, y que   la cadena $(X_n)_{n\in\mathbb{N}}$  así  construida tiene entonces matriz de transición $P$.
+
+    Note que dada \mathbf{una} v.a. uniforme $U$ en $[0,1]$, $\Phi:= f(\cdot,  U):E \rightarrow E$  es una función aleatoria,  que entrega transiciones de la cadena desde  un estado $x$ cualquiera, a algún estado $y=\Phi(x)= f(x,  U)$.  
+				
+	\item  Programe una función $Trans(x,u,P)$ que tiene  como parámetros un valor $u$  en $[0,1]$ y una matriz estocástica $P$ indexada por $\{1,...N\}$, y  entrega \mathbf{para cada} $x$ el  valor correspondiente de la función de transición  asociada a $P$ con el parámetro $u$ dado.  Puede usar para ello una función ya programada en el Laboratorio 1 si lo desea.
+
+    En base a lo anterior, construya  también  un método $CM(\mu,P,n)$ que simule $n$ pasos de la cadena de Markov homogénea con matriz de transición $P$ y distribución inicial $\mu$. 
+    \vspace{.5cm}\\
+    Notar ahora que  dadas realizaciones  $(U_{n})_{n\geq 1}$ de v.a.  i.i.d. uniformes en $[0,1]$,  disponemos de una sucesión  de funciones  (aleatorias) $\Phi_n:= f(\cdot,  U_n):E \rightarrow E$, con $n\geq 1$,   que entregan  transiciones de la cadena desde  un estado $x$ cualquiera en el tiempo $n-1$, a algún estado $y=\Phi_n (x)= f(x,  U_n)$  en el tiempo $n$.
+
+    Más aun,   disponemos de un  \mathbf{flujo aleatorio}  $(\Phi_{n,m} :E \rightarrow E )_{n\geq 0, m> n} $ dado por  $ \Phi_{n,m} (x)=  \Phi_{m} \circ \cdots \circ \Phi_n(x)$,   que puede  entregar  las transiciones de la cadena desde  cualquier estado $x$  en el tiempo $n-1$, a algún estado $y=\Phi_{n,m} (x)$  en el tiempo $m$.
+
+    \item En base a la función construida en la parte 1),   construya ahora una función  $Flujo(x,n,m,u,P)$ que toma como parámetros  un vector  $u$  de $m-n+1$  valores en $[0,1]$ y una matriz estocástica  $P$, y entrega  **para cualquier** $x$ ,  el estado  en el tiempo $m$  de una cadena que se encuentra en $x$ en el tiempo $n-1$ obtenido al hacer $m-n+1$   transiciones sucesivas con la  función de transición  asociada a $P$. 
+	
+	\item Usando las funciones antes construidas, y utilizando (solo)  $n=100$ v.a. uniformes,   simule y grafique $n=100$ pasos de  $K=10$ trayectorias de un paseo aleatorio en el conjunto $\{1,...,N\}$ para $N=10$, donde cada trayectoria parte de  un estado distinto. En los extremos $x=1,10$ el paseo aleatorio se queda en el estado actual con probabilidad $1-p$ y salta con probabilidad $p$.  Realice esto  en cada uno de  los 3 casos siguientes: 	 $p=1/2$, $p=1/3$, $p= 2/3$.
+\end{enumerate}
+
+\subsection*{Problema 3: Aplicación a un modelo de colas}
+
+Considere una cola a tiempo discreto a la que, en cada instante $n\in \NN$ llega un cliente con probabilidad $p\in (0,1)$ y no llegan clientes con probabilidad $1-p$. Durante cada intervalo de tiempo en que hay al menos un cliente en la cola, un cliente es atendido y sale de la cola con probabilidad $q\in (0,1)$ y no se va ningún cliente con probabilidad $1-q$. Denote por $X_n$ la cantidad de clientes en la cola en el instante $n$.
+
+\begin{enumerate}
+    \item Escriba $X_n$ como $X_n = F (X_{n-1},Y_n,Z_n)$ explícitamente en términos de v.a.'s $(Y_n)\sim Bernoulli(p)$ y $(Z_n)\sim Bernoulli(q)$ independientes. Justifique que $(X_n)$ es irreducible. Se puede probar que para $p>q$, la cadena $(X_n)$ diverge c.s. Además, en el caso $p=q$ la medida $(1-p,1,1,\dots)$ es invariante, y para $p<q$ lo es la medida 
+
+    $$ \pi_0 	= \frac{q-p}{q}, 	\qquad 	\pi_x 	= \left( \frac{p(1-q)}{q(1-p)} \right)^x 	\frac{q-p}{q(1-q)}, 	\quad x\geq 1.$$
+
+    Explicite el rango de parámetros para los que $(X_n)$ es recurrente positiva, recurrente nula o transiente.
+	
+    \item En lo que sigue se considerará una versión ``truncada'' (y simulable) de la cadena. Para ello, se fijará $N$ un número máximo de clientes que la cola permite, y se modifica la matriz de transición con la convención de que si ya hay $N$ clientes, un nuevo cliente simplemente no se queda, pero la dinámica de los que ya están es la misma de antes. Simule y grafique trayectorias de $(X_n)$ hasta $n=1000$ para $3$ pares de
+	valores representativos de $(p,q)$, fijando en cada caso valores convenientes de $N$ que deberá determinar.
+	
+    \item Para un par $p,q$ tal que $p<q$ y un valor $N$ fijos que usted determine, compare las siguientes 3 estrategias para estimar numéricamente la distribución invariante $\pi^N$ asociada:
+	
+	\begin{itemize}
+		\item Simular $K$ (grande) CM independientes en un tiempo $T$ (grande) y obtener el histograma correspondiente a la \textit{medida empírica} para
+		las $K$ trayectorias en ese tiempo.
+		
+		\item Simular una CM por un tiempo $T$ (grande) y obtener el histograma de las \textit{medias ergódicas} 
+		$$ \frac{1}{T} \sum_{k=1}^T \mathbf{1}_{\{X_k=i\}}, \quad i\in \{0,...,N\}. $$
+	\end{itemize}
+	
+	En todos los casos, puede fijar $K$ y/o $T$ en términos de la cantidad de uniformes a simular o según un cierto error. Compare los métodos en distancia en variación total a $\pi$, y haga un análisis completo de las distintas estrategias.
+\end{enumerate}

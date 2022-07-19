@@ -1,0 +1,155 @@
+\vspace{0.3cm}
+\begin{center}
+{\huge \textbf{Monte Carlo y eficiencia de simulación}}
+\end{center}
+
+% \begin{mdframed}[backgroundcolor=black!10,linewidth=0]
+% \textbf{Indicaciones}:
+% Para este laboratorio puede usar todas las funciones de Python que estime necesarias, restringiéndose solamente al uso de los generadores básicos de n\'{u}meros aleatorios uniformes en [0,1] en lo que respecta a las simulaciones. En cada uno de los siguientes problemas, cuando se pidan comparaciones para distintos par\'{a}metros, se deber\'{a} entregar en las respuestas las tablas correspondientes y los c\'{o}digos utilizados. Debe ser ordenado al programar, comentando cada m\'{e}todo implementado para facilitar la corrección.
+% \end{mdframed}
+
+\subsection*{Preliminar}
+\begin{enumerate}
+  \item Programe el m\'{e}todo \emph{DiscreteQuantile(f,u)}, que recibe como par\'{a}metros una funci\'{o}n de masa discreta \emph{f} y un vector $u\in \lbrack 0,1]^{r}$, y retorne el menor vector $n\in\mathbb{N}^r$ (coordenada a coordenada) tal que $\sum_{j=0}^{n_i}f(j)\geq u_i.$
+
+  \item Programe el m\'{e}todo \emph{DiscreteQuantileF(F,u)}, que recibe como par\'{a}metros una funci\'{o}n de distribuci\'{o}n \emph{F} y un vector $u\in \lbrack 0,1]^{r}$, y retorne el menor vector $n\in\mathbb{N}^r$ tal que$\ F(n_i)\geq u_i.$
+\end{enumerate}
+
+\subsection*{Problema 1}
+
+En \textit{python} existen distintas librerías que permiten simular variables aleatorias. Entre ellas se destacan las siguientes:
+\begin{multicols}{3}
+\begin{itemize}
+    \item \href{https://numpy.org/doc/}{\textit{Numpy}}
+    \item \href{https://docs.scipy.org/doc/scipy/}{\textit{Scipy}}
+    \item \href{https://docs.python.org/3/library/random.html}{\textit{Random}}
+\end{itemize}
+\end{multicols}
+
+\begin{enumerate}
+    \item Programe la función \texttt{uniforme}, que reciba un valor entero $n$ y un método (\textit{Numpy}, \textit{Scipy} o \textit{Random}), y retorne $n$ simulaciones de una variable aleatoria uniforme en $[0,1]$.
+    \item Genere $10^6$ uniformes para cada librería y grafique en un histograma cada muestra generada, utilizando la librería \textit{seaborn}.
+    \item Genere $100$ muestras de $1000$ uniformes en $[0,1]$ y utilizando la librería \textit{time} calcule los tiempos de ejecución que toman generar cada muestra para cada librería. Grafique los tiempos encontrados para cada método y calcule la media y varianza del tiempo de ejecución por muestra de cada método.
+    \item En base a los resultados anteriores. ¿Cual es el mejor método a utilizar? Argumente.
+    \item Genere funciones que permitan obtener una muestra para las siguientes variables a partir de uniformes:
+    \begin{itemize}
+        \item $Bernoulli(p)$
+        \item $Binomial(p,N)$
+        \item $Geometrica(p)$
+    \end{itemize}
+    Utilice estas funciones y la librería \textit{random} para generar muestras de estas variables. Compare los tiempos de ejecución con los métodos para simular directamente estas variables disponibles en las librerías \textit{numpy} y \textit{scipy} (note que $Bernoulli(p)=Binomial(p,1)$).
+\end{enumerate}
+Las librerías anteriores generan números \textbf{pseudoaleatorios} que se asemeja bastante a lo que se necesita.
+
+\begin{enumerate}
+    \item[6.] Averig\"{u}e y explique en qu\'{e} consisten los m\'{e}todos para generar n\'{u}meros pseudoaleatorios uniformes en [0,1] disponibles en la versi\'{o}n que se usar\'{a} de Python. Especifique: n\'{u}mero de bits, per\'{\i}odo (de congruencias lineal utilizada o medida equivalente para el m\'{e}todo que corresponda), posibilidad y manera de cambiar semilla. Utilizar aproximadamente media plana de desarrollo incluyendo tablas y/o figuras.
+
+\end{enumerate}
+\subsection*{Problema 2}
+
+Tomando en cuenta que
+\[I=\frac{\pi }{4}=\int\limits_{0}^{1}\sqrt{1-x^{2}}\ \dd x=\int\limits_{0}^{1}\int\limits_{0}^{1}\mathbf{1}_{\{x^{2}+y^{2}\leq 1\}}\ \dd x \dd y,\]
+se considerar\'{a}n dos m\'{e}todos de Monte Carlo para calcular num\'{e}ricamente $I$:
+\begin{itemize}
+  \item Utilizando la variable aleatoria $X=\sqrt{1-U^{2}}$, con $U$ v. a. uniforme en $[0,1].$
+  \item Utilizando la variable aleatoria $Z=\mathbf{1}_{\{U_{1}^{2}+U_{2}^{2}\leq 1\}}$, con $U_{i}$ v. a. uniforme en $[0,1]$ e independientes.
+\end{itemize}
+
+\begin{enumerate}
+  \item Calcule las varianzas $\mathrm{Var}(X)$ y $\mathrm{Var}(Z)$ de forma te\'{o}rica y de forma simulada con diferentes cantidades de r\'{e}plicas $n$. Grafique. Estime una cantidad de r\'{e}plicas necesarias para $X$ y $Z$ con tal de obtener una aproximaci\'{o}n de la varianza con un error del orden del $1\%$.
+
+  \item Calcule la cantidad de r\'{e}plicas necesarias para $X$ y $Z$ con tal de aproximar $I$ con un error m\'{a}ximo de $\mathrm{Err}_{1}=0.1$ y probabilidad $\Pr_{1}=90\%$. Haga el mismo ejercicio con $\mathrm{Err}_{2}=0.01$ y $\Pr_{2}=95\%$, $\mathrm{Err}_{3}=0.001$ y $\Pr_{3}=99\%.$
+
+  \item Aproxime las esperanzas $\mathbb{E}(X)$ y $\mathbb{E}(Z)$ de forma simulada con diferentes cantidades de réplicas $n$ hasta llegar al $n^*$ tal que se cumple $Err3$ y $Pr3$.
+  \begin{itemize}
+      \item Grafique las aproximaciones en función de la cantidad de réplicas.
+      \item Grafique el tiempo utilizado en aproximar las esperanzas en función de la cantidad de réplicas. 
+      \item Estime los costos de simular una réplica de $X$ y una réplica de $Z$.
+  \end{itemize}
+
+  \item Considerando $Err3$ y $Pr3$ calcule un intervalo de confianza para $I$ utilizando $X$ y $Z$. Mida el tiempo total utilizado por cada método para obtener dicha precisión y compare los errores de estimación. Compare los costos totales para cada método ¿Cuál método es más eficiente?
+
+  \item Considerando $\mathrm{Err}_{3}$ y $\Pr_{3}$ calcule el costo te\'{o}rico de estimar $I$ utilizando $X$ y $Z$, tomando como costo la cantidad de variables aleatorias uniformes necesarias ¿Cuál método es mas eficiente bajo este criterio? ¿Qué diferencia se observa entre comparar las eficiencias usando este criterio (número de uniformes) y el criterio anterior (costo total)? ¿Qué indica esa diferencia? ¿Cuál criterio debería preferirse en general?
+\end{enumerate}
+
+\subsection*{Problema 3}
+\begin{enumerate}
+    \item Programe el método ``NewtonRaphson``, que recibe como parámetros una función de distribución $F$, su función de densidad $f$ y un vector $u \in [0, 1]^r$, y aplique el método de Newton-Raphson para calcular el vector $x \in R^r$ tal que $|F(x_i) − u_i|\leq error$, donde error es un parámetro de la clase inicializado con $error=10^{−4}$.
+    
+    Decimos que $X$ es una variable $Beta$ de parámetros $\theta_1,\,\theta_2>0$ si su función de densidad $f_X$ cumple
+    $$ f_X(x) = \frac{x^{\theta_1-1}(1-x)^{\theta_2-1}}{B(\theta_1,\theta_2)}\mathbf{1}_{[0,1]} \, ,$$
+
+    donde $B(\theta_1,\theta_2) = \displaystyle\int^1_0 t^{\theta_1-1}(1-t)^{\theta_2-1}dt$. Para esta función puede usar \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.beta.html}{el método de la biblioteca \textit{Scipy}}.
+    
+    \item 2 - Grafique en una misma figura la función de densidad para:
+    \begin{enumerate}
+        \item $\theta_1 = 2$, $\theta_2 = 5$,
+        \item $\theta_1 = 2$, $\theta_2 = 2$,
+        \item $\theta_1 = 1$, $\theta_2 = 3$,
+        \item $\theta_1 = 0.5$, $\theta_2 = 0.5$.
+    \end{enumerate}
+    
+    De ahora en adelante fijamos los parámetros $\theta_1=2$ y $\theta_2=5$.
+
+    \item Utilice el método ``NewtonRaphson`` para simular $10000$ réplicas de $X\sim Beta(\theta_1,\theta_2)$. Grafique los resultados.
+    
+    \item Programe el método de ``AceptacionRechazo`` que tome una función de densidad $f$ definida en $[0,1]$, una cota apropiada $K$ y dos vectores $u,v\in[0,1]^r$ y retornen réplicas de de una v.a. $X$ de densidad $f$ usando el método de aceptación rechazo usando v.a. auxiliares de densidad $g\sim Unif([0,1])$.
+    
+    \item Encuentre una cota $K$ para la variable $Beta(\theta_1,\theta_2)$, con $\theta_1,\theta_2$ como en el punto anterior. Implemente el método de aceptación-rechazo con $f_X$ y $K$ para simular réplicas de $Beta(\theta_1,\theta_2)$ usando $10000$ uniformes. Grafique los resultados.
+    
+    \item Encuentre una cota $K$ para la variable $Beta(\theta_1,\theta_2)$, con $\theta_1,\theta_2$ como en el punto anterior. Implemente el método de aceptación-rechazo con $f_X$ y $K$ para simular réplicas de $Beta(\theta_1,\theta_2)$ usando $10000$ uniformes. Grafique los resultados.
+    
+    \item Usando el método más eficiente, simule $n = 100000$ réplicas de $X$, calcule las medias y varianzas muestrales, y luego compare los resultados con los valores teóricos.
+\end{enumerate}
+
+%%%
+\iffalse
+\begin{enumerate}
+  \item Programe el m\'{e}todo \emph{DiscreteQuantile(f,u)}, que recibe como par\'{a}metros una funci\'{o}n de masa discreta \emph{f} y un vector $u\in \lbrack 0,1]^{r}$, y retorne el menor vector $n\in\mathbb{N}^r$ (coordenada a coordenada) tal que $\sum_{j=0}^{n_i}f(j)\geq u_i.$
+
+  \item Programe el m\'{e}todo \emph{DiscreteQuantileF(F,u)}, que recibe como par\'{a}metros una funci\'{o}n de distribuci\'{o}n \emph{F} y un vector $u\in \lbrack 0,1]^{r}$, y retorne el menor vector $n\in\mathbb{N}^r$ tal que$\ F(n_i)\geq u_i.$
+
+\item Programe el m\'{e}todo \emph{ContinuousQuantile(F,f,u)}, que recibe como par\'{a}metros una funci\'{o}n de distribuci\'{o}n \emph{F,} su funci\'{o}n de densidad \emph{f} y un vector $u\in \lbrack 0,1]^{r}$, y aplique el m\'{e}todo de Newton para calcular el vector $x\in\mathbb{R}^r$ tal que $\left\vert F(x_{i})-u_{i}\right\vert \leq \emph{error},$ donde \emph{error} es un par\'{a}metro de la clase inicializado con \emph{error=10}$^{-4}.$
+\end{enumerate}
+% \item Agregue el m\'{e}todo \emph{ContinuousQuantileF(F,p)}, que aplique el m%
+% \'{e}todo anterior pero que aproxime su funci\'{o}n de densidad \emph{f} con
+% diferencias finitas centradas%
+% \begin{equation*}
+% \emph{f(x)=}\frac{\emph{F(x+epsilon)-F(x-epsilon)}}{2\emph{epsilon}}
+% \end{equation*}
+% , donde \emph{epsilon }es un par\'{a}metro de la clase inicializado con 
+% \emph{epsilon=10}$^{-4}.$
+
+\noindent Considere $X$ una variable aleatoria discreta con
+\[\mathbb{P}(X=j)=\left( \frac{1}{2}\right)^{j},\ j\geq 1.\]
+
+\begin{enumerate}
+  \item[4.] Para $k=1,\dots,5$, simule $n=10^{k}$ r\'{e}plicas de $X$ para cada uno de los 3 m\'{e}todos implementados, usando las mismas $n^k$ variables uniformes para cada uno de ellos (en el caso del método continuo utilice el comando \emph{ceil} para redondear el resultado) ¿En que medida coinciden los resultados de los tres métodos y por qué? Grafique el tiempo de ejecuci\'{o}n en funci\'{o}n de la cantidad de r\'{e}plicas, estime el costo por réplica de cada uno de los m\'{e}todos y ordene los m\'{e}todos seg\'{u}n su eficiencia.
+
+  \item[5.] Usando el m\'{e}todo m\'{a}s eficiente, para $k=1,...,5$ simule $n=10^{k}$ r\'{e}plicas de $X,$ calcule las medias y varianzas muestrales, y luego compare los resultados con los valores te\'{o}ricos.
+\end{enumerate}
+\fi
+%%% 
+
+\subsection*{Problema 4}
+
+Considere $Y_{\lambda ,s}$ variable aleatoria discreta con
+$$ \mathbb{P}(Y_{\lambda,t,s}=k)=\frac{e^{-\lambda}\lambda^k/k!}{\sum^s_{j=t}e^{-\lambda}\lambda^j/j!} \text{ para }k=t,\dots,s \, .$$
+
+Para las evaluaciones considere $\lambda = 5$.
+
+Analizaremos dos métodos que reciban $t$ y $s$, y simulen $n$ réplicas de $Y_{\lambda,t,s}$.
+
+\begin{enumerate}
+    \item  Implemente el método de aceptacion-rechazo utilizando variables uniformes discretas.
+    
+    \item Implemente el método de simulación condicional de una variable aleatoria apropiada.
+    
+    \item Evalue la eficiencia teórica de ambos métodos.
+
+  \item Compare la precisión numérica de los dos métodos considerando sus histogramas y las eficiencias numéricas para los siguientes casos:
+  \begin{itemize}
+      \item $t=0$, $s=10$.
+      \item $t=10$, $s=20$.
+  \end{itemize}
+\end{enumerate}

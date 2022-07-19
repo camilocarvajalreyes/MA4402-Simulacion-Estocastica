@@ -1,0 +1,104 @@
+\vspace{0.3cm}
+\begin{center}
+{\huge \textbf{Laboratorio 4.2: Integral estocástica y EDEs}}
+\end{center}
+
+\section*{Problema 1: Movimiento Browniano} %(CAMBIAR FORMA EN QUE SE AÑADEN FUNCIONALIDADES?)
+\begin{enumerate}
+	\item Programe una función \texttt{BrownianTrajectories} que reciba como parámetros:
+	\begin{itemize}
+		\item un vector $x$ de $N$ condiciones iniciales,
+		\item un tiempo final $T>0$,
+		\item un entero $K>0$,
+	\end{itemize}
+	y que simule $N$ copias independientes de un movimiento browniano $(B_t)_{t\in[0,T]}$ en la grilla $t = (t_0,t_1,\ldots,t_K)$, con $t_i = iT/K$, partiendo de las condiciones iniciales indicadas en el vector $x$. Debe retornar \texttt{[t, B]}, siendo \texttt{B} la matriz con todas las trayectorias simuladas.
+	%No utilice ningún ciclo tipo \texttt{for} o similar, aproveche las funciones de Matlab como \texttt{cumsum}.
+	
+	\item Utilizando la función creada, genere y grafique $N=50$ trayectorias brownianas partiendo de $x=0$ hasta $T$ muy grande ($T\geq 10^{10}$, por ejemplo), en una malla temporal suficientemente fina. Agregue los gráficos de las funciones $L$ y $-L$, donde $L(t) := \sqrt{2t \log \log t}$. Observe y comente.
+	
+	\item Fije un $T \in [1,10]$ a gusto. Definimos el \emph{valor absoluto} $|B|$ y el \emph{máximo acumulado} $M$ del browniano, como
+	\[
+	|B|_t := |B_t|
+	\quad \text{y} \quad
+	S_t := \max_{s\leq t} B_t.
+	\]
+	\begin{enumerate}
+		\item Para $N=3$ brownianos simulados, grafique las trayectorias de $|B|$ y $S$ asociadas, comentando en qué se diferencian.
+		%\emph{Indicación:} utilice la función \texttt{cummax}.
+		\item Para $N$ grande ($N\geq 10^5$, por ejemplo), grafique histogramas de $|B|_T$ y $S_T$. Observe, compare y comente. Busque en Google o en un libro el resultado matemático correspondiente a lo que ilustran estas simulaciones.
+	\end{enumerate}
+	
+\end{enumerate}
+
+
+\section*{Problema 2: Resolución numérica de ecuaciones diferenciales estocásticas} 
+Consideremos una ecuación diferencial estocástica genérica:
+\begin{equation}
+\label{eq:SDE}
+dX_t = b(X_t)dt + \sigma(X_t) dB_t, \quad X_0 = x_0,
+\end{equation}
+donde $(B_t)_{t\geq 0}$ es un movimiento browniano en $\mathbb{R}$, $x_0 \in \mathbb{R}$ está dado, y $b,\sigma: \mathbb{R} \mapsto \mathbb{R}$ son funciones conocidas. En esta parte del laboratorio deseamos resolver numéricamente esta ecuación, y evaluar el desempeño de los algoritmos utilizados.
+
+\begin{enumerate}
+\item Implemente una función \texttt{[t,B,E]=SDEEuler(N,K,T,x0,b,s)} que realice lo siguiente:
+\begin{itemize}
+\item Genere una malla $\texttt{t}$ del intervalo $[0,T]$ usando paso $T/K$.
+\item Genere $N$ trayectorias brownianas independientes en dicha malla, retornando el resultado en \texttt{B}.
+\item Por cada trayectoria browniana, genere las aproximaciones de la solución de \eqref{eq:SDE} mediante el esquema de Euler, retornando el resultado en \texttt{E}. Las variables \texttt{x0}, \texttt{b} y \texttt{s} corresponden a $x_0$, $b$ y $\sigma$.
+\end{itemize}
+Utilice esta función para explorar la naturaleza de las soluciones en función de los coeficientes $b$ y $\sigma$: realice pruebas y gráficos para $N=1$ trayectoria y para variados $b$ y $\sigma$ que usted estime convenientes; por ejemplo, puede fijar $b$ y considerar distintos $\sigma$ que son múltiplos de una función fija, para ver los efectos del ruido en la ecuación. Deber\'a  por tanto simular las trayectorias de los diferentes procesos usando la misma realizaci\'on de un movimiento  Browniano. 
+
+\item En el caso particular en que $b(x) = bx$ y $\sigma(x) = \sigma x$ para ciertas constantes $b,\sigma$, la ecuación \eqref{eq:SDE} describe un \emph{movimiento browniano geométrico}, y puede resolverse explícitamente:
+\begin{equation}
+\label{eq:gBm}
+X_t = x_0 \exp\left( (b-\frac{\sigma^2}{2}) t  +  \sigma B_t \right).
+\end{equation}
+Para parámetros $N$, $K$, $T$, $x_0$, $b$ y $\sigma$ que usted estime convenientes, obtenga la aproximacione de Euler. Compare gráficamente contra la trayectoria de la solución exacta dada por \eqref{eq:gBm} utilizando el mismo movimiento Browniano. Comente.
+
+\item Siguiendo con el caso del movimiento browniano geométrico, en esta parte se desea cuantificar lo observado gráficamente en el punto anterior. Específicamente: si $E_t^{K}$ denota la aproximacion de Euler de paso $T/K$ al tiempo $t$ , queremos estudiar
+\begin{equation}
+\label{eq:rate}
+\mathbb{E} |X_T - E_T^K|,
+\end{equation}
+y en particular ver a qué tasa converge a 0 en función de $K$. Se espera que lo anterior sea de orden $K^{-\alpha}$, para cierto $\alpha >0$ por determinar experimentalmente. Para esto, fije $T=x_0=b=\sigma=1$ y un $N$ a conveniencia ($100$ ó $1000$ debería bastar), e implemente una función \texttt{TestSDEEuler()} que realice lo siguiente:
+\begin{itemize}
+\item Genere un vector creciente de distintos valores de $K$, desde $K$ relativamente pequeño ($\sim 10$ ó $\sim 100$) a un a $K$ grande ($\sim 10^5$ o m\'as). De preferencia, que sea un vector equiespaciado en escala logarítmica.
+\item Para cada $K$ generado, obtenga $N$ realizaciones de la aproximacion del esquema de Euler de \eqref{eq:SDE}. Utilice estas realizaciones para aproximar la esperanza \eqref{eq:rate} usando Monte Carlo, donde para cada trayectoria,  $X_T$ se calcula de manera exacta usando la expresi\'on \eqref{eq:gBm} con la misma realizaci\'on de  $B_T$ que la del movimiento Browniano discretrizado utilizado en el esquema de Euler. Grafique en función de  $K$. 
+\item Mediante una regresión lineal entre $\log(K)$ y el logaritmo de las aproximaciones de \eqref{eq:rate} obtenidas en el punto anterior, obtenga una estimación de las tasa $\alpha$ del esquema y grafique los resultados de la regresión.
+\end{itemize}
+Comente los resultados obtenidos.
+\item Muestre que $\mathbb{E}(X_T)= e^{bT}$.  Usando un esquema de Euler y Monte Carlo, calcule ahora $\mathbb{E}(E_T^K)$ y haga un analisis similar al anterior para el denominado ``error d\'ebill '':   $| \mathbb{E}(X_T) - \mathbb{E}(E_T^K)|$   (en contraste con el error ``fuerte''   \eqref{eq:rate}).  Comente. 
+\end{enumerate}
+
+
+%%%%%%%%%%%%
+% Problema %
+%%%%%%%%%%%%
+
+\section*{Problema 3: Problema de Dirichlet en $\mathbb{R}^2$}
+En esta parte estudiaremos el \emph{problema de Dirichlet en $\mathbb{R}^2$}:
+\begin{equation}
+\label{eq:Dirichlet}
+\begin{cases}
+\Delta u(x) = 0, & x \in D \\
+u(x) = f(x), & x \in \partial D,
+\end{cases}
+\end{equation}
+donde $D\subseteq \mathbb{R}^2$ es un abierto acotado, y $f:\partial D \to \mathbb{R}$ es una función continua. 
+Denotamos por $(B_t)_{t\geq 0}$  un movimiento Browniano en $\mathbb{R}^2$, es decir  $(B_t)_{t\geq 0}= (B^1_t, B^2_t)_{t\geq 0}$ con $B^1, B^2$ movimientos Brownianos independientes en $\mathbb{R}$. 
+
+Se prueba (ver e.g. Karatzas-Shreve , ``Brownian motion and stochastic calculus'')  que la solución de \eqref{eq:Dirichlet} tiene la  representaci\'on probabilística 
+\begin{equation}
+\label{eq:u}
+u(x) = \mathbb{E} f(B^x_{\tau^x}) \quad \forall x\in \bar{D},
+\end{equation}
+donde $(B^x_t)_{t\geq 0}$ es un movimiento Browniano en $\mathbb{R}^2$ partiendo de $x$,  es decir $(B^x_t)_{t\geq 0} = (B_t+x)_{t\geq 0}$ , y  $\tau^x = \inf\{t\geq 0: B^x_t \notin D\}$ es el tiempo de parada en que $B^x_t$  sale de $D$. 
+\begin{enumerate}
+\item Implemente una funci\'on que simule $N$ trayectorias Brownianas independientes en $\mathbb{R}^2$ partiendo de $(0,0)$, en una grilla temporal de paso $h$, durante $K$ pasos. Defina una  funci\'on que implemente una grilla espacial fina de $D=[-1,1]^2$ y $D=B((0,0), 1)$, de ancho $\epsilon>0$. Usando (solo) $N$ trayectorias  Brownianas  independientes partiendo  de $(0,0)$    implemente en base a lo anterior una funci\'on que  simule  para cada $x$ en la grilla, $N$  trayectorias Brownianas partiendo de  $x$, durante $K$ pasos  de paso $h$ (MUY IMPORTANTE:  en total solo deben usarse $N$ trayectorias Brownianas, no $N\times $(n\'umero de puntos en la grilla)). 
+
+\item Programe una funci\'on que, dada $N=1$ trayectoria (discretizada)  simulada  $(B^x_{ih})_{i=1}^K$ de movimiento Browniano de $K$ pasos de paso $h$ partiendo de $x$, retorne $B^x_{\tau^x \wedge (Kh)}$, es decir,  el punto  en la frontera por el cual el proceso sali\'o  de $D$, o bien su posici\'on en el tiempo $Kh$ si no sali\'o hasta ese momento.  Alternativamente, puede implementar una funci\'on, que dada dicha trayectoria, entregue la trayectoria ``detenida''   $(B^x_{(ih) \wedge \tau^x})_{i=1}^K$ en el tiempo  $\tau^x$.   Note que dado que el tiempo es discreto, en el tiempo $\tau^x$ el proceso se encontrar\'a en realidad fuera de $D$,  por lo que deber\'a  escoger  como punto de salida  un punto  en $\partial D$ que interpole entre $B^x_{\tau}$ y $B^x_{\tau-h}$. 
+
+ \item Combine lo antes implementado para simular por bloques de $K$ pasos de paso $h$,  $N$ trayectorias Brownianas partiendo de cada punto $x$ de la grilla espacial, hasta que todas las trayectorias hayan salido del $D$, encontrando para cada  trayectoria $(B^x_{ih})_{i\in \NN}$ el punto $B^x_{\tau^x} \in \partial D$ respectivo.   Haga esto para cada uno de los $2$ dominios $D$ especificados.  Se recomienda agregar para cada trayectoria   $(B^x_{ih})_{i\in \NN}$    una variable binaria que indique si el proceso ya sali\'o del  dominio, con el fin de optimizar  el uso de la funci\'on programada en 2). 
+  
+\item Busque ejemplos de funciones  $f:\partial D \to \mathbb{R}$ para los cuales el problema de Dirichlet  \eqref{eq:u} tiene soluci\'on anal\'itica conocida, en los dos dominios $D=[-1,1]^2$ y $D=B((0,0), 1)$ considerados.  Calcule num\'ericamente $u(x)$ para cada $x$ en la grilla espacial correspondiente, mediante un m\'etodo de Monte Carlo  usando $N>10000$ trayectorias de movimientos Brownianos partiendo de $(0,0)$ y lo antes desarrollado.  Haga esto para distintos valores de $h$ y $\epsilon$, compare  entre si los resultados obtenidos con distintos sets de par\'ametros, y con la  solución anal\'itica conocida.  Para una elecci\'on apropiada de par\'ametros $N$, $h$ y $\epsilon$  grafique la soluci\'on calculada con la representaci\'on probabilista y la soluci\'on exacta, en cada uno de los dominios. 
+\end{enumerate}
