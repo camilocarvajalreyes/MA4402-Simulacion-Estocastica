@@ -89,7 +89,8 @@ Se tienen las siguientes proposiciones:
 
 \begin{proof}
 \gris
-Probemos \ref{prop1:b}, el resto queda propuesto como \ejercicio \gris. Debemos probar que $X_t = \frac{1}{\sqrt{c}} B_{ct}$ cumple con las condiciones de la definición (\ref{def:mb}). Es claro  que las condiciones I,II y IV son directas del hecho que $(B_t)_{t \geq 0}$ es un movimiento browniano. Además: 
+Probemos \ref{prop1:b}, el resto queda propuesto como \ejercicio.
+\\ \gris Debemos probar que $X_t = \frac{1}{\sqrt{c}} B_{ct}$ cumple con las condiciones de la definición (\ref{def:mb}). Es claro  que las condiciones I,II y IV son directas del hecho que $(B_t)_{t \geq 0}$ es un movimiento browniano. Además: 
 \begin{equation*}
     X_{t+s} - X_t = \underbrace{\frac{1}{\sqrt{c} } \left( B_{ct + cs} - B_{ct} \right)}_{\mathcal{N}(0,cs)} \sim  \mathcal{N}(0,s)\,.
 \end{equation*}
@@ -595,8 +596,8 @@ La condición $\E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty$ se cum
 Podemos usar lo anterior para comprobar que 
 $$\int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t \,.$$
 \end{example}
-\gris
 \begin{proof}
+\gris
 Sea $(\pi^{n})_{n \in \N}$ secuencia de particiones de $[0,t]$ como en la proposición. (para $t >0$ fijo), luego, por dicha proposición y por lo hecho previamente:
 \begin{equation*}
     \int_{0}^{t} B_s dB_s = \lim_{n \to \infty} \int_{0}^{t} B_s^n ds ~ ~ ~ \text{en } L^{2}(d\P)\,,
@@ -797,124 +798,97 @@ Luego
     &=X_0^2 + Y_0^2 + 2X_0Y_0 + 2 \int_{0}^{t} X_s dX_s + 2 \int_{0}^{t} Y_s dY_s  \\
     &+ 2 \int_{0}^{t} X_s dY_s + 2 \int_{0}^{t} Y_s dX_s + \int_{0}^{t} H_s^2 ds + \int_{0}^{t} \tilde{H}_s^2 ds + 2 \int_{0}^{t} H_s \tilde{H}_s ds \,.
 \end{align*}
-Haciendo $\frac{1}{2} ( (3) - (1) - (2) )$ se tiene el resultado.\findem
+Haciendo $\frac{1}{2} ( (3) - (1) - (2) )$ se tiene el resultado \findem
 \negro
 \end{proof}
 
-% \end{document}
-
-% \documentclass[../main/main.tex]{subfiles}
-% \begin{document}
+\newpage
 % \chapter{Ecuaciones Diferenciales Estocásticas}
-
 \subsection{Ecuaciones Diferenciales Estocásticas}
 Dada una ecuación diferencial clásica, digamos 
 \begin{equation*}
-        \frac{dX_t}{dt} = b(X_t)
+        \frac{dX_t}{dt} = b(X_t)\,,
 \end{equation*}
 o en forma diferencial 
 \begin{equation*}
-        dX_t = b(X_t) dt
+        dX_t = b(X_t) dt\,,
 \end{equation*}
 
-Donde $b: \mathbb{R} \to \mathbb{R}$ es una función determinista, queremos añadir \textit{ruido} a la evolución 
+donde $b: \mathbb{R} \to \mathbb{R}$ es una función determinista, queremos añadir \textit{ruido} a la evolución 
 de $X$. Este ruido puede modelar distintos fenómenos: imperfecciones en la medición, variaciones 
 bursátiles, interacciones con el medio, etc. Si el ruido es proporcional a una función de $X$, obtenemos 
-la \textbf{ecuación diferencial estocástica} (SDE en inglés)
+la \textbf{ecuación diferencial estocástica} (EDE o bien \textit{SDE} en inglés)
 \begin{equation*}
         \label{eq:sde_1}
         \tag{*}
-        dX_t = b(X_t) dt \sigma (X_t) dB_t
+        dX_t = b(X_t) dt \sigma (X_t) dB_t \,.
 \end{equation*}
-
-Donde e$(B_t)_{t \ge  0}$ es un movimiento browniano. Esto debe entenderse como una notación para 
+Aquí $(B_t)_{t \ge  0}$ es un movimiento browniano. Esto debe entenderse como una notación para 
 la siguiente definición rigurosa:
- \begin{definition}
-         Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, 
-         con un movimiento browniano $(B_t)_{t \ge 0}$ asociado y una variable
-         aleatoria $X_0 \in \mathcal{F}_0$, junto con funciones $b: \mathbb{R} \to \mathbb{R}$, $\sigma: \mathbb{R} \to \mathbb{R}$, 
-         decimos que $(X_t)_{t \ge 0}$ es una \textbf{solución fuerte} de la ecuación diferencial estocástica
-         (\ref{eq:sde_1}), si 
-         \begin{itemize}
-                 \item $\forall  t \ge  0$, $\int_{0}^{t} \abs{b(X_s)} ds < \infty$ y 
-                         $\int_{0}^{t} \abs{\sigma (X_s)}^2 ds < \infty$ casi seguramente.
-                 \item $\forall  t \ge 0$,
-                         \begin{equation*}
-                                 \label{eq:sde_2}
-                                 \tag{**}
-                                 X_t = X_0 + \int_{0}^{t} b(X_s) ds  + \int_{0}^{t} \sigma (X_s) dB_s 
-                         \end{equation*}
-                         casi seguramente. 
-         \end{itemize}
- \end{definition}
+\begin{definition}[Solución exacta de una EDE]
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, con un movimiento browniano $(B_t)_{t \ge 0}$ asociado y una variable aleatoria $X_0 \in \mathcal{F}_0$, junto con funciones $b: \mathbb{R} \to \mathbb{R}$, $\sigma: \mathbb{R} \to \mathbb{R}$, decimos que $(X_t)_{t \ge 0}$ es una solución fuerte de la ecuación diferencial estocástica (\ref{eq:sde_1}), si 
+\begin{itemize}
+\item $\displaystyle \forall  t \ge  0$, $\int_{0}^{t} \abs{b(X_s)} ds < \infty$ y 
+     $\int_{0}^{t} \abs{\sigma (X_s)}^2 ds < \infty$ casi seguramente.
+\item $\forall  t \ge 0$,
+\begin{equation*}
+     \label{eq:sde_2}
+     \tag{**}
+     X_t = X_0 + \int_{0}^{t} b(X_s) ds  + \int_{0}^{t} \sigma (X_s) dB_s 
+\end{equation*}
+casi seguramente. 
+\end{itemize}
+\end{definition}
 \begin{remark}
-        También puede incluirse el caso en que $b$ y $\sigma$ dependen de $t$: $b = b(t,x)$, 
-        $\sigma = \sigma(t,x)$. 
+    También puede incluirse el caso en que $b$ y $\sigma$ dependen de $t$: $b = b(t,x)$, $\sigma = \sigma(t,x)$. 
 \end{remark}
 
 Un $X$ cumpliendo (\ref{eq:sde_2}) se denomina \textbf{difusión}. 
 
-Ahora estudiamos la existencia y unicidad  para (\ref{eq:sde_2}). Notemos que incluso en el caso determinista
-($\sigma \equiv 0$), (\ref{eq:sde_2}) puede tener mal comportamiento (múltiples soluciones o soluciones 
-que explotan) si la función $b$ no es Lipschitz. (por ejemplo $\frac{dx}{dt} = x^2$. Esto resulta ser 
-suficiente:
-
-\begin{theorem}[Existencia y Unicidad de Soluciones para SDEs]
-        Supongamos que $\exists K >0$ constante tal que 
-        \begin{itemize}
-                \item $\abs{b(x) - b(y)} + \abs{\sigma(x)- \sigma(y)} \le  K \abs{x-y}$, 
-                        $\forall x,y \in \mathbb{R}$. 
-                \item $\abs{b(x)} + \abs{\sigma(x)} \le K(1+\abs{x})$, $\forall x \in \mathbb{R}$. 
-                \item $\E[X_{0}^{2}] < \infty$. 
-        \end{itemize}
-        Entonces, para todo $T$, (\ref{eq:sde_2}) admite casi seguramente una única solución fuerte 
-        $(X_t)_{t \in [0,T]}$ en $[0,T]$, la cual además cumple 
-        \begin{equation*}
-                \E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty
-        \end{equation*}
+\newp Ahora estudiamos la existencia y unicidad  para (\ref{eq:sde_2}). Notemos que incluso en el caso determinista ($\sigma \equiv 0$), (\ref{eq:sde_2}) puede tener mal comportamiento (múltiples soluciones o soluciones que explotan) si la función $b$ no es Lipschitz. (por ejemplo $\frac{dx}{dt} = x^2$. Esto resulta ser suficiente:
+\begin{theorem}[Existencia y Unicidad de Soluciones para EDEs]
+Supongamos que $\exists K >0$ constante tal que 
+\begin{itemize}
+    \item $\abs{b(x) - b(y)} + \abs{\sigma(x)- \sigma(y)} \le  K \abs{x-y}$, $\forall x,y \in \mathbb{R}$. 
+    \item $\abs{b(x)} + \abs{\sigma(x)} \le K(1+\abs{x})$, $\forall x \in \mathbb{R}$. 
+    \item $\E[X_{0}^{2}] < \infty$. 
+\end{itemize}
+Entonces, para todo $T$, (\ref{eq:sde_2}) admite casi seguramente una única solución fuerte $(X_t)_{t \in [0,T]}$ en $[0,T]$, la cual además cumple 
+\begin{equation*}
+    \E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty \,.
+\end{equation*}
 \end{theorem}
 
 \begin{proof}
 \gris
 Usaremos un argumento de punto fijo. Para ello, sea
 \begin{equation*}
-        \xi = \{ (X_t)_{t \in [0,T]} \text{ adaptado y continuo tal que }  \|X\|_T < \infty \},
+    \xi = \{ (X_t)_{t \in [0,T]} \text{ adaptado y continuo tal que }  \|X\|_T < \infty \}\,,
 \end{equation*}
-donde $\|X\|_{T}^{2} := \E \left[ \sup_{t \in [0,T]} \abs{X_t}^{2}
-\right] $. $(\xi, \| \cdot \|_{T})$ es un espacio de Banach. $\forall \in \xi$, definimos 
-$(\Phi(X)_t)_{t \in [0,T]}$ como
+donde $\|X\|_{T}^{2} := \E \left[ \sup_{t \in [0,T]} \abs{X_t}^{2} \right] $. $(\xi, \| \cdot \|_{T})$ es un espacio de Banach. $\forall \in \xi$, definimos $(\Phi(X)_t)_{t \in [0,T]}$ como
 \begin{equation*}
-        \Phi(X)_t = X_0 + \int_{0}^{t} b(X_s) ds  \int_{0}^{t} \sigma(X_s) dB_s
+        \Phi(X)_t = X_0 + \int_{0}^{t} b(X_s) ds  \int_{0}^{t} \sigma(X_s) dB_s\,.
 \end{equation*}
 
 Es fácil ver que $\Phi(X) \in \xi$. Además 
 \begin{align*}
-        | \Phi(X)_t & -  \Phi(Y)_{t}|^2 
-        \le \abs{ \int_{0}^{t} (b(X_s) -b(Y_s))ds +
-        \int_{0}^{t}(\sigma(X_s) - \sigma(Y_s)) dB_s}^2 \\
-        &\le 2\sup_{t \in [0,T]} \abs{ \int_{0}^{t} (b(X_s) -b(Y_s))ds}^2
-          + 2\sup_{t \in [0,T]} \abs{  \int_{0}^{t}(\sigma(X_s) - \sigma(Y_s)) dB_s}^2
+    | \Phi(X)_t & -  \Phi(Y)_{t}|^2 \le \abs{ \int_{0}^{t} (b(X_s) -b(Y_s))ds + \int_{0}^{t}(\sigma(X_s) - \sigma(Y_s)) dB_s}^2 \\
+    & \le 2\sup_{t \in [0,T]} \abs{ \int_{0}^{t} (b(X_s) -b(Y_s))ds}^2 + 2\sup_{t \in [0,T]} \abs{  \int_{0}^{t}(\sigma(X_s) - \sigma(Y_s)) dB_s}^2\,.
 \end{align*}
-
 Por otra parte
 \begin{align*}
-        \|\Phi(X) &- \Phi(Y)\|_{T}^{2} = 
-        \E \left[ \sup_{t \in [0,T]} \abs{\Phi(X)_{t} - \Phi(Y)_{t}}^2 \right] \\ 
-        \le  & 2 \E \left[ \sup_{t \in [0,T]} \left( \int_{0}^{t}
-        \abs{b(X_s) -b(Y_s)}ds \right)^2 \right] \\
-         & + 2 \E \left[\sup_{t \in [0,T]} \abs{ \int_{0}^{t}
-        (\sigma(X_s) -\sigma(Y_s))dB_s}^2 \right] \\
-        \le & 2 K^2T^2\E \left[\sup_{t \in [0,T]} \abs{ X_t -Y_t }^2 \right] 
-        + 8 K^2 T \E \left[ \sup_{t \in [0,T]} \abs{X_t - Y_t}^2\right] \\
-        &= \left( 2K^2 T^2 + 8K^2 T \right) \| X-Y \|_{T}^{2}
+    \|\Phi(X) &- \Phi(Y)\|_{T}^{2} = \E \left[ \sup_{t \in [0,T]} \abs{\Phi(X)_{t} - \Phi(Y)_{t}}^2 \right] \\ 
+    \le & 2 \E \left[ \sup_{t \in [0,T]} \left( \int_{0}^{t} \abs{b(X_s) -b(Y_s)}ds \right)^2 \right] \\
+     & + 2 \E \left[\sup_{t \in [0,T]} \abs{ \int_{0}^{t} (\sigma(X_s) -\sigma(Y_s))dB_s}^2 \right] \\
+    \le & 2 K^2T^2\E \left[\sup_{t \in [0,T]} \abs{ X_t -Y_t }^2 \right] + 8 K^2 T \E \left[ \sup_{t \in [0,T]} \abs{X_t - Y_t}^2\right] \\
+    &= \left( 2K^2 T^2 + 8K^2 T \right) \| X-Y \|_{T}^{2}\,.
 \end{align*}
-Luego, $\Phi$ es Lipschitz con constante $L(T) \le \sqrt{2 K^2 T^2 + 8 K^2 T}$, luego, si $T$ es 
-suficientemente pequeño, de modo que $L(T)<1$, $\Phi$ será contractante, y entonces, tendrá un único
-punto fijo en $\xi$. Para pasar a un $T$ cualquiera, basta concatenar soluciones en intervalos
+Luego, $\Phi$ es Lipschitz con constante $L(T) \le \sqrt{2 K^2 T^2 + 8 K^2 T}$, luego, si $T$ es suficientemente pequeño, de modo que $L(T)<1$, $\Phi$ será contractante, y entonces, tendrá un único punto fijo en $\xi$. Para pasar a un $T$ cualquiera, basta concatenar soluciones en intervalos
 \begin{equation*}
-        [0,\frac{T}{n}], [\frac{T}{n}, \frac{2T}{n}], \ldots, [\frac{(n-1)T}{n},T]
+    [0,\frac{T}{n}], [\frac{T}{n}, \frac{2T}{n}], \ldots, [\frac{(n-1)T}{n},T]\,.
 \end{equation*}
-para $n$ adecuado.\findem
+para $n$ adecuado.
+\findem
 \negro
 \end{proof}
 
@@ -923,536 +897,407 @@ para $n$ adecuado.\findem
 \end{remark}
 
 \subsubsubsection{Esquemas Numéricos}
-
 Dada una ecuación diferencial estocástica 
 \begin{equation*}
-        dX_t = b(X_t)dt + \sigma(X_t) dB_t,
+    dX_t = b(X_t)dt + \sigma(X_t) dB_t\,,
 \end{equation*}
-
 queremos aproximar la solución por $X_t^{n}$ que se pueda generar efectivamente en un computador. 
 \newp El parámetro $n \in \N$ se tomará grande, y se espera que $X^{n} \xrightarrow[n]{} X$ en algún sentido. 
 
 El primer esquema es clásico \textbf{esquema de Euler} que se justifica por la siguiente heurística: 
 \begin{align*}
-        \label{eq:sde_3}
-        \tag{*}
-        X_{t+h} &= X_t + \int_{t}^{t+h} b(X_s) ds + \int_{t}^{t+s} \sigma(X_s) dB_s \\
-                &\approx X_t + b(X_t) h + \sigma(X_t) (B_{t+h} - B_{t})
+    \label{eq:sde_3}
+    \tag{*}
+    X_{t+h} &= X_t + \int_{t}^{t+h} b(X_s) ds + \int_{t}^{t+s} \sigma(X_s) dB_s \\
+            &\approx X_t + b(X_t) h + \sigma(X_t) (B_{t+h} - B_{t})
 \end{align*}
 
 Es decir, reemplazamos $(X_s)_{s \in [t,t+h]}$ por su valor en el extremo izquierdo del intervalo $[t,t+h]$.
-
-% platano
-
-% \begin{leftbar}
-% \lipsum
-% \end{leftbar}
 
 \begin{algorithm}[Esquema de Euler]
 \begin{leftbar}
 % \caption{Esquema de Euler}
 % \DontPrintSemicolon
-        \KwIn{$T>0$, $n \in \N$, $h = \frac{T}{n}$.\\}
-    Definir $(X^{n}_{ih})_{i = 0, \ldots, n}$ mediante $X_{0}^{n} = X_0$ y
-        \begin{equation*}
-                X^{n}_{ih + h} = X^{n}_{ih} + b(X^{n}_{ih})h + \sigma(X^{n}_{ih})(B_{ih + h} - B_{ih})
-        \end{equation*}
+\KwIn{$T>0$, $n \in \N$, $h = \frac{T}{n}$.\\}
+Definir $(X^{n}_{ih})_{i = 0, \ldots, n}$ mediante $X_{0}^{n} = X_0$ y
+    \begin{equation*}
+            X^{n}_{ih + h} = X^{n}_{ih} + b(X^{n}_{ih})h + \sigma(X^{n}_{ih})(B_{ih + h} - B_{ih})\,.
+    \end{equation*}
 \end{leftbar}
 \end{algorithm}
-Refinemos un poco lo anterior: desde (\ref{eq:sde_1}) 
+Refinemos un poco lo anterior: desde (\ref{eq:sde_1})
 \begin{equation*}
-        X_{t+h} \approx X_t + b(X_t) h + \sigma(X_t) \Delta B
+        X_{t+h} \approx X_t + b(X_t) h + \sigma(X_t) \Delta B\,.
 \end{equation*}
 
 Luego, para mejorar el esquema, buscamos mejorar ese $\Delta B$, pues es de orden sólo $h^{\frac{1}{2}}$ y 
 buscamos $h$. Por It\^{o}, para $s \ge t$, 
 \begin{align*}
-        \sigma(X_s) 
-        &= \sigma(X_t) + \int_{0}^{t} \sigma'(X_u) dX_u + \frac{1}{2} \int_{t}^{s} \sigma''(X_u) 
-        d \langle X \rangle_u \\
-        &= \sigma(X_t) + \int_{t}^{s} \sigma'(X_u)[b(X_u)ds + \sigma(X_u) dB_u ] 
-        + \frac{1}{2} \int_{t}^{s} \sigma''(X_u) \sigma^2(X_u) du
+        \sigma(X_s) & = \sigma(X_t) + \int_{0}^{t} \sigma'(X_u) dX_u + \frac{1}{2} \int_{t}^{s} \sigma''(X_u) d \langle X \rangle_u \\
+        &= \sigma(X_t) + \int_{t}^{s} \sigma'(X_u)[b(X_u)ds + \sigma(X_u) dB_u ] + \frac{1}{2} \int_{t}^{s} \sigma''(X_u) \sigma^2(X_u) du \,.
 \end{align*}
-
 Reemplazaremos esto en $\int_{t}^{t+h} \sigma (X_s) dB_s$. Con la siguiente heurística:
 \begin{align*}
         du~ dB_s   &\sim h \cdot h^{1/2} = h^{3/2} \\ 
         du~ ds     &\sim h \cdot h = h^2 \\
-        dB_u~ dB_s &\sim  h^{1/2} \cdot h^{1/2} = h
+        dB_u~ dB_s &\sim  h^{1/2} \cdot h^{1/2} = h\,.
 \end{align*}
-
 Descartaremos las integrales $du dB_s$ y $du ds$. Obtenemos:
 \begin{align*}
-        X_{t+h} 
-        &= X_t \int_{t}^{t+h}b(X_s) ds + \int_{t}^{t+h} \sigma(X_s) dB_s \\
-        \approx & X_t + b(X_t)h + \sigma (X_t)(B_{t+h} - B_t)  \\
-        &+ \sigma'(X_t) \sigma(X_t) \int_{t}^{t+h}\int_{t}^{s} dB_u dB_s
+        X_{t+h} & = X_t \int_{t}^{t+h}b(X_s) ds + \int_{t}^{t+h} \sigma(X_s) dB_s \\
+         &  \approx X_t + b(X_t)h + \sigma (X_t)(B_{t+h} - B_t) + \sigma'(X_t) \sigma(X_t) \int_{t}^{t+h}\int_{t}^{s} dB_u dB_s \,.
 \end{align*}
-
- Pero: 
- \begin{align*}
-         \int_{t}^{t+h}\int_{t}^{s} dB_u dB_s 
-         &= \int_{t}^{t+h} (B_s -B_t) dB_s \\ 
-         &= \int_{t}^{t+h} B_s dB_s - B_t \int_{t}^{t+h} dB_s \\ 
-         &= \frac{1}{2} B^2_{t+h} + \frac{1}{2}(t+h) 
-            - \left[ \frac{1}{2} B^{2}_t - \frac{1}{2} t \right] - B_t (B_{t+h} - B_t) \\ 
-         &= \frac{1}{2} B^{2}_{t+h} + \frac{1}{2} B^{2}_t - \frac{1}{2}h - B_t B_{t+h} + B_{t}^2 \\ 
-         &= \frac{1}{2} (B_{t+h} - B_t)^2 - \frac{1}{2} h
- \end{align*}
-
+Pero: 
+\begin{align*}
+     \int_{t}^{t+h}\int_{t}^{s} dB_u dB_s 
+     &= \int_{t}^{t+h} (B_s -B_t) dB_s \\ 
+     &= \int_{t}^{t+h} B_s dB_s - B_t \int_{t}^{t+h} dB_s \\ 
+     &= \frac{1}{2} B^2_{t+h} + \frac{1}{2}(t+h) 
+        - \left[ \frac{1}{2} B^{2}_t - \frac{1}{2} t \right] - B_t (B_{t+h} - B_t) \\ 
+     &= \frac{1}{2} B^{2}_{t+h} + \frac{1}{2} B^{2}_t - \frac{1}{2}h - B_t B_{t+h} + B_{t}^2 \\ 
+     &= \frac{1}{2} (B_{t+h} - B_t)^2 - \frac{1}{2} h \,.
+\end{align*}
 Obtenemos
 \begin{algorithm}[Esquema de Milstein]
 \begin{leftbar}
- % \caption{}
- \KwIn{ $T > 0$, $n \in \N$, $h := \frac{T}{n}$.\\}
- Se define $(X_{ih}^{n})_{i=0,\ldots,n}$ por
- medio de: $X_0^n = 0$ y
- \begin{align*}
-  X_{ih+h}^{n} = X_{ih}^{n} + b(X_{ih}^{n}) h &+ \sigma(X_{ih}^{n}) (B_{ih +h} - B_{ih}) \\
-       &+ \frac{1}{2} \sigma (X_{ih}^{n}) \sigma'(X_{ih}^{n}) \left[ (B_{ih +h} - B_{ih})^2 - h\right]
- \end{align*}
+% \caption{}
+\KwIn{ $T > 0$, $n \in \N$, $h := \frac{T}{n}$.\\}
+Se define $(X_{ih}^{n})_{i=0,\ldots,n}$ por
+medio de: $X_0^n = 0$ y
+$$ X_{ih+h}^{n} = X_{ih}^{n} + b(X_{ih}^{n}) h + \sigma(X_{ih}^{n}) (B_{ih +h} - B_{ih}) + \frac{1}{2} \sigma (X_{ih}^{n}) \sigma'(X_{ih}^{n}) \left[ (B_{ih +h} - B_{ih})^2 - h\right] $$
 \end{leftbar}
 \end{algorithm}
 
- Se tienen las siguientes tasas de convergencia. 
- \begin{theorem}[Convergencia Esquema de Euler]
-         Supongamos que $b, \sigma$ son Lipschitz de constante $L$, y que $\exists m \ge  1$ entero 
-         tal que $\E [\abs{X_0}^{2m}] < \infty$. Entonces, $\exists K = K(T,L,m,\E[\abs{X_0}^{2m}])$ 
-         constante, tal que la aproximación de Euler $(X_{ih}^{n})$ (con $h = \frac{T}{n}$) cumple 
-         $\forall n$: 
-         \begin{align*}
-                 \label{eq:sde_4}
-                 &\E \left[ \sup_{i = 1,\ldots, n} \abs{X_{ih} - X_{ih}^n}^{2m} \right] \le \frac{K}{n^{2m}}, 
-                 \text{ y } \tag{1} \\
-                 &\forall \alpha \in \left\lbrack 0, \frac{1}{2} - \frac{1}{2m} \right ), ~ ~ 
-                 n^{\alpha} \cdot \sup_{i= 1 ,\ldots, n} \abs{X_{ih} -
-                 X_{ih}^{n}} \xrightarrow[\text{c.s.}]{n} 0
-         \end{align*}
-         
- \end{theorem}
-
- Similarmente
-
-\begin{theorem}[Convergencia del Esquema de Milstein]
-        Supongamos que $b, \sigma \in \mathcal{C}^2$ con derivadas hasta orden $2$ acotadas por una 
-        constante $C >0$, y que $\exists m \ge 1$ entero, tal que, $\E \left[
-                \abs{X_0}^{4m} \right] < \infty$. Entonces $\exists K = K(T,C,m,\E[\abs{X_0}^{4m}])$,
-        tal que la aproximación de Milstein $(X_{ih}^{n})_{i = 1, \ldots,n}$ cumple $\forall n$: 
-        \begin{align*}
-                \label{eq:sde_5}
-                &\sup_{i = 1,\ldots,n} \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m}
-                \right] \le \frac{K}{n^{2m}}, \text{ y } \tag{2}\\
-                 &\forall \alpha \in \left \lbrack 0, \frac{1}{2} - \frac{1}{m} \right), ~ ~ 
-                 n^{\alpha} \cdot \sup_{i= 1 ,\ldots, n} \abs{X_{ih} -
-                 X_{ih}^{n}} \xrightarrow[\text{c.s.}]{n} 0
-        \end{align*}
+Se tienen las siguientes tasas de convergencia. 
+\begin{theorem}[Convergencia Esquema de Euler]
+Supongamos que $b, \sigma$ son Lipschitz de constante $L$, y que $\exists m \ge  1$ entero tal que $\E [\abs{X_0}^{2m}] < \infty$. Entonces, $\exists K = K(T,L,m,\E[\abs{X_0}^{2m}])$ constante, tal que la aproximación de Euler $(X_{ih}^{n})$ (con $h = \frac{T}{n}$) cumple $\forall n$: 
+\begin{equation*}
+\label{eq:sde_4}
+\tag{1}
+    \E \left[ \sup_{i = 1,\ldots, n} \abs{X_{ih} - X_{ih}^n}^{2m} \right] \le \frac{K}{n^{2m}}\,,
+\end{equation*}
+y
+$$ \forall \alpha \in \left\lbrack 0, \frac{1}{2} - \frac{1}{2m} \right ), \espacio n^{\alpha} \cdot \sup_{i= 1 ,\ldots, n} \abs{X_{ih} - X_{ih}^{n}} \xrightarrow[\text{c.s.}]{n} 0 \,.$$
 \end{theorem}
 
-Las demostraciones correspondientes escapan al alcance del curso, sin embargo, los teoremas nos
-dicen en esencia: 
+Similarmente
+\begin{theorem}[Convergencia del Esquema de Milstein]
+Supongamos que $b, \sigma \in \mathcal{C}^2$ con derivadas hasta orden $2$ acotadas por una constante $C >0$, y que $\exists m \ge 1$ entero, tal que, $\E \left[\abs{X_0}^{4m} \right] < \infty$. Entonces $\exists K = K(T,C,m,\E[\abs{X_0}^{4m}])$, tal que la aproximación de Milstein $(X_{ih}^{n})_{i = 1, \ldots,n}$ cumple $\forall n$: 
+
+\begin{equation*}
+\label{eq:sde_5}
+\tag{2}
+    \sup_{i = 1,\ldots,n} \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m}
+\right] \le \frac{K}{n^{2m}}\,,
+\end{equation*}
+y
+$$ \forall \alpha \in \left \lbrack 0, \frac{1}{2} - \frac{1}{m} \right), \espacio  n^{\alpha} \cdot \sup_{i= 1 ,\ldots, n} \abs{X_{ih} - X_{ih}^{n}} \xrightarrow[\text{c.s.}]{n} 0 \,.$$
+\end{theorem}
+
+Las demostraciones correspondientes escapan al alcance del curso, sin embargo, los teoremas nos dicen en esencia: 
 \begin{itemize}
-        \item (\ref{eq:sde_4}) implica que el esquema de Euler es de orden $n^{\frac{1}{2}}$. 
-        \item (\ref{eq:sde_5}) implica que el esquema de Milstein es de orden $n$: 
-                \begin{equation*}
-                        \E \left[ X_{ih} - X_{ih}^{n} \right] \le  \left( \E
-                        \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m} \right]
-                        \right)^{\frac{1}{2m}} \le  
-                        \begin{cases}
-                                \frac{K^{1/2m}}{n^{1/2}}, ~ ~ ~ \text{Euler} \\
-                                \frac{K^{1/2m}}{n}, ~ ~ ~ \text{Milstein}
-                        \end{cases}
-                \end{equation*}
+\item (\ref{eq:sde_4}) implica que el esquema de Euler es de orden $n^{\frac{1}{2}}$. 
+\item (\ref{eq:sde_5}) implica que el esquema de Milstein es de orden $n$: 
+\begin{equation*}
+    \E \left[ X_{ih} - X_{ih}^{n} \right] \le  \left( \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m} \right] \right)^{\frac{1}{2m}} \le  
+    \begin{cases}
+        \frac{K^{1/2m}}{n^{1/2}}, ~ ~ ~ \text{Euler} \\
+        \frac{K^{1/2m}}{n}, ~ ~ ~ \text{Milstein} \,.
+    \end{cases}
+\end{equation*}
 \end{itemize}
 
 \subsubsection{Cálculo Estocástico y EDPs}
-
-Se puede establecer una profunda conexión entre ciertas EDPs en $\mathbb{R}^{d}$ y las difusiones. Para ello, 
-se necesita primero definir el movimiento browniano en $\mathbb{R}^d$. 
+Se puede establecer una profunda conexión entre ciertas EDPs en $\mathbb{R}^{d}$ y las difusiones. Para ello, se necesita primero definir el movimiento browniano en $\mathbb{R}^d$. 
 \begin{definition}
-        Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, 
-        decimos que $B = )B_t^1, \ldots, B_t^{\tilde{d}})_{t \ge 0}^{T}$. Es un movimiento browniano 
-        d-dimensional si los $(B_t^i)_{t\ge 0}$ son movimientos brownianos independientes 
-        (en $\mathbb{R}^d$). 
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, decimos que $B = )B_t^1, \ldots, B_t^{\tilde{d}})_{t \ge 0}^{T}$. Es un movimiento browniano $d$-dimensional si los $(B_t^i)_{t\ge 0}$ son movimientos brownianos independientes (en $\mathbb{R}^d$). 
 \end{definition}
 
 \begin{definition}[Proceso de It\^{o} d-simensional]
-        Un proceso $X = (X_t^1, \ldots, X_t^d)_{t \ge 0}^T$ a valores en $\mathbb{R}^d$ se dice un 
-        \textbf{proceso de It\^{o} d-dimensional} si $\forall i = 1, \ldots, d$ 
-        \begin{equation*}
-                \label{eq:sde_6}
-                \tag{*}
-                X_t^i = X_0^i + \int_{0}^{t} K_s^i ds + \sum_{j=1}^{\tilde{d}} H_s^{ij} dB_s^j
-        \end{equation*}
-        donde $(K_{t}^{i})_{t \ge 0, i=1,\ldots,d}$, $(H^{ij}_{t})_{t \ge  0},
-        \substack{i =1, \ldots,d \\ j =1, \ldots,\tilde{d}}$ son procesos adaptados cumpliendo $\forall T > 0$: 
-        \begin{equation*}
-                \forall i, ~ \int_{0}^{T} \abs{K_s^i} ds < \infty, \text{c.s.}, ~ ~ ~ 
-                \int_{0}^{T} \abs{H^{ij}_s}^2 ds < \infty, ~ ~ ~ \forall ij
-        \end{equation*}
+Un proceso $X = (X_t^1, \ldots, X_t^d)_{t \ge 0}^T$ a valores en $\mathbb{R}^d$ se dice un \textbf{proceso de It\^{o} d-dimensional} si $\forall i = 1, \ldots, d$ 
+\begin{equation*}
+    \label{eq:sde_6}
+    \tag{*}
+    X_t^i = X_0^i + \int_{0}^{t} K_s^i ds + \sum_{j=1}^{\tilde{d}} H_s^{ij} dB_s^j \,,
+\end{equation*}
+donde $(K_{t}^{i})_{t \ge 0, i=1,\ldots,d}$, $(H^{ij}_{t})_{t \ge  0}, \substack{i =1, \ldots,d \\ j =1, \ldots,\tilde{d}}$ son procesos adaptados cumpliendo $\forall T > 0$: 
+\begin{equation*}
+    \forall i, ~ \int_{0}^{T} \abs{K_s^i} ds < \infty, \text{c.s.}, \espacio \int_{0}^{T} \abs{H^{ij}_s}^2 ds < \infty, \espacio \forall ij \,.
+\end{equation*}
 \end{definition}
 
-Matricialmente: si $K_t = (K_t^1, \ldots, K_t^d)^T \in \mathbb{R}$, $H_t =
-(H_t^{ij})_{\substack{i = 1,\ldots, d \\ j=1,\ldots,\tilde{d}}} \in \mathbb{R}^{d \times \tilde{d}}$, luego 
-(\ref{eq:sde_6}) equivale a $X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s$. 
-
-Ahora que trabajamos con varios brownianos i.i.d., debemos extender la definición de covariación 
-cuadrátic: 
-
+Matricialmente: si $K_t = (K_t^1, \ldots, K_t^d)^T \in \mathbb{R}$, $H_t = (H_t^{ij})_{\substack{i = 1,\ldots, d \\ j=1,\ldots,\tilde{d}}} \in \mathbb{R}^{d \times \tilde{d}}$, luego (\ref{eq:sde_6}) equivale a $X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s$. 
+\newp Ahora que trabajamos con varios brownianos i.i.d., debemos extender la definición de covariación 
+cuadrática:
 \begin{equation*}
-        d\langle X^{i}, X^{j} \rangle_t := \sum_{l=1}^{\tilde{d}} H_{t}^{il} H_{t}^{jl} dt
+    d\langle X^{i}, X^{j} \rangle_t := \sum_{l=1}^{\tilde{d}} H_{t}^{il} H_{t}^{jl} dt \,,
 \end{equation*}
-
 es decir, 
 \begin{equation*}
-        \label{eq:sde_7}        
-        \tag{**}
-\langle X^{i}, X^{j} \rangle := \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_{s}^{il} H_{s}^{jl} ds
+    \label{eq:sde_7}        
+    \tag{**}
+    \langle X^{i}, X^{j} \rangle := \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_{s}^{il} H_{s}^{jl} ds \,.
 \end{equation*}
- Por ejemplo: $X^i = B^i$, $X_j = B^j$ se tiene 
- \begin{equation*}
-         H_{s}^{il} = 
-         \begin{cases}
-                 1 &, \text{ si } l=i \\
-                 0 & \sim 
-         \end{cases}
- \end{equation*}
-
-Que opera de manera análoga para $H^{jl}_s$, por otra parte 
+Por ejemplo: $X^i = B^i$, $X_j = B^j$ se tiene 
 \begin{equation*}
-        \langle B^i, B^j \rangle_t = \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_s^{il} H_s^{jl} ds = \delta_{ij} t 
+     H_{s}^{il} = 
+    \begin{cases}
+         1 &, \text{ si } l=i \\
+         0 & \sim \,,
+    \end{cases}
 \end{equation*}
-
+que opera de manera análoga para $H^{jl}_s$. Por otra parte 
+\begin{equation*}
+    \langle B^i, B^j \rangle_t = \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_s^{il} H_s^{jl} ds = \delta_{ij} t \,.
+\end{equation*}
 Esto se justifica probando (propuesto) que para $i \neq j$ 
 \begin{equation*}
-        \sum_{k} (\Delta B_k^i)(\Delta B_k^j) \xrightarrow[\abs{\pi} \to 0]{L^2(d\P)} 0
+    \sum_{k} (\Delta B_k^i)(\Delta B_k^j) \xrightarrow[\abs{\pi} \to 0]{L^2(d\P)} 0 \,,
 \end{equation*}
-Donde $\Delta B_k^i$, $\Delta B_k^j$ son los incrementos en intervalo
+donde $\Delta B_k^i$, $\Delta B_k^j$ son los incrementos en intervalo
 $[t_{k-1}, t_{k}]$ de la malla temporal.
-
 \begin{remark}
-        (\ref{eq:sde_7}) se obtiene a partir de la siguientes propiedades equivalentes: 
-        \begin{itemize}
-                \item $\langle \cdot , \cdot  \rangle$ es bilineal y simétrica. 
-                \item $\langle X, \int_{0}^{\cdot} \tilde{H}_s ds \rangle_t = 0$ 
-                \item $\langle \int_{0}^{\cdot} H_s dB_s^i, \int_{0}^{\cdot } \tilde{H}_s dB_s^j \rangle 
-                        = \delta_{ij} \int_0^t H_s \tilde{H_s} ds$
-        \end{itemize}
+    (\ref{eq:sde_7}) se obtiene a partir de la siguientes propiedades equivalentes: 
+    \begin{itemize}
+        \item $\langle \cdot , \cdot  \rangle$ es bilineal y simétrica. 
+        \item $\displaystyle \langle X, \int_{0}^{\cdot} \tilde{H}_s ds \rangle_t = 0$ 
+        \item $\displaystyle \langle \int_{0}^{\cdot} H_s dB_s^i, \int_{0}^{\cdot } \tilde{H}_s dB_s^j \rangle = \delta_{ij} \int_0^t H_s \tilde{H_s} ds$
+    \end{itemize}
 \end{remark}
-
-Ahora podemos enunciar: 
+\newp Ahora podemos enunciar: 
 \begin{theorem}[Regla de It\^{o} en $\mathbb{R}^d$]
-        Dado un tal $(X_t)_{t \ge 0}$  y una función $f: \mathbb{R}^d \to \mathbb{R}$ $\mathcal{C}^2$, 
-        se tiene $\forall t \ge 0$, 
-        \begin{equation*}
-                \label{eq:sde_8}
-                \tag{$\star$}
-                f(X_t) = f(X_0) + \sum_{i=1}^{d} \int_{0}^{t} \frac{\partial f}{\partial x^i} (X_s) dX_s^i 
-                + \frac{1}{2} \sum_{i,j = 1}^{d} \int_{0}^{t}
-                \frac{\partial^2 f}{\partial x^i \partial x^j}(X_s) d \langle X^i, X^j \rangle _s
-        \end{equation*}
-        donde $dX_s^i := K_s^i ds + \sum_{l=1}^{\tilde{d}} H_{s}^{il} dB_s^l$.
+Dado un tal $(X_t)_{t \ge 0}$  y una función $f: \mathbb{R}^d \to \mathbb{R}$ $\mathcal{C}^2$, se tiene $\forall t \ge 0$, 
+\begin{equation*}
+    \label{eq:sde_8}
+    \tag{$\star$}
+    f(X_t) = f(X_0) + \sum_{i=1}^{d} \int_{0}^{t} \frac{\partial f}{\partial x^i} (X_s) dX_s^i + \frac{1}{2} \sum_{i,j = 1}^{d} \int_{0}^{t} \frac{\partial^2 f}{\partial x^i \partial x^j}(X_s) d \langle X^i, X^j \rangle _s \,,
+\end{equation*}
+donde $dX_s^i := K_s^i ds + \sum_{l=1}^{\tilde{d}} H_{s}^{il} dB_s^l$.
 \end{theorem}
 
 La demostración escapa al alcance del curso. 
 
-\newp Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y 
-anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir (\ref{eq:sde_8}) 
-matricialmente: 
-
+\newp Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir (\ref{eq:sde_8}) matricialmente: 
 \begin{equation*}
-        f(X_t) = f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot dX_s 
-        + \frac{1}{2} \int_{0}^{t} \text{tr} \left( D^2 f(X_s) H_s H_s^{T} \right) ds
+    f(X_t) = f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot dX_s + \frac{1}{2} \int_{0}^{t} \text{tr} \left( D^2 f(X_s) H_s H_s^{T} \right) ds \,,
 \end{equation*}
-
-Siendo $D^2 f(x)$ la matriz hessiana del $f$ en $x$. Como caso particular se puede 
-analizar: $dX_t^i = K_t dt + \sigma dB_t^i$ ($d = \tilde{d}$), es decir, $H_t^{ij} \equiv 0$, $i \neq j$, 
+siendo $D^2 f(x)$ la matriz hessiana del $f$ en $x$. 
+\\ Como caso particular se puede analizar: $dX_t^i = K_t dt + \sigma dB_t^i$ ($d = \tilde{d}$), es decir, $H_t^{ij} \equiv 0$, $i \neq j$, 
 $H_t^{ii} \equiv \sigma$. En tal caso $d \langle X^i, X^j \rangle _s = \sigma^2 \delta_{ij} ds$, luego 
 \begin{align*}
-        f(X_t) 
-        &= f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot d X_s + \frac{1}{2} \sigma^2 
-        \int_0^{t} \Delta f(X_s) ds \\ 
-        &= f(X_0) + \int_{0}^{t} \left[ \nabla f(X_s) \cdot K_s + \frac{1}{2}
-        \sigma^2 \Delta f(X_s) \right] ds
-        + \sigma \int_{0}^{t} \nabla f(X_s) \cdot dB_s
+    f(X_t) & = f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot d X_s + \frac{1}{2} \sigma^2 \int_0^{t} \Delta f(X_s) ds \\ 
+    & = f(X_0) + \int_{0}^{t} \left[ \nabla f(X_s) \cdot K_s + \frac{1}{2} \sigma^2 \Delta f(X_s) \right] ds + \sigma \int_{0}^{t} \nabla f(X_s) \cdot dB_s \,.
 \end{align*}
 
 \begin{definition}
-        Dado $x \in \mathbb{R}^{\tilde{d}}$, denotaremos $\P_x$, $\E_x$ a la probabilidad y esperanza 
-        de la medida bajo la cual el movimiento browniano $(B_t)_{t \ge 0}$ parte desde $x$, es
-        decir, 
-        \begin{equation*}
-                \P_x (X_0 = x) = 1
-        \end{equation*}
+Dado $x \in \mathbb{R}^{\tilde{d}}$, denotaremos $\P_x$, $\E_x$ a la probabilidad y esperanza de la medida bajo la cual el movimiento browniano $(B_t)_{t \ge 0}$ parte desde $x$, es decir, 
+\begin{equation*}
+    \P_x (X_0 = x) = 1
+\end{equation*}
 \end{definition}
 
 \subsubsection{Problema de Dirichlet}
-
-Sea $D \subseteq \mathbb{R}^d$ abierto, $f:\partial D \to \mathbb{R}$ función continua. Consideremos el 
-\textbf{problema de Dirichlet}: encontrar $u: \overline{D} \to  \mathbb{R}$ de clase $\mathcal{C}^2$
-y continua en $\overline{D}$, tal que 
+Sea $D \subseteq \mathbb{R}^d$ abierto, $f:\partial D \to \mathbb{R}$ función continua. Consideremos el \textbf{problema de Dirichlet}: encontrar $u: \overline{D} \to  \mathbb{R}$ de clase $\mathcal{C}^2$ y continua en $\overline{D}$, tal que 
 \begin{equation*}
-        \label{eq:sde_9}
-        \tag{D}
-        \begin{cases}
-                \Delta u = 0 & \text{ en } D \\ 
-                u = f & \text{ en } \partial D
-        \end{cases}
+    \label{eq:sde_9}
+    \tag{D}
+    \begin{cases}
+        \Delta u = 0 & \text{ en } D \\ 
+        u = f & \text{ en } \partial D
+    \end{cases} \,.
 \end{equation*}
-
 A continuación escribiremos una \textbf{representación probabilista} de la solución: sea 
 \begin{align*}
-        \tau_D 
-        &= \text{ tiempo de llegada de } B \text{ a }  D^{c} \\
-        &= \inf \{ t \ge 0 : B_t \in D^{c} \}
+    \tau_D & = \text{ tiempo de llegada de } B \text{ a }  D^{c} \\
+    &= \inf \{ t \ge 0 : B_t \in D^{c} \} \,,
 \end{align*}
-
 de manera heurística, la solución de (\ref{eq:sde_9}) tiene la representación 
 \begin{equation*}
-        \label{eq:sde_10} 
-        \tag{$ \square$}
-        u(x) = \E_{x} \left[ f(B_{\tau_D}) \right], ~ ~ ~ \forall x \in \overline{D}
+    \label{eq:sde_10} 
+    \tag{$ \square$}
+    u(x) = \E_{x} \left[ f(B_{\tau_D}) \right], ~ ~ ~ \forall x \in \overline{D}
 \end{equation*}
 
 De manera más rigurosa:
 \begin{theorem}
-        Si $f$ es acotada y $\forall x \in D$, $\P_x ( \tau_D < \infty) = 1$, entonces cualquier 
-        solución acotada de (\ref{eq:sde_9}) tiene la representación (\ref{eq:sde_10})
+    Si $f$ es acotada y $\forall x \in D$, $\P_x ( \tau_D < \infty) = 1$, entonces cualquier solución acotada de (\ref{eq:sde_9}) tiene la representación (\ref{eq:sde_10})\,.
 \end{theorem}
-
 \begin{proof}[Idea de Demostración]
 \gris
 Sea $u$ solución acotada de (\ref{eq:sde_9}), por el lema de It\^{o}: 
 \begin{equation*}
-        u(B_t) = u(B_0) + \int_{0}^{t} \nabla e u (B_s) \cdot dB_s 
-                + \frac{1}{2} \int_{0}^{t} \Delta u(B_s) ds
+    u(B_t) = u(B_0) + \int_{0}^{t} \nabla e u (B_s) \cdot dB_s + \frac{1}{2} \int_{0}^{t} \Delta u(B_s) ds \,.
 \end{equation*}
-
 De manear heurística: 
-
 \begin{equation*}
-        u(B_{\tau_D}) = u(B_0) + \int_{0}^{\tau_D} \nabla u(B_s) \cdot  dB_s 
-        + \frac{1}{2} \int_{0}^{\tau_D} \Delta u(B_s) ds
+    u(B_{\tau_D}) = u(B_0) + \int_{0}^{\tau_D} \nabla u(B_s) \cdot  dB_s + \frac{1}{2} \int_{0}^{\tau_D} \Delta u(B_s) ds \,.
 \end{equation*}
-
 Luego 
 \begin{align*}
-        \E_x \left[ f(B_{\tau_D}) \right] = \E_x[u(B_0)] 
-        + \E_x \left[ \int_{0}^{t} \nabla u (B_s) \cdot dB_s \right] 
+    \E_x \left[ f(B_{\tau_D}) \right] = \E_x[u(B_0)] + \E_x \left[ \int_{0}^{t} \nabla u (B_s) \cdot dB_s \right] \,,
 \end{align*}
-
-Que finalmente implica $u(x) = \E_x[f(B_{\tau_{D}})]$.\findem
+que finalmente implica $u(x) = \E_x[f(B_{\tau_{D}})]$.
+\findem
 \negro
 \end{proof}
 
-\newp Si a priori no conoce la existencia de solución de (\ref{eq:sde_9}), se espera que (\ref{eq:sde_10}) 
-sea la solución. Esto es cierto, bajo ciertas condiciones de \textbf{regularidad} de $\partial D$ que 
-aseguren que (\ref{eq:sde_9}) entregue una función continua hasta $\partial D$. Específicamente 
-
+\newp Si a priori no conoce la existencia de solución de (\ref{eq:sde_9}), se espera que \ref{eq:sde_10}) sea la solución. Esto es cierto, bajo ciertas condiciones de \textbf{regularidad} de $\partial D$ que aseguren que (\ref{eq:sde_9}) entregue una función continua hasta $\partial D$. Específicamente tenemos la definición siguiente.
 \begin{definition}[Punto Regular]
-        Dado $D \subseteq \mathbb{R}^{d}$ abierto, sea 
-        \begin{equation*}
-                \sigma_D = \inf \{ t> 0: B_t \in D^{c}\}
-        \end{equation*}
-
-        Decimos que un punto $x \in \partial D$ es \textbf{regular} si $\P_x (\sigma_D = 0) =1$, 
-        es decir, con probabilidad $0$, la trayectoria de $B$ entra a $D$ inmediatamente y se queda 
-        $D$ por intervalo de tiempo
+Dado $D \subseteq \mathbb{R}^{d}$ abierto, sea 
+\begin{equation*}
+    \sigma_D = \inf \{ t> 0: B_t \in D^{c}\} \,.
+\end{equation*}
+Decimos que un punto $x \in \partial D$ es regular si $\P_x (\sigma_D = 0) =1$, es decir, con probabilidad $0$, la trayectoria de $B$ entra a $D$ inmediatamente y se queda $D$ por intervalo de tiempo.
 \end{definition}
 
 \begin{theorem}
-        Dado $D \subseteq \mathbb{R}^{d}$ abierto, con $d \ge  2$, y $x \in \partial D$, son equivalentes: 
-        \begin{enumerate}
-                \item $x$ es regular.
-                \item $\forall  f : \partial D \to \mathbb{R}$  medible y acotada, continua en $x$, se tiene 
-                        \begin{equation*}
-                                \lim_{\substack{y \to  x \\ y \in D}} \E_{y} [f(B_{\tau_D})] = f(x)
-                        \end{equation*}
-        \end{enumerate}
+Dado $D \subseteq \mathbb{R}^{d}$ abierto, con $d \ge  2$, y $x \in \partial D$, son equivalentes: 
+\begin{enumerate}
+    \item $x$ es regular.
+    \item $\forall  f : \partial D \to \mathbb{R}$  medible y acotada, continua en $x$, se tiene 
+        \begin{equation*}
+            \lim_{\substack{y \to  x \\ y \in D}} \E_{y} [f(B_{\tau_D})] = f(x) \,.
+        \end{equation*}
+\end{enumerate}
 \end{theorem}
 
 Con esto se obtiene 
-
 \begin{theorem}
-        Sea $D \subseteq \mathbb{R}^{d}$ abierto con $\partial D$ regular (es decir, $\forall x \in \partial D$, 
-        $x$ es regular), sea $f : \partial D \to  \mathbb{R}$ continua y acotada. Si $\forall  \in D$, 
-        $\P_{x} (\tau_D < \infty ) = 1$, entonces 
-        \begin{equation*}
-                u(x) := \E_{x} [f(B_{\tau_D})]
-        \end{equation*}
-
-        es la única solución de (\ref{eq:sde_9}).
+    Sea $D \subseteq \mathbb{R}^{d}$ abierto con $\partial D$ regular (es decir, $\forall x \in \partial D$, $x$ es regular), sea $f : \partial D \to  \mathbb{R}$ continua y acotada. Si $\forall  \in D$, $\P_{x} (\tau_D < \infty ) = 1$, entonces 
+    \begin{equation*}
+        u(x) := \E_{x} [f(B_{\tau_D})]
+    \end{equation*}
+    es la única solución de (\ref{eq:sde_9}).
 \end{theorem}
 
 Más generalmente 
 
 \begin{theorem}
-        Sea $D \subseteq \mathbb{R}^{d}$ abierto y acotado, sean $g : D \to \mathbb{R}$, $f : \partial D \to  \mathbb{R}$ 
-        acotadas y continuas. Sea $u : \overline{D} \to  \mathbb{R}$ $\mathcal{C}^2$ en $D$ y continua en 
-        $\overline{D}$ tal que 
-        \begin{equation*}
-                \begin{cases}
-                        \Delta u = g & \text{ en } D \\
-                        u = f & \text{ en } \partial D
-                \end{cases}
-        \end{equation*}
-
-        entonces 
-        \begin{equation*}
-                u(x) 
-                = \E_{x} \left[ f(B_{\tau_D}) + \frac{1}{2} \int_{0}^{\tau_D} g(B_s) ds \right]
-        \end{equation*}
+    Sea $D \subseteq \mathbb{R}^{d}$ abierto y acotado, sean $g : D \to \mathbb{R}$, $f : \partial D \to  \mathbb{R}$ acotadas y continuas. Sea $u : \overline{D} \to  \mathbb{R}$ $\mathcal{C}^2$ en $D$ y continua en $\overline{D}$ tal que 
+    \begin{equation*}
+        \begin{cases}
+            \Delta u = g & \text{ en } D \\
+            u = f & \text{ en } \partial D
+        \end{cases} \,,
+    \end{equation*}
+    entonces 
+    \begin{equation*}
+        u(x) = \E_{x} \left[ f(B_{\tau_D}) + \frac{1}{2} \int_{0}^{\tau_D} g(B_s) ds \right] \,.
+    \end{equation*}
 \end{theorem}
 
-Con esto se puede idear un algoritmo. En efecto, basta simular $N$ movimientos brownianos independientes 
-en $\mathbb{R}^{d}$ , $B^{(1)}, \ldots, B^{(N)}$ cada uno partiendo desde $x \in D$ en incrementos temporales 
-de paso $h$ fijo. Sea $t^{k}$ el primer instante en que $B^{k}$ sale de $D$. Se aproxima (\ref{eq:sde_9}) 
-como: 
+Con esto se puede idear un algoritmo. En efecto, basta simular $N$ movimientos brownianos independientes en $\mathbb{R}^{d}$ , $B^{(1)}, \ldots, B^{(N)}$ cada uno partiendo desde $x \in D$ en incrementos temporales de paso $h$ fijo. Sea $t^{k}$ el primer instante en que $B^{k}$ sale de $D$. Se aproxima (\ref{eq:sde_9}) como: 
 \begin{equation*}
-        u(x) = \frac{1}{N} \sum_{k=1}^{N} f(B_{t^{(k)}}^{k}) 
+    u(x) = \frac{1}{N} \sum_{k=1}^{N} f(B_{t^{(k)}}^{k}) 
 \end{equation*}
 % \begin{ejer}
 %     Establezca el algoritmo descrito anteriormente.
 % \end{ejer}
+\ejercicio \gris : Establezca el algoritmo descrito anteriormente. \negro
 
 \subsubsection{Ecuación de Feynman-Kac}
+Se busca encontrar una representación probabilista para las soluciones de cierta clase de EDPs parabólicas (es decir, con derivadas temporales; el problema de Dirichlet es una ecuación elíptica). 
 
-Se busca encontrar una representación probabilista para las soluciones de cierta clase de EDPs 
-parabólicas (es decir, con derivadas temporales; el problema de Dirichlet es una ecuación elíptica). 
-
-Necesitaremos un verisón del lema de It\^{o} que admite dependencia temporal de la función:
+\newp Necesitaremos un versión del lema de It\^{o} que admite dependencia temporal de la función:
 \begin{theorem}[Lema de It\^{o}]
-        Sea $X_t \in \mathbb{R}^{d}$  un proceso con descomposición: 
-        \begin{equation*}
-                dX_t = K_t dt + H_t dB_t 
-        \end{equation*}
-
-        Donde $K_T \in \mathbb{R}^{d}$, $H_t \in \mathbb{R}^{d \times \tilde{d}}$, $B_t$ movimiento browniano en 
-        $\mathbb{R}^{\tilde{d}}$. Sea $f : [0, \infty) \times  \mathbb{R}^{d} \to \mathbb{R}$ de clase $\mathcal{C}^{1,2}$. 
-        Entonces
-        \begin{align*}
-                f(t,X_t) 
-                 = f(0,X_0) &+ \int_{0}^{t} \partial_s f(s,X_s) ds \\ 
-                & + \int_{0}^{t} \nabla_{x} f(s, X_s) \cdot dX_s 
-                    + \frac{1}{2} \int_{0}^{t} \text{tr}( D^2_x f(s,X_s)H_s H_s^T) ds
-        \end{align*}
+Sea $X_t \in \mathbb{R}^{d}$  un proceso con descomposición: 
+\begin{equation*}
+    dX_t = K_t dt + H_t dB_t \,,
+\end{equation*}
+donde $K_T \in \mathbb{R}^{d}$, $H_t \in \mathbb{R}^{d \times \tilde{d}}$, $B_t$ movimiento browniano en $\mathbb{R}^{\tilde{d}}$. Sea $f : [0, \infty) \times  \mathbb{R}^{d} \to \mathbb{R}$ de clase $\mathcal{C}^{1,2}$. Entonces
+\begin{align*}
+    f(t,X_t) = f(0,X_0) & + \int_{0}^{t} \partial_s f(s,X_s) ds \\ 
+    & + \int_{0}^{t} \nabla_{x} f(s, X_s) \cdot dX_s + \frac{1}{2} \int_{0}^{t} \text{tr}( D^2_x f(s,X_s)H_s H_s^T) ds \,.
+\end{align*}
 \end{theorem}
 
-Especificaremos la EDP: Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$
-funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el 
-operador:
+Especificaremos la EDP: Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$ funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el operador:
 \begin{equation*}
-        \mathcal{L} := b(\cdot) \cdot \nabla + \frac{1}{2} \text{tr}(a(\cdot) D^2 (\cdot ))
+    \mathcal{L} := b(\cdot) \cdot \nabla + \frac{1}{2} \text{tr}(a(\cdot) D^2 (\cdot )) \,,
 \end{equation*}
-
 es decir $(\mathcal{L} f)(x) := b(x) \cdot \nabla f(x) + \frac{1}{2} \text{tr}(D^2 f(x) a(x))$. 
-Consideremos la siguiente EDP parabólica para una función $u(t,x)$, $t \ge 0$, $x \in \mathbb{R}^{d}$: 
+\newp Consideremos la siguiente EDP parabólica para una función $u(t,x)$, $t \ge 0$, $x \in \mathbb{R}^{d}$: 
 \begin{equation*}
-        \label{eq:sde_11} 
-        \tag{*} 
-        \begin{cases}
-                \partial_t u + \mathcal{L} u = 0 & (t,x) \in [0,T] \times \mathbb{R}^{d} \\ 
-                u(T,x) = f(x) & x \in \mathbb{R}^{d}
-        \end{cases}
+    \label{eq:sde_11} 
+    \tag{*} 
+    \begin{cases}
+        \partial_t u + \mathcal{L} u = 0 & (t,x) \in [0,T] \times \mathbb{R}^{d} \\ 
+            u(T,x) = f(x) & x \in \mathbb{R}^{d}
+    \end{cases}
 \end{equation*}
 
-Por otro lado, sea $X_t^{x}$ solución de la siguiente SDE: (para $x \in \mathbb{R}^d$ fijo)
+Por otro lado, sea $X_t^{x}$ solución de la siguiente EDE: (para $x \in \mathbb{R}^d$ fijo)
 \begin{equation*}
-        \label{eq:sde_12}
-        \tag{**}
-        X_t^x = x + \int_{0}^{t} b(X_s^x) ds + \int_{0}^{t} \sigma (X_s^x) dB_s
+    \label{eq:sde_12}
+    \tag{**}
+    X_t^x = x + \int_{0}^{t} b(X_s^x) ds + \int_{0}^{t} \sigma (X_s^x) dB_s \,.
 \end{equation*}
 
 Tenemos 
 \begin{theorem}[Fórmula de Feynman-Kac]
-        Supongamos $b$, $\sigma$ Lipschitz y que $f$ tiene crecimiento a lo más 
-        polinomial. Supongamos además (\ref{eq:sde_11}) admite solución $\mathcal{C}^{1,2}$ 
-        con derivadas con crecimiento polinomial. Entonces 
-        \begin{equation*}
-                u(t,x) = \E[ f (X_{T-t}^{x})]
-        \end{equation*}
+    Supongamos $b$, $\sigma$ Lipschitz y que $f$ tiene crecimiento a lo más polinomial. Supongamos además (\ref{eq:sde_11}) admite solución $\mathcal{C}^{1,2}$ con derivadas con crecimiento polinomial. Entonces 
+    \begin{equation*}
+        u(t,x) = \E[ f (X_{T-t}^{x})]
+    \end{equation*}
 \end{theorem}
  \begin{proof}
 \gris
- Fijemos $0 < t < T$. Sea $(Y_{r}^{x,t})_{r \in [0,T]}$ solución de la SDE: 
- \begin{equation*}
-         Y_{r}^{x,t} = x + \int_{0}^{r} b(Y_{s}^{x,t})ds + \int_{t}^{r} \sigma (Y_{s}^{x,t}) dB_s
- \end{equation*}
-
+Fijemos $0 < t < T$. Sea $(Y_{r}^{x,t})_{r \in [0,T]}$ solución de la EDE: 
+\begin{equation*}
+     Y_{r}^{x,t} = x + \int_{0}^{r} b(Y_{s}^{x,t})ds + \int_{t}^{r} \sigma (Y_{s}^{x,t}) dB_s
+\end{equation*}
 Probaremos primero que
 \begin{equation*}
-u(t,x) = \E [f (Y_T^{x,t})]
+    u(t,x) = \E [f (Y_T^{x,t})]
 \end{equation*}
-
- Usamos It\^{o} sobre $u(r,Y_r^{x,t})$, en $r = T$:
- \begin{align*}
-         u(T, &Y_T^{x,t}) 
-         =  u(t,Y_t^{x,t}) + \int_{t}^{T} \partial_s u(s,Y_s^{x,t}) ds 
-         + \int_{t}^{T} \nabla u (s, Y_s^{x,t}) \cdot dY_s^{x,t} \\
-          + & \frac{1}{2} \int_{t}^{T} \text{tr} (D^2 u(s,Y_s^{x,t})
-         \sigma(Y_s^{x,t})\sigma(Y_s^{x,t})^{T}) ds \\ 
-         = ~ & u(t,x) + \int_{t}^{T} \sigma(Y_s^{x,t}) dB_s \\
-         + & \int_{t}^{T} \left[ 
-         \partial_s u (s, Y_s^{x,t}) + \nabla u(s,Y_s^{x,t}) \cdot  b(Y_s^{x,t}) 
-         + \frac{1}{2} \text{tr}(D^2 u (s, Y_s^{x,t}))a(Y_s^{x,t})
-         \right] ds
- \end{align*}
- 
- Como $u$ resuelve (\ref{eq:sde_11}), se tiene que $[ ~ ] = 0$ y que
- $u(T,Y_{T}^{x,t}) = f(Y_T^{x,t})$. Tomando $\E[\cdot]$, la martingala se anula, luego 
- \begin{equation*}
-         \E [f(Y_{t}^{x,t})] = u(t,x)
- \end{equation*}
-
- Para concluir que $u(t,x) = \E [f(X_{T-t}^{x})]$, basta notar que los procesos 
- $(X_r^{x})_{0 \le r \le T-t}$ y $(Y_r^{x,t})_{t \le  r \le T}$ tiene la misma ley, pues
- ambos resuelven la SDE (\ref{eq:sde_12}) pero con movimientos brownianos distintos: 
- \begin{itemize}
-         \item $X^x$ resuelve (\ref{eq:sde_12}) para el movimiento browniano 
-                 $(B_{r})_{0 \le r \le T - t}$. 
-         \item $Y^{x,t}$ resuelve (\ref{eq:sde_12}) para el movimiento browniano 
-                 $(B_{t+r} - B_t)_{0 \le  r \le  T-t}$ 
- \end{itemize}
-
- Luego, $X_{T-t}^{x} \stackrel{d}{=} Y_{T}^{x,t}$,  así
- \begin{equation*}
-         u(x,t) = \E [f(Y_{T}^{x,t})] = \E [f(X_{T-t}^{x}]
- \end{equation*}
-
- En vista de lo anterior, se obtiene el algoritmo Monte Carlo (\ref{alg:fk_1}) para aproximar la 
- solución de (\ref{eq:sde_11}). 
-
- \begin{algorithm}[Solución de Monte Carlo para EDPs parabólicas de la forma (\ref{eq:sde_11}).]
- \label{alg:fk_1}
- \begin{leftbar}
- % \caption{}
- \KwIn{ Fijar $T >0$, $n \in \N$, $N \in \N$.\\}
- \begin{enumerate}
-         \item   Definir una malla temporal $0 = t_0 <,\ldots, < t_n = T$. 
-         \item Definir $N$ procesos, como copias independientes de la aproximación de Euler de 
-             la SDE (\ref{eq:sde_12}). 
-             \begin{equation*}
-                 \left( X_{t_i}^{x,n,k} \right)_{
-                         \substack{ k = 1,\ldots, N \\  i = 0 , \ldots, n}}
-             \end{equation*}
-     \item Aproximar (\ref{eq:sde_11}) mediante: 
-            \begin{equation*}
-                u^{n,N}(t_i,x) = \frac{1}{N} \sum_{k=1}^{N} f\left( X_{T-t_i}^{x,n,k} \right), 
-                ~ ~ ~ \forall i = 0, \ldots, n
-            \end{equation*}
- \end{enumerate}
- \end{leftbar}
- \end{algorithm}
- \begin{remark}
-         Puede probarse que la aproximación de Euler tiene error de orden $\frac{1}{n}$ 
-         (antes de usar Monte Carlo) en el sentido que 
-         \begin{equation*}
-                 \E [f(X_t^{x})] - \E[f ( X_T^{x,n,1})] \sim \frac{1}{n}
-         \end{equation*}
- \end{remark} \findem
+Usamos It\^{o} sobre $u(r,Y_r^{x,t})$, en $r = T$:
+\begin{align*}
+     u(T, Y_T^{x,t}) & =  u(t,Y_t^{x,t}) + \int_{t}^{T} \partial_s u(s,Y_s^{x,t}) ds + \int_{t}^{T} \nabla u (s, Y_s^{x,t}) \cdot dY_s^{x,t} \\
+      & + \frac{1}{2} \int_{t}^{T} \text{tr} (D^2 u(s,Y_s^{x,t})) \sigma(Y_s^{x,t})\sigma(Y_s^{x,t})^{T}) ds \\ 
+     & = u(t,x) + \int_{t}^{T} \sigma(Y_s^{x,t}) dB_s \\
+     & + \int_{t}^{T} \left[\partial_s u (s, Y_s^{x,t}) + \nabla u(s,Y_s^{x,t}) \cdot  b(Y_s^{x,t}) + \frac{1}{2} \text{tr}(D^2 u (s, Y_s^{x,t}))a(Y_s^{x,t})\right] ds \,.
+\end{align*}
+Como $u$ resuelve (\ref{eq:sde_11}), se tiene que $[ ~ ] = 0$ y que $u(T,Y_{T}^{x,t}) = f(Y_T^{x,t})$. Tomando $\E[\cdot]$, la martingala se anula, luego 
+\begin{equation*}
+     \E [f(Y_{t}^{x,t})] = u(t,x) \,.
+\end{equation*}
+Para concluir que $u(t,x) = \E [f(X_{T-t}^{x})]$, basta notar que los procesos $(X_r^{x})_{0 \le r \le T-t}$ y $(Y_r^{x,t})_{t \le  r \le T}$ tiene la misma ley, pues ambos resuelven la EDE (\ref{eq:sde_12}) pero con movimientos brownianos distintos: 
+\begin{itemize}
+    \item $X^x$ resuelve (\ref{eq:sde_12}) para el movimiento browniano $(B_{r})_{0 \le r \le T - t}$. 
+    \item $Y^{x,t}$ resuelve (\ref{eq:sde_12}) para el movimiento browniano $(B_{t+r} - B_t)_{0 \le  r \le  T-t}$ \,.
+\end{itemize}
+Luego, $X_{T-t}^{x} \stackrel{d}{=} Y_{T}^{x,t}$,  así
+\begin{equation*}
+    u(x,t) = \E [f(Y_{T}^{x,t})] = \E [f(X_{T-t}^{x})] \,.
+\end{equation*}
+\findem
 \negro
 \end{proof}
 
+En vista de lo anterior, se obtiene el algoritmo Monte Carlo (\ref{alg:fk_1}) para aproximar la 
+solución de (\ref{eq:sde_11}). 
+\begin{algorithm}[Solución de Monte Carlo para EDPs parabólicas de la forma (\ref{eq:sde_11}).]
+\label{alg:fk_1}
+\begin{leftbar}
+% \caption{}
+\KwIn{ Fijar $T >0$, $n \in \N$, $N \in \N$.\\}
+\begin{enumerate}
+    \item   Definir una malla temporal $0 = t_0 <,\ldots, < t_n = T$. 
+    \item Definir $N$ procesos, como copias independientes de la aproximación de Euler de la EDE (\ref{eq:sde_12}). 
+    \begin{equation*}
+        \left( X_{t_i}^{x,n,k} \right)_{\substack{ k = 1,\ldots, N \\  i = 0 , \ldots, n}} \,.
+    \end{equation*}
+    \item Aproximar (\ref{eq:sde_11}) mediante: 
+        \begin{equation*}
+            u^{n,N}(t_i,x) = \frac{1}{N} \sum_{k=1}^{N} f\left( X_{T-t_i}^{x,n,k} \right), \espacio \forall i = 0, \ldots, n \,.
+        \end{equation*}
+\end{enumerate}
+\end{leftbar}
+\end{algorithm}
 
-
-
-% \end{document}
+\begin{remark}
+ Puede probarse que la aproximación de Euler tiene error de orden $\frac{1}{n}$ (antes de usar Monte Carlo) en el sentido que 
+ \begin{equation*}
+    \E [f(X_t^{x})] - \E[f ( X_T^{x,n,1})] \sim \frac{1}{n} \,.
+ \end{equation*}
+\end{remark}
