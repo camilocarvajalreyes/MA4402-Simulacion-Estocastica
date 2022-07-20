@@ -4,9 +4,52 @@
 
 \subsection{Movimiento Browniano}
 % clase 19 ajustar
+Recordemos la definición \ref{gauss}. Un vector se dice Gaussiano si toda combinación de sus coordenadas es v.a. Gaussiana. Además llamamos media de $X$ al vector
+$$ \mu = \E(X) = (\E(X^i))^n_{i=1}$$
+y matriz de varianza-covarianza a 
+$$ \Sigma = \E((X-\mu)(X-\mu)^T)=(Cov(X^i,X^j))^n_{i,j=1,1} \,.$$
+Recordemos además que podemos simular una variable $X\sim\mathcal{N}(\mu,\Sigma)$ usando distribuciones normales estándar usando que
+$$ X\igualley \mu + \Gamma \mathcal{N}(0,I_d) \, $$
+donde $\Gamma$ cumple $\Gamma \Gamma^T=\Sigma$. % $\Gamma\in\mathcal{M}_{n\times d}$
 
+\begin{proposition}
+Sea $X$ vector Gaussiano. Tenemos las siguientes propiedades.
+\begin{itemize}
+    \item Sea $J\subseteq \{1,\dots,n\}$, el subvector $\tilde X = (X^j)_{j\in J}$ también es vector Gaussiano.
+    \item Por definición, $\langle \lambda,X\rangle $ es un vector Gaussiano:
+    $$ \langle \lambda,X\rangle \sim \mathcal{N}\bigg(\langle \lambda,\mu\rangle,\frac{\lambda^T\Sigma\lambda}{2}\bigg) $$
+    y su función característica está dada por
+    $$ \E\bigg(e^{i\langle \lambda,X\rangle}\bigg) = \displaystyle e^{i\langle \mu,\lambda\rangle-\frac{\lambda^T\Sigma\lambda}{2}} \,.$$
+    \item Un subvector $\tilde X=(X^j)_{j\in J}$ tiene coordenadas independientes ssi $Cov(X^i,X^j)=0 \espacio \forall i,j\in J,\,j\neq i$
+    \item Si $\Sigma$ no es degenerada, $X$ tiene densidad
+    $$ \displaystyle \frac{1}{(2\pi)^{\frac{n}{2}}|\Sigma|^{\frac{1}{2}}} exp\bigg(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\bigg) \espacio\text{para }x\in\R^n $$
+\end{itemize}
+\end{proposition}
 
+\begin{definition}[Proceso Gaussiano]
+\label{def:pro_gauss}
+Sea $\mathbb{T}$ un conjunto de índices. Un proceso Gaussiano $(X_t)_{t\in\mathbb{T}}\subseteq \R^{\mathbb{T}}$ de función de medias $m=(m_t)_{t\in\mathbb{T}}\in\R^Pi$ y función de varianza-covarianzas $K=(K_{t,s})_{t,s\in\mathbb{T}}$ (que es simétrica $\geq 0$) es una familia $X_t:(\Omega,\mathcal{F},\P)\mapsto (\R,\mathcal{B}(\R))$ de variables aleatorias tal que $\forall S\subseteq \mathbb{T}$ finito $(X_t)_{t\in S}$ es vector Gaussiano con media $(m_t)_{t\in S}$, y matriz de covarianza $(K_{t,s})_{t,s\in S}$.
+\end{definition}
+
+\begin{theorem}[Existencia del proceso Gaussiano]
+Dados $m$ y $K$ como en la definición \ref{def:pro_gauss}, $\exists (X_t)_{t\in\mathbb{T}}$ proceso Gaussiano con media $m$ y varianza-covarianza $K$. Además su ley en $\R^{\mathbb{T}}$ es única.
+\end{theorem}
+La demostración consiste en utilizar el teorema de consistencia de Kolmogorov.
+
+\begin{definition}[Movimiento Browniano]
+Un proceso $(B_t:t\geq 0)$ definido en un espacio de probabilidad completo $\edp$ es un movimiento Browniano real si es un proceso Gaussiano con
+\begin{itemize}
+    \item $\E(B_t)=0$ \espacio $\forall t\geq 0$
+    \item $\E(B_tB_s) = Cov(B_t,B_s) = t \lor s $
+    \item La aplicación $t\mapsto B_t(\omega)$ es continua $\P(d\omega)$ c.s.\,.
+\end{itemize}
+\end{definition}
+
+\newp ------------------------------------------------------------------------------------------------------------
+\\
+%%%%%%% RC %%%%%%%%%%%%%%
 % corregir redacción
+\iffalse
 Se busca definir una función real de al variable $t \in \mathbb{R}_{+}$ (interpretada como tiempo), que sea continua y que sea \textit{} forma de darle sentido a lo anterior es mediante un \textbf{paseo aleatorio}: sean 
 \begin{itemize}
 \item $X_1, X_2, X_3, \ldots $ variables aleatorias independientes e idénticamente distribuidas tales que 
@@ -29,8 +72,10 @@ Específicamente, el escalamiento es: $\forall a >0$, definimos:
 \end{equation*}
 
 con lo que se tiene que $B_t^{(a)} \approx \mathcal{N}(0,t)$. También es directo ver que para $m > n$ enteros, $S_m - S_n$ es independiente de $S_n$, es decir, $(S_n)_{n \in \N}$ tiene \textbf{incrementos independientes}, lo cual se manifiesta también en $(B_{t}^{(a)})_{t \geq 0}$. Esto motiva:
+\fi
 
-\begin{definition}[Movimiento Browniano]
+La siguiente es una definición equivalente:
+\begin{definition}[Movimiento Browniano, definición equivalente]
         \label{def:mb}
         Un movimiento browniano es un proceso estocástico (es decir, una colección de variables aleatorias indexadas por $t \geq 0$) denotado $(B_t)_{T \geq 0}$, que satisface:     
 \renewcommand{\labelenumi}{\roman{enumi})}
@@ -48,14 +93,16 @@ con lo que se tiene que $B_t^{(a)} \approx \mathcal{N}(0,t)$. También es direct
 \end{enumerate}
 \end{definition}
 
-La ley del proceso $(B_{t}^{(a)})_{t \geq 0}$ converge, cuando $a \rightarrow \infty$, a la ley del movimiento browniano $(B_t)_{t \geq 0}$, en un sentido adecuado (esto se llama \textit{teorema de Donsker}). Por otra parte, $(B_t)_{t \geq 0}$ también se conoce como \textbf{Proceso de Wiener}. El nombre \textit{browniano} proviene del botánico Robert Brown, quien observó el movimiento errático de partículas de polen en el agua. Posteriormente, Einstein explicó este movimiento como resultado de muchas pequeñas colisiones del polen con las moléculas de agua circundantes.
-\newp Dado lo anterior surge la pregunta: ¿ Existe un proceso cumpliendo las condiciones de la definición anterior?
 
+La ley del proceso $(B_{t}^{(a)})_{t \geq 0}$ converge, cuando $a \rightarrow \infty$, a la ley del movimiento browniano $(B_t)_{t \geq 0}$, en un sentido adecuado (esto se llama \textit{teorema de Donsker}). Por otra parte, $(B_t)_{t \geq 0}$ también se conoce como \textbf{Proceso de Wiener}. El nombre \textit{browniano} proviene del botánico Robert Brown, quien observó el movimiento errático de partículas de polen en el agua. Posteriormente, Einstein explicó este movimiento como resultado de muchas pequeñas colisiones del polen con las moléculas de agua circundantes.
+\iffalse
+\newp Dado lo anterior surge la pregunta: ¿ Existe un proceso cumpliendo las condiciones de la definición anterior?
 \begin{theorem}
     \label{teo:mb}
     El movimiento browniano existe.
 \end{theorem}
 La demostración queda pendiente. Por ahora veamos algunas propiedades básicas del movimiento browniano.
+\fi
 
 \begin{proposition}
 $\forall ~ 0 = t_0 < t_1 < \ldots < t_n$ , la colección 
