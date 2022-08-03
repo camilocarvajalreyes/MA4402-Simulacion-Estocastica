@@ -45,7 +45,7 @@ Un proceso $(B_t:t\geq 0)$ definido en un espacio de probabilidad completo $\edp
 \end{itemize}
 \end{definition}
 
-\newp ------------------------------------------------------------------------------------------------------------
+% \newp ------------------------------------------------------------------------------------------------------------
 \\
 %%%%%%% RC %%%%%%%%%%%%%%
 % corregir redacción
@@ -172,7 +172,8 @@ $\P$- casi seguramente se cumple:
 \newp La demostración de este resultado utiliza herramientas fuera del alcance del curso. Gráficamente  \ref{lli:1} y \ref{lli:2} significa que la trayectoria de $(B_{t})_{t \geq 0}$ cruza o pasa cerca del gráfico de la función $f(t) = \sqrt{2t \log \log (t)} $ infinitas veces cuando $t \rightarrow \infty$, y lo mismo para $-f(t)$. 
 
 \begin{proposition}
-     $$\operatorname{Cov}(B_t,B_s) = t \wedge s := \min(t,s)\,.$$ 
+     % $$\operatorname{Cov}(B_t,B_s) = t \wedge s  := \min(t,s)\,. $$ 
+     $$ \operatorname{Cov}(B_t,B_s) = \min(t,s) \,.$$
 \end{proposition}
 \begin{proof}
 \gris
@@ -182,7 +183,7 @@ $\P$- casi seguramente se cumple:
      &= \E (B_t B_s) - \underbrace{(\E (B_t))(\E (B_s))}_{= 0} \\
      &= \E \underbrace{((B_t - B_s)B_s)}_{\text{indep.}} + \E(B_s) \\
      &= \underbrace{\left( \E(B_t - B_s) \right)}_{=0} + \underbrace{\var({Bs})}_{s}\\
-     &= s = s \wedge t
+     &= s = \min(s,t)
 \end{align*}
 \findem
 \negro
@@ -361,7 +362,7 @@ sean $T$, $S$ tiempos de parada tales que $S \leq T \le K$ con $K>0$ una constan
 \end{theorem}
 La demostración de este teorema utiliza herramientas fuera del alcance del curso. 
 
-\newp El resultado anterior es útil para algunos cálculos sobre tiempos de parada. La condición de $T$ acotado suele ser demasiado restrictiva. Para $T$ tiempo de parada no acotado, se trabaja con $T \wedge n$ y luego se hace $n \to \infty$. Esta técnica se denomina \textbf{localización}. Veamos un ejemplo:
+\newp El resultado anterior es útil para algunos cálculos sobre tiempos de parada. La condición de $T$ acotado suele ser demasiado restrictiva. Para $T$ tiempo de parada no acotado, se trabaja con $\min(T,n)$ y luego se hace $n \to \infty$. Esta técnica se denomina \textbf{localización}. Veamos un ejemplo:
 
 \begin{proposition}
 Para $a \in \mathbb{R}$, sea $T_a = \inf \{ t \ge 0: B_t = a \}$. Entonces $T_a < \infty$ casi seguramente y su ley viene dada por su transformada de Laplace.
@@ -375,19 +376,19 @@ o equivalente, su densidad es
 \end{proposition}
 \begin{proof}
 \gris
-Sea $a>0$. Sea además la martingala $X_t = \exp(\sigma B_t - \frac{\sigma^2}{2}t)$ y usemos el teorema al tiempo de parada acotado $T_a \wedge n$, para $n \in \N$. Luego $\E (X_{T_a \wedge n}) = \E(X_0) = 1$. Queremos  hacer $n \to \infty$. Notemos que:
+Sea $a>0$. Sea además la martingala $X_t = \exp(\sigma B_t - \frac{\sigma^2}{2}t)$ y usemos el teorema al tiempo de parada acotado $\min(T_a,n)$, para $n \in \N$. Luego $\E (X_{\min(T_a,n)}) = \E(X_0) = 1$. Queremos  hacer $n \to \infty$. Notemos que:
 \begin{itemize}
-\item $X_{T_{a} \wedge n} = \exp\left(\sigma B_{T_{a} \wedge n} - \frac{\sigma^{2}}{2} 
-        T_a \wedge n \right)  \le e^{\sigma a}$, es decir, la sucesión $(X_{T_a \wedge n})_{n \in \N}$ está dominada por $e^{\sigma a}$.
-\item En $\{T_a < \infty \}$, $X_{T_a \wedge n} \xrightarrow[n]{} X_{T_a}$
-\item En $\{T_a = \infty \}$, $X_{T_a \wedge n} = X_n = \exp\left( \sigma B_n - \frac{\sigma^2 n}{2} \right)  \xrightarrow[n]{} 0$.  % n\to\infty % ????
+\item $X_{\min(T_{a},n)} = \exp\left(\sigma B_{\min(T_{a},n)} - \frac{\sigma^{2}}{2} 
+        \min(T_a,n) \right)  \le e^{\sigma a}$, es decir, la sucesión $(X_{\min(T_a,n)})_{n \in \N}$ está dominada por $e^{\sigma a}$.
+\item En $\{T_a < \infty \}$, $X_{\min(T_a,n)} \xrightarrow[n]{} X_{T_a}$
+\item En $\{T_a = \infty \}$, $X_{\min(T_a,n)} = X_n = \exp\left( \sigma B_n - \frac{\sigma^2 n}{2} \right)  \xrightarrow[n]{} 0$.  % n\to\infty % ????
 \end{itemize}
 Luego, usando el teorema de convergencia dominada: 
 \begin{align*}
-    1 &= \lim_n \E(X_{T_{a} \wedge n}) \\ 
-    &\stackrel{\text{TCD}}{=} \E\left(\lim_n X_{T_a \wedge n} \right)\\
-    &= \E \left( \lim_n \mathbbm{1}_{\{T_a < \infty\}} X_{T_a \wedge n} + 
-    \lim_n \mathbbm{1}_{\{T_{a} = \infty\}} X_{T_a \wedge n} \right)\\
+    1 &= \lim_n \E(X_{\min(T_{a},n)}) \\ 
+    &\stackrel{\text{TCD}}{=} \E\left(\lim_n X_{\min(T_a,n)} \right)\\
+    &= \E \left( \lim_n \mathbbm{1}_{\{T_a < \infty\}} X_{\min(T_a,n)} + 
+    \lim_n \mathbbm{1}_{\{T_{a} = \infty\}} X_{\min(T_a,n)} \right)\\
     &= \E \left( \mathbbm{1}_{\{ T_a < \infty \}}  X_{T_a}  \right)  = \E \left( \mathbbm{1}_{\{T_a < \infty \}} \exp( \sigma B_{T_a} - \frac{\sigma^2 T_a}{2}) \right)\,.
 \end{align*}
 Es decir, 
@@ -433,7 +434,7 @@ para ciertos instantes $0 = t_0 < t_1 < \ldots, t_k = T$, $(A_i)_{i=1}^{k}$ son 
 \begin{definition}[Integral Estocástica]
 Dado un tal $H$, la \textbf{integral estocástica} de $H$ con respecto a $B$ es el proceso $\left(I(H)_t \right)_{t \in [0,T]}$. Definido como 
 \begin{equation*}
-    I(H)_t = \sum_{i=1}^{k} A_i \left( B_{t_i \wedge n} - B_{t_{i-1} \wedge t} \right) =: \int_{0}^{t} H_s dB_s\,.
+    I(H)_t = \sum_{i=1}^{k} A_i \left( B_{\min(t_i,n)} - B_{\min(t_{i-1},t)} \right) =: \int_{0}^{t} H_s dB_s\,.
 \end{equation*}
 Es decir, para $t \in (t_j, t_{j+1}]$ 
 \begin{equation*}
