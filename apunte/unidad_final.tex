@@ -461,7 +461,7 @@ Para demostrar \ref{ie:i} se requiere que $\forall s < t$
 Sin pérdida de generalidad, podemos asumir que $s = t_{l} < t_m < t$ para ciertos $l,m$ (en caso contrario, $t$ y $s$ se pueden incluir en la partición $0 = t_0 < t_1, \ldots, t_k = T$ y el proceso $H$ obtenido seguirá siendo simple predecible). Tenemos:
 \begin{equation*}
     \label{eq:*}
-    \tag{*}
+    % \tag{*}
     \E \left[ \int_{0}^{t_m} H_u dB_u \mid \mathcal{F}_{t_l} \right] = \sum_{i=1}^{m} \E \left( A_i (B_{t_i} - B_{t_{i-1}}) \mid  \mathcal{F}_{t_l} \right)\,. 
 \end{equation*}
 Para $i \ge  l+1$: $\mathcal{F}_{t_{i-1}} \supseteq \mathcal{F}_{t_l}$, luego 
@@ -470,7 +470,7 @@ Para $i \ge  l+1$: $\mathcal{F}_{t_{i-1}} \supseteq \mathcal{F}_{t_l}$, luego
     &= \E \left[ \E (A_{i}(B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_{i-1}}  \mid  \mathcal{F}_{t_l}  \right]  \\ 
     &= \E \left[ A_{i} \E( B_{t_i} - B_{t_{i-1}}) \mid \mathcal{F}_{t_l}\right] = 0\,.
 \end{align*}
-Luego en (\ref{eq:*}) quedan sólo los términos $i \le l$, y la esperanza condicional desaparece pues
+Luego en $\sum_{i=1}^{m} \E \left( A_i (B_{t_i} - B_{t_{i-1}}) \mid  \mathcal{F}_{t_l} \right)$ quedan sólo los términos $i \le l$, y la esperanza condicional desaparece pues
 los términos dentro son $\mathcal{F}_{t_l}$-medibles. Luego
 \begin{equation*}
     \E \left[ \int_{0}^{t_m} H_u dB_u  \mid \mathcal{F}_{t_l} \right] = \sum_{i=1}^{l} A_i (B_{t_i} -B_{t_{i-1}}) = \int_{0}^{t_l} H_u dB_u \,.
@@ -641,6 +641,7 @@ La condición $\E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty$ se cum
 \end{remark}
 
 \begin{example}
+\label{ejemplo:6_4_1}
 Podemos usar lo anterior para comprobar que 
 $$\int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t \,.$$
 \end{example}
@@ -668,7 +669,7 @@ $L^2(d\P)$:
 Luego, $\displaystyle \E \left[ \left( \sum_{i=1}^{k_n} (\Delta B_i )^2 - t \right)  \right] = 2 \sum_{i=1}^{k_n} (\Delta t_i)^2 \xrightarrow[n \to \infty]{} 0$, pues $\|\pi^n\| \xrightarrow[n]{} n$. Como todos estos limites son en $L^2(d\P)$, se tiene:
 \begin{equation*}
     \label{eq:ej}
-    \tag{*}
+    % \tag{*}
     \int_{0}^{t} B_s dB_s = \frac{1}{2} B_t^2 - \frac{1}{2}t \,.
 \end{equation*}
 \findem
@@ -680,11 +681,11 @@ Si $(A_t)_{t \ge 0}$ es un procesos con trayectorias derivables y $A_0 = 0$,
 \begin{equation*}
     \int_{0}^{t} A_s dA_s = \int_{0}^{t} A_s \frac{dA_s}{ds} ds = \frac{1}{2} A^2_t\,,
 \end{equation*}
-lo cual difiere de (\ref{eq:ej}). Esto se debe a que el proceso $A$ tiene \textbf{variación cuadrática} $0$ por tener trayectorias suaves, es decir, 
+lo cual difiere del ejemplo \ref{ejemplo:6_4_1}. Esto se debe a que el proceso $A$ tiene \textbf{variación cuadrática} $0$ por tener trayectorias suaves, es decir, 
 \begin{equation*}
-    \lim_{n} \sum_{i=1}^{k_n} (\Delta A_i)^2 = 0\,,
+    \lim_{n} \sum_{i=1}^{k_n} (\Delta A_i)^2 = 0\,.
 \end{equation*}
-la formula (\ref{eq:ej}) es un caso particular de la \textbf{formula de It\^{o}}.
+La formula del ejemplo \ref{ejemplo:6_4_1} es un caso particular de la \textbf{formula de It\^{o}}.
 \end{remark}
 
 \subsubsection{Cálculo de It\^{o}}
@@ -692,18 +693,19 @@ la formula (\ref{eq:ej}) es un caso particular de la \textbf{formula de It\^{o}}
 Notemos que (\ref{eq:ej}) puede escribirse como
 \begin{equation*}
     \label{eq:ito_cal_1}
-    \tag{**}
+    % \tag{**}
     f(B_t) = \int_{0}^t f'(B_s) dB_s + \frac{1}{2} \int_{0}^{t} f''(B_s) ds\,.
 \end{equation*}
-Para $f(x) = x^2$. Queremos deducir (\ref{eq:ito_cal_1}) para funciones de clase $\mathcal{C}^2$ generales, y para procesos $X$ más generales que el movimiento browniano $B$. 
+Para $f(x) = x^2$. Queremos deducir esto para funciones de clase $\mathcal{C}^2$ generales, y para procesos $X$ más generales que el movimiento browniano $B$. 
 \begin{definition}[Proceso de It\^{o}]
+\label{def:ito_cal_2}
 Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y 
 un movimiento browniano $(B_t)_{t \ge 0}$ definido sobre él. Decimos
 que un proceso $(X_t)_{t \in [0,T]}$ es un \textbf{proceso de It\^{o}} si se escribe como:
 \begin{equation*}
     \label{eq:ito_cal_2}
-    \tag{***}
-    X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s ~ ~ ~ \forall t \in [0,T]
+    % \tag{***}
+    X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s \espacio \forall t \in [0,T]
 \end{equation*}
 Donde:
 \begin{itemize}
@@ -714,11 +716,11 @@ Donde:
 \end{definition}
 
 \begin{remark}
-    Puede probarse que la escritura (\ref{eq:ito_cal_2}) es única, es decir, si $\tilde{K}, \tilde{H}$        también cumplen (\ref{eq:ito_cal_2}), entonces $K \equiv \tilde{K}$, $H \equiv \tilde{H}$ casi seguramente con respecto a $ds \otimes d\P$. 
+    Puede probarse que la escritura de la Definición \ref{def:ito_cal_2} es única, es decir, si reemplazamos $K$, $H$ por  $\tilde{K}, \tilde{H}$, entonces $K \equiv \tilde{K}$, $H \equiv \tilde{H}$ casi seguramente con respecto a $ds \otimes d\P$. 
 \end{remark}
 
 \begin{definition}[Variación Cuadrática]
-Dado un proceso de It\^{o} $(X_t)_{t \ge 0}$ con descomposición (\ref{eq:ito_cal_2}), su \textbf{variación cuadrática} se define como el proceso $\langle X \rangle_t$ dado por
+Dado un proceso de It\^{o} $(X_t)_{t \ge 0}$ con descomposición de la Definición \ref{def:ito_cal_2}, su \textbf{variación cuadrática} se define como el proceso $\langle X \rangle_t$ dado por
 \begin{equation*}
         \langle X \rangle_t ~ := \int_{0}^{t} H^2_s ds \,.
 \end{equation*}
@@ -731,21 +733,23 @@ Dado un proceso de It\^{o} $(X_t)_{t \ge 0}$ con descomposición (\ref{eq:ito_ca
     Donde $(\pi^{n})_{n \ge 1}$ es una secuencia de particiones de $[0,T]$ como antes. Esto justifica el nombre \textit{variación cuadrática}.
 \end{remark}
 
-\begin{theorem}[Lema de It\^{o}, Regla de It\^{o}, Fórmula de It\^{0}]
-Sea $(X_t)_{t \ge 0}$ un proceso de It\^{0} con descomposición (\ref{eq:ito_cal_2}), y $f: \mathbb{R} \to  \mathbb{R}$ una función $\mathcal{C}^2$. Entonces 
+\begin{theorem}[Lema de It\^{o}, Regla de It\^{o}, Fórmula de It\^{o}]
+\label{theorem:ito}
+Sea $(X_t)_{t \ge 0}$ un proceso de It\^{0} con descomposición de la Definición \ref{def:ito_cal_2}, y $f: \mathbb{R} \to  \mathbb{R}$ una función $\mathcal{C}^2$. Entonces 
 \begin{equation*}
     \label{eq:ito_cal_3}
-    \tag{$\star$}
+    % \tag{$\star$}
     f(X_t)  = f(X_0) + \int_{0}^{t} f'(X_s) dX_s +  \frac{1}{2}\int_{0}^{t} f''(X_s) d \langle X \rangle_s\,.
 \end{equation*}
 \end{theorem}
 
 \begin{remark}
-(\ref{eq:ito_cal_3}) suele escribirse en \textit{forma diferencial}, la cual es más fácil de 
+\label{remark:ito_dif}
+La expresión del Teorema \ref{theorem:ito} suele escribirse en \textit{forma diferencial}, la cual es más fácil de 
 recordar: 
 \begin{equation*}
     \label{eq:ito_cal_3b}
-    \tag{$\square$}
+    % \tag{$\square$}
     df(X_t) = f'(X_t)dX_t + \frac{1}{2} f''(X_t)d\langle X \rangle_t\,.
 \end{equation*}
 Alternativamente, usando las definiciones de $\langle X \rangle_t$  y $\int_{0}^{t} f'(X_s) dX_s$, se tiene 
@@ -757,7 +761,7 @@ Alternativamente, usando las definiciones de $\langle X \rangle_t$  y $\int_{0}^
 Lo cual muestra que $f(X_t)$ es un proceso de It\^{o} y nos entrega su descomposición.
 \end{remark}
 \begin{remark}
-    La regla de It\^{o} también se conoce como \textit{regla de la cadena estocástica}, la cual se justifica al observar (\ref{eq:ito_cal_3b}). Notar que $\frac{1}{2}f''(X_t) d\langle X \rangle_t$ es una \text{novedad} en el sentido de que no aparece en cálculo clásico. 
+    La regla de It\^{o} también se conoce como \textit{regla de la cadena estocástica}, la cual se justifica al observar la forma diferencial de la Observación \ref{remark:ito_cal_3b}. Notar que $\frac{1}{2}f''(X_t) d\langle X \rangle_t$ es una \text{novedad} en el sentido de que no aparece en cálculo clásico. 
 \end{remark}
 \begin{example}
     Para $X = B$, $f(x) = x^2$, tenemos 
@@ -771,14 +775,14 @@ Lo cual muestra que $f(X_t)$ es un proceso de It\^{o} y nos entrega su descompos
 Dados $\mu \in \mathbb{R}$ un \textit{coeficiente de drift}, $\sigma > 0$  \textit{volatilidad}. Decimos que $(S_t)_{t \ge 0}$ es un movimiento browniano \textit{geométrico} si cumple: 
 \begin{equation*}
     \label{eq:ito_cal_ej}
-    \tag{$\triangle$}
+    % \tag{$\triangle$}
     dS_t = \mu dS_t dt + \sigma S_t dB_t\,.
 \end{equation*}
 Para resolver esto, sea $(X_t)_{t \ge 0}$ dado por 
 \begin{equation*}
         dX_t = (\mu - \frac{1}{2} \sigma^2) dt + \sigma d B_t\,.
 \end{equation*}
-y definimos $S_t = S_0 e^{X_t}$. Verificamos que $S$ cumple (\ref{eq:ito_cal_ej}): usando la regla de It\^{o}, 
+y definimos $S_t = S_0 e^{X_t}$. Verificamos que $S$ es un movimiento browniano geométrico: usando la regla de It\^{o}, 
 \begin{align*}
     dS_t &= S_0 \left[e^{X_t} dX_t + \frac{1}{2} e^{X_t} d \langle X  \rangle_t \right] \\
     &= S_0 \left[e^{X_t} (\mu - \frac{1}{2} \sigma^2)dt + e^{X_t} \sigma dB_t + \frac{1}{2} e^{X_t} \sigma^2 dt    \right] \\
@@ -789,10 +793,11 @@ El movimiento browniano geométrico es un modelo simple de precios de acciones.
 \end{example}
 
 \begin{definition}[Covariación Cuadrática]
+\label{def:cov_cuad}
 Sean dos procesos de It\^{o} $X,Y$ con descomposición
 \begin{align*}
     \label{eq:ito_cal_4}
-    \tag{$\star\star$}
+    % \tag{$\star\star$}
     dXt &= K_t dt + H_t dB_t \\ 
     dY_t&= \tilde{K} _t dt + \tilde{H}_t dB_t \,.
 \end{align*}
@@ -811,7 +816,7 @@ Puede probarse que
 
 La siguiente propiedad completa lo básico del calculo estocástico:
 \begin{proposition}[Integración por Partes]
-Dados $X,Y$ proceso de It\^{o} con descomposición (\ref{eq:ito_cal_4}),se tiene 
+Dados $X,Y$ proceso de It\^{o} con descomposición de la Definición \ref{def:cov_cuad},se tiene 
 \begin{equation*}
     X_t Y_t = X_0 Y_0 + \int_{0}^{t} X_s dY_s + \int_{0}^{t} Y dX_s + \langle X,Y \rangle_t
 \end{equation*}
@@ -824,15 +829,15 @@ o en forma diferencial
 \gris
 Por la regla de It\^{o} 
 \begin{align*}
-    \label{eq:ito_cal_5_1}
-    \tag{1}
+    % \label{eq:ito_cal_5_1}
+    % \tag{1}
     X^2_{t} &= X^2_{0} + \int_{0}^{t} 2 X_s dX_s + \int_{0}^{t} \frac{1}{2} 2 d \langle X \rangle_s\\
             &= X^2_{0} + 2 \int_{0}^{t} X_s d X_s + \int_{0}^{t} H_s^2 ds \,.
 \end{align*}
 Análogamente
 \begin{equation*}
-    \label{eq:ito_cal_5_2}
-    \tag{2}
+    % \label{eq:ito_cal_5_2}
+    % \tag{2}
     Y^2_{t} = Y^2_{0} + 2 \int_{0}^{t} Y_s d Y_s + \int_{0}^{t} \tilde{H}_s^2 ds \,.
 \end{equation*}
 
@@ -868,32 +873,40 @@ bursátiles, interacciones con el medio, etc. Si el ruido es proporcional a una 
 la \textbf{ecuación diferencial estocástica} (EDE o bien \textit{SDE} en inglés)
 \begin{equation*}
         \label{eq:sde_1}
-        \tag{*}
-        dX_t = b(X_t) dt \sigma (X_t) dB_t \,.
+        % \tag{*}
+        dX_t = b(X_t) dt + \sigma (X_t) dB_t \,.
 \end{equation*}
 Aquí $(B_t)_{t \ge  0}$ es un movimiento browniano. Esto debe entenderse como una notación para 
 la siguiente definición rigurosa:
 \begin{definition}[Solución exacta de una EDE]
-Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, con un movimiento browniano $(B_t)_{t \ge 0}$ asociado y una variable aleatoria $X_0 \in \mathcal{F}_0$, junto con funciones $b: \mathbb{R} \to \mathbb{R}$, $\sigma: \mathbb{R} \to \mathbb{R}$, decimos que $(X_t)_{t \ge 0}$ es una solución fuerte de la ecuación diferencial estocástica (\ref{eq:sde_1}), si 
+\label{def:sol_ede}
+Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{t \geq 0}, \P)$, con un movimiento browniano $(B_t)_{t \ge 0}$ asociado y una variable aleatoria $X_0 \in \mathcal{F}_0$, junto con funciones $b: \mathbb{R} \to \mathbb{R}$, $\sigma: \mathbb{R} \to \mathbb{R}$, decimos que $(X_t)_{t \ge 0}$ es una solución fuerte de la ecuación diferencial estocástica $dX_t = b(X_t) dt + \sigma (X_t) dB_t$, si 
 \begin{itemize}
-\item $\displaystyle \forall  t \ge  0$, $\int_{0}^{t} \abs{b(X_s)} ds < \infty$ y 
-     $\int_{0}^{t} \abs{\sigma (X_s)}^2 ds < \infty$ casi seguramente.
+\item $\displaystyle \forall  t \ge  0$, $\displaystyle\int_{0}^{t} \abs{b(X_s)} ds < \infty$ y 
+     $\displaystyle\int_{0}^{t} \abs{\sigma (X_s)}^2 ds < \infty$ casi seguramente.
 \item $\forall  t \ge 0$,
 \begin{equation*}
      \label{eq:sde_2}
-     \tag{**}
+     % \tag{**}
      X_t = X_0 + \int_{0}^{t} b(X_s) ds  + \int_{0}^{t} \sigma (X_s) dB_s 
 \end{equation*}
 casi seguramente. 
 \end{itemize}
 \end{definition}
 \begin{remark}
-    También puede incluirse el caso en que $b$ y $\sigma$ dependen de $t$: $b = b(t,x)$, $\sigma = \sigma(t,x)$. 
+    También puede incluirse el caso en que $b$ y $\sigma$ dependen de $t$, i.e., $b = b(t,x)$, $\sigma = \sigma(t,x)$. 
 \end{remark}
 
-Un $X$ cumpliendo (\ref{eq:sde_2}) se denomina \textbf{difusión}. 
+\begin{remark}
+\label{remark:sde_2}
+Un $X$ cumpliendo 
+$$X_t = X_0 + \int_{0}^{t} b(X_s) ds  + \int_{0}^{t} \sigma (X_s) dB_s $$ 
+% como en la Definición \ref{def:sol_ede} 
+se denomina \textbf{difusión}.
+\end{remark}
 
-\newp Ahora estudiamos la existencia y unicidad  para (\ref{eq:sde_2}). Notemos que incluso en el caso determinista ($\sigma \equiv 0$), (\ref{eq:sde_2}) puede tener mal comportamiento (múltiples soluciones o soluciones que explotan) si la función $b$ no es Lipschitz. (por ejemplo $\frac{dx}{dt} = x^2$. Esto resulta ser suficiente:
+\newp Ahora estudiemos su existencia y unicidad. Notemos que incluso en el caso determinista ($\sigma \equiv 0$), la ecuación \ref{remark:sde_2} puede tener mal comportamiento (múltiples soluciones o soluciones que explotan) si la función $b$ no es Lipschitz. (por ejemplo $\frac{dx}{dt} = x^2$). Esto resulta ser suficiente:
+
 \begin{theorem}[Existencia y Unicidad de Soluciones para EDEs]
 Supongamos que $\exists K >0$ constante tal que 
 \begin{itemize}
@@ -901,7 +914,9 @@ Supongamos que $\exists K >0$ constante tal que
     \item $\abs{b(x)} + \abs{\sigma(x)} \le K(1+\abs{x})$, $\forall x \in \mathbb{R}$. 
     \item $\E[X_{0}^{2}] < \infty$. 
 \end{itemize}
-Entonces, para todo $T$, (\ref{eq:sde_2}) admite casi seguramente una única solución fuerte $(X_t)_{t \in [0,T]}$ en $[0,T]$, la cual además cumple 
+Entonces, para todo $T$,
+$$X_t = X_0 + \int_{0}^{t} b(X_s) ds  + \int_{0}^{t} \sigma (X_s) dB_s $$ 
+admite casi seguramente una única solución fuerte $(X_t)_{t \in [0,T]}$ en $[0,T]$, la cual además cumple 
 \begin{equation*}
     \E \left[ \sup_{t \in [0,T]} \abs{X_t}^2 \right] < \infty \,.
 \end{equation*}
@@ -941,7 +956,7 @@ para $n$ adecuado.
 \end{proof}
 
 \begin{remark}
-    El argumento anterior prueba la unicidad de soluciones en $\xi$. Sin embargo, puede probarse que cualquier selección de (\ref{eq:sde_2}) debe pertenecer a $\xi$, lo cual significa que el argumento anterior efectivamente implica unicidad de soluciones. 
+    El argumento anterior prueba la unicidad de soluciones en $\xi$. Sin embargo, puede probarse que cualquier selección de \ref{remark:sde_2} debe pertenecer a $\xi$, lo cual significa que el argumento anterior efectivamente implica unicidad de soluciones. 
 \end{remark}
 
 \subsubsubsection{Esquemas Numéricos}
@@ -955,7 +970,7 @@ queremos aproximar la solución por $X_t^{n}$ que se pueda generar efectivamente
 El primer esquema es clásico \textbf{esquema de Euler} que se justifica por la siguiente heurística: 
 \begin{align*}
     \label{eq:sde_3}
-    \tag{*}
+    % \tag{*}
     X_{t+h} &= X_t + \int_{t}^{t+h} b(X_s) ds + \int_{t}^{t+s} \sigma(X_s) dB_s \\
             &\approx X_t + b(X_t) h + \sigma(X_t) (B_{t+h} - B_{t})
 \end{align*}
@@ -973,7 +988,7 @@ Definir $(X^{n}_{ih})_{i = 0, \ldots, n}$ mediante $X_{0}^{n} = X_0$ y
     \end{equation*}
 \end{leftbar}
 \end{algorithm}
-Refinemos un poco lo anterior: desde (\ref{eq:sde_1})
+Refinemos un poco lo anterior: partiendo desde $dX_t = b(X_t) dt + \sigma (X_t) dB_t$,
 \begin{equation*}
         X_{t+h} \approx X_t + b(X_t) h + \sigma(X_t) \Delta B\,.
 \end{equation*}
@@ -1021,7 +1036,7 @@ Se tienen las siguientes tasas de convergencia.
 Supongamos que $b, \sigma$ son Lipschitz de constante $L$, y que $\exists m \ge  1$ entero tal que $\E [\abs{X_0}^{2m}] < \infty$. Entonces, $\exists K = K(T,L,m,\E[\abs{X_0}^{2m}])$ constante, tal que la aproximación de Euler $(X_{ih}^{n})$ (con $h = \frac{T}{n}$) cumple $\forall n$: 
 \begin{equation*}
 \label{eq:sde_4}
-\tag{1}
+% \tag{1}
     \E \left[ \sup_{i = 1,\ldots, n} \abs{X_{ih} - X_{ih}^n}^{2m} \right] \le \frac{K}{n^{2m}}\,,
 \end{equation*}
 y
@@ -1034,7 +1049,7 @@ Supongamos que $b, \sigma \in \mathcal{C}^2$ con derivadas hasta orden $2$ acota
 
 \begin{equation*}
 \label{eq:sde_5}
-\tag{2}
+% \tag{2}
     \sup_{i = 1,\ldots,n} \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m}
 \right] \le \frac{K}{n^{2m}}\,,
 \end{equation*}
@@ -1044,8 +1059,8 @@ $$ \forall \alpha \in \left \lbrack 0, \frac{1}{2} - \frac{1}{m} \right), \espac
 
 Las demostraciones correspondientes escapan al alcance del curso, sin embargo, los teoremas nos dicen en esencia: 
 \begin{itemize}
-\item (\ref{eq:sde_4}) implica que el esquema de Euler es de orden $n^{\frac{1}{2}}$. 
-\item (\ref{eq:sde_5}) implica que el esquema de Milstein es de orden $n$: 
+\item $$\E \left[ \sup_{i = 1,\ldots, n} \abs{X_{ih} - X_{ih}^n}^{2m} \right] \le \frac{K}{n^{2m}}$$ implica que el esquema de Euler es de orden $n^{\frac{1}{2}}$. 
+\item $$ \sup_{i = 1,\ldots,n} \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m}\right] \le \frac{K}{n^{2m}}$$ implica que el esquema de Milstein es de orden $n$: 
 \begin{equation*}
     \E \left[ X_{ih} - X_{ih}^{n} \right] \le  \left( \E \left[ \abs{X_{ih} - X_{ih}^{n}}^{2m} \right] \right)^{\frac{1}{2m}} \le  
     \begin{cases}
@@ -1062,10 +1077,11 @@ Dado un espacio de probabilidad filtrado $(\Omega, \mathcal{F},(\mathcal{F}_t)_{
 \end{definition}
 
 \begin{definition}[Proceso de It\^{o} d-simensional]
+\label{def:ito_d}
 Un proceso $X = (X_t^1, \ldots, X_t^d)_{t \ge 0}^T$ a valores en $\mathbb{R}^d$ se dice un \textbf{proceso de It\^{o} d-dimensional} si $\forall i = 1, \ldots, d$ 
 \begin{equation*}
     \label{eq:sde_6}
-    \tag{*}
+    % \tag{*}
     X_t^i = X_0^i + \int_{0}^{t} K_s^i ds + \sum_{j=1}^{\tilde{d}} H_s^{ij} dB_s^j \,,
 \end{equation*}
 donde $(K_{t}^{i})_{t \ge 0, i=1,\ldots,d}$, $(H^{ij}_{t})_{t \ge  0}, \substack{i =1, \ldots,d \\ j =1, \ldots,\tilde{d}}$ son procesos adaptados cumpliendo $\forall T > 0$: 
@@ -1074,7 +1090,7 @@ donde $(K_{t}^{i})_{t \ge 0, i=1,\ldots,d}$, $(H^{ij}_{t})_{t \ge  0}, \substack
 \end{equation*}
 \end{definition}
 
-Matricialmente: si $K_t = (K_t^1, \ldots, K_t^d)^T \in \mathbb{R}$, $H_t = (H_t^{ij})_{\substack{i = 1,\ldots, d \\ j=1,\ldots,\tilde{d}}} \in \mathbb{R}^{d \times \tilde{d}}$, luego (\ref{eq:sde_6}) equivale a $X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s$. 
+Matricialmente: si $K_t = (K_t^1, \ldots, K_t^d)^T \in \mathbb{R}$, $H_t = (H_t^{ij})_{\substack{i = 1,\ldots, d \\ j=1,\ldots,\tilde{d}}} \in \mathbb{R}^{d \times \tilde{d}}$, luego la ecuación de la Definición \ref{def:ito_d} equivale a $X_t = X_0 + \int_{0}^{t} K_s ds + \int_{0}^{t} H_s dB_s$. 
 \newp Ahora que trabajamos con varios brownianos i.i.d., debemos extender la definición de covariación 
 cuadrática:
 \begin{equation*}
@@ -1083,7 +1099,7 @@ cuadrática:
 es decir, 
 \begin{equation*}
     \label{eq:sde_7}        
-    \tag{**}
+    % \tag{**}
     \langle X^{i}, X^{j} \rangle := \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_{s}^{il} H_{s}^{jl} ds \,.
 \end{equation*}
 Por ejemplo: $X^i = B^i$, $X_j = B^j$ se tiene 
@@ -1105,7 +1121,8 @@ Esto se justifica probando (propuesto) que para $i \neq j$
 donde $\Delta B_k^i$, $\Delta B_k^j$ son los incrementos en intervalo
 $[t_{k-1}, t_{k}]$ de la malla temporal.
 \begin{remark}
-    (\ref{eq:sde_7}) se obtiene a partir de la siguientes propiedades equivalentes: 
+La expresión
+    $$ \langle X^{i}, X^{j} \rangle := \sum_{l=1}^{\tilde{d}} \int_{0}^{t} H_{s}^{il} H_{s}^{jl} ds$$ se obtiene a partir de la siguientes propiedades equivalentes: 
     \begin{itemize}
         \item $\langle \cdot , \cdot  \rangle$ es bilineal y simétrica. 
         \item $\displaystyle \langle X, \int_{0}^{\cdot} \tilde{H}_s ds \rangle_t = 0$ 
@@ -1117,7 +1134,7 @@ $[t_{k-1}, t_{k}]$ de la malla temporal.
 Dado un tal $(X_t)_{t \ge 0}$  y una función $f: \mathbb{R}^d \to \mathbb{R}$ $\mathcal{C}^2$, se tiene $\forall t \ge 0$, 
 \begin{equation*}
     \label{eq:sde_8}
-    \tag{$\star$}
+    % \tag{$\star$}
     f(X_t) = f(X_0) + \sum_{i=1}^{d} \int_{0}^{t} \frac{\partial f}{\partial x^i} (X_s) dX_s^i + \frac{1}{2} \sum_{i,j = 1}^{d} \int_{0}^{t} \frac{\partial^2 f}{\partial x^i \partial x^j}(X_s) d \langle X^i, X^j \rangle _s \,,
 \end{equation*}
 donde $dX_s^i := K_s^i ds + \sum_{l=1}^{\tilde{d}} H_{s}^{il} dB_s^l$.
@@ -1125,7 +1142,7 @@ donde $dX_s^i := K_s^i ds + \sum_{l=1}^{\tilde{d}} H_{s}^{il} dB_s^l$.
 
 La demostración escapa al alcance del curso. 
 
-\newp Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir (\ref{eq:sde_8}) matricialmente: 
+\newp Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir la regla de Itô matricialmente: 
 \begin{equation*}
     f(X_t) = f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot dX_s + \frac{1}{2} \int_{0}^{t} \text{tr} \left( D^2 f(X_s) H_s H_s^{T} \right) ds \,,
 \end{equation*}
@@ -1162,13 +1179,22 @@ A continuación escribiremos una \textbf{representación probabilista} de la sol
 de manera heurística, la solución de (\ref{eq:sde_9}) tiene la representación 
 \begin{equation*}
     \label{eq:sde_10} 
-    \tag{$ \square$}
+    % \tag{$ \square$}
     u(x) = \E_{x} \left[ f(B_{\tau_D}) \right], ~ ~ ~ \forall x \in \overline{D}
 \end{equation*}
 
 De manera más rigurosa:
 \begin{theorem}
-    Si $f$ es acotada y $\forall x \in D$, $\P_x ( \tau_D < \infty) = 1$, entonces cualquier solución acotada de (\ref{eq:sde_9}) tiene la representación (\ref{eq:sde_10})\,.
+    Si $f$ es acotada y $\forall x \in D$, $\P_x ( \tau_D < \infty) = 1$, entonces cualquier solución acotada de
+    \begin{equation*}
+        \tag{D}
+        \begin{cases}
+            \Delta u = 0 & \text{ en } D \\ 
+            u = f & \text{ en } \partial D
+        \end{cases} \,.
+    \end{equation*}
+    tiene la representación
+    $$ u(x) = \E_{x} \left[ f(B_{\tau_D}) \right], ~ ~ ~ \forall x \in \overline{D}\,.$$
 \end{theorem}
 \begin{proof}[Idea de Demostración]
 \gris
@@ -1189,7 +1215,7 @@ que finalmente implica $u(x) = \E_x[f(B_{\tau_{D}})]$.
 \negro
 \end{proof}
 
-\newp Si a priori no conoce la existencia de solución de (\ref{eq:sde_9}), se espera que \ref{eq:sde_10}) sea la solución. Esto es cierto, bajo ciertas condiciones de \textbf{regularidad} de $\partial D$ que aseguren que (\ref{eq:sde_9}) entregue una función continua hasta $\partial D$. Específicamente tenemos la definición siguiente.
+\newp Si a priori no conoce la existencia de solución del problema de Dirichlet, se espera que $\E_{x} \left[ f(B_{\tau_D}) \right]$ sea la solución. Esto es cierto, bajo ciertas condiciones de \textbf{regularidad} de $\partial D$ que aseguren que (\ref{eq:sde_9}) entregue una función continua hasta $\partial D$. Específicamente tenemos la definición siguiente.
 \begin{definition}[Punto Regular]
 Dado $D \subseteq \mathbb{R}^{d}$ abierto, sea 
 \begin{equation*}
@@ -1215,7 +1241,7 @@ Con esto se obtiene
     \begin{equation*}
         u(x) := \E_{x} [f(B_{\tau_D})]
     \end{equation*}
-    es la única solución de (\ref{eq:sde_9}).
+    es la única solución del problema de Dirichlet. % (\ref{eq:sde_9}).
 \end{theorem}
 
 Más generalmente 
@@ -1259,7 +1285,7 @@ donde $K_T \in \mathbb{R}^{d}$, $H_t \in \mathbb{R}^{d \times \tilde{d}}$, $B_t$
 \end{align*}
 \end{theorem}
 
-Especificaremos la EDP: Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$ funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el operador:
+\newp Especificaremos la EDP: Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$ funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el operador:
 \begin{equation*}
     \mathcal{L} := b(\cdot) \cdot \nabla + \frac{1}{2} \text{tr}(a(\cdot) D^2 (\cdot )) \,,
 \end{equation*}
