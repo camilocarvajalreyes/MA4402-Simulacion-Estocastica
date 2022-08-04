@@ -143,56 +143,7 @@ Además, usamos el módulo \href{https://pytorch.org/docs/stable/optim.html}{tor
     \item[5] Re-defina el modelo usando una capa intermedia. Entrenelo usando alguna de los optimizadores. ¿Cómo se comparan los resultados de esta nueva red en ambos conjuntos con los modelos anteriores? Justifique.
 \end{itemize}
 
-\section*{Problema 2: Regresi\'on log\'istica con gradiente estocástico }
-
-En este problema aplicaremos el algoritmo de descenso de gradiente estocástico a un m\'etodo de clasificación supervisada denominado {\bf regresi\'on log\'istica}.  Consideramos un conjunto de $M$ datos correspondiente a vectores   $\{x^{(m)}\}_{i=1,\dots,M} \subset \mathbb{R}^p$ de caracter\'isticas,  y  sus respectivas etiquetas  $\{y^{(m)}\}_{i=1,\dots,M} \subset \{0,1\}$ que indican si cada uno de ellos pertenece a  una de dos ``clases''  posibles $C_0$ ó $C_1$. El objetivo es usar estos datos para aprender como clasificar correctamente cualquier vector nuevo $x$ de caracter\'isticas  en una de las clases $C_k$, $k=0,1$ (sin ver su etiqueta).
-
-Por simplicidad nos restringiremos a modelos de clasificación lineales, los que pueden escribirse de manera general como
-\[  \phi(x)=\sigma\left( \langle a, x\rangle + b  \right), \]
-donde  $x\in \mathbb{R}^p$, $a\in \mathbb{R}^p$  y $b\in \mathbb{R}$ son par\'ametros fijos,  y $\sigma: \mathbb{R}\to [0,1]$ es una función ``de activación'', creciente, no lineal, fija,  que se usar\'a para atribuir el vector $x$ a la clase $C_1$ o $C_0$ seg\'un si el valor de $\phi$ est\'a por encima o debajo de un cierto umbral (por ejemplo, etiquetar $x$ como de clase $C_1$ si $\phi(x)=\sigma   ( a^\mathrm{t}x + b) \in (1/2, 1]$, y de clase $C_0$ en caso contrario).  
- Para simplificar la notación introducimos la  escritura
-\[  \sigma(w^\mathrm{t}x) =  \sigma\left( \langle a, x \rangle+ b  \right), \]
-donde  $w = (a,b)\in \mathbb{R}^{p+1}$ y, con abuso de notaci\'on, $x$ en el lado izquierdo corresponde  al vector agrandado $ (x,1)\in\mathbb{R}^{p+1}$.  Puesto que $\sigma(w^\mathrm{t}x)\in (0,1)$ podemos pensar  intuitivamente en esta cantidad como  ``probabilidad'' de que un vector de caracter\'isticas aleatorias  $x$  provenga de la clase $C_1$.  
-
-Escogeremos como $\sigma$ la llamada función logística o sigmoide: 
-\[ \phi(r)=\sigma(r) = \frac{1}{1+e^{-r}}. \]
-
-
-\begin{enumerate}
-\item  Dado un dato $x$,  interprete geom\'etricamente la condici\'on $\sigma(w^\mathrm{t}x)\in (1/2,1]$. 
-
-  Veamos  ahora que la intepretaci\'on probabilista antes mecionada es rigurosa para el caso de un modelo Bayesiano  en que los datos son generados por dos posibles leyes Gaussianas multivariadas. De manera m\'as precisa supongamos que, condicionalmente a que el dato $x$ proviene de la clase  $C_i$, $i\in\{0,1\}$, se tiene que $  x\sim {\cal N}( \mu_i , \Sigma)$ normal multivariada en $\mathbb{R}^p$ de media $\mu_i$ y  varianza-covarianza no singular $\Sigma$ (igual para ambas clases).  Supongamos adem\'as que cada dato proviene de una clase $C_i$, que tiene probabilidad a priori $p(C_i)\in (0,1)$ de ser elegida para generar ese dato.  Explicite $p(x\vert C_i)$  para $i=0,1$ y muestre que $p(C_1\vert x)$ esta dada por
-  \[ p(C_1\vert x)=  \sigma (w^\mathrm{t}x )= \frac{1}{1+ \exp{(-\langle a, x\rangle - b)}}, \]
-  con
-  \[ a= \Sigma^{-1}(\mu_1-\mu_0)\mbox{ y } b= \frac{1}{2} (\mu_0^\mathrm{t}  \Sigma^{-1} \mu_0 - \mu_1^\mathrm{t}  \Sigma^{-1} \mu_1)+ \ln\left(\frac{p(C_1)}{p(C_0)}\right).\]
- 
-
-  \item Supondremos en lo que sigue  que cada observación $(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})$ se obtiene de manera independientemente, sampleando,  {\it para cada una}, primero una clase $y^{(m)}\in \{0,1\}$ y luego un vector de caracter\'isticas $x^{(m)}$ aleatorias de datos de clase $C_{y^{(m)}}$. 
-  Para encontrar el parámetro $w = (a,b)\in \mathbb{R}^{p+1} $ que mejor explica las etiquetas de los datos observados $(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})$, se propone maximizar la función de ``verosimilitud '' 
-  \[ \prod_{m=1}^M \sigma\bigl( w^\mathrm{t}x^{(m)} \bigr)^{y^{(m)}} \Bigl( 1 - \sigma\bigl( w^\mathrm{t}x^{(m)}\bigr) \Bigr)^{(1-y^{(m)})}, \]
-  lo cual es equivalente a minimizar la función de pérdida
-  \begin{equation}\label{LogLike}
-     L(w) = -\frac{1}{M}\sum_{m=1}^My^{(m)}\log \sigma\bigl(w^\mathrm{t}x^{(m)}\bigr) + (1-y^{(m)})\log\Bigl(1-\sigma\bigl(w^\mathrm{t}x^{(m)}\bigr)\Bigr). 
-   \end{equation}
-   En el caso de la parte 1, d\'e una interpretaci\'on de  esta funci\'on en t\'erminos de verosimilitudes ``a posteriori'' y explique por qu\'e tiene sentido buscar maximizarla.   Encuentre adem\'as (en general) una expresi\'on simple para la derivada con respecto a $w$ de cada uno de los t\'erminos de la suma.  
-   \item Proponga e implemente un algoritmo de descenso de gradiente estocástico,  para resolver numéricamente el problema de minimización
-    \[ \min_w L(w).\]
-                
-    Genere $4000$ datos  ``de entrenamiento'' etiquetados de dos clases Gaussianas  en $\mathbb{R}^2$ como en la parte 1,  equiprobables, para  cada una de 2 elecciones  fijas de par\'ametros $(\mu_0,\mu_1)$ (correspondiente a distintos grados de separaci\'on de las Gaussianas).  
-    
-    Utilice el algoritmo para encontrar  el hiperplano  que mejor separa las dos Gaussianas en cada caso. Para el paso considere varias sucesiones del estilo  $\gamma_t = \frac{\gamma_0}{1+t/t_0}$, con  distintos valores de par\'ametros (por ejemplo $t_0 = 100$ y $\gamma_0 = 0.05$).  
-    Para cada conjunto de datos y grado de separaci\'on, corra el algoritmo varias veces desde  varias  condiciones iniciales  distintas ¿C\'omo influyen estas en el resultado? Compare los resultados obtenidos con el  hiperplano $w$ ``te\'orico '' para esas Gaussianas. Grafique los hiperplanos obtenidos junto con (parte de) las nubes de datos.  En cada caso, guarde la trayectoria de puntos  $w_t$ generados por el algoritmo.  
-  
-  \item Considere ahora un caso de  Gaussianas  "poco separadas".  Fije una elecci\'on de condici\'on inicial entre las consideradas  en la parte anterior.  Corra el algoritmo con  \emph{mini-batchs} de  tama\~nos  distintos. Grafique en cada caso la evoluci\'on de los valores de la funci\'on que se minimiza, y comente las diferencias  observadas con distintos pasos y tamaños. 
-
-    Discuta la rapidez de convergencia del algoritmo, la influencia del paso elegido y del tama\~no del \emph{mini-batch}.  
-   
-   Finalmente, para  cada uno los conjuntos de datos considerados en esta parte,  genere ahora $1000$ datos adicionales ``de  prueba''.  Cuantifique el error de generalizaci\'on (o ``fuera de muestra'') de la estimaci\'on realizada, usando la log-verosimilitud como funci\'on de $w$, calculada con estos nuevos datos.  Muestre gr\'aficamente como mejora ese error de generalizaci\'on  a medida que $w_t$ evoluciona hasta el valor final obtenido con el algoritmo.  
-   
- \item Aplique ahora regresi\'on logística para clasificar  tumores de mama, en las clases ``benigno'' o ``maligno'',  usando los datos provistos en Material Docente (\texttt{data.csv}\footnote{Fuente: \url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\%28Diagnostic\%29}}). Para ello estandarice cada una de las columnas de datos y entrene el algoritmo antes implementado con el $80\%$ de los datos.  Use despu\'es el $20\%$ restante para  evaluar como generaliza el clasificador encontrado con regresi\'on log\'istica . 
-\end{enumerate}
-
-\section*{Problema 3: Regresión Lineal}
+\section*{Problema 2: Regresión Lineal}
 
 Dado un conjunto de datos $(x_i,y_i)_{i=1}^n\subset\mathbb{R}^m\times\mathbb{R}$, se propone la siguiente relación entre sus componentes
 \begin{equation}\label{reglin}
@@ -248,3 +199,54 @@ En lo que sigue justifique sus respuestas graficando la función de costos cada 
     \end{enumerate}
     
 \end{enumerate}
+
+\iffalse
+\section*{Problema 3: Regresi\'on log\'istica con gradiente estocástico }
+
+En este problema aplicaremos el algoritmo de descenso de gradiente estocástico a un m\'etodo de clasificación supervisada denominado {\bf regresi\'on log\'istica}.  Consideramos un conjunto de $M$ datos correspondiente a vectores   $\{x^{(m)}\}_{i=1,\dots,M} \subset \mathbb{R}^p$ de caracter\'isticas,  y  sus respectivas etiquetas  $\{y^{(m)}\}_{i=1,\dots,M} \subset \{0,1\}$ que indican si cada uno de ellos pertenece a  una de dos ``clases''  posibles $C_0$ ó $C_1$. El objetivo es usar estos datos para aprender como clasificar correctamente cualquier vector nuevo $x$ de caracter\'isticas  en una de las clases $C_k$, $k=0,1$ (sin ver su etiqueta).
+
+Por simplicidad nos restringiremos a modelos de clasificación lineales, los que pueden escribirse de manera general como
+\[  \phi(x)=\sigma\left( \langle a, x\rangle + b  \right), \]
+donde  $x\in \mathbb{R}^p$, $a\in \mathbb{R}^p$  y $b\in \mathbb{R}$ son par\'ametros fijos,  y $\sigma: \mathbb{R}\to [0,1]$ es una función ``de activación'', creciente, no lineal, fija,  que se usar\'a para atribuir el vector $x$ a la clase $C_1$ o $C_0$ seg\'un si el valor de $\phi$ est\'a por encima o debajo de un cierto umbral (por ejemplo, etiquetar $x$ como de clase $C_1$ si $\phi(x)=\sigma   ( a^\mathrm{t}x + b) \in (1/2, 1]$, y de clase $C_0$ en caso contrario).  
+ Para simplificar la notación introducimos la  escritura
+\[  \sigma(w^\mathrm{t}x) =  \sigma\left( \langle a, x \rangle+ b  \right), \]
+donde  $w = (a,b)\in \mathbb{R}^{p+1}$ y, con abuso de notaci\'on, $x$ en el lado izquierdo corresponde  al vector agrandado $ (x,1)\in\mathbb{R}^{p+1}$.  Puesto que $\sigma(w^\mathrm{t}x)\in (0,1)$ podemos pensar  intuitivamente en esta cantidad como  ``probabilidad'' de que un vector de caracter\'isticas aleatorias  $x$  provenga de la clase $C_1$.  
+
+Escogeremos como $\sigma$ la llamada función logística o sigmoide: 
+\[ \phi(r)=\sigma(r) = \frac{1}{1+e^{-r}}. \]
+
+
+\begin{enumerate}
+\item  Dado un dato $x$,  interprete geom\'etricamente la condici\'on $\sigma(w^\mathrm{t}x)\in (1/2,1]$. 
+
+  Veamos  ahora que la intepretaci\'on probabilista antes mecionada es rigurosa para el caso de un modelo Bayesiano  en que los datos son generados por dos posibles leyes Gaussianas multivariadas. De manera m\'as precisa supongamos que, condicionalmente a que el dato $x$ proviene de la clase  $C_i$, $i\in\{0,1\}$, se tiene que $  x\sim {\cal N}( \mu_i , \Sigma)$ normal multivariada en $\mathbb{R}^p$ de media $\mu_i$ y  varianza-covarianza no singular $\Sigma$ (igual para ambas clases).  Supongamos adem\'as que cada dato proviene de una clase $C_i$, que tiene probabilidad a priori $p(C_i)\in (0,1)$ de ser elegida para generar ese dato.  Explicite $p(x\vert C_i)$  para $i=0,1$ y muestre que $p(C_1\vert x)$ esta dada por
+  \[ p(C_1\vert x)=  \sigma (w^\mathrm{t}x )= \frac{1}{1+ \exp{(-\langle a, x\rangle - b)}}, \]
+  con
+  \[ a= \Sigma^{-1}(\mu_1-\mu_0)\mbox{ y } b= \frac{1}{2} (\mu_0^\mathrm{t}  \Sigma^{-1} \mu_0 - \mu_1^\mathrm{t}  \Sigma^{-1} \mu_1)+ \ln\left(\frac{p(C_1)}{p(C_0)}\right).\]
+ 
+
+  \item Supondremos en lo que sigue  que cada observación $(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})$ se obtiene de manera independientemente, sampleando,  {\it para cada una}, primero una clase $y^{(m)}\in \{0,1\}$ y luego un vector de caracter\'isticas $x^{(m)}$ aleatorias de datos de clase $C_{y^{(m)}}$. 
+  Para encontrar el parámetro $w = (a,b)\in \mathbb{R}^{p+1} $ que mejor explica las etiquetas de los datos observados $(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})$, se propone maximizar la función de ``verosimilitud '' 
+  \[ \prod_{m=1}^M \sigma\bigl( w^\mathrm{t}x^{(m)} \bigr)^{y^{(m)}} \Bigl( 1 - \sigma\bigl( w^\mathrm{t}x^{(m)}\bigr) \Bigr)^{(1-y^{(m)})}, \]
+  lo cual es equivalente a minimizar la función de pérdida
+  \begin{equation}\label{LogLike}
+     L(w) = -\frac{1}{M}\sum_{m=1}^My^{(m)}\log \sigma\bigl(w^\mathrm{t}x^{(m)}\bigr) + (1-y^{(m)})\log\Bigl(1-\sigma\bigl(w^\mathrm{t}x^{(m)}\bigr)\Bigr). 
+   \end{equation}
+   En el caso de la parte 1, d\'e una interpretaci\'on de  esta funci\'on en t\'erminos de verosimilitudes ``a posteriori'' y explique por qu\'e tiene sentido buscar maximizarla.   Encuentre adem\'as (en general) una expresi\'on simple para la derivada con respecto a $w$ de cada uno de los t\'erminos de la suma.  
+   \item Proponga e implemente un algoritmo de descenso de gradiente estocástico,  para resolver numéricamente el problema de minimización
+    \[ \min_w L(w).\]
+                
+    Genere $4000$ datos  ``de entrenamiento'' etiquetados de dos clases Gaussianas  en $\mathbb{R}^2$ como en la parte 1,  equiprobables, para  cada una de 2 elecciones  fijas de par\'ametros $(\mu_0,\mu_1)$ (correspondiente a distintos grados de separaci\'on de las Gaussianas).  
+    
+    Utilice el algoritmo para encontrar  el hiperplano  que mejor separa las dos Gaussianas en cada caso. Para el paso considere varias sucesiones del estilo  $\gamma_t = \frac{\gamma_0}{1+t/t_0}$, con  distintos valores de par\'ametros (por ejemplo $t_0 = 100$ y $\gamma_0 = 0.05$).  
+    Para cada conjunto de datos y grado de separaci\'on, corra el algoritmo varias veces desde  varias  condiciones iniciales  distintas ¿C\'omo influyen estas en el resultado? Compare los resultados obtenidos con el  hiperplano $w$ ``te\'orico '' para esas Gaussianas. Grafique los hiperplanos obtenidos junto con (parte de) las nubes de datos.  En cada caso, guarde la trayectoria de puntos  $w_t$ generados por el algoritmo.  
+  
+  \item Considere ahora un caso de  Gaussianas  "poco separadas".  Fije una elecci\'on de condici\'on inicial entre las consideradas  en la parte anterior.  Corra el algoritmo con  \emph{mini-batchs} de  tama\~nos  distintos. Grafique en cada caso la evoluci\'on de los valores de la funci\'on que se minimiza, y comente las diferencias  observadas con distintos pasos y tamaños. 
+
+    Discuta la rapidez de convergencia del algoritmo, la influencia del paso elegido y del tama\~no del \emph{mini-batch}.  
+   
+   Finalmente, para  cada uno los conjuntos de datos considerados en esta parte,  genere ahora $1000$ datos adicionales ``de  prueba''.  Cuantifique el error de generalizaci\'on (o ``fuera de muestra'') de la estimaci\'on realizada, usando la log-verosimilitud como funci\'on de $w$, calculada con estos nuevos datos.  Muestre gr\'aficamente como mejora ese error de generalizaci\'on  a medida que $w_t$ evoluciona hasta el valor final obtenido con el algoritmo.  
+   
+ \item Aplique ahora regresi\'on logística para clasificar  tumores de mama, en las clases ``benigno'' o ``maligno'',  usando los datos provistos en Material Docente (\texttt{data.csv}\footnote{Fuente: \url{https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+\%28Diagnostic\%29}}). Para ello estandarice cada una de las columnas de datos y entrene el algoritmo antes implementado con el $80\%$ de los datos.  Use despu\'es el $20\%$ restante para  evaluar como generaliza el clasificador encontrado con regresi\'on log\'istica . 
+\end{enumerate}
+\fi

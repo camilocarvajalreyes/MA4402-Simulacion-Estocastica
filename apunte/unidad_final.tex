@@ -209,7 +209,8 @@ si $X_t$ es $\mathcal{F}_t$ medible $\forall t$. En general se asume que los pro
 \newp Cuando trabajamos con un proceso (por ejemplo un movimiento browniano y no se menciona la filtración, esta implícito que se usa la filtración natural. 
 
 \newp Para comprender el concepto de martingala es provechoso reflexionar sobre el siguiente ejemplo: si $X_t$ representa la riqueza de una persona en el instante $t$, la cual evoluciona de acuerdo a reglas aleatorias de un cierto \textit{juego} (ejemplo: apuestas, fluctuaciones de la bolsa), entendemos que el juego es \textbf{justo} si la riqueza futura no crece ni decrece, en esperanza.
-% def repetida
+
+\vspace{1.2cm} \\
 \begin{definition}[Martingala]
 Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$ con filtración $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$, una \textbf{martingala} es un proceso $(X_t)_{t \geq 0}$ adaptado tal que:
 \begin{itemize}
@@ -343,7 +344,7 @@ el juego en un tiempo aleatorio con la información disponible hasta el momento,
 \newp Bajo cierta condición en el tiempo de parada, la respuesta será \textbf{no}. Para especificar lo anterior, 
 necesitamos definir la $\sigma$-álgebra correspondiente a la información disponible hasta cierto 
 tiempo de parada. 
-\begin{definition}
+\begin{definition}[$\sigma$-álgebra asociada a un tiempo de parada]
 Dado $(\Omega, \mathcal{F}, (\mathcal{F}_t)_{t \geq 0}, \P)$ y un tiempo de parada $T$, la 
 $\sigma$-álgebra asociada a $T$ es:
 \begin{equation*}
@@ -592,7 +593,7 @@ Con esto hemos probado:
         \int_{0}^{t} X_s^n dB_s \xrightarrow[n \to \infty]{L^2(\P)} \int_{0}^{t}X_s dB_s\,.
     \end{equation*}
 \end{proposition}
-
+\vspace{.75cm}\\
 A continuación se presenta otra propiedad útil.
 \begin{proposition}
 $\forall  x \in \mathcal{H}$, $\forall \tau$ tiempo de parada,
@@ -601,8 +602,9 @@ $\forall  x \in \mathcal{H}$, $\forall \tau$ tiempo de parada,
 \end{equation*}
 casi seguramente.
 \end{proposition}
-
+\vspace{.75cm}\\
 Para hacer cálculos más explícitos, necesitaremos el siguiente resultado de aproximación. Puede verse como una versión levemente restringida del hecho que $\mathcal{S}$ es denso en $\mathcal{H}$, aunque más explicita: 
+
 \begin{proposition}
 Sea $x \in \mathcal{H}$ tal que $\E\{ \sup_{t \in [0,T]} \abs{X_t}^2 \} < \infty$. Sea $(\pi^n)_{n \in \N}$ una colección de particiones de $[0,T]$, $\pi^{n} = \{ 0= t_0^{n}< t_{1}^n< \ldots, < t_{k_n}^{n} = T\}$ tal que 
 \begin{equation*}
@@ -855,7 +857,7 @@ Haciendo $\frac{1}{2} ( (3) - (1) - (2) )$ se tiene el resultado \findem
 \negro
 \end{proof}
 
-\newpage
+% \newpage
 % \chapter{Ecuaciones Diferenciales Estocásticas}
 \subsection{Ecuaciones Diferenciales Estocásticas}
 Dada una ecuación diferencial clásica, digamos 
@@ -1129,7 +1131,7 @@ La expresión
         \item $\displaystyle \langle \int_{0}^{\cdot} H_s dB_s^i, \int_{0}^{\cdot } \tilde{H}_s dB_s^j \rangle = \delta_{ij} \int_0^t H_s \tilde{H_s} ds$
     \end{itemize}
 \end{remark}
-\newp Ahora podemos enunciar: 
+\newp Ahora podemos enunciar (sin demostración): 
 \begin{theorem}[Regla de It\^{o} en $\mathbb{R}^d$]
 Dado un tal $(X_t)_{t \ge 0}$  y una función $f: \mathbb{R}^d \to \mathbb{R}$ $\mathcal{C}^2$, se tiene $\forall t \ge 0$, 
 \begin{equation*}
@@ -1140,9 +1142,9 @@ Dado un tal $(X_t)_{t \ge 0}$  y una función $f: \mathbb{R}^d \to \mathbb{R}$ $
 donde $dX_s^i := K_s^i ds + \sum_{l=1}^{\tilde{d}} H_{s}^{il} dB_s^l$.
 \end{theorem}
 
-La demostración escapa al alcance del curso. 
+% La demostración escapa al alcance del curso. 
 
-\newp Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir la regla de Itô matricialmente: 
+ Desarrollando $d \langle X^i, X^j \rangle _s = \sum_{l=1}^{\tilde{d}} H_{s}^{il} H_{s}^{jl} ds$, y anotando $\text{tr}(\cdot)$ la traza de una matriz cuadrada, podemos escribir la regla de Itô matricialmente: 
 \begin{equation*}
     f(X_t) = f(X_0) + \int_{0}^{t} \nabla f(X_s) \cdot dX_s + \frac{1}{2} \int_{0}^{t} \text{tr} \left( D^2 f(X_s) H_s H_s^{T} \right) ds \,,
 \end{equation*}
@@ -1285,31 +1287,32 @@ donde $K_T \in \mathbb{R}^{d}$, $H_t \in \mathbb{R}^{d \times \tilde{d}}$, $B_t$
 \end{align*}
 \end{theorem}
 
-\newp Especificaremos la EDP: Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$ funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el operador:
-\begin{equation*}
-    \mathcal{L} := b(\cdot) \cdot \nabla + \frac{1}{2} \text{tr}(a(\cdot) D^2 (\cdot )) \,,
-\end{equation*}
-es decir $(\mathcal{L} f)(x) := b(x) \cdot \nabla f(x) + \frac{1}{2} \text{tr}(D^2 f(x) a(x))$. 
-\newp Consideremos la siguiente EDP parabólica para una función $u(t,x)$, $t \ge 0$, $x \in \mathbb{R}^{d}$: 
-\begin{equation*}
-    \label{eq:sde_11} 
-    \tag{*} 
-    \begin{cases}
-        \partial_t u + \mathcal{L} u = 0 & (t,x) \in [0,T] \times \mathbb{R}^{d} \\ 
-            u(T,x) = f(x) & x \in \mathbb{R}^{d}
-    \end{cases}
-\end{equation*}
-
-Por otro lado, sea $X_t^{x}$ solución de la siguiente EDE: (para $x \in \mathbb{R}^d$ fijo)
-\begin{equation*}
-    \label{eq:sde_12}
-    \tag{**}
-    X_t^x = x + \int_{0}^{t} b(X_s^x) ds + \int_{0}^{t} \sigma (X_s^x) dB_s \,.
-\end{equation*}
-
-Tenemos 
+\newp Especificaremos la EDP
 \begin{theorem}[Fórmula de Feynman-Kac]
-    Supongamos $b$, $\sigma$ Lipschitz y que $f$ tiene crecimiento a lo más polinomial. Supongamos además (\ref{eq:sde_11}) admite solución $\mathcal{C}^{1,2}$ con derivadas con crecimiento polinomial. Entonces 
+    Sean $b: \mathbb{R}^{d} \to \mathbb{R}$, $\sigma : \mathbb{R}^{d} \to  \mathbb{R}^{d \times \tilde{d}}$ funciones dadas, y sea $a: \mathbb{R}^{d} \to \mathbb{R}^{d}$ dada por $a = \sigma \sigma^T$. Consideremos el operador:
+    \begin{equation*}
+        \mathcal{L} := b(\cdot) \cdot \nabla + \frac{1}{2} \text{tr}(a(\cdot) D^2 (\cdot )) \,,
+    \end{equation*}
+    es decir $(\mathcal{L} f)(x) := b(x) \cdot \nabla f(x) + \frac{1}{2} \text{tr}(D^2 f(x) a(x))$.
+
+    \newp Consideremos la siguiente EDP parabólica para una función $u(t,x)$, $t \ge 0$, $x \in \mathbb{R}^{d}$: 
+    \begin{equation*}
+        \label{eq:sde_11} 
+        \tag{1} 
+        \begin{cases}
+            \partial_t u + \mathcal{L} u = 0 & (t,x) \in [0,T] \times \mathbb{R}^{d} \\ 
+                u(T,x) = f(x) & x \in \mathbb{R}^{d}
+        \end{cases}
+    \end{equation*}
+    % Supongamos $b$, $\sigma$ Lipschitz y que $f$ tiene crecimiento a lo más polinomial. Supongamos además (\ref{eq:sde_11}) admite solución $\mathcal{C}^{1,2}$ con derivadas con crecimiento polinomial.
+    Supongamos que admite solución $\mathcal{C}^{1,2}$ con derivadas con crecimiento polinomial, con $b$, $\sigma$ Lipschitz y tal que $f$ tiene crecimiento a lo más polinomial. 
+    Por otro lado, sea $X_t^{x}$ solución de la siguiente EDE: (para $x \in \mathbb{R}^d$ fijo)
+    \begin{equation*}
+        \label{eq:sde_12}
+        \tag{2}
+        X_t^x = x + \int_{0}^{t} b(X_s^x) ds + \int_{0}^{t} \sigma (X_s^x) dB_s \,,
+    \end{equation*}
+    entonces 
     \begin{equation*}
         u(t,x) = \E[ f (X_{T-t}^{x})]
     \end{equation*}
