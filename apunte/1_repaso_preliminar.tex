@@ -1,0 +1,680 @@
+\subsection{Repaso Probabilidades}
+\subsubsection{Ley y Esperanza}
+Consideraremos $(\Omega,\mathcal{F},\mathbb{P})$ espacio de probabilidad (e.d.p.), $(E,\Sigma)$ espacio medible y $X: \Omega \longrightarrow E$ variable aleatoria (función medible).
+
+\begin{definition}[Ley de X]
+La ley de X es la medida de probabilidad:
+$\mu := \mathbb{P} \circ X^{-1}: \Sigma \longrightarrow [0,1]$, $A \in \Sigma \longmapsto \mu(A)=\mathbb{P}(X \in A)=\mathbb{P}(X^{-1}(A))$
+
+Corresponde a la medida inducida por $\mathbb{P}$ y $X$ en $\Sigma$.
+\end{definition}
+
+\begin{notation}
+\beforeitemize
+\begin{itemize}
+    \item $\mu:=Ley(X)$ o $X\thicksim \mu$.
+    \item $\langle \mu, f \rangle = \int f(x) d\mu(x) = \int f(x)\mu(dx)$ $\forall f \in L^1(E,\Sigma,\mu)$.
+\end{itemize}
+\end{notation}
+
+\begin{definition}[Esperanza]
+Si $Y:\Omega \longrightarrow \mathbb{R}$ es variable aleatoria e $Y\in L^1(\Omega,\mathcal{F},\mathbb{P}), Y\geq1$, $\mathbb{E(Y)}$ denota la integral de Lebesgue de $Y$ con respecto a $\mathbb{P}$ y se define la esperanza de $Y$ como sigue:
+
+\begin{itemize}
+    \item $\mathbb{E}(Y)=\mathbb{P}(B)$ cuando $Y=\mathbf{1}_B$ con $B \in \mathcal{F}$
+    \item $\displaystyle\mathbb{E}(Y)=\sum^n_{i=1} b_i \mathbb{P}(B_i)$ cuando $\displaystyle Y=\sum^n_{i=1}b_i\mathbf{1}_{B_i}$ con $B_i \in \mathcal{F}$, i.e., $Y$ es una función simple.
+    % %%% arreglar acá !!!
+    \item Para $Y\geq1$, $\mathbb{E}(Y) = \displaystyle \lim_{n\rightarrow \infty} \nearrow \mathbb{E}(Y_n)$ con $(Y_n)_{n \in \mathbb{N}}$ sucesión creciente de funciones simples tal que $Y_n \displaystyle \nearrown Y$  % arreglar nearrow
+    %$$ Y_n \,\substack{\nearrow \\ \tiny{n\to\infty}}\, Y \espacio \mbox{\rojo borrar esto en seguida\negro}$$
+    % $$ Y_n \,\underset{n\to\infty}{\nearrow}\, Y \espacio \mbox{\rojo borrar esto en seguida\negro}$$
+    \item $\mathbb{E}(Y) = \mathbb{E}(Y_+)-\mathbb{E}(Y_-)$ para $Y\in L^1$
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+Sea $X:\Omega \longrightarrow E $ v.a., $f:(E,\Sigma)\longrightarrow (\mathbb{R},\mathcal{B(\mathbb{R})})$ medida $\geq 0$ $f\in L^1(E,\Sigma,\mu) =_\mu Ley(X)$, entonces
+$$ \mathbb{E}(f(X)) = \langle \mu,f \rangle, \forall f \in L^1(\mu)$$
+Más aún, $f\in L^1(\mu)$ si y sólo si $f(X) \in L^1(\Omega,\mathcal{F},\mathbb{P})$
+\end{proposition}
+\begin{proof}
+\ejercicio
+
+Indicación: demostrar primero para indicatrices de conjuntos medibles, luego para funciones simples, positivas y finalmente concluir el caso general. 
+\end{proof}
+
+\begin{remark}
+\beforeitemize
+\begin{enumerate}
+    \item Si $X$ es v.a. real, ``discreta'' tenemos que:
+    $$ \mu=Ley(X) = \sum_x p_x\delta_x$$
+    $$\mathbb{E}(f(X)) = \int f(x)\mu(dx) = \sum_x f(x)p_x \, .$$
+    En lo anterior, $\delta_x$ son masas de Dirac, $\sum_xp_x = 1$ y las sumas son finitas o numerables.
+    \item Si $X$ es v.a., (absolutamente) ``continua'':
+    $$ \mu(dx) = f_X(x)dx \, ,$$ 
+    $$ \mathbb{E}(\varphi(X))=\int \varphi(x)\mu(dx)=\int\varphi(x) f_X(x)dx \, ,$$
+    donde $f_X$ es la densidad de $X$.
+\end{enumerate}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Esperanza Condicional} %clase 2
+Sea $(\Omega,\F,P)$ un espacio de probabilidad completo y $G\subset \F$ una sub-$\sigma$-álgebra. Consideramos las siguientes interpretaciones:
+\begin{itemize}
+    \item $\omega\in\Omega$ serán los ``estados posibles de la naturaleza''
+    \item $\F$ conjuntos cuya ocurrencia somos capaces de distinguir: dado $\omega \in\Omega$ y $B\in\F$, podemos responder si $\omega\in B$ (eventos), y podemos ``medir'', i.e., calcular $\P(B)$ \\
+    $\therefore\F$ representa a qué información tenemos acceso.
+    \item $\G$, al ser una sub-$\sigma$-álgebra, posee menos información (reconoce menos eventos).
+\end{itemize}
+\begin{definition}[Esperanza condicional, caso $L^2$]
+Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanza condicional de $X$ dado $\G$ como la \textbf{proyección ortogonal} desde $L^2\edp$ de $X$ en el subespacio vectorial $L^2(X,\G\P)$.
+\\ Esto lo denotaremos $\E(X|\G)$
+\end{definition}
+\begin{remark}
+\beforeitemize
+\begin{itemize}
+    \item $L^2(X,\G,\P)$ es cerrado en $L^2\edp$.
+    \\ En efecto $Z_n\convldos Z$ con $Z_n\in L^2(X,\G,\P)$ implica que existe una subsucesión que converge a $Z$ casi seguramente. Por lo tanto $Z\in\G$
+    \item $\E(X|\G)$ es $\G$-medible.
+    \item $\E(\cdot|\G):\L^2\edp\mapsto L^2(\Omega,\G,\P)$ es bilineal y continua.
+\end{itemize}
+\end{remark}
+\begin{remark}[Propiedad fundamental]
+$\E(X|\G)$ queda caracterizada como la única variable aleatoria tal que:
+\begin{enumerate}
+    \item $\E(X|\G)\in L^2(\Omega,\G,\P)$
+    \item $\E(\E(X|\G)|Z) = \E(X|Z) \espacio \forall Z\in L^2(\Omega,\G,\P)$
+    \vspace{.4cm}\\ En particular tenemos $\E(\E(X|\G)) = \E(X)$ y si además $X\in L^2(\Omega,\G,\P)$, $E(X|\G)=X$
+\end{enumerate}
+\end{remark}
+%\vspace{1cm}  % haciendo que la propiedad empieze en la próxima página
+La siguiente propiedad es un ejercicio fácil.
+\begin{property}
+\beforeitemize
+\begin{enumerate}
+    \item $Z=\E(X|\G)$ minimiza $Z\in L^2(\Omega,\G,\P)\mapsto\E((Z-X)^2)$.
+    \item Como consecuencia de lo anterior, tenemos la siguiente \textbf{interpretación estadística}: La v.a. $\mathcal{G}$-medible $\E(X|\G)$ es el \textbf{mejor estimador de $X$} en el sentido de tener \textbf{menor error cuadrático medio} (en inglés \textit{MSE}) usando la \textbf{información accesible} para la $\sigma$-álgebra $\G$.
+    %\item Si $X$ es $\G$-medible, la mejor estimación (menor error cuadrático) de $X$ usando la información en $\G$ es $\E(X|\G)=X$
+    \item Si $\G$ es la tribu trivial ($G=\{\emptyset,\Omega\}$), toda función $\G$-medible es constante. Luego $\E(X|\G)$ es constante tal que $\E(E(X|\G))=\E(X)\implies\E(X|\G)=\E(X)$. \\ Dicho de otro modo, la mejor estimación es ``trivial'' y no usa información.
+\end{enumerate}
+\end{property}
+%\demejercicio
+
+\begin{lemma}
+Sea $Y:\Omega\mapsto E$ v.a. y $Z:\Omega\mapsto \R$ v.a. medible con respecto a $\G=\sigma(Y):=\{Y^{-1}(A):A\in \Sigma \}\subset \mathcal{F}$ (con $\Sigma$ $\sigma$-álgebra de $E$), entonces existe $h:E\mapsto \R$ medible tal que $Z=h(Y)$.
+\end{lemma}
+\begin{remark}
+\beforeitemize
+\begin{itemize}
+    \item En particular para $Z=\E(X|\G)$, $\G=\sigma(Y)$ escribimos $\E(X|Y=y):=h(y)$, de modo que
+    $$ \E(X|Y) = \E(X|\sigma(Y)) = h(Y) = \E(X|Y=y)|_{y=Y} \, .$$
+    \item Si $Y=(Y_1,\dots,Y_d)\in\R^d$, $\E(X|\sigma(Y_1,\dots,Y_d)$ se denota $\E(X|Y_1,\dots,Y_d)$. Por lo anterior, es una función de ($Y_1,\dots,Y_d$)\, .
+\end{itemize}
+\end{remark}
+\begin{proof}
+(del Lema)
+
+\begin{itemize} \gris
+    \item Primero asumimos que $Z=\mathbf{1}_B$ con $B\in\sigma(Y)$, es decir $B=Y^{-1}(A)$ para cieto  $A\in\Sigma$. \\ Entonces $\mathbf{1}_B=\mathbf{1}_{Y^{-1}(A)}=\mathbf{1}_A(Y)$, luego $Z=h(Y)$ con $h(y)=\mathbf{1}_A(y) \, .$
+    \item Ahora tomemos $Z=\displaystyle \sum^n_{i=1}b_i\mathbf{1}_{B_i}$ con $B_i=Y^{-1}(A_i)$, $A_i\in\Sigma$, $\forall i\in\{1,\dots,n\} \, .$
+    \\ As\'i,  $Z=\displaystyle \sum^n_{i=1}b_i\mathbf{1}_{A_i}(Y)$, luego $Z=h(Y)$ con $h(y)=\displaystyle\sum^n_{i=1}b_i\mathbf{1}_{A_i}(y)$.
+    \item Sea $Z\geq 0$, entonces existe una sucesión $(Z_k)_k$, todos $\G-medibles$ y $h^k:E\mapsto\R$ medibles tal que $h^k(Y)=Z_k \displaystyle \nearrowk Z$ (puntualmente) c.s. . Entonces podemos definir:
+    $$ h(y) = \begin{cases} \displaystyle\limsup_{k\to \infty}h^k(y)  & \mbox{ si }y\in Y(\Omega)\\
+                            0 & \mbox{ si }y\notin Y(\Omega)  \end{cases} \, .$$
+    % Se puede probar que $h$ es medible. 
+    Luego dado que $Z_K \nearrowk Z$, queda que $h(Y)=\displaystyle\limsup_{k\to \infty}Z_k$\, . % $Z=\displaystyle\lim_{k\to\infty}Z_k=\lim_{k\to\infty}h^k(Y)=h(Y)$ c.s. 
+    \item El caso general se deduce de lo anterior y  queda propuesto.
+\end{itemize} \findem \negro
+\end{proof}
+\vspace{2cm}  % haciendo que el teorema empiece en la próxima página
+\begin{theorem}[Esperanza condicional, caso general $L^1$]
+Sean $X\in L^1\edp$ v.a. y $\G\subset\mathcal{F}$ sub-$\sigma$-álgebra. Entonces existe una única variable aleatoria $Z\in L^1\edp$ tal que:
+\begin{itemize}
+    \item $Z\in L^1(\Omega,\G,\P)$
+    \item $\E(XH)=\E(ZH) \hspace{.5cm} \forall H\in L^\infty(\Omega,\G,\P)$ \espacio (propiedad fundamental)
+\end{itemize}
+\end{theorem}
+\begin{notation}
+Denotamos $Z$  como $\E(X|\G)$ y la llamamos \textbf{Esperanza condicional de $X$ % $\in L^1$
+dado $\G$}
+\end{notation}
+\begin{remark}
+\beforeitemize
+\begin{itemize}
+    \item $\E(\E(X|\G))=\E(X)$ (con $H=1$)
+    \item La propiedad fundamental equivale a $\E(X \mathbf{1}_A)=\E(\E(X|\G)\mathbf{1}_A) \forall A\in\G$
+    \\ Esto se demuestra usando aproximación por funciones simples y T.C.M. (\ejercicio)
+\end{itemize}
+\end{remark}
+\begin{proof}
+(del Teorema)
+
+\ejercicio \gris \, Para la existencia cuando $X\geq0$ considerar $X_n:=\min(X,n) \, \forall n\in\N$ y ver que $\E(X_{n+1}|\G)\geq\E(X_n|\G)$ c.s. . Por T.C.D. se verifica que $X_n\convluno X$ y entonces tomando $Z=\displaystyle\lim_{n\to\infty}\nearrow\E(X_n|\G)$ se prueba que $\E(XH)=\E(\E(ZH))\,\forall H\in \L^\infty(\G)$. 
+
+Para unicidad primero ver que si tomamos $Z,Z'$ tal que satisfacen la propiedad fundamental entonces $\E((Z-Z')_{\{Z<Z'\}})=0$. Notar que lo anterior es simétrico y usarlo para concluir que $Z=Z'$ c.s. .
+\negro
+% \color{red} completar indicación \color{black}  % 10/14
+\end{proof}
+\begin{property}
+\beforeitemize
+\begin{enumerate}
+    \item[(i)] $\E(\cdot|\G):L^1\edp\mapsto L^1(\Omega,\G,\P)$ es una aplicación lineal continua
+    \item[(ii)] Si $X\in L^1(\Omega,\G,\P)$ entonces $\E(X|\G)=X$
+    \item[(iii)] Si $F\in L^\infty(\Omega,\G,\P)$ entonces $\E(XF|\G)=F\E(X|\G)$
+    \item[(iv)] Si $\mathcal{H}\subseteq \G\subseteq\mathcal{F}$ $\sigma$-álgebras entonces
+    $ \E(\E(X|\G)|\mathcal{H}) = \E(\E(X|\mathcal{H})|\G)=\E(X|\mathcal{H})$
+\end{enumerate}
+\end{property}
+\begin{proof}
+\beforeitemize
+\begin{enumerate} \gris
+    \item[(i)] \ejercicio \gris
+    \item[(ii)] \ejercicio \gris
+    \item[(iii)] Sean $F$, $H\in L^\infty(\G)$, $\E((X F) H)=\E(X(FH))=\E(\E(X|\G)F H)$
+    \\ Como $\E(X|\G)F \in L^1(\Omega,\G,\P)$, por (ii), y tomando $H=1$,  $\E(X F)=\E(\E(X|\G)F)=\E(X|\G)F$.
+    \item[(iv)] La segunda igualdad es directa pues $\E(X|\mathcal{H})$ es en particular $\G$-medible. Para la primera tomemos $H\in L^\infty(\H)$, como $H\in L^\infty$ tenemos $\E(XH)=\E(\E(X|\G)H)=\E(\E(\E(X|\G)|\mathcal{H})H)$ pues $\E(\E(X|\G)|\mathcal{H})$ es $\mathcal{H}$-medible, entonces $\E(X|\mathcal{H})=\E(\E(X|\G)|\mathcal{H})$, pero como tenemos que $\E(X|\mathcal{H})=\E(\E(X|\mathcal{H})|\G)$ (segunda igualdad), entonces concluimos que $\E(\E(X|\mathcal{H})|\G)=\E(\E(X|\G)|\mathcal{H})$.
+    % que es igual a $\E(\E(X|\mathcal{H})H|\G)$ pues $\E(\E(X|\G)|\mathcal{H})\in L^1(\mathcal{H})$ \, .
+\end{enumerate}
+\findem
+\end{proof}
+% \vspace{2cm} \\
+\begin{example}[Aterrizando el concepto]
+\beforeitemize
+\begin{itemize}
+    \item Sean $(B_n)_{n\in\N}\subset\F$ partición de $\Omega$ y $\G:=\sigma((B_n)_n)$
+    \\ Se puede probar que $\G=\{\cup_{j\in J}B_j:J\subseteq\N\mbox{ numerable o finito }\}\cup\{\emptyset\}$ (\ejercicio).
+    \\ Sea $X\in L^1$, la esperanza condicional está dada por:
+    $$ \E(X|\G)=\displaystyle\sum_{n\in\N}\mathbf{1}_{B_n}\E(X|B_n) \, .$$
+    \begin{proof} \gris
+    $\displaystyle\sum_{n\in\N}\mathbf{1}_{B_n}\E(X|B_n)$ es $\G$-medible y está en $L^1$. Por otro lado, $\forall A\in\G$, $\exists (B_n)_{n\in\N}$ $A=\displaystyle \dot\cup_{j\in J}B_j$, luego se tiene
+    $$ \E((\displaystyle\sum_{n\in\N}\mathbf{1}_{B_n}\E(X|B_n))\mathbf{1}_A)=\E(\sum_{j\in J}\mathbf{1}_{B_j}\E(X|B_j))=\E(X \mathbf{1}_A) \, .$$
+    \negro \end{proof}
+    \item Sean $(X,Y)\in\R^2$ par aleatorio continuo con densidad $f_{(X,Y)}$. La densidad condicional de $X|Y=y$ se define como $\displaystyle f_{X|Y}(x|y) = \frac{f_{(X,Y)(x,y)}}{f_Y(y)}\mathbf{1}_{\{f_Y(y)>0\}}$.
+    \\ \ejercicio: demostrar que 
+    $$ \E(X|Y)(\omega) = [\displaystyle\int x f_{X|Y}(x|y)dx]|_{y=Y(\omega)} \, .$$
+\end{itemize}
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Convergencia en Ley de variables aleatorias}
+Parte de esta subsección está basada en el libro de Billingsley \cite{billing}.
+\begin{notation}
+\beforeitemize
+\begin{itemize}
+    \item $(E,d)$ espacio métrico, $\mathcal{B}$ tribu boreliana
+    \item $\mathcal{M}(E)$ medidas finitas $\geq0$ sobre $E$
+    \item $\mathcal{P}(E)$ medidas de probabilidad, $\mathcal{M}_s(E)$ medidas con sigma finitas %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+    \item $\mathcal{C}_b(E)$ funciones continuas acotadas %%%%%%%%%%%%%%%%%%%%5
+    \item $BL(E)$ funciones Lipschitz acotadas
+    \item Integral de $f$ con respecto a $\mu \in \mathcal{M}(E)$ (con $f$ medible y acotada): $$ \langle \mu, f \rangle = \int f(x)\mu(dx) $$
+\end{itemize}
+\end{notation}
+
+\subsubsection{Definición de convergencia débil y en ley}
+\begin{remark}
+$\nu \in \mathcal{M}(E)$ queda caracterizada por $\langle \nu,f \rangle$, $f \in \mathcal{C}_b(E)$
+\end{remark}
+\begin{proof}\gris Sea $F\subset E$ cerrado y $\epsilon>0$. Consideramos $f_\epsilon(x) = \max (0,1-\frac{d(x,F)}{\epsilon})$ con $d(x,F)=\displaystyle\inf_{y\in F}(x,y)$. Notemos que esta función es $\frac{1}{\epsilon}$-Lipschitz y que $\mathbf{1}_F\leq f_\epsilon\leq\mathbf{1}_{F^\epsilon}\searroweps\mathbf{1}_F$, donde $F^\epsilon = \{x \in E : d(x,F)<\epsilon\}$. Entonces por teorema de convergencia dominada, 
+$$ \langle \nu,f_\epsilon \rangle \searroweps \nu(F) \, . $$
+Sea $\displaystyle\mathcal{H}=\{A\subset E \mbox{ tal que }\mu(A)=\sup_{F\subset A cerrado}\mu(F)=\mu(A)=\inf_{F\subset A\mbox{ abierto}}\mu(F)\}$. $\mathcal{H}$ es $\sigma$-álgebra y $\{F\subset A : F\mbox{ cerrado}\}\subset\mathcal{H}$. Entonces $\mathcal{B}=\sigma(cerrados)\subset\mathcal{H}$ y por lo tanto $\displaystyle\forall A\in\mathcal(B)(E),A=\sup_{F cerrado \subset A}\mu(F),\Rightarrow \mu$ queda caracterizada por los cerrados y entonces por $\langle \mu,f \rangle, f\in\mathcal{C}_b(E)$. 
+\negro \findem
+\end{proof}
+
+\begin{definition}[Convergencia Débil]
+Sean $\mu\in \mathcal{M}(E)$ y $(\mu_n)_{n \in \mathbb{N}}\subset \mathcal{M}(E)$ medidas finitas mayores o iguales a $0$. Decimos que $(\mu_n)$ converge débilmente a $\mu$ si 
+$$\langle \mu_n,f\rangle \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f \rangle, \espacio \forall f \in \mathcal{C}_b(E), .$$
+Esto se denota $\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$.
+\end{definition}
+\begin{remark}
+$\mathcal{P}(E)\subset \mathcal{M}(E) \subset \mathcal{M}_s(E) \subset\mathcal{C}_b(E)^*$ \espacio y \espacio$\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$ equivale a $\displaystyle \mu_n \mbox{ }\overset{\ast}{\substack{\rightharpoonup\\n \to\infty}} \mbox{ }\mu$
+
+La inclusión $\mathcal{M}_s(E) \subset\mathcal{C}_b(E)^*$ se demuestra como sigue: para cada $\nu\in\mathcal{M}_s(E)$, la aplicación $f\in\mathcal{C}_b(E)\mapsto\langle \nu,f\rangle:=\langle \nu_+,f\rangle-\langle \nu_-,f\rangle$ es lineal. Además es continua: $|\langle\nu,f\rangle|\leq (\langle \nu_+,f\rangle+\langle \nu_-,f\rangle)\|f\|_{unif}$. Entonces $\nu\in\mathcal{C}_b(E)^*$.
+\end{remark}
+
+\begin{example}[\label{ejemplo:1_2_1}] 
+Consideremos $E=\mathbb{R}$.
+\begin{itemize} % % completar en clase
+    \item[(i)] $\mu_n=\delta_{\frac{1}{n}} \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \delta_0$ 
+    \item[(ii)] $\displaystyle\mu_n(dx) = \frac{n}{2}\mathbf{1}_{[-\frac{1}{n},\frac{1}{n}]}(x)dx \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \delta_0$
+    \item[(iii)] $\displaystyle\mu_n=\frac{1}{n}\sum_{n=0}^{n-1}\delta_{\frac{k}{n}} \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$ %$$ = \mbox{Lebesgue en }[0,1]$
+    \\ Donde $\mu$ es la medida de Lebesgue en $[0,1]$
+\end{itemize}
+\end{example}
+\begin{proof}
+\gris Sea $f\in C_b(E)$, %\beforeitemize
+\begin{itemize}
+    \item[(i)] $\langle \mu_n,f\rangle=f(\frac{1}{n})\conv f(0)=\langle \delta_0,f\rangle$
+    \item[(ii)] Observemos que 
+    $\displaystyle\int f(x)\mu_n(dx)=\frac{n}{2}\int^{\frac{1}{n}}_{-\frac{1}{n}}f(x)dt = \frac{n}{2}\cdot\frac{2}{n}\cdot f(\xi_n)$,
+    
+    donde en la última igualdad usamos el teorema del valor medio para integrales y $\xi_n\in[\frac{-1}{n},\frac{1}{n}]$.
+    \\ Como $f$ es continua, $\frac{n}{2}\cdot\frac{2}{n}\cdot f(\xi_n) \conv f(0)=\langle \delta_0,f \rangle$
+    \item[(iii)] Tenemos que $\displaystyle\int f(x)\mu_n(dx) = \frac{1}{n}\sum^n_{k=0}f\bigg(\frac{k}{n}\bigg)$. El lado derecho es una suma de Riemann con paso $\frac{1}{n}$. Como $f$ es continua entonces es Riemann integrable y luego $\displaystyle \frac{1}{n}\sum^n_{k=0}f\bigg(\frac{k}{n}\bigg) \conv \int_0^1 f(x)dx$.
+\end{itemize} 
+\findem
+\negro \end{proof}
+
+\begin{definition}[Convergencia en Ley]
+Sean $(\Omega_n,\mathcal{F}_n,\mathbb{P}_n), (\Omega,\mathcal{F},\mathbb{P})$ espacios de probabilidad, Sean $X_n:\Omega_n \longrightarrow E, n\in\mathbb{N}$, y $X:\Omega \longrightarrow E$ v.a., decimos que $X_n$ converge en ley o en distribución a $X$ si 
+$$\mu_n:=Ley(X_n) \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu:=Ley(X)\mbox{ en }\mathcal{P}(E) \, .$$
+Equivalentemente, $\forall f \in \mathcal{C}_b(E)$ $$ \langle \mu_n,f \rangle \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f,\rangle\, \, ,$$
+y 
+$$ \mathbb{E}_n(f(X_n)) \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \mathbb{E}(f(X))\, .$$
+\end{definition}
+\begin{notation}
+La convergencia en ley se denota del siguiente modo:
+$$X_n \,\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\,X \, .$$
+Equivalentemente podemos denotarla \espacio
+%$$ X_n \mbox{ }\overset{\mathcal{L}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \mbox{ o } \mbox{ }\overset{d}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \, .$$
+$ X_n \,\overset{\mathcal{L}}{\substack{\longrightarrow \\n \to \infty}}\,X \hspace{.5cm}\mbox{ o }\hspace{.5cm} X_n\,\overset{d}{\substack{\longrightarrow \\n \to \infty}}\,X \, .$
+\end{notation}
+
+\begin{example}
+Gracias al Ejemplo \ref{ejemplo:1_2_1} tenemos lo siguiente:
+\begin{itemize}
+    \item Sean $X_n \thicksim \frac{1}{n}\displaystyle\sum_{k=0}^{n-1}\delta_{\frac{k}{n}}$ y $X \thicksim \mathbb{U}[[0,1]$, entonces $X_n \mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ .
+    \item Sean $X_n \thicksim \mathbb{U}([-\frac{1}{n},\frac{1}{n}])$ y $X \thicksim \delta_0 (X \equiv 0)$ entonces $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ .
+\end{itemize}
+\end{example}
+
+\begin{remark}
+\beforeitemize
+\begin{itemize}
+    \item $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \centernot\implies \mathbb{E}_n(f(X_n)) \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \mathbb{E}(f(X))$, para toda $f$ medible acotada.
+    %\item $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \nRightarrow \mathbb{P}(X_n\leq x) \longrightarrow \mathbb{P}(X\leq x) \forall x \in \mathbb{R}$
+    \item $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \centernot\implies \mathbb{P}(X_n\leq x) \conv \mathbb{P}(X\leq x) \forall x \in \mathbb{R}$.
+\end{itemize}
+
+% En ambos casos necesitamos que sea continua y acotada
+\end{remark}
+
+\begin{theorem}[Portmanteau] Sean $\mu,\mu_n \in \mathcal{P}(E)$. Son equivalentes:
+\label{portmanteau}
+\begin{enumerate}
+    \item[(i)] $\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$
+    \item[(ii)] $\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \hspace{.25cm}\, \forall f$ acotada, uniformemente continua
+    \item[(iii)]$\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \espacio \forall f \in BL(E)$ Lipschitz acotada
+    \item[(iv)] $\displaystyle\limsup_{n\to\infty} \mu_n (F)\leq\mu(F) \espacio \forall F $ cerrado
+    \item[(v)] $\displaystyle\liminf_{n\to\infty} \mu_n (G)\geq\mu(G) \espacio \forall G $ abierto
+    \item[(vi)] $\displaystyle\lim_{n\to\infty}\mu_n(A) = \mu(A) \espacio \forall A \in \mathcal{B}$ tal que $\mu(\partial A)=0$ (frontera de medida nula)
+    \item[(vii)] $\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \espacio \forall f$ acotada, continua $\mu(dx)$-c.s.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\gris
+(vi)$\Rightarrow$(i)$\Rightarrow$(ii)$\Rightarrow$(iii) son directas.
+
+\begin{itemize}
+    \item[] (iii)$\Rightarrow$(iv) tomamos $f_\epsilon(x)=\max(0,1-\frac{d(x,F)}{\epsilon})$ y notemos que $\mathbf{1}_F\leq f_\epsilon\leq\mathbf{1}_\bar{{F^\epsilon}}$. Luego tenemos
+    $$\displaystyle\limsup_{n}\mu_n(F)\leq\limsup_{n}\langle\mu_n(F),f_\epsilon\rangle=\langle\mu,f\rangle \, .$$
+    A su vez $\mathbf{1}_\bar{{F^\epsilon}}$ $\,\substack{\searrow \\ \tiny{\epsilon\to 0}}\,\mathbf{1}_F$, de donde se concluye que
+    $$ \displaystyle\limsup_n\mu_n(F)\leq \langle \mu,\mathbf{1}_{\bar{{F^\epsilon}}} \rangle \,\substack{\searrow \\ \tiny{\epsilon\to 0}}\, \mu(F) \, ,$$
+    Donde en la última convergencia usamos T.C.D.
+    \item[] (iv)$\Rightarrow$(v) Basta tomar $F=G^c$.
+    \item[] (v)$\Rightarrow$(vi) $A^o \subset A\subset \bar{A}$ y como $\partial A=0$, $\mu(\bar{A})=\mu(A)=\mu(A^o)$. Ahora aplicamos (iv), $\limsup\leq\liminf$ y (v) para obtener: $$\mu(\bar{A})\geq \displaystyle \varlimsup_n \mu_n(\bar{A}) \geq \varlimsup_n \mu_n(A) \geq \varliminf_{n}\mu_n(A) \geq \varliminf_{n} \mu_n(A^0) \geq\mu(A^o) \, ,$$ donde hemos usando (v) en la primera y la última desigualdad. Concluimos que $\exists \lim_{n\to\infty}\mu_n(A)=\mu(A)$.
+    \item[] (vi)$\Rightarrow$(vii) Sin perder generalidad podemos suponer que $f:E\longrightarrow[0,1]$. De otro modo basta cambiar $f$ por $\frac{f-\inf f}{\sup f - \inf f}$.
+    \\ Notar que usando Fubini, para todo $g\geq0$ medible y $\nu\in\mathcal{P}(E)$ tenemos
+    $$ \langle \nu,g \rangle = \displaystyle\int(\int^\infty_0 \mathbf{1}_{\{(t,x):t<g(x)\}}dt)\nu(dx)=\int^\infty_0\nu(\{g>t\})dt \, .$$
+    Por otro lado, sea $C_f$ los puntos de continuidad de $f$, se puede probar que  $C_f\cap\partial\{f>t\}\subseteq\{f=t\}$ (\ejercicio \gris ).
+    \\ Además, se tiene que $\mu(\{f=t\})=0$ salvo para un conjunto numerable de $t$'s. En efecto, como $\mu$ es medida finita, $\mu(\partial\{f>t\})=\mu(C_f\cap \partial\{f>t\})=0 \espacio dt\mbox{-c.t.p.} \, .$
+    \\ Entonces $$ \mu_n(f>t) \conv \mu(f>t) \espacio dt\mbox{-c.t.p.} \, .$$
+    Por último, por T.C.D. concluimos que $\langle \mu_n,f \rangle = \displaystyle\int^1_0 \mu_n(f>t)dt \conv \int^1_0\mu(f>t)dt = \langle \mu, f\rangle$.
+\end{itemize}
+\findem \negro
+\end{proof}
+
+%%%%% clase 4 %%%%%%%%
+\begin{theorem}[Teorema del mapeo]
+Si $X_n$ y $X$ son v.a., en $(E,d)$ tal que $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ y $\Phi:(E,d)\longrightarrow (E',d')$ es función continua (no necesariamente acotada) entonces $\Phi(X_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\Phi(X)$
+\end{theorem}
+\demejercicio
+
+\begin{property}[Consecuencias de Teo. del mapeo]
+Sea $(X_n,Y_n)\in\mathbb{R}^2d,Z_n\in\mathbb{R}$ v.a.,
+\begin{itemize}
+    \item $(X_n,Y_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }(X,Y)\Longrightarrow X_n+Y_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X+Y$
+    \item $(X_n,Z_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }(X,Z)\Longrightarrow X_n\cdot Z_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }XZ$
+    \item $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow (X_n^{i_1},\dots,X_n^{i_k})\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }(X^{i_1},\dots,X^{i_k})$ \\ (pues la proyección es una función continua)
+\end{itemize}
+\end{property}
+\begin{proof}
+\ejercicio
+\end{proof}
+
+\begin{proposition}
+Sea $(\Omega,\mathcal{F},\mathbb{P})$ un espacio de probabilidad (no $n$ distintos como antes). Entonces:
+$$\left.\begin{aligned}
+X_n\mbox{ }\overset{L^p}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \\ \mbox{o} \hspace{1cm} \\
+X_n\mbox{ }\overset{c.s.}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X
+\end{aligned}\right\} \Longrightarrow X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \, .$$
+%$$ X_n\mbox{ }\overset{L^p}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \espacio \mbox{ o } \espacio X_n\mbox{ }\overset{c.s.}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$$
+I.e., la convergencia en ley es más débil que las otras convergencias.
+\end{proposition}
+\begin{proof}
+\ejercicio \gris
+
+Indicación: usar Portmanteau con caracterización (iii) ($f\inBL(E)$). \negro
+\end{proof}
+
+\begin{remark}
+En general $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \centernot\implies X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$, sin embargo
+$$ X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }A \mbox{ determinista } \Longrightarrow X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }A \mbox{ determinista }$$
+\end{remark}
+\begin{proof}
+\ejercicio
+\end{proof}
+
+\begin{theorem}[del mapeo generalizado]
+Si $X_n$ y $X$ son v.a., en $(E,d)$ tal que $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ y $\Phi:(E,d)\longrightarrow (E',d')$ es función continua $\mu(dx)$-c.s. en $X\in E$ con $\mu=Ley(X)$ entonces $\Phi(X_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\Phi(X)$.
+\end{theorem}
+\begin{proof}
+\color{blue}Ejercicio (usar Portmanteau (vii)) \color{black}
+\end{proof}
+
+\begin{proposition}
+Sean $X,X_n,n\in\N$ v.a., reales, son equivalentes:
+$$X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \espacio \mbox{ y }\espacio F_{X_n}(x) \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } F_X(x)\, ,$$
+para todo $x$ punto de continuidad de $F_X$.
+\end{proposition}
+\begin{proof}
+\color{blue}$\Rightarrow$ Ejercicio. \gris Para $\Leftarrow$ ver Billingsley \cite{billing}. \negro
+\end{proof}
+
+\subsubsection{Una métrica D para la convergencia débil en M(E)}
+\begin{definition}[Norma Lipschitz]
+Sea $f\in BL(E)$ y $\mu\in \mathcal{M}_s(E)$, definimos la norma Lipschitz como:
+$$\displaystyle \|f\|_{BL(E)} := \sup_x|f(x)|+\sup_{x\neq y}\frac{|f(x)-f(y)|}{d(x,y)} \, .$$
+% A $\|\cdot\|_{BL(E)}$ se le llama norma Lipschitz. 
+Por otro lado definimos:
+%$$ \|\mu\|_{BL(E)^*}:=\displaystyle\sup_{} \dots$$
+$$\|\mu\|_{BL(E)^*} := \displaystyle\sup_{f\in BL(E),\|f\|_{BL}\leq 1}|\langle \mu,f\rangle| \, .$$
+\end{definition}
+% \begin{remark}
+%De hecho el segundo supremo 
+% $\displaystyle\sup_{x\neq y}\frac{|f(x)-f(y)|}{d(x,y)}$ es la constante Lipschitz  óptima:
+% $$\|\mu\|_{BL(E)^*} := \displaystyle\sup_{f\in BL(E),\|f\|_{BL}\leq 1}|\langle \mu,f\rangle| \, .$$
+% \end{remark}
+
+\begin{definition}[Distancia Lipschitz dual]
+Sean $\mu,\nu\in\mathcal{M}(E)$. Definimos la distancia Lipschitz dual como: $$D(\mu,\nu):=\|\mu-\nu\|_{BL(E)^*} \, .$$
+\end{definition}
+
+\begin{theorem}
+Si $E$ es separable, $D$ metriza la convergencia débil en $\mathcal{M}(E)$, esto es, para  $(\mu_n)\subseteq\mathcal{M}(E),\mu\in\mathcal{M}(E)$,
+$$ \mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu \espacio \mbox{ ssi } \espacio D(\mu_n,\mu)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }0$$
+Además, los e.m. $(\mathcal{M}(E),D)$ y $(\mathcal{P}(E),D)$ son separables y más aún, son polacos (separables completos) si $E$ lo es.
+\end{theorem}
+\begin{proof}
+\gris Ver Billingsley \cite{billing} \negro
+\end{proof}
+
+\begin{remark}
+\beforeitemize
+\begin{itemize}
+\item No es cierto en general al cambiar $\mathcal{M}(E)$ por $\mathcal{C}_b(E)^*$. (Topología débil $*$ no siempre es metrizable).
+% \end{remark}
+% \begin{remark}
+\item $D$ es estrictamente más débil que la distancia de variación total, dada por: 
+$$\|\mu-\nu\|_{TV}:=|\mu-\nu|= \displaystyle\sup_{f\in \mathcal{C}_b(E),\|f\|_{unif}\leq 1}|\langle \mu-\nu,f\rangle|=\|\mu-\nu\|_{\mathcal{C}_b(E)^*} \, . $$
+En efecto,  vimos que
+$$ \mu_n=\frac{1}{n}\displaystyle\sum^{n-1}_{k=0}\delta_{\frac{k}{n}}\Longrightarrow\mu=\mathbb{U}_{[0,1]} \, , $$
+pero $\|\mu_n-\mu\|_{TV}=1\espacio\forall n\in\mathbb{N}$ pues $\mu_n\bot\mu$ (i.e., son singulares una con respecto a la otra). 
+\\ Entonces, la distancia variación total es demasiado rígida. Por ende el uso de funciones Lipschitz acotadas.
+\end{itemize}
+\end{remark}
+
+\vspace{3cm}
+
+\subsubsection{Compacidad en (M(E),D): Tensión}
+%\color{red}AGREGAR OBSERVACIÓN 10:50\color{black}
+\begin{definition}[Tensión (\textit{Tightness})]
+\label{def:tension}
+Una familia $M\subset\mathcal{M}(E)$ se dice \textbf{tensa} si:
+\begin{itemize}
+    \item[(i)] $\displaystyle\sup_{\mu\in M}\mu(E)<\infty$
+    \item[(ii)] $\forall \epsilon >0, \exists K_\epsilon\subset E$ compacto tal que $\displaystyle\sup_{\mu\in M}\mu(K_\epsilon^c)\leq \epsilon$
+    
+Dicho de otro modo, casi toda la masa de todas las $\mu\in M$ está en un mismo compacto.
+\end{itemize}
+\end{definition}
+
+\begin{example} % Sea $E=\mathbb{R}$
+\label{ejemplo:1_2_3}
+\beforeitemize
+\begin{itemize}
+    \item[(a)] Sea $E=\mathbb{R}$, $M=(\delta_n)_{n\in\mathbb{N}}$ no es tensa.
+    \item[(b)] Sea $E=\mathbb{R}$, $M=\}\mu_a\}_{a\in[0,R]}$ es tensa, con $\mu_a=\mathbb{U}_{[-a,a]}$.
+    \item[(c)] Sea $E=\mathbb{R}^d$, $M=\{\mu\}$ con $\mu$ medida finita es tensa ($\mu$ es regular interior por compactos).
+    
+    (De hecho, se prueba en Billingsley \cite{billing} que $M=\{\mu\}$ es tensa si (E,d) es polaco).
+    \item[(d)] Sea $E=\mathbb{R}$, $\{\mu_\sigma\}_{\sigma\in[0,L]}$ con $\mu_\sigma=\mathcal{N}(0,\sigma^2)$ es tensa
+    
+    De manera más general, $\{\mu_\lambda\}_{\lambda\in\Lambda}\subset \mathcal{P}(\mathbb{R})$ tal que $\exists p>0, \displaystyle\sup_{\lambda\in\Lambda}\int|x|^p\mu_\lambda(dx)=c<\infty$ es tensa. Intuición: si los momentos están acotados, no puede haber masa muy lejos.
+    \item[(e)] Sea $E$ un espacio arbitrario, si $M_1,M_2,\dots,M_m$ son $m$ familias tensas entonces $M=\displaystyle\cup^m_{i=1}M_i$ es una familia tensa.
+    
+    En particular, las familias finitas en $\mathcal{M}(E)$ con $(E,d)$ polaco, son tensas.
+\end{itemize}
+\end{example}
+\begin{proof}
+\gris
+Debemos probar los puntos (i) y (ii) de la definición \ref{def:tension} (Tensión), sin embargo el punto (i) es directo cuando las medidas son de probabilidad. Por ende en general probaremos sólo el punto (ii).
+\begin{enumerate}
+    \item[(a)] Siempre habrá infinitas medidas fuera del compacto que nos demos, i.e., $\forall K$ compacto, existen infinitos $n\in\N$ tal que $n\in K^c$, entonces $\displaystyle\sup_n\delta_n(K^c)=1$. Por ende $(\delta_n)_{n\in\mathbb{N}}$ no es tensa.
+    \item[(b)] % (i) en la definición es directo pues $[0,R]$ es acotado. %$\displaystyle\sup_{\mu\in M}\mu(E)\leq $
+    Sea $\epsilon>0$, $K_\epsilon=[-R,R]$ cumple $\mu_a(K_E^c)=0\leq\epsilon, \forall a\in[0,R]$.
+    %\item[(c)]
+    \item[(d)] Sea $\epsilon>0$, tenemos que: %$\mu_\lambda([-R,R]^c)=\int\mathbf{1}_{\{|x|^p>R^p\}}\mu_\lambda(dx)$
+    \begin{alignat*}{2}
+        \mu_\lambda([-R,R]^c) & = \int\mathbf{1}_{\{|x|^p>R^p\}}\mu_\lambda(dx) \\
+         & \leq \frac{1}{R^p}\int |x|^p\mu_\lambda(dx)\\
+         & \leq \frac{c}{R^p} < \epsilon \espacio \forall \lambda \in \Lambda \espacio \text{si} \espacio R>\sqrt[\leftroot{-3}\uproot{3}p]{\tfrac{c}{\epsilon}}\, , %\sqrt[\leftroot{-3}\uproot{3}p]{\frac{c}{\epsilon}}
+    \end{alignat*}
+    Donde usamos que $\mathbf{1}_{\{\frac{|x|^p}{R^p}>1\}}\leq\frac{|x|^p}{R^p}$.
+    \item[(e)] Sea $\epsilon>0$ y $K_\epsilon^i$ tal que $\displaystyle\sup_{\mu\in M^i}\mu((K^i_\epsilon)^c)\leq\epsilon$.
+    \\ Definimos $K_\epsilon$ como $K_\epsilon=K^1_\epsilon\cup\dots\cup K^m_\epsilon$, que es compacto.
+    \\ Entonces, $\forall \mu\in M$ tenemos
+    $ \mu(K_\epsilon^c)\leq\mu((K^i_\epsilon)^c)\leq\epsilon$ (con $i$ tal que $\mu\in M^i$).
+\end{enumerate}
+\findem \negro
+\end{proof}
+
+\begin{theorem}[Prokhorov]
+\label{theorem:pro}
+Sea $M\subseteq\mathcal{M}(E), ((E,d))$ separable.
+\begin{itemize}
+    \item[(i)] $M$ tensa $\Longrightarrow$ $M$ relativamente compacta
+    \item[(ii)] Si además $E$ es completo, la recíproca también es cierta.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+\gris Ver Billingsley \cite{billing} \negro
+\end{proof}
+
+\begin{example}
+Sean $(X_n)_{n\in\mathbb{N}}$ v.a., en $\mathbb{R}$ tal que $\displaystyle\sup_n\mathbb{E}(|X_n|^2)<\infty$ (i.e., sus leyes tienen momento de orden 2 acotado uniformemente). Entonces existe subsucesión $n_k\nearrow\infty$ y $X$ v.a., en $E$ tal que $X_{n_k}\mbox{ }\overset{ley}{\substack{\longrightarrow \\k \to \infty}}\mbox{ }X$.
+\end{example}
+\begin{proof}
+\gris En efecto, sea $M$ como sigue
+$$ M:=(\mu_n:=Ley(X_n))_{n\in\N}\subseteq\mathcal{P}(\R) \, .$$
+Por ejemplo \ref{ejemplo:1_2_3} tenemos que $M$ es tensa. Entonces por Teorema \ref{theorem:pro} (Prokhorov), $M$ es relativamente compacta (secuencialmente). Entonces existen $\mu$ en $\mathcal{P}(\R)$ y una subsucesión creciente a infinito $n_k$ tal que $\mu_{n_k}\mbox{ }\substack{\Longrightarrow \\k \to \infty}\mbox{ } \mu$ 
+\\ Sea $\edp = (\R,\mathcal{B}(\R),\mu)$ y consideremos $X:\Omega\mapsto\R$ la identidad ($X=Id$), \\ entonces $Ley(X)=\mu$, y $X_{n_k}\mbox{ }\overset{ley}{\substack{\longrightarrow \\k \to \infty}}\mbox{ } X$
+\findem
+\negro
+\end{proof}
+
+\subsubsection{Convergencia débil y función característica}
+Ahora veamos una aplicación: función característica.
+
+\begin{definition}[Función Característica]
+Sea $X$ v.a., en $\mathbb{R}^d$, $\mu=Ley(X)$. Su función característica es: $ \espacio \forall \xi\in\mathbb{R}^d$,
+\begin{alignat*}{2}
+    \varphi_\mu(\xi) & = \mathbb{E}(e^{i\langle\xi,X\rangle}) \in\mathbb{C} \\
+     & =\int \cos\langle\xi,x\rangle\mu(dx) +i\int sen\langle x,\xi\rangle\mu(dx) \, .
+\end{alignat*}
+% $$\varphi_\mu(\xi) = \mathbb{E}(e^{i\langle\xi,X\rangle}) \in\mathbb{C}$$
+% $$ =\int \cos\langle\xi,x\rangle\mu(dx) +i\int sen\langle x,\xi\rangle\mu(dx) \, .$$
+También se denota $\varphi_X$. Notar que siempre está bien definida para cualquier v.a. $X$ y para todo $\xi\in\R^d$.
+\end{definition} 
+
+\vspace{2cm}
+\begin{property}
+\beforeitemize
+\begin{itemize}
+    \item[(i)] $|\varphi_\mu(\xi)|\leq 1,  \forall \xi \in\mathbb{R}^d$ y $\varphi_\mu(C)=1$.
+    \item[(ii)] $\varphi_\mu$ es uniformemente continua.
+    \item[(iii)] La función característica $\varphi_\mu$ caracteriza las medidas finitas $\mu$:
+    $$ \varphi_\mu(\xi)=\varphi_\nu(\xi) \forall \xi\in\mathbb{R}^d\Longrightarrow\mu=\nu \, .$$
+\end{itemize}
+\end{property}
+\begin{proof}
+\gris
+\beforeitemize
+\begin{itemize}
+    \item[(i)] Fácil.
+    \item[(ii)] Sean $\xi,\zeta\in\R^d$, notemos que
+    \begin{alignat*}{2}
+        |\varphi_\mu(\xi)-\varphi_\mu(\zeta)| & = |\E(e^{i\langle\xi,X\rangle}-e^{i\langle\zeta,X\rangle})| \\
+         & = |\E([e^{i\langle\xi-\zeta,X\rangle}-1]\cdot e^{i\langle\zeta,X\rangle})| \\
+         & \leq \E(|e^{i\langle\xi-\zeta,X\rangle}-1|)\cdot 1 \, .
+    \end{alignat*}
+    Llamemos $u=\xi-\zeta$. Por T.C.D. $\E(|e^{i\langle\xi-\zeta,X\rangle}-1|)\,\substack{\longrightarrow \\ |u|\to 0}\mbox{ }0$
+    \item[(iii)]
+    Para $d=1$ el esquema de demostración es el siguiente: % \ejercicio \gris
+    \\ (basta probar que $\langle \mu,f\rangle = \langle\nu,f\rangle \espacio \forall f\in\mathcal{C}_0(\R)$)
+    \begin{itemize}
+        \item Usando Teorema de Stone-Weirstrass, se prueba para cada $L>0$ que las combinaciones lineales de $f_n$ son densas en $\mathcal{C}_0([-L,L])$ para la convergencia uniforme.
+        \item Por consiguiente, también son densas en las funciones $f_L$ $L$-periódicas en $\R$, dadas por las traslaciones de funciones $f\in\mathcal{C}_0([-L,L])$ (con respecto a la convergencia uniforme en $\R$)
+        \item Para esas funciones $f_L$, la hipótesis $\varphi_\mu=\varphi_\nu$ implica que $\langle\mu,f_L\rangle=\langle\mu,f_L\rangle$ (probar esto queda de \ejercicio\gris)
+        \begin{alignat*}{2}
+        \therefore |\langle \mu,f\rangle-\langle\mu,f\rangle| & \leq |\langle \mu,f_L\rangle-\langle\mu,f_L\rangle| + |\langle \mu,f-f_L\rangle-\langle\mu,f-f_L\rangle| \\
+         & \leq 2\cdot \|f\|_{Unif}(\mu([-L,L]^c)+\mu([-L,L]^c)) \\
+         & \leq \epsilon , \espacio \mbox{para }L\mbox{ suficientemente grande} \, .
+        \end{alignat*}
+    \end{itemize}
+    El caso $d\geq 2$ se deja de \ejercicio
+\end{itemize}
+\findem
+\negro
+\end{proof}
+
+\vspace{3cm}
+\begin{theorem}[Lévy]
+\label{theorem:levy}
+Sea $(\mu_n)_{n\in\mathbb{N}}\subset\mathcal{P}(\mathbb{R}^d)$,
+\begin{enumerate}
+    \item[(i)] Supongamos $\exists \mu\in\mathcal{P}(\R^d)$ tal que $\mu_n\mbox{ }\substack{\Longrightarrow \\ n\to\infty}\mbox{ }\mu$, luego 
+    $$ \varphi_{\mu_n}(\xi)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }\varphi_\mu(\xi), \forall\xi\in\mathbb{R^d} \, .$$
+    \item[(ii)] Supongamos que $\varphi_{\mu_n}(\xi)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }\mu(\xi), \forall\xi\in\mathbb{R}^d$ con $\varphi$ continua en $0$. Entonces, $$\exists\mu\in\mathcal{P}(\R^d)\mbox{ tal que }\mu_n\mbox{ }\substack{\Longrightarrow \\ n\to\infty}\mbox{ }\mu\mbox{ y }\varphi=\varphi_\mu \, .$$
+\end{enumerate}
+\end{theorem}
+Este es un teorema basado en lo visto anteriormente. Para su demostración se usará lo siguiente:
+\begin{lemma}
+\label{lemma:levy}
+Si $\varphi_{\mu_n}(\xi)\conv\varphi(\xi), \espacio \forall \xi$, con $\varphi$ continua en $0$, entonces $(\mu_n)_{n\in\mathbb{N}}$ es tensa.
+\end{lemma}
+\begin{proof}
+\gris
+\beforeitemize
+\begin{itemize}
+    \item Para cada $i=1,\dots,d$, sean $(\mu_n^i)_n\subseteq \mathcal{P}(\R)$ las leyes marginales de $(\mu_n)_{n\in\N}$. Es decir, si $\mu_n=Ley(X_n^1,\dots,X_n^d)$, $\mu_n^i=Ley(X_n^i)$
+    \item Basta probar que cada familia $(\mu_n^i)_{n\in\N}$ es tensa.
+    Esto puesto que si son tensas, $\forall \epsilon>0, \exists K_\epsilon^i\subseteq\R$ compacto tal que $\forall n\in\N$, $\mu_n^i((K_\epsilon^i)^c)\leq\epsilon$. Entonces tomando $K_\epsilon:=K\epsilon^1\times\dots\times K_\epsilon^d$, que es un compacto en $\R^d$ tenemos que
+    $$ \mu_n(K^c_\epsilon)\leq \displaystyle\sum^d_{i=1}\mu_n^i((K_\epsilon^i)^c)\leq d \epsilon \, .$$
+    $\therefore \, (\mu_n)_{n\in\N}$ es tensa. 
+    \\ Además, por continuidad en $0$, $$\varphi_{\mu_n^i}(t)=\varphi_{\mu_n}(0,\dots,0,t,0,\dots,0)\conv \varphi(0,\dots,0,t,0,\dots,0)\, ,$$
+    Con $t\in\R$ en la posición $i$-ésima. Luego basta suponer que $d=1$ y probar el resultado en este caso.
+    \item Sea $\delta>0$, entonces para todo $\nu\in\mathcal{P}(\R)$
+    \begin{alignat*}{2}
+        \displaystyle \frac{1}{\delta}\int^\delta_0 [\int_\R 1-cos(tx)\nu(dx)]dt & = \int_\R(1-\frac{sen(x\delta)}{x\delta})\nu(dx) \\
+         & \geq  \int_{|x\delta|>1}(1-\frac{sen(x\delta)}{x\delta})\nu(dx) \\
+         & \geq c\nu(\{x:|x|>\frac{1}{\delta}\}) \, .
+    \end{alignat*}
+    % $$ \displaystyle \frac{1}{\delta}\int^\delta_0 [\int_\R 1-cos(tx)\nu(dx)]dt  = \int_\R(1-\frac{sen(x\delta)}{x\delta})\nu(dx)$$
+    Donde usamos Teorema de Fubini. Luego queda que
+    $$ \displaystyle \mu_n([-\frac{1}{\delta},\frac{1}{\delta}]^c)\leq \frac{c}{\delta}\int^\delta_0 1-Re(\varphi_{\mu_n}(t))dt \, .$$
+    Y entonces
+    $$ \displaystyle \limsup_{n\in\N} \mu_n([-\frac{1}{\delta},\frac{1}{\delta}]^c)\leq \frac{c}{\delta}\int^\delta_0 1-Re(\varphi_{\mu_n}(t))dt\mbox{ }\substack{\longrightarrow \\ \delta\to0}\mbox{ }0 \, ,$$
+    donde nuevamente hemos usado la continuidad de $\varphi$ en $0$.
+    \\ De este modo, $\forall \epsilon>0$, $\exists L=\frac{1}{\delta}>0$ tal que 
+    $$ \limsup_{n\in\N} \mu_n([-L,L]^c)\leq \frac{\epsilon}{2} \, ,$$
+    y entonces existe $n_0\in\N$ tal que $\displaystyle \sup_{n\geq n_0}\mu_n([-L,L]^c)\leq \epsilon$
+    \item Como cada $(\mu_0),\dots,(\mu_{n_0-1})$ es tensa, por ejemplo \ref{ejemplo:1_2_3}, $\{(\mu_0),\dots,(\mu_{n_0-1})\}$ también es una familia tensa.
+    \\ Luego, $\exists K_0\leq \R$ compacto tal que $\mu_k(K_0^c)\leq\epsilon$, $\forall k = 0,\dots,n_0-1$.
+    \\ Tomando $K_\epsilon:=K_0\cup [-1,1]$ obtenemos finalmente $\displaystyle\sup_{n\in\N}\mu_n(K_\epsilon^c)\leq \epsilon$.
+\end{itemize}
+\findem
+\negro
+\end{proof}
+
+\begin{proof} del Teorema \ref{theorem:levy} (Lévy)
+\gris
+\begin{itemize}
+    \item[(i)] Directo, pues $x\mapsto cos(\langle\xi,x\rangle)$, $\x\mapsto sen(\langle\xi,x\rangle)$ son continuas acotadas.
+    \item[(ii)] Acá usaremos el Lema \ref{lemma:levy}
+    \\ En efecto, por Teorema \ref{theorem:pro} (Prokhorov), $\exists\mu\in\mathcal{P}(\R^d)$ y $(\mu_{n_k})_{k\in\N}$ subsucesión tal que $\mu_{n_k}\mbox{ }\substack{\Longrightarrow \\k \to \infty}\mbox{ }\mu$, y gracias a (i) tenemos que $\varphi_{\mu_{n_k}}(\xi)\mbox{ }\substack{\longrightarrow \\k \to \infty}\mbox{ }\varphi_{\mu}(\xi)$, y por hipótesis, $\varphi_{\mu_{n_k}}(\xi)\mbox{ }\substack{\longrightarrow \\k \to \infty}\mbox{ }\varphi(\xi)$.
+    Por lo tanto $\varphi=\varphi_\mu$ es una función característica.
+    
+    Veamos entonces que se tiene $\mu_n\convdebil\mu$. Si suponemos lo contrario, existe una subsucesión $(\mu_{n_j})_{j\in\N}$ y un $\epsilon>0$ tal que $D(\mu_{n_j},\mu)>\epsilon$.
+    \\Sin embargo, la familia $(\mu_{n_j})_{j\in\N}$ es también tensa y entonces existe $\nu\in\mathcal{P}(\R^d)$ y $(\mu_{n_{j_k}})_{k\in\N}$ subsucesión de la subsucesión que cumple $\mu_{n_{j_k}}\mbox{ }\substack{\Longrightarrow \\k \to \infty}\mbox{ }\nu$.
+    \\ Luego por usando el argumento anterior, $\varphi_\nu=\varphi=\varphi_\mu$, es decir, $\mu=\nu$. Esto es una contradicción puesto que $D(\nu,\mu)\geq\epsilon>0$.
+\end{itemize}
+\findem
+\negro 
+\end{proof}
+
+\subsection{Teorema central del límite en varias variables} %clase 5
+\begin{definition}[Distribución Gaussiana multivariada]
+\label{gauss}
+Decimos que $Z$ es vector Gaussiano de media $\mu$ y varianza $\Gamma$ si toda combinación de sus coordenadas es v.a. Gaussiana y $\mathbb{E}(Z)=\mu$, $Cov(Z)=\Gamma$. Esto se denota $Z\sim\mathcal{N}(\mu,\Gamma)$.
+\end{definition}
+
+\begin{remark}
+Si $Z\sim\mathcal{N}(\mu,\Gamma)$ entonces tenemos $\varphi_Z(\xi)=\mathbb{E}(e^{i\langle\xi,Z\rangle})=e^{i\langle\xi,Z\rangle-\frac{\xi^T\Gamma\xi}{Z}}$.
+\\ Cuando el espacio es $\mathbb{R}$, esto se convierte en $\varphi_Z(t)=e^{ita-\frac{t^2\sigma^2}{Z}}$, con $a=\E(Z)$ y $\sigma=\Var(Z)$.
+\end{remark}
+
+\vspace{2cm}
+\begin{theorem}[T.C.L. multivariado]
+\label{tcl}
+Sean $X_1,\dots,X_n,\dots$ variables aleatorias independientes idénticamente distribuidas (i.i.d.) en $L^2$ % $\convley$
+($\mathbb{E}(|X_n|^2)<\infty$). En $\mathbb{R}^d$, sean $\mu:=\mathbb{E}(X_n)$ 
+la media de las v.a. y $\Gamma=Cov(X_n)$ matriz de varianza-covarianza (i.e., $\Gamma=(Cov(X_n^i,X_n^j))_{ij}^d$). 
+
+Tomemos $\bar{X}_n:=\displaystyle\frac{1}{n} \sum^n_{k=1}X_k$, entonces
+$$ \sqrt{n}(\bar{X}_n-\mu)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\mathcal{N}(0,\Gamma) \, .$$
+\end{theorem}
+Para demostrarlo usaremos el siguiente lema:
+\begin{lemma}
+\label{lemma:lema_tcl}
+Sea $W$ v.a. real tal que $\mathbb{E}(W^2)<\infty$, entonces $$\varphi_W(t)=1+it\mathbb{E}(W)-\frac{t^2}{2}\mathbb{E}(W^2)+o(t^2) \, .$$
+\end{lemma}
+\begin{proof}
+\gris Notemos usando Taylor que
+$$ e^{ix} = \displaystyle 1+ix-\frac{x^2}{2} + R_2(ix) \, ,$$
+donde $R_2(ix) = \displaystyle\int_0^{ix}e^{it}(ix-t)^2dt$. 
+\\ Se puede demostrar (\ejercicio\gris) que $|R_2(ix)|\leq \frac{|x|^3}{6}$ y que $|R_2(ix)|\leq 2|x|^2$. Entonces tenemos
+$$ \varphi_W(t)=\displaystyle\E(e^{itW})=1+it\E(W)-\frac{t^2}{2}\E(W^2)+\E(R_2(itW)) \, .$$
+Basta ver que $\displaystyle\frac{1}{t^2}\E(R_2(itW)) \mbox{ }\overset{}{\substack{\longrightarrow \\t \to 0}}\mbox{ }0$. Para esto usamos lo siguiente:
+$$\displaystyle \E(|R_2(itW)|) \leq \E(\min\{\frac{t^3|W|^3}{6},2t^2|W|^2\})<\infty \, ,$$ 
+y como $\displaystyle\frac{1}{t^2}\E(R_2(itW))\leq \E(\min\{\frac{t|W|^3}{6},2|W|^2\}) $, podemos concluir usando T.C.D. . \findem
+\end{proof}
+% \vspace{2cm}
+
+\begin{proof}[Demostración de TCL multivariado \ref{tcl}]
+%\vspace{.5cm} \\
+\gris Denotemos $Z_n = \sqrt{n}(\bar{X}_n-\mu)$ y sea $Z\sim\mathcal{N}(0,\Gamma)$. 
+\begin{itemize}
+    \item Por Teorema \ref{theorem:levy} (Lévy), basta probar que $\varphi_{Z_n}(\xi)\conv \varphi_Z(\xi), \espacio \forall\xi\in\R^d$.
+    \item Primero notemos que podemos escribir $Z_n=\displaystyle \frac{\sum^n_{k=1}(\bar{X}_k-\mu)}{\sqrt{n}}$. Entonces %$\varphi_{Z_n}(\xi)$ como
+    $$\displaystyle\varphi_{Z_n}(\xi) = \displaystyle \E(e^{\frac{i}{\sqrt{n}}\langle\xi,\sum^n_{k=1}(X_k-\mu)\rangle})=\displaystyle\E(\Pi^n_{k=1}e^{\frac{i}{\sqrt{n}}W_k}) \, ,$$
+    donde $W_k:=\langle\xi,X_k-\mu\rangle$. Luego usando la independencia de las $W_k$ deducimos que 
+    $$ \displaystyle\E(\Pi^n_{k=1}e^{\frac{i}{\sqrt{n}}W_k}) = (\varphi_W\bigg(\frac{1}{\sqrt{n}}\bigg))^n  \, .$$
+    \item Ahora aplicaremos el Lema \ref{lemma:lema_tcl} a $W_k$. En efecto tomando $t=\frac{1}{\sqrt{n}}$, y usando que $\var(W)=\xi^T\Gamma\xi$, y que $\E(W)=0$, nos queda que
+    \begin{alignat*}{2}
+        \bigg(\varphi_W\bigg(\frac{1}{\sqrt{n}}\bigg)\bigg)^n & = \bigg(1+0-\frac{1}{2n}\xi^T\Gamma\xi+o\bigg(\frac{1}{n}\bigg)\bigg)^n \\
+         & = \bigg(1+\frac{1}{n}\bigg(\frac{-\xi^T\Gamma\xi}{2}+\frac{1}{\frac{1}{n}}o\bigg(\frac{1}{n}\bigg)\bigg)\bigg)^n \\
+         & \conv e^{-\frac{\xi^T\Gamma\xi}{2}}=\varphi_Z(\xi)  \, .
+    \end{alignat*}
+    La última convergencia se tiene ya que $\frac{-\xi^T\Gamma\xi}{2}+\frac{1}{\frac{1}{n}}o(\frac{1}{n}))$ está contenido en una bola de centro $\frac{-\xi^T\Gamma\xi}{2}$ y radio $\epsilon$. Luego para $N$ suficientemente grande, se está suficientemente cerca de $\frac{-\xi^T\Gamma\xi}{2}$.  % pendiente
+\end{itemize}
+\findem \negro
+\end{proof}
