@@ -1,5 +1,8 @@
+Este capítulo contiene definiciones y resultados que ya han sido abordados en el curso Cadenas de Markov. No obstante, nos interesaremos también en simular cadenas de Markov de manera eficiente. También se propondrán algoritmos para simular la distribución invariante de una cadena.
+
+\newp Para revisar el tema con mayor profundidad, se puede consultar  ``Markov Chains'' de J. Norris \cite{norris} o ``Processus de Markov et applications'' de E. Pardoux \cite{pardoux}.
 \subsection{Recuerdo}
-En esta sección recordaremos las bases de Cadenas de Markov. Para revisar el tema en profundidad, se puede consultar  ``Markov Chains'' de J. Norris \cite{norris} o ``Processus de Markov et applications'' de E. Pardoux \cite{pardoux}.
+En esta sección recordaremos las bases de Cadenas de Markov. 
 \subsubsection{Definición}
 \begin{definition}[Cadena de Markov]
 Sea $E$ un conjunto numerable, $P=(P_{xy})_{x,y\in E}$ matriz estocástica y $\lambda=(\lambda_x)_{x\in E}$ vector de probabilidad inicial.
@@ -80,6 +83,7 @@ En caso contrario se dice transiente.
 \begin{remark}
 Recurrencia es una propiedad de clase.
 \end{remark}
+\vspace{1cm}\\
 \begin{proposition}
 \beforeitemize
 \begin{itemize}
@@ -87,7 +91,6 @@ Recurrencia es una propiedad de clase.
     \item Toda $\cm$ irreducible en $E$ finito es recurrente.
 \end{itemize}
 \end{proposition}
-\\ \vspace{3cm}
 \begin{theorem}
 \label{theorem:visitas}
 Sea $X\sim\cm$ y denotemos
@@ -205,12 +208,12 @@ es una cadena de Markov de parámetros $\lambda$, $P$.
 En la Proposición \ref{propsimmarkov} tomar $Z_n=U_n$, $X_0=\Phi_0(U_0)$, y notar que $\P(X_0)=\lambda_y$ y $\P(\Phi(x,Z_1)=y)=P_{xy}.$ \findem
 \negro
 \end{proof}
-\vspace{.5cm} \\
+% \vspace{.5cm} \\
 \begin{remark}
 Siempre podemos asumir que $E=\{y_0,\dots,y_n,\dots\} = \{0,1,\dots,n,\dots\}=\N$.
 \newline Luego, para simular $X_0\sim\lambda$ y cada transición $Ley(X_{n+1}|X_n=x)=P_{x_0}$, podemos usar simulaciones de variables discretas en $\N$ como las vistas en sección \ref{disc}.
 \end{remark}
-\vspace{1.5cm}\\
+% \vspace{1.5cm}\\
 \subsection{Ley de grandes números para cadenas de Markov}
 \begin{theorem}[Ley de grandes números para CM o Teorema ergódico]
 \label{lgn_cm}
@@ -266,7 +269,7 @@ P_{xy}
 \newline Por la parte anterior, aplicada a $\hat{X}\sim CM(\hat{\mu},\hat{P})$,
 $$ \displaystyle\frac{1}{n}\sum^n_{k=0}\mathbf{1}_{\{X_{k+1}=y,X_k=x\}} \mbox{ }\overset{\P_\mu-c.s.}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\pi_xP_{xy} \, ,$$ y tomar cociente (dividir por la aproximación de $\pi_x$). \negro \findem
 \end{proof}
-
+\vspace{1.5cm}\\
 \subsection{Distancia de Variación total y coupling }
 Nos interesa cuantificar la convergencia de cadenas de Markov y en particular encontrar condiciones para convergencia ``rápida'' (geométrica) al equilibrio. Para ello  estudiaremos una noci\'on apropiada de distancia entre probabilidades en $E$.
 \begin{definition}[Distancia de variación total]
@@ -349,7 +352,6 @@ $\therefore$ este coupling alcanza el ínfimo. \findem
 \negro 
 \end{proof}
 
-\vspace{.5cm} \\
 \begin{remark}
 La distancia en variación total se puede definir en $(E,\Sigma)$ espacio medible cualquiera como
 $$ \|\mu-\nu\|_1 = \displaystyle \int_E|\frac{d\mu}{d\lambda}(x)-\frac{d\nu}{d\lambda}(x)|\lambda(dx)\, ,$$
@@ -524,7 +526,7 @@ Y definimos:
 $$f(x,u)=f_0\bigg(\frac{u}{\beta}\bigg)\mathbf{1}_{u\leq\beta}+f_1\bigg(x,\frac{u-\beta}{1-\beta}\bigg)\mathbf{1}_{u>\beta}\, .$$
 Esta función cumple lo requerido (\ejercicio) y además 
 $$\forall x\in E,\espacio \P(f(x,U)=y)=P_{xy}\,.$$
-\vspace{1.5cm}\\
+% \vspace{1.5cm}\\
 \begin{theorem}[Algoritmo de simulación perfecta]
 \beforeitemize
 \begin{enumerate}
@@ -560,9 +562,9 @@ que es la ley geométrica buscada. Veamos ahora que $\P(X_0=x)$ es invariante.
     & = \sum_{y\in E}\beta\sum^\infty_{k=0}(mQ^{k})_y(1-\beta)^{k}[(1-\beta)Q_{yx}+\beta m_x] \\
     & = \sum_{y\in E}\P(x_0=y)P_{yx} = \sum_{y\in E}\mu_y P_{yx}\,,
 \end{alignat*}
-gracias a que $P_{xy}=(1-\beta)Q_{yx}+\beta m_x$\, y que $\P(x_0=y)=\beta\sum^\infty_{k=0}(mQ^{k})_y(1-\beta)^{k}$. Como
-$$ \mu_x = \displaystyle\sum \mu_yP_{yx}$$
-tenemos que $\mu_x$ es medida invariante. Como la medida invariante es única concluimos que $\mu_x=\pi\, . \findem$
+gracias a que $P_{xy}=(1-\beta)Q_{yx}+\beta m_x$\, y que $\P(x_0=y)=\beta\sum^\infty_{k=0}(mQ^{k})_y(1-\beta)^{k}$. \\ Como
+$ \mu_x = \displaystyle\sum \mu_yP_{yx}$
+tenemos que $\mu_x$ es medida invariante. Como la medida invariante es única concluimos que $\mu_x=\pi\, .$ \findem
 \negro
 \end{proof}
 
@@ -647,7 +649,7 @@ $$ \P(X^y_{\tau,0}=x)=\mbox{ }\substack{\longrightarrow \\ k\to-\infty}\mbox{ }\
 \findem
 \negro
 \end{proof}
-\vspace{.5cm}\\
+% \vspace{.5cm}\\
 \subsubsection{Criterio Foster-Lyapunov para convergencia geométrica}
 \begin{theorem}[de Harris]
 Sea $(X_n)_{n\in\N}$ cadena de Markov en $E$ con matriz $P$ irreducible tal que

@@ -1,4 +1,8 @@
-Referencias en Pardoux \cite{pardoux} y Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H., Teller, E.  \cite{metro}.
+A partir de la unidad anterior podemos obtener una familia de algoritmos que se basa en el uso de cadenas de Markov. Estos se llaman \textbf{Markov Chain Monte Carlo} y tienen variadas aplicaciones, incluyendo optimización global de funciones no convexas.
+
+\newp Algunos de los casos de uso incluyen situaciones en las que uno no necesariamente desea llegar a un óptimo global sino más bien un buen mínimo local. Pese a esto, en algunos casos existen garantías de convergencia y son competitivos con métodos deterministas.
+
+\newp Referencias en Pardoux \cite{pardoux} y Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H., Teller, E.  \cite{metro}.
 \subsection{Cadenas de Markov reversibles} % clase 12 lunes 5 oct
 \begin{proposition}
 \label{prop:4_1_1}
@@ -33,7 +37,7 @@ $$ \pi_xP_{xy}=\pi_yP_{yx}\forall x,y\in E\, .$$
 \newline $\therefore (\hat{X}_n)_{n=0}^N\sim CM(\pi,P)$ gracias a la proposición \ref{prop:4_1_1}. \findem
 \negro
 \end{proof}
-\vspace{.5cm}\\
+% \vspace{.5cm}\\
 \begin{remark}
 \beforeitemize
 \begin{itemize}
@@ -138,7 +142,7 @@ $\implies \P(X_{n+1}=y| X_n=x)=\displaystyle\min\{\frac{\pi_y}{\pi_x}R_{yx},R_{x
 La construcción sólo requiere conocer $\lambda = \alpha \pi$ con $\alpha>0$ una constante (depende sólo de $\displaystyle \frac{\pi_x}{\pi_y},x$ e $y$). % \newline 
 Esto es muy importante en la práctica pues muchas veces se conoce sólo la medida $\lambda$ en $E$, y calcular la constante de normalización puede ser inviable numéricamente si $E$ es grande.
 \end{remark}
-\vspace{.5cm} \\ %%%%%%%%%%
+% \vspace{.5cm} \\ %%%%%%%%%%
 \begin{remark}
 El grafo $G$ debe escogerse idealmente de forma que
 \begin{itemize}
@@ -248,7 +252,7 @@ Ver Pardoux cap 10 \cite{pardoux} para una versión para C.M. en tiempo continuo
     \label{fig:betas}
 \end{figure}
 
-\newpage
+% \newpage
 \subsection{MCMC y estadística Bayesiana}
 \subsubsection{Recuerdo de estadística Bayesiana}
 \textbf{Idea}: modelamos simultaneamente y probabilisticamente:

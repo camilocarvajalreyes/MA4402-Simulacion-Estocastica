@@ -1,5 +1,10 @@
+La presente sección está dedicada a aquellos elementos útiles de probabilidades y teoría de la medida y que serán utilizados a lo largo del curso. Primero se definirán objetos conocidos de probabilidades, para luego dar paso a un repaso de esperanza condicional.
+
+\newp Luego nos enfocaremos en convergencia en ley, que es una herramienta de suma importancia y que estará presente en las siguientes unidades. Este concepto, que suele ser visto en cursos de Probabilidades, está subyacente en varios algoritmos, además de ser la base del Teorema central del límite. Este último será también abordado al final de esta unidad.
+
 \subsection{Repaso Probabilidades}
 \subsubsection{Ley y Esperanza}
+
 Consideraremos $(\Omega,\mathcal{F},\mathbb{P})$ espacio de probabilidad (e.d.p.), $(E,\Sigma)$ espacio medible y $X: \Omega \longrightarrow E$ variable aleatoria (función medible).
 
 \begin{definition}[Ley de X]
@@ -78,6 +83,7 @@ Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanz
     \item $\E(\cdot|\G):\L^2\edp\mapsto L^2(\Omega,\G,\P)$ es bilineal y continua.
 \end{itemize}
 \end{remark}
+\vspace{1cm} \\  % haciendo que la propiedad empieze en la próxima página
 \begin{remark}[Propiedad fundamental]
 $\E(X|\G)$ queda caracterizada como la única variable aleatoria tal que:
 \begin{enumerate}
@@ -86,7 +92,7 @@ $\E(X|\G)$ queda caracterizada como la única variable aleatoria tal que:
     \vspace{.4cm}\\ En particular tenemos $\E(\E(X|\G)) = \E(X)$ y si además $X\in L^2(\Omega,\G,\P)$, $E(X|\G)=X$
 \end{enumerate}
 \end{remark}
-%\vspace{1cm}  % haciendo que la propiedad empieze en la próxima página
+
 La siguiente propiedad es un ejercicio fácil.
 \begin{property}
 \beforeitemize
@@ -125,7 +131,7 @@ Sea $Y:\Omega\mapsto E$ v.a. y $Z:\Omega\mapsto \R$ v.a. medible con respecto a 
     \item El caso general se deduce de lo anterior y  queda propuesto.
 \end{itemize} \findem \negro
 \end{proof}
-\vspace{2cm}  % haciendo que el teorema empiece en la próxima página
+% \vspace{2cm}  % haciendo que el teorema empiece en la próxima página
 \begin{theorem}[Esperanza condicional, caso general $L^1$]
 Sean $X\in L^1\edp$ v.a. y $\G\subset\mathcal{F}$ sub-$\sigma$-álgebra. Entonces existe una única variable aleatoria $Z\in L^1\edp$ tal que:
 \begin{itemize}
@@ -196,6 +202,7 @@ Para unicidad primero ver que si tomamos $Z,Z'$ tal que satisfacen la propiedad 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Convergencia en Ley de variables aleatorias}
+La convergencia en ley es una herramienta que aparece varias veces a lo largo de este curso. A continuación se fijarán las bases teóricas de esta convergencia en un contexto más general del que se suele ver en cursos de probabilidades.
 Parte de esta subsección está basada en el libro de Billingsley \cite{billing}.
 \begin{notation}
 \beforeitemize
@@ -286,7 +293,7 @@ Gracias al Ejemplo \ref{ejemplo:1_2_1} tenemos lo siguiente:
 
 % En ambos casos necesitamos que sea continua y acotada
 \end{remark}
-
+\vspace{2cm}\\
 \begin{theorem}[Portmanteau] Sean $\mu,\mu_n \in \mathcal{P}(E)$. Son equivalentes:
 \label{portmanteau}
 \begin{enumerate}
@@ -324,7 +331,8 @@ Gracias al Ejemplo \ref{ejemplo:1_2_1} tenemos lo siguiente:
 
 %%%%% clase 4 %%%%%%%%
 \begin{theorem}[Teorema del mapeo]
-Si $X_n$ y $X$ son v.a., en $(E,d)$ tal que $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ y $\Phi:(E,d)\longrightarrow (E',d')$ es función continua (no necesariamente acotada) entonces $\Phi(X_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\Phi(X)$
+Si $X_n$ y $X$ son v.a., en $(E,d)$ tal que $X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$ y $\Phi:(E,d)\longrightarrow (E',d')$ es función continua (no necesariamente acotada) entonces 
+$$\Phi(X_n)\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }\Phi(X)$$
 \end{theorem}
 \demejercicio
 
@@ -406,7 +414,7 @@ Además, los e.m. $(\mathcal{M}(E),D)$ y $(\mathcal{P}(E),D)$ son separables y m
 \begin{proof}
 \gris Ver Billingsley \cite{billing} \negro
 \end{proof}
-
+\vspace{2cm} \\
 \begin{remark}
 \beforeitemize
 \begin{itemize}
@@ -422,7 +430,7 @@ pero $\|\mu_n-\mu\|_{TV}=1\espacio\forall n\in\mathbb{N}$ pues $\mu_n\bot\mu$ (i
 \end{itemize}
 \end{remark}
 
-\vspace{3cm}
+% \vspace{3cm}
 
 \subsubsection{Compacidad en (M(E),D): Tensión}
 %\color{red}AGREGAR OBSERVACIÓN 10:50\color{black}
@@ -515,7 +523,7 @@ Sea $X$ v.a., en $\mathbb{R}^d$, $\mu=Ley(X)$. Su función característica es: $
 También se denota $\varphi_X$. Notar que siempre está bien definida para cualquier v.a. $X$ y para todo $\xi\in\R^d$.
 \end{definition} 
 
-\vspace{2cm}
+% \vspace{2cm}
 \begin{property}
 \beforeitemize
 \begin{itemize}
@@ -556,7 +564,7 @@ También se denota $\varphi_X$. Notar que siempre está bien definida para cualq
 \negro
 \end{proof}
 
-\vspace{3cm}
+% \vspace{3cm}
 \begin{theorem}[Lévy]
 \label{theorem:levy}
 Sea $(\mu_n)_{n\in\mathbb{N}}\subset\mathcal{P}(\mathbb{R}^d)$,
@@ -632,7 +640,7 @@ Si $Z\sim\mathcal{N}(\mu,\Gamma)$ entonces tenemos $\varphi_Z(\xi)=\mathbb{E}(e^
 \\ Cuando el espacio es $\mathbb{R}$, esto se convierte en $\varphi_Z(t)=e^{ita-\frac{t^2\sigma^2}{Z}}$, con $a=\E(Z)$ y $\sigma=\Var(Z)$.
 \end{remark}
 
-\vspace{2cm}
+% \vspace{2cm}
 \begin{theorem}[T.C.L. multivariado]
 \label{tcl}
 Sean $X_1,\dots,X_n,\dots$ variables aleatorias independientes idénticamente distribuidas (i.i.d.) en $L^2$ % $\convley$

@@ -2,6 +2,10 @@
 % \begin{document}
 % \chapter{Movimiento, Browniano Procesos de difusión y Aplicaciones}
 
+Este capítulo tiene como objetivo introducir conceptos que se abordan de manera más exhaustiva en el curso de cálculo de estocástico. Más precisamente, veremos el movimiento Browniano, objeto central para procesos estocásticos y que tiene variadas aplicaciones. 
+
+\newp Nos interesará la simulación del movimiento Browniano y con ellos procesos conducidos por él, que son a su vez representaciones microscópicas de lo que describen ciertas ecuaciones derivadas parciales. Con esto obtendremos métodos estocásticos para la resolución de ciertas EDPs, los cuales son competitivos con métodos deterministas en dimensión alta.
+
 \subsection{Movimiento Browniano}
 % clase 19 ajustar
 Recordemos la definición \ref{gauss}. Un vector se dice Gaussiano si toda combinación de sus coordenadas es v.a. Gaussiana. Además llamamos media de $X$ al vector
@@ -116,7 +120,7 @@ $\forall ~ 0 = t_0 < t_1 < \ldots < t_n$ , la colección
 Directa de la definición.
 \negro
 \end{proof}
-
+\vspace{.5cm}\\
 Esto da lugar a un método sencillo para generar un movimiento browniano discretizado: para un horizonte $T > 0$ y $n \in \N$, sea $\Delta t = \frac{T}{n}$, y $t_i = i \Delta t$.  Dadas $Z_1, \ldots, Z_n$ i.i.d. $\mathcal{N}(0,1)$, entonces el proceso $(Y_{t})_{t \in [0,T]}$: 
 \begin{equation*}
     Y_{t_i} := \sqrt{\Delta t} \sum_{j=1}^{i} Z_j
@@ -144,7 +148,7 @@ Probemos \ref{prop1:b}, el resto queda propuesto como \ejercicio.
 \findem
 \negro
 \end{proof}
-
+\vspace{.5cm}\\
 A pesar de que son continuas, las \textbf{trayectorias} de un movimiento browniano son bastante irregulares. La trayectoria de un movimiento browniano es la función aleatoria:
 \begin{equation*}
      t \mapsto B_t
@@ -157,7 +161,7 @@ $$\P( \exists t \geq 0 \text{ tal que } B_t \text{ es derivable en } t) = 0 \,.$
 La demostración de dicho teorema escapa a los contenidos del curso. 
 
 \newp El comportamiento de las \textbf{oscilaciones} del movimiento browniano cerca de $t=0$ y $t=\infty$ queda descrito por el siguiente resultado:
-
+\vspace{.5cm}\\
 \begin{theorem}[Ley del Logaritmo Iterado]
 $\P$- casi seguramente se cumple:
 % \renewcommand{\labelenumi}{\roman{enumi})}
@@ -210,7 +214,7 @@ si $X_t$ es $\mathcal{F}_t$ medible $\forall t$. En general se asume que los pro
 
 \newp Para comprender el concepto de martingala es provechoso reflexionar sobre el siguiente ejemplo: si $X_t$ representa la riqueza de una persona en el instante $t$, la cual evoluciona de acuerdo a reglas aleatorias de un cierto \textit{juego} (ejemplo: apuestas, fluctuaciones de la bolsa), entendemos que el juego es \textbf{justo} si la riqueza futura no crece ni decrece, en esperanza.
 
-\vspace{1.2cm} \\
+% \vspace{1.2cm} \\
 \begin{definition}[Martingala]
 Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \P)$ con filtración $\mathbb{F} = (\mathcal{F}_{t})_{t \geq 0}$, una \textbf{martingala} es un proceso $(X_t)_{t \geq 0}$ adaptado tal que:
 \begin{itemize}

@@ -1,3 +1,5 @@
+Esta unidad estará dedicada a la exploración de algoritmos tipo \textbf{gradiente estocástico}. Si bien los conceptos han sido introducidos hace tiempo, su uso ha subido significativamente en años recientes gracias a su uso en iteligencia artificial y aprendizaje de máquinas. Más precisamente, estos métodos son utilizados para el entrenamiento de redes neuronales profundas, cuyo caso de uso será también introducido en esta sección.
+
 \subsection{Introducción}
 Observamos  $\samples\in\R^d\times\R$ muchos datos (potencialmente infinitos) de dimensión (posiblemente) grande.
 \begin{example}[Clasificación de imágenes]
@@ -235,7 +237,7 @@ Entonces tenemos lo siguiente (casi seguramente):
     \newline $\therefore\mbox{ si }Crit:\{\theta:\nabla F(\theta)=0\}$, $\forall \epsilon>0$, $\P(dist(\theta_t,Crit)>\epsilon)\mbox{ }\substack{\longrightarrow \\ t\to\infty}\mbox{ }0$\espacio, i.e., la probabilidad de estar a distancia positiva de puntos críticos tiende a $0$.
 \end{itemize}
 \end{remark}
-\vspace{.75cm}\\
+% \vspace{.75cm}\\
 \begin{proof}[Esquema de Demostración de Teorema \ref{theorem:sgd_no_conv}, gradiente estocástico, caso no-convexo]
 \gris 
 % Veremos un esquema de demostración. 

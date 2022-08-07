@@ -1,13 +1,15 @@
 Este capítulo está basado en los libros \textit{Monte -Carlo methods in financial engineering}, capítulo 1, P. Glasserman \cite{glass} y \textit{Processus de Markov et applications. Algorithmes, Réseaux, Génome et Finance}, capítulo 1, É. Pardoux\cite{pardoux}.
 \subsubsection{Introducción}
-La idea es:
+Monte Carlo es un nombre común para varios métodos, cuyo elemento en común es el uso de la aleatoriedad, con la cual típicamente se usarán para  % simulaciones o algún cálculo numérico.
+% La idea es:
 \begin{itemize}
     \item calcular cantidades/integrales
     \item simular objetos matemáticos
 \end{itemize}
 Ambos deterministas, en base a números/objetos aleatorios.
-\newp Origen: 1940-1950 (Fermi, Ulam, Metropolis, von Neumann) Relacionada a los avances en física nuclear: simulación computacional aleatoria de solucoones de la ecuación de fisión. \newline Aplicaciones en EDP, física, biología matemática, economía, ingeniería, finanzas, aprendizaje de máquinas, optimización, entre otras.
 
+\newp Los métodos de tipo Monte Carlo aparecen en variadas aplicaciones que incluyen: resolución de EDP, física, biología matemática, economía, ingeniería, finanzas, aprendizaje de máquinas, optimización, entre otras.
+\newp Origen: 1940-1950 (Fermi, Ulam, Metropolis, von Neumann) Relacionada a los avances en física nuclear: simulación computacional aleatoria de soluciones de la ecuación de fisión. 
 \subsection{Descripción de M.C.}
 \newp Consideremos la siguiente integral:
 $$ I:=\displaystyle\int_\Omega f(x)m(dx) \, ,$$
@@ -47,7 +49,7 @@ $$ \P(|\bar{Y}_n-\mu|\leq\displaystyle\frac{\sigma}{\sqrt{n}}Z_{\frac{\alpha}{2}
 con $\alpha\in(0,1)$ y $Z_{\frac{\alpha}{2}}$ tal que $\P(\normal(0,1)>Z_{\frac{\alpha}{2}})=\displaystyle\frac{\alpha}{2}$, donde hemos usado la caracterización \textit{(vi)} del Teorema de Portmanteau (\ref{portmanteau}).
 \newp Entonces \textbf{para lograr una precisión $\epsilon$ con probabilidad $\geq1-\alpha$}, i.e., $$\P(|\hat{Y}_n-\mu|\leq \epsilon)\geq1-\alpha \, ,$$ \textbf{tenemos que tomar n tal que}:
 $$ \displaystyle\frac{\sigma Z_{\frac{\alpha}{2}}}{\sqrt{n}}\leq\epsilon \espacio \ssi \espacio n \geq \frac{\sigma^2 Z^2_{\frac{\alpha}{2}}}{\epsilon^2} \, .$$
-\vspace{1cm}
+% \vspace{1cm}
 \begin{remark}
 \beforeitemize
 \begin{itemize}
@@ -352,7 +354,7 @@ $$ \Finvgen (V) \sim Ley(x \, |\, x\in[a,b]) \, .$$
 \ejercicio
 \newline \gris Indicación: demostrar y utilizar: $F_{\{x|x\in[a,b]\}}(x)=\displaystyle\frac{F_X(x)-F_X(a)}{F_X(b)-F_X(a)}$. \negro
 \end{proof}
-\vspace{1cm}
+% \vspace{1cm}
 \subsection{Técnicas de reducción de varianza en M.M.C}
 Para una presentación sucinta de estos temas ver el capítulo 1 del libro \textit{Processus de Markov et applications. Algorithmes, Réseaux, Génome et
 Finance}, capítulo 1, É. Pardoux \cite{pardoux} y con el algo más de profundidad \textit{Monte -Carlo methods in financial engineering} de P. Glasserman, capítulo 1. Para más detalles ver Asmussen ``Stochastic Simulation'' \cite{asm}.
@@ -450,7 +452,7 @@ $$ \Longleftrightarrow \E(f(U)f(1-U))-\E(f(U))^2 \leq 0 \, .$$
 %$$\displaystyle\frac{1}{n}\sum^n_{k=1}f(U_k)$$
 %Usamos $$\displaystyle\frac{1}{n}\sum^n_{k=1}[\frac{f(U_k)+f(1-U_k)}{2}] $$
 %Y reduciremos la varianza a la mitad.
-
+\vspace{1cm}\\
 \subsubsection{Muestreo preferencial (\textit{importance sampling})}
 \label{preferencial}
 Queremos calcular $I=\E(f(X))=\int f(x)\mu(dx)$ con $X\sim \mu$ y supongamos que podemos simular $Z\sim\nu$ simulable tal que $\nu\approx\mu$ .  % con $Z\sim \nu$ simulable. 
@@ -486,7 +488,7 @@ $$ I\approx\displaystyle\frac{1}{n}\sum^n_{k=1}\cos(\frac{\pi z_k}{2})/L(z_k), \
 En la figura \ref{fig:pref} se grafican ambas funciones. Se puede mostrar que la varianza se reduce en factor mayor que $10$.
 \begin{figure}
     \centering
-    \includegraphics[scale=0.12]{img/clase_08_pag_11.jpg}
+    \includegraphics[scale=0.11]{img/clase_08_pag_11.jpg}
     \caption{Ejemplo de muestreo preferencial}
     \label{fig:pref}
 \end{figure}
@@ -544,7 +546,7 @@ $$ \sigma^2\,=\,\displaystyle\sum^k_{j=1}p_j\sigma^2_j+\sum^k_{j=1}p_j(\E(Y^j)-\
 Aqu\'i, por un lado $\sum^k_{j=1}p_j\sigma^2_j$ corresponde a la esperanza de la varianza condicional, mientras que el término $\sum^k_{j=1}p_j(\E(Y^j)-\E(Y))^2$ es la varianza de la esperanza condicional (ver Figura \ref{fig:estrat}). 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.17]{img/clase_09_pag_3.jpg}
+    \includegraphics[scale=0.16]{img/clase_09_pag_3.jpg}
     \caption{Ejemplo gráfico de muestreo estratificado}
     \label{fig:estrat}
 \end{figure}
