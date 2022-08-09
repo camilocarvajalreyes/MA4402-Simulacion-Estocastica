@@ -9,7 +9,12 @@ Consideraremos $(\Omega,\mathcal{F},\mathbb{P})$ espacio de probabilidad (e.d.p.
 
 \begin{definition}[Ley de X]
 La ley de X es la medida de probabilidad:
-$\mu := \mathbb{P} \circ X^{-1}: \Sigma \longrightarrow [0,1]$, $A \in \Sigma \longmapsto \mu(A)=\mathbb{P}(X \in A)=\mathbb{P}(X^{-1}(A))$
+\begin{alignat*}{2}
+    \mu := \mathbb{P} \circ X^{-1}:  \Sigma &\longrightarrow [0,1] \\
+    A \in \Sigma & \longmapsto \mu(A)=\mathbb{P}(X \in A)=\mathbb{P}(X^{-1}(A))
+\end{alignat*}
+% $$\mu := \mathbb{P} \circ X^{-1}: \Sigma \longrightarrow [0,1]\,,$$ 
+% $$A \in \Sigma \longmapsto \mu(A)=\mathbb{P}(X \in A)=\mathbb{P}(X^{-1}(A))$$
 
 Corresponde a la medida inducida por $\mathbb{P}$ y $X$ en $\Sigma$.
 \end{definition}
@@ -18,21 +23,19 @@ Corresponde a la medida inducida por $\mathbb{P}$ y $X$ en $\Sigma$.
 \beforeitemize
 \begin{itemize}
     \item $\mu:=Ley(X)$ o $X\thicksim \mu$.
-    \item $\langle \mu, f \rangle = \int f(x) d\mu(x) = \int f(x)\mu(dx)$ $\forall f \in L^1(E,\Sigma,\mu)$.
+    \item $\displaystyle \langle \mu, f \rangle = \int f(x) d\mu(x) = \int f(x)\mu(dx)$ \espacio $\forall f \in L^1(E,\Sigma,\mu)$.
 \end{itemize}
+Se usarán tanto $\langle \mu, f \rangle$ (que nos sugiere una noción de dualidad) como $\int f(x) d\mu(x) = \int f(x)\mu(dx)$, que es una versión más ``probabilista'' que aquella que suele usarse en cursos de teoría de la medida.
 \end{notation}
 
 \begin{definition}[Esperanza]
-Si $Y:\Omega \longrightarrow \mathbb{R}$ es variable aleatoria e $Y\in L^1(\Omega,\mathcal{F},\mathbb{P}), Y\geq1$, $\mathbb{E(Y)}$ denota la integral de Lebesgue de $Y$ con respecto a $\mathbb{P}$ y se define la esperanza de $Y$ como sigue:
+Si $Y:\Omega \longrightarrow \mathbb{R}$ es variable aleatoria e $Y\in L^1(\Omega,\mathcal{F},\mathbb{P}), Y\geq1$, $\mathbb{E}(Y)$ denota la integral de Lebesgue de $Y$ con respecto a $\mathbb{P}$ y se define la esperanza de $Y$ como sigue:
 
 \begin{itemize}
-    \item $\mathbb{E}(Y)=\mathbb{P}(B)$ cuando $Y=\mathbf{1}_B$ con $B \in \mathcal{F}$
-    \item $\displaystyle\mathbb{E}(Y)=\sum^n_{i=1} b_i \mathbb{P}(B_i)$ cuando $\displaystyle Y=\sum^n_{i=1}b_i\mathbf{1}_{B_i}$ con $B_i \in \mathcal{F}$, i.e., $Y$ es una función simple.
-    % %%% arreglar acá !!!
-    \item Para $Y\geq1$, $\mathbb{E}(Y) = \displaystyle \lim_{n\rightarrow \infty} \nearrow \mathbb{E}(Y_n)$ con $(Y_n)_{n \in \mathbb{N}}$ sucesión creciente de funciones simples tal que $Y_n \displaystyle \nearrown Y$  % arreglar nearrow
-    %$$ Y_n \,\substack{\nearrow \\ \tiny{n\to\infty}}\, Y \espacio \mbox{\rojo borrar esto en seguida\negro}$$
-    % $$ Y_n \,\underset{n\to\infty}{\nearrow}\, Y \espacio \mbox{\rojo borrar esto en seguida\negro}$$
-    \item $\mathbb{E}(Y) = \mathbb{E}(Y_+)-\mathbb{E}(Y_-)$ para $Y\in L^1$
+    \item $\mathbb{E}(Y)=\mathbb{P}(B)$ cuando $Y=\mathbf{1}_B$ con $B \in \mathcal{F}$\,.
+    \item $\displaystyle\mathbb{E}(Y)=\sum^n_{i=1} b_i \mathbb{P}(B_i)$ cuando $\displaystyle Y=\sum^n_{i=1}b_i\mathbf{1}_{B_i}$ con $B_i \in \mathcal{F}$, i.e., cuando $Y$ es una función simple.
+    \item Para $Y\geq1$, $\mathbb{E}(Y) = \displaystyle \lim_{n\rightarrow \infty} \nearrow \mathbb{E}(Y_n)$ con $(Y_n)_{n \in \mathbb{N}}$ sucesión creciente de funciones simples tal que $Y_n \displaystyle \nearrown Y$\,.
+    \item $\mathbb{E}(Y) = \mathbb{E}(Y_+)-\mathbb{E}(Y_-)$ para $Y\in L^1$\,.
 \end{itemize}
 \end{definition}
 
@@ -43,8 +46,8 @@ Más aún, $f\in L^1(\mu)$ si y sólo si $f(X) \in L^1(\Omega,\mathcal{F},\mathb
 \end{proposition}
 \begin{proof}
 \ejercicio
-
-Indicación: demostrar primero para indicatrices de conjuntos medibles, luego para funciones simples, positivas y finalmente concluir el caso general. 
+\gris \\
+Indicación: demostrar primero para indicatrices de conjuntos medibles, luego para funciones simples, positivas y finalmente concluir el caso general. \negro
 \end{proof}
 
 \begin{remark}
@@ -67,9 +70,10 @@ Sea $(\Omega,\F,P)$ un espacio de probabilidad completo y $G\subset \F$ una sub-
 \begin{itemize}
     \item $\omega\in\Omega$ serán los ``estados posibles de la naturaleza''
     \item $\F$ conjuntos cuya ocurrencia somos capaces de distinguir: dado $\omega \in\Omega$ y $B\in\F$, podemos responder si $\omega\in B$ (eventos), y podemos ``medir'', i.e., calcular $\P(B)$ \\
-    $\therefore\F$ representa a qué información tenemos acceso.
+    $\therefore\,\F$ representa a qué información tenemos acceso.
     \item $\G$, al ser una sub-$\sigma$-álgebra, posee menos información (reconoce menos eventos).
 \end{itemize}
+Un ejemplo simple es pensar en un termómetro, con el cual podremos responder a preguntas acerca del clima. De cierto modo esta herramienta nos está definiendo una $\sigma$-álgebra, pues podemos ``medir'' eventos como si la temperatura está o no dentro de cierto rango. Por otro lado, si tuviésemos más herramientas, por ejemplo un pluviómetro además de un termómetro, entonces la $\sigma$-álgebra correspondiente sería más grande pues nos permite acceder a más información (y la $\sigma$-álgebra del termómetro sólo es una sub-$\sigma$-álgebra  de esta).
 \begin{definition}[Esperanza condicional, caso $L^2$]
 Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanza condicional de $X$ dado $\G$ como la \textbf{proyección ortogonal} desde $L^2\edp$ de $X$ en el subespacio vectorial $L^2(X,\G\P)$.
 \\ Esto lo denotaremos $\E(X|\G)$
@@ -82,8 +86,9 @@ Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanz
     \item $\E(X|\G)$ es $\G$-medible.
     \item $\E(\cdot|\G):\L^2\edp\mapsto L^2(\Omega,\G,\P)$ es bilineal y continua.
 \end{itemize}
+
 \end{remark}
-\vspace{1cm} \\  % haciendo que la propiedad empieze en la próxima página
+% \vspace{1cm} \\  % haciendo que la propiedad empieze en la próxima página
 \begin{remark}[Propiedad fundamental]
 $\E(X|\G)$ queda caracterizada como la única variable aleatoria tal que:
 \begin{enumerate}
@@ -105,6 +110,7 @@ La siguiente propiedad es un ejercicio fácil.
 \end{property}
 %\demejercicio
 
+\vspace{.5cm}\\
 \begin{lemma}
 Sea $Y:\Omega\mapsto E$ v.a. y $Z:\Omega\mapsto \R$ v.a. medible con respecto a $\G=\sigma(Y):=\{Y^{-1}(A):A\in \Sigma \}\subset \mathcal{F}$ (con $\Sigma$ $\sigma$-álgebra de $E$), entonces existe $h:E\mapsto \R$ medible tal que $Z=h(Y)$.
 \end{lemma}
@@ -128,8 +134,8 @@ Sea $Y:\Omega\mapsto E$ v.a. y $Z:\Omega\mapsto \R$ v.a. medible con respecto a 
                             0 & \mbox{ si }y\notin Y(\Omega)  \end{cases} \, .$$
     % Se puede probar que $h$ es medible. 
     Luego dado que $Z_K \nearrowk Z$, queda que $h(Y)=\displaystyle\limsup_{k\to \infty}Z_k$\, . % $Z=\displaystyle\lim_{k\to\infty}Z_k=\lim_{k\to\infty}h^k(Y)=h(Y)$ c.s. 
-    \item El caso general se deduce de lo anterior y  queda propuesto.
-\end{itemize} \findem \negro
+    \item El caso general se deduce de lo anterior y  queda propuesto.  
+\end{itemize}\findem \negro
 \end{proof}
 % \vspace{2cm}  % haciendo que el teorema empiece en la próxima página
 \begin{theorem}[Esperanza condicional, caso general $L^1$]
@@ -160,6 +166,7 @@ Para unicidad primero ver que si tomamos $Z,Z'$ tal que satisfacen la propiedad 
 \negro
 % \color{red} completar indicación \color{black}  % 10/14
 \end{proof}
+\vspace{1cm}\\
 \begin{property}
 \beforeitemize
 \begin{enumerate}
@@ -216,6 +223,8 @@ Parte de esta subsección está basada en el libro de Billingsley \cite{billing}
 \end{itemize}
 \end{notation}
 
+
+\vspace{2cm}\\
 \subsubsection{Definición de convergencia débil y en ley}
 \begin{remark}
 $\nu \in \mathcal{M}(E)$ queda caracterizada por $\langle \nu,f \rangle$, $f \in \mathcal{C}_b(E)$
@@ -293,7 +302,7 @@ Gracias al Ejemplo \ref{ejemplo:1_2_1} tenemos lo siguiente:
 
 % En ambos casos necesitamos que sea continua y acotada
 \end{remark}
-\vspace{2cm}\\
+% \vspace{2cm}\\
 \begin{theorem}[Portmanteau] Sean $\mu,\mu_n \in \mathcal{P}(E)$. Son equivalentes:
 \label{portmanteau}
 \begin{enumerate}
@@ -414,7 +423,7 @@ Además, los e.m. $(\mathcal{M}(E),D)$ y $(\mathcal{P}(E),D)$ son separables y m
 \begin{proof}
 \gris Ver Billingsley \cite{billing} \negro
 \end{proof}
-\vspace{2cm} \\
+% \vspace{2cm} \\
 \begin{remark}
 \beforeitemize
 \begin{itemize}
