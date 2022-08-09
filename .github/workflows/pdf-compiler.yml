@@ -11,5 +11,5 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: apunte/main.tex
+          root_file: main.tex
           working_directory: apunte/
