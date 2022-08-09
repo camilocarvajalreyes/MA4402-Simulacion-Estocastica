@@ -12,3 +12,4 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: apunte/main.tex
+          working_directory: apunte/
