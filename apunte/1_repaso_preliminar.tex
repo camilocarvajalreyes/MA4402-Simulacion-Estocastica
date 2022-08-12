@@ -243,16 +243,16 @@ Esto se denota $\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } 
 \begin{remark}
 $\mathcal{P}(E)\subset \mathcal{M}(E) \subset \mathcal{M}_s(E) \subset\mathcal{C}_b(E)^*$ \espacio y \espacio$\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$ equivale a $\displaystyle \mu_n \mbox{ }\overset{\ast}{\substack{\rightharpoonup\\n \to\infty}} \mbox{ }\mu$
 
-La inclusión $\mathcal{M}_s(E) \subset\mathcal{C}_b(E)^*$ se demuestra como sigue: para cada $\nu\in\mathcal{M}_s(E)$, la aplicación $f\in\mathcal{C}_b(E)\mapsto\langle \nu,f\rangle:=\langle \nu_+,f\rangle-\langle \nu_-,f\rangle$ es lineal. Además es continua: $|\langle\nu,f\rangle|\leq (\langle \nu_+,f\rangle+\langle \nu_-,f\rangle)\|f\|_{unif}$. Entonces $\nu\in\mathcal{C}_b(E)^*$.
+La inclusión $\mathcal{M}_s(E) \subset\mathcal{C}_b(E)^*$ se demuestra como sigue: para cada $\nu\in\mathcal{M}_s(E)$, la aplicación $f\in\mathcal{C}_b(E)\mapsto\langle \nu,f\rangle:=\langle \nu_+,f\rangle-\langle \nu_-,f\rangle$ es lineal. Además es continua: $|\langle\nu,f\rangle|\leq (\langle \nu_+,1\rangle+\langle \nu_-,1\rangle)\|f\|_{unif}$. Entonces $\nu\in\mathcal{C}_b(E)^*$.
 \end{remark}
 
 \begin{example}[\label{ejemplo:1_2_1}] 
-Consideremos $E=\mathbb{R}$.
+Consideremos $E=\mathbb{R}$. Tenemos: 
 \begin{itemize} % % completar en clase
     \item[(i)] $\mu_n=\delta_{\frac{1}{n}} \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \delta_0$ 
     \item[(ii)] $\displaystyle\mu_n(dx) = \frac{n}{2}\mathbf{1}_{[-\frac{1}{n},\frac{1}{n}]}(x)dx \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \delta_0$
-    \item[(iii)] $\displaystyle\mu_n=\frac{1}{n}\sum_{n=0}^{n-1}\delta_{\frac{k}{n}} \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$ %$$ = \mbox{Lebesgue en }[0,1]$
-    \\ Donde $\mu$ es la medida de Lebesgue en $[0,1]$
+    \item[(iii)] $\displaystyle\mu_n=\frac{1}{n}\sum_{n=0}^{n-1}\delta_{\frac{k}{n}} \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu, $ %$$ = \mbox{Lebesgue en }[0,1]$
+    \\ donde $\mu$ es la medida de Lebesgue en $[0,1]$
 \end{itemize}
 \end{example}
 \begin{proof}
@@ -273,7 +273,7 @@ Consideremos $E=\mathbb{R}$.
 Sean $(\Omega_n,\mathcal{F}_n,\mathbb{P}_n), (\Omega,\mathcal{F},\mathbb{P})$ espacios de probabilidad, Sean $X_n:\Omega_n \longrightarrow E, n\in\mathbb{N}$, y $X:\Omega \longrightarrow E$ v.a., decimos que $X_n$ converge en ley o en distribución a $X$ si 
 $$\mu_n:=Ley(X_n) \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu:=Ley(X)\mbox{ en }\mathcal{P}(E) \, .$$
 Equivalentemente, $\forall f \in \mathcal{C}_b(E)$ $$ \langle \mu_n,f \rangle \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f,\rangle\, \, ,$$
-y 
+o
 $$ \mathbb{E}_n(f(X_n)) \mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \mathbb{E}(f(X))\, .$$
 \end{definition}
 \begin{notation}
@@ -308,7 +308,7 @@ Gracias al Ejemplo \ref{ejemplo:1_2_1} tenemos lo siguiente:
 \begin{enumerate}
     \item[(i)] $\mu_n \mbox{ }\substack{\Longrightarrow \\n \to \infty}\mbox{ } \mu$
     \item[(ii)] $\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \hspace{.25cm}\, \forall f$ acotada, uniformemente continua
-    \item[(iii)]$\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \espacio \forall f \in BL(E)$ Lipschitz acotada
+    \item[(iii)]$\langle \mu_n,f\rangle { }\substack{\longrightarrow \\ n\to\infty}\mbox{ } \langle \mu,f\rangle, \espacio \forall f \in BL(E)$ (Lipschitz acotada)
     \item[(iv)] $\displaystyle\limsup_{n\to\infty} \mu_n (F)\leq\mu(F) \espacio \forall F $ cerrado
     \item[(v)] $\displaystyle\liminf_{n\to\infty} \mu_n (G)\geq\mu(G) \espacio \forall G $ abierto
     \item[(vi)] $\displaystyle\lim_{n\to\infty}\mu_n(A) = \mu(A) \espacio \forall A \in \mathcal{B}$ tal que $\mu(\partial A)=0$ (frontera de medida nula)
@@ -358,18 +358,18 @@ Sea $(X_n,Y_n)\in\mathbb{R}^2d,Z_n\in\mathbb{R}$ v.a.,
 \end{proof}
 
 \begin{proposition}
-Sea $(\Omega,\mathcal{F},\mathbb{P})$ un espacio de probabilidad (no $n$ distintos como antes). Entonces:
+Sea $(\Omega,\mathcal{F},\mathbb{P})$ un espacio de probabilidad. Entonces:
 $$\left.\begin{aligned}
 X_n\mbox{ }\overset{L^p}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \\ \mbox{o} \hspace{1cm} \\
 X_n\mbox{ }\overset{c.s.}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X
 \end{aligned}\right\} \Longrightarrow X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \, .$$
 %$$ X_n\mbox{ }\overset{L^p}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \espacio \mbox{ o } \espacio X_n\mbox{ }\overset{c.s.}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{\mathbb{P}}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X \Longrightarrow X_n\mbox{ }\overset{ley}{\substack{\longrightarrow \\n \to \infty}}\mbox{ }X$$
-I.e., la convergencia en ley es más débil que las otras convergencias.
+Es decir, la convergencia en ley es más débil que las otras convergencias usuales de v.a. definidas en un mismo espacio de probabilidad.
 \end{proposition}
 \begin{proof}
 \ejercicio \gris
 
-Indicación: usar Portmanteau con caracterización (iii) ($f\inBL(E)$). \negro
+Indicación: usar Portmanteau con la caracterización (iii) ($f\in BL(E)$). \negro
 \end{proof}
 
 \begin{remark}
