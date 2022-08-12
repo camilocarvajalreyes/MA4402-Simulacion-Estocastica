@@ -438,7 +438,7 @@ $$\int_{[0,1]^n}\sigma(y^Tx+\theta)d\mu(x)=0 \espacio \forall y\in\R^n,\forall\t
 \negro
 \end{proof}
 \begin{remark}
-A las funciones que cumplen la propiedad del lema \ref{lemma:discrim} se les llama funciones discriminatorias. El resultado vale entonces para cualquier función discriminatoria continua. Además, se puede generalizar además a funciones sigmoide medibles y funciones sigmoide arbitrarias agregando ciertas restricciones adicionales.
+A las funciones que cumplen la propiedad del lema \ref{lemma:discrim} se les llama funciones discriminatorias. El resultado vale entonces para cualquier función discriminatoria continua. Además, se puede generalizar a funciones sigmoide medibles y funciones sigmoide arbitrarias agregando ciertas restricciones adicionales.
 
 Más aún, existen variados resultados que proponen cotas para el tamaño de la red neuronal dependiendo de la función a aproximar. La versión del Teorema de Aproximación Universal que hemos visto corresponde al caso de ancho arbitrario, donde ancho se refiere a la cantidad de perceptrones de la capa. Análogamente existen versiones de ancho acotado y profundidad arbitraria, donde profundidad se refiere a la cantidad de capas.
 \end{remark}
@@ -503,7 +503,7 @@ $$ \frac{\partial l_i}{\partial a_k} = \frac{\partial l_i}{\partial z_i}\frac{\p
 i.e., hicimos el mismo cálculo anterior pero basado en cálculos simples de derivadas usando las variables auxiliares. Veamos otro ejemplo. Calcularemos $\frac{\partial l_i}{\partial b_k}$ usando este principio:
 $$ \frac{\partial l_i}{\partial b_k} = \frac{\partial l_i}{\partial z_i}\frac{\partial z_i}{\partial u_i^j}\frac{\partial u_i^j}{\partial v_i^j}\frac{\partial v_i^j}{\partial b_k} = 2z_i \cdot 1 \cdot a_k\sigma'(v_i^j)\cdot 1 = 2 (y_i-\sum^N_{j=1}u_i^j)a_k\sigma'(\omega^T_j x_i+b_j) \,$$
 donde $\sigma'$ es la derivada de la función de activación $\sigma$ (unidimensional). \newp Notemos la facilidad con la que llegamos a la expresión final, y más aún, notemos que muchas de las derivadas parciales que usamos también se usaron para computar $\frac{\partial l_i}{\partial a_k}$. Se puede hacer un cálculo análogo para llegar a $\frac{\partial l_i}{\partial \omega_k}$, con lo cual tendríamos calculado el gradiente de $l_i$. 
-\newp El algoritmo Back-Propagation consiste en el uso exhaustivo de la \textbf{regla de la cadena}. Calculamos derivadas parciales paso por paso y las guardamos para usarlos en cada parámetro. De este modo que sólo computaremos derivadas simples y guardarlos evitará hacer cálculos redundantes. %La única restricción que tenemos para usar Back-Propagation es que no hayan cálculos circulares.
+\newp El algoritmo Back-Propagation consiste en el uso exhaustivo de la \textbf{regla de la cadena}. Calculamos derivadas parciales paso por paso y las guardamos para usarlas en cada parámetro. De este modo que sólo computaremos derivadas simples y guardarlos evitará hacer cálculos redundantes. %La única restricción que tenemos para usar Back-Propagation es que no hayan cálculos circulares.
 En nuestro caso no era imposible calcular el gradiente, pero a medida que las redes neuronales sean más profundas, más profundas serán las dependencias entre variables y por ende más cálculos se ahorrarán si usamos regla de la cadena, además de simplificar el computo.
 
 \newp Las bibliotecas que implementan redes neuronales, como \textit{pytorch} implementan este algoritmo implícitamente, de modo que al definir las operaciones entre variables, se guardan las derivadas parciales respectivas. Durante el entrenamiento, una vez que la información pasa a través de la red neuronal para computar una predicción, se computará un error (\textit{forward}). Enseguida, se computa el gradiente usando las operaciones que estaban guardadas, haciendo fluir la información en reversa hasta tener el valor de cada derivada parcial (\textit{backward}). Esto nos da una manera eficiente de usar descenso de gradiente estocástico.
@@ -517,7 +517,7 @@ $$ ReLU(t) = \begin{cases}
 t & \text{ cuando }t\geq0 \\
 0 & \text{ cuando }t<0
 \end{cases}$$
-Si bien esta función no es sigmoide y es no-acotada, es mucho más fácil de computar, es invariante a la escala. El problema de que no sea derivable en $0$ se arregla simplemente asignando $1$ o $0$ como valor de la derivada en aquel punto. Por último notar que podemos lograr funciones que si son sigmoides al acoplar dos funciones \textit{ReLU} o más. Un ejemplo de esto es la función $\sigma$ siguiente:
+Si bien esta función no es sigmoide y es no-acotada, es mucho más fácil de computar y es invariante a la escala. El problema de que no sea derivable en $0$ se arregla simplemente asignando $1$ o $0$ como valor de la derivada en aquel punto. Por último notar que podemos lograr funciones que si son sigmoides al acoplar dos funciones \textit{ReLU} o más. Un ejemplo de esto es la función $\sigma$ siguiente:
 $$ \sigma(t) = \frac{1}{2}(ReLU(t+1)-1-(ReLU(t-1)-1))\,,$$
 que es una función sigmoide continua, y por ende cumple con las hipótesis del Teorema \ref{teo:AU}. En la figura \ref{fig:fun_activ} se muestran algunas de las funciones de activación que se han mencionado en esta subsección.
 \begin{images}[\label{fig:fun_activ}]{Ejemplos de funciones de activación}
