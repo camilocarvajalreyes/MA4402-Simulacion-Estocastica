@@ -74,7 +74,7 @@ se considerar\'{a}n dos m\'{e}todos de Monte Carlo para calcular num\'{e}ricamen
 
 \subsection*{Problema 3}
 \begin{enumerate}
-    \item Programe el método ``NewtonRaphson``, que recibe como parámetros una función de distribución $F$, su función de densidad $f$ y un vector $u \in [0, 1]^r$, y aplique el método de Newton-Raphson para calcular el vector $x \in R^r$ tal que $|F(x_i) − u_i|\leq error$, donde error es un parámetro de la clase inicializado con $error=10^{−4}$.
+    \item Programe el método ``NewtonRaphson``, que recibe como parámetros una función de distribución $F$, su función de densidad $f$ y un vector $u \in [0, 1]^r$, y aplique el método de Newton-Raphson para calcular el vector $x \in R^r$ tal que $|F(x_i) - u_i|\leq error$, donde error es un parámetro de la clase inicializado con $error=10^{-4}$.
     
     Decimos que $X$ es una variable $Beta$ de parámetros $\theta_1,\,\theta_2>0$ si su función de densidad $f_X$ cumple
     $$ f_X(x) = \frac{x^{\theta_1-1}(1-x)^{\theta_2-1}}{B(\theta_1,\theta_2)}\mathbf{1}_{[0,1]} \, ,$$
@@ -97,8 +97,12 @@ se considerar\'{a}n dos m\'{e}todos de Monte Carlo para calcular num\'{e}ricamen
     
     \item Encuentre una cota $K$ para la variable $Beta(\theta_1,\theta_2)$, con $\theta_1,\theta_2$ como en el punto anterior. Implemente el método de aceptación-rechazo con $f_X$ y $K$ para simular réplicas de $Beta(\theta_1,\theta_2)$ usando $10000$ uniformes. Grafique los resultados.
     
-    \item Encuentre una cota $K$ para la variable $Beta(\theta_1,\theta_2)$, con $\theta_1,\theta_2$ como en el punto anterior. Implemente el método de aceptación-rechazo con $f_X$ y $K$ para simular réplicas de $Beta(\theta_1,\theta_2)$ usando $10000$ uniformes. Grafique los resultados.
-    
+    \item - Para $k = 3, \dots , 5$, simule $n = 10^k$ réplicas de $X$ para cada uno de los métodos implementados. Para cada $k$ grafique los histogramas de las muestras obtenidas.
+
+    \begin{itemize}
+        \item ¿En que medida coinciden los resultados ambos métodos y por qué?
+        \item Grafique el tiempo de ejecución en función de la cantidad de réplicas, estime el costo por réplica de cada uno de los métodos y ordene los métodos según su eficiencia.
+    \end{itemize}
     \item Usando el método más eficiente, simule $n = 100000$ réplicas de $X$, calcule las medias y varianzas muestrales, y luego compare los resultados con los valores teóricos.
 \end{enumerate}
 
