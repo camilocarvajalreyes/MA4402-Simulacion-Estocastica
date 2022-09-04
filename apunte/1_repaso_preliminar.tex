@@ -7,8 +7,8 @@ La presente sección está dedicada a aquellos elementos útiles de probabilidad
 
 Consideraremos $(\Omega,\mathcal{F},\mathbb{P})$ espacio de probabilidad (e.d.p.), $(E,\Sigma)$ espacio medible y $X: \Omega \longrightarrow E$ variable aleatoria (función medible).
 
-\begin{definition}[Ley de X]
-La ley de X es la medida de probabilidad:
+\begin{definition}[Ley de $X$]
+La \textit{ley} de $X$ es la medida de probabilidad:
 \begin{alignat*}{2}
     \mu := \mathbb{P} \circ X^{-1}:  \Sigma &\longrightarrow [0,1] \\
     A \in \Sigma & \longmapsto \mu(A)=\mathbb{P}(X \in A)=\mathbb{P}(X^{-1}(A))
@@ -34,15 +34,15 @@ Si $Y:\Omega \longrightarrow \mathbb{R}$ es variable aleatoria e $Y\in L^1(\Omeg
 \begin{itemize}
     \item $\mathbb{E}(Y)=\mathbb{P}(B)$ cuando $Y=\mathbf{1}_B$ con $B \in \mathcal{F}$\,.
     \item $\displaystyle\mathbb{E}(Y)=\sum^n_{i=1} b_i \mathbb{P}(B_i)$ cuando $\displaystyle Y=\sum^n_{i=1}b_i\mathbf{1}_{B_i}$ con $B_i \in \mathcal{F}$, i.e., cuando $Y$ es una función simple.
-    \item Para $Y\geq1$, $\mathbb{E}(Y) = \displaystyle \lim_{n\rightarrow \infty} \nearrow \mathbb{E}(Y_n)$ con $(Y_n)_{n \in \mathbb{N}}$ sucesión creciente de funciones simples tal que $Y_n \displaystyle \nearrown Y$\,.
+    \item Para $Y\geq0$, $\mathbb{E}(Y) = \displaystyle \lim_{n\rightarrow \infty}\mathbb{E}(Y_n)$ con $(Y_n)_{n \in \mathbb{N}}$ sucesión creciente de funciones simples tal que $Y_n \displaystyle \nearrown Y$\,.
     \item $\mathbb{E}(Y) = \mathbb{E}(Y_+)-\mathbb{E}(Y_-)$ para $Y\in L^1$\,.
 \end{itemize}
 \end{definition}
 
 \begin{proposition}
-Sea $X:\Omega \longrightarrow E $ v.a., $f:(E,\Sigma)\longrightarrow (\mathbb{R},\mathcal{B(\mathbb{R})})$ medida $\geq 0$ $f\in L^1(E,\Sigma,\mu) =_\mu Ley(X)$, entonces
-$$ \mathbb{E}(f(X)) = \langle \mu,f \rangle, \forall f \in L^1(\mu)$$
-Más aún, $f\in L^1(\mu)$ si y sólo si $f(X) \in L^1(\Omega,\mathcal{F},\mathbb{P})$
+Sea $X:\Omega \longrightarrow E $ v.a., $f:(E,\Sigma)\longrightarrow (\mathbb{R},\mathcal{B(\mathbb{R})})$ medida $\geq 0$ $f\in L^1(E,\Sigma,\mu) =_\mu Ley(X)$. Entonces
+$$\mathbb{E}(f(X)) = \langle \mu,f \rangle,\quad\forall f \in L^1(\mu).$$
+Más aún, $f\in L^1(\mu)$ si, y sólo si $f(X) \in L^1(\Omega,\mathcal{F},\mathbb{P})$.
 \end{proposition}
 \begin{proof}
 \ejercicio
@@ -53,14 +53,13 @@ Indicación: demostrar primero para indicatrices de conjuntos medibles, luego pa
 \begin{remark}
 \beforeitemize
 \begin{enumerate}
-    \item Si $X$ es v.a. real, ``discreta'' tenemos que:
+    \item Si $X$ es v.a. ``discreta'', tenemos que
     $$ \mu=Ley(X) = \sum_x p_x\delta_x$$
     $$\mathbb{E}(f(X)) = \int f(x)\mu(dx) = \sum_x f(x)p_x \, .$$
     En lo anterior, $\delta_x$ son masas de Dirac, $\sum_xp_x = 1$ y las sumas son finitas o numerables.
-    \item Si $X$ es v.a., (absolutamente) ``continua'':
+    \item Si $X$ es v.a. absolutamente ``continua'', esto es, posee densidad $f_X$, entonces
     $$ \mu(dx) = f_X(x)dx \, ,$$ 
-    $$ \mathbb{E}(\varphi(X))=\int \varphi(x)\mu(dx)=\int\varphi(x) f_X(x)dx \, ,$$
-    donde $f_X$ es la densidad de $X$.
+    $$ \mathbb{E}(\varphi(X))=\int_\R\varphi(x)\mu(dx)=\int\varphi(x) f_X(x)dx.$$
 \end{enumerate}
 \end{remark}
 
@@ -75,8 +74,7 @@ Sea $(\Omega,\F,P)$ un espacio de probabilidad completo y $G\subset \F$ una sub-
 \end{itemize}
 Un ejemplo simple es pensar en un termómetro, con el cual podremos responder a preguntas acerca del clima. De cierto modo esta herramienta nos está definiendo una $\sigma$-álgebra, pues podemos ``medir'' eventos como si la temperatura está o no dentro de cierto rango. Por otro lado, si tuviésemos más herramientas, por ejemplo un pluviómetro además de un termómetro, entonces la $\sigma$-álgebra correspondiente sería más grande pues nos permite acceder a más información (y la $\sigma$-álgebra del termómetro sólo es una sub-$\sigma$-álgebra  de esta).
 \begin{definition}[Esperanza condicional, caso $L^2$]
-Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanza condicional de $X$ dado $\G$ como la \textbf{proyección ortogonal} desde $L^2\edp$ de $X$ en el subespacio vectorial $L^2(X,\G\P)$.
-\\ Esto lo denotaremos $\E(X|\G)$
+Sea $X\in L^2\edp, \G\subset\F$ una sub-$\sigma$-álgebra. Se define la esperanza condicional de $X$ dado $\G$, denotada $\E(X|\G)$, como la \textbf{proyección ortogonal} desde $L^2\edp$ de $X$ en el subespacio vectorial $L^2(X,\G,\P)$.
 \end{definition}
 \begin{remark}
 \beforeitemize
@@ -224,7 +222,7 @@ Parte de esta subsección está basada en el libro de Billingsley \cite{billing}
 \end{notation}
 
 
-\vspace{2cm}\\
+%\vspace{2cm}\\
 \subsubsection{Definición de convergencia débil y en ley}
 \begin{remark}
 $\nu \in \mathcal{M}(E)$ queda caracterizada por $\langle \nu,f \rangle$, $f \in \mathcal{C}_b(E)$
@@ -441,7 +439,7 @@ pero $\|\mu_n-\mu\|_{TV}=1\espacio\forall n\in\mathbb{N}$ pues $\mu_n\bot\mu$ (i
 
 % \vspace{3cm}
 
-\subsubsection{Compacidad en (M(E),D): Tensión}
+\subsubsection{Compacidad en $(M(E),D)$: Tensión}
 %\color{red}AGREGAR OBSERVACIÓN 10:50\color{black}
 \begin{definition}[Tensión (\textit{Tightness})]
 \label{def:tension}
@@ -522,10 +520,9 @@ Por ejemplo \ref{ejemplo:1_2_3} tenemos que $M$ es tensa. Entonces por Teorema \
 Ahora veamos una aplicación: función característica.
 
 \begin{definition}[Función Característica]
-Sea $X$ v.a., en $\mathbb{R}^d$, $\mu=Ley(X)$. Su función característica es: $ \espacio \forall \xi\in\mathbb{R}^d$,
+Sea $X$ v.a. en $\mathbb{R}^d$ y $\mu=Ley(X)$. Se define la función característica de $X$ como
 \begin{alignat*}{2}
-    \varphi_\mu(\xi) & = \mathbb{E}(e^{i\langle\xi,X\rangle}) \in\mathbb{C} \\
-     & =\int \cos\langle\xi,x\rangle\mu(dx) +i\int sen\langle x,\xi\rangle\mu(dx) \, .
+    \varphi_\mu(\xi) := \mathbb{E}(e^{i\langle\xi,X\rangle}) =\int \cos\langle\xi,x\rangle\mu(dx) +i\int \sen\langle x,\xi\rangle\mu(dx)\in\mathbb{C},\quad \xi\in\mathbb{R}^d.
 \end{alignat*}
 % $$\varphi_\mu(\xi) = \mathbb{E}(e^{i\langle\xi,X\rangle}) \in\mathbb{C}$$
 % $$ =\int \cos\langle\xi,x\rangle\mu(dx) +i\int sen\langle x,\xi\rangle\mu(dx) \, .$$
@@ -539,7 +536,7 @@ También se denota $\varphi_X$. Notar que siempre está bien definida para cualq
     \item[(i)] $|\varphi_\mu(\xi)|\leq 1,  \forall \xi \in\mathbb{R}^d$ y $\varphi_\mu(C)=1$.
     \item[(ii)] $\varphi_\mu$ es uniformemente continua.
     \item[(iii)] La función característica $\varphi_\mu$ caracteriza las medidas finitas $\mu$:
-    $$ \varphi_\mu(\xi)=\varphi_\nu(\xi) \forall \xi\in\mathbb{R}^d\Longrightarrow\mu=\nu \, .$$
+    $$ \varphi_\mu=\varphi_\nu\iff\mu=\nu.$$
 \end{itemize}
 \end{property}
 \begin{proof}
