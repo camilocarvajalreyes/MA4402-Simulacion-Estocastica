@@ -494,7 +494,7 @@ Debemos probar los puntos (i) y (ii) de la definición \ref{def:tension} (Tensi�
 
 \begin{theorem}[Prokhorov]
 \label{theorem:pro}
-Sea $M\subseteq\mathcal{M}(E), ((E,d))$ separable.
+Sea $M\subseteq\mathcal{M}(E)$, con $(E,d)$ separable.
 \begin{itemize}
     \item[(i)] $M$ tensa $\Longrightarrow$ $M$ relativamente compacta
     \item[(ii)] Si además $E$ es completo, la recíproca también es cierta.
@@ -522,7 +522,7 @@ Ahora veamos una aplicación: función característica.
 \begin{definition}[Función Característica]
 Sea $X$ v.a. en $\mathbb{R}^d$ y $\mu=Ley(X)$. Se define la función característica de $X$ como
 \begin{alignat*}{2}
-    \varphi_\mu(\xi) := \mathbb{E}(e^{i\langle\xi,X\rangle}) =\int \cos\langle\xi,x\rangle\mu(dx) +i\int \sen\langle x,\xi\rangle\mu(dx)\in\mathbb{C},\quad \xi\in\mathbb{R}^d.
+    \varphi_\mu(\xi) := \mathbb{E}(e^{i\langle\xi,X\rangle}) =\int \cos\langle\xi,x\rangle\mu(dx) +i\int \sen\langle \xi,x\rangle\mu(dx)\in\mathbb{C},\quad \xi\in\mathbb{R}^d.
 \end{alignat*}
 % $$\varphi_\mu(\xi) = \mathbb{E}(e^{i\langle\xi,X\rangle}) \in\mathbb{C}$$
 % $$ =\int \cos\langle\xi,x\rangle\mu(dx) +i\int sen\langle x,\xi\rangle\mu(dx) \, .$$
@@ -533,7 +533,7 @@ También se denota $\varphi_X$. Notar que siempre está bien definida para cualq
 \begin{property}
 \beforeitemize
 \begin{itemize}
-    \item[(i)] $|\varphi_\mu(\xi)|\leq 1,  \forall \xi \in\mathbb{R}^d$ y $\varphi_\mu(C)=1$.
+    \item[(i)] $|\varphi_\mu(\xi)|\leq 1,  \forall \xi \in\mathbb{R}^d$ y $\varphi_\mu(0)=1$.
     \item[(ii)] $\varphi_\mu$ es uniformemente continua.
     \item[(iii)] La función característica $\varphi_\mu$ caracteriza las medidas finitas $\mu$:
     $$ \varphi_\mu=\varphi_\nu\iff\mu=\nu.$$
@@ -577,7 +577,7 @@ Sea $(\mu_n)_{n\in\mathbb{N}}\subset\mathcal{P}(\mathbb{R}^d)$,
 \begin{enumerate}
     \item[(i)] Supongamos $\exists \mu\in\mathcal{P}(\R^d)$ tal que $\mu_n\mbox{ }\substack{\Longrightarrow \\ n\to\infty}\mbox{ }\mu$, luego 
     $$ \varphi_{\mu_n}(\xi)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }\varphi_\mu(\xi), \forall\xi\in\mathbb{R^d} \, .$$
-    \item[(ii)] Supongamos que $\varphi_{\mu_n}(\xi)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }\mu(\xi), \forall\xi\in\mathbb{R}^d$ con $\varphi$ continua en $0$. Entonces, $$\exists\mu\in\mathcal{P}(\R^d)\mbox{ tal que }\mu_n\mbox{ }\substack{\Longrightarrow \\ n\to\infty}\mbox{ }\mu\mbox{ y }\varphi=\varphi_\mu \, .$$
+    \item[(ii)] Supongamos que $\varphi_{\mu_n}(\xi)\mbox{ }\substack{\longrightarrow \\ n\to\infty}\mbox{ }\varphi(\xi), \forall\xi\in\mathbb{R}^d$ con $\varphi$ continua en $0$. Entonces, $$\exists\mu\in\mathcal{P}(\R^d)\mbox{ tal que }\mu_n\mbox{ }\substack{\Longrightarrow \\ n\to\infty}\mbox{ }\mu\mbox{ y }\varphi=\varphi_\mu \, .$$
 \end{enumerate}
 \end{theorem}
 Este es un teorema basado en lo visto anteriormente. Para su demostración se usará lo siguiente:
