@@ -47,14 +47,8 @@ Disponemos entonces de cuatro métodos de Monte Carlo para aproximar $\alpha$: u
 				
 	\item  Programe una función $Trans(x,u,P)$ que tiene  como parámetros un valor $u$  en $[0,1]$ y una matriz estocástica $P$ indexada por $\{1,...N\}$, y  entrega \mathbf{para cada} $x$ el  valor correspondiente de la función de transición  asociada a $P$ con el parámetro $u$ dado.  Puede usar para ello una función ya programada en el Laboratorio 1 si lo desea.
 
-    En base a lo anterior, construya  también  un método $CM(\mu,P,n)$ que simule $n$ pasos de la cadena de Markov homogénea con matriz de transición $P$ y distribución inicial $\mu$. 
-    \vspace{.5cm}\\
-    Notar ahora que  dadas realizaciones  $(U_{n})_{n\geq 1}$ de v.a.  i.i.d. uniformes en $[0,1]$,  disponemos de una sucesión  de funciones  (aleatorias) $\Phi_n:= f(\cdot,  U_n):E \rightarrow E$, con $n\geq 1$,   que entregan  transiciones de la cadena desde  un estado $x$ cualquiera en el tiempo $n-1$, a algún estado $y=\Phi_n (x)= f(x,  U_n)$  en el tiempo $n$.
+    En base a lo anterior, construya  también  un método $CM(u,\mu,P)$ que tome un vector de $n$ uniformes y simule $n$ pasos de la cadena de Markov homogénea con matriz de transición $P$ y distribución inicial $\mu$. 
 
-    Más aun,   disponemos de un  \mathbf{flujo aleatorio}  $(\Phi_{n,m} :E \rightarrow E )_{n\geq 0, m> n} $ dado por  $ \Phi_{n,m} (x)=  \Phi_{m} \circ \cdots \circ \Phi_n(x)$,   que puede  entregar  las transiciones de la cadena desde  cualquier estado $x$  en el tiempo $n-1$, a algún estado $y=\Phi_{n,m} (x)$  en el tiempo $m$.
-
-    \item En base a la función construida en la parte 1),   construya ahora una función  $Flujo(x,n,m,u,P)$ que toma como parámetros  un vector  $u$  de $m-n+1$  valores en $[0,1]$ y una matriz estocástica  $P$, y entrega  **para cualquier** $x$ ,  el estado  en el tiempo $m$  de una cadena que se encuentra en $x$ en el tiempo $n-1$ obtenido al hacer $m-n+1$   transiciones sucesivas con la  función de transición  asociada a $P$. 
-	
 	\item Usando las funciones antes construidas, y utilizando (solo)  $n=100$ v.a. uniformes,   simule y grafique $n=100$ pasos de  $K=10$ trayectorias de un paseo aleatorio en el conjunto $\{1,...,N\}$ para $N=10$, donde cada trayectoria parte de  un estado distinto. En los extremos $x=1,10$ el paseo aleatorio se queda en el estado actual con probabilidad $1-p$ y salta con probabilidad $p$.  Realice esto  en cada uno de  los 3 casos siguientes: 	 $p=1/2$, $p=1/3$, $p= 2/3$.
 \end{enumerate}
 
