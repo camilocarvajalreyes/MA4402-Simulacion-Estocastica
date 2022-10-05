@@ -7,6 +7,6 @@ Repositorio para el curso Simulación Estocástica (DIM UChile): Apuntes y Labor
 ## Laboratorios
 - [Laboratorio 1 - Monte Carlo y eficiencia de simulación](https://github.com/camilocarvajalreyes/MA4402-Simulacion-Estocastica/tree/main/laboratorios/laboratorio_1.ipynb)
 - [Laboratorio 2 - Reducción de varianza y cadenas de Markov](https://github.com/camilocarvajalreyes/MA4402-Simulacion-Estocastica/tree/main/laboratorios/laboratorio_2.ipynb)
-- Laboratorio 3 - Algoritmos estocásticos usando cadenas de Markov
+- [Laboratorio 3 - Algoritmos estocásticos usando cadenas de Markov](https://github.com/camilocarvajalreyes/MA4402-Simulacion-Estocastica/tree/main/laboratorios/laboratorio_3.ipynb)
 - Laboratorio 4.1 - Descenso de gradiente estocástico y aplicaciones
 - Laboratorio 4.2 - Integral estocástica y EDEs
