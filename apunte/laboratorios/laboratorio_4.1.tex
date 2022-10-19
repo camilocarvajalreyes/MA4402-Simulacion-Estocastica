@@ -3,15 +3,82 @@
 {\huge \textbf{Descenso de gradiente estocástico y aplicaciones}}
 \end{center}
 
-\subsection*{Problema 1: Redes Neuronales}
+\section*{Problema 1: Regresión Lineal}
+
+Dado un conjunto de datos $(x_i,y_i)_{i=1}^n\subset\mathbb{R}^m\times\mathbb{R}$, se propone la siguiente relación entre sus componentes
+$$y = \theta^Tx + \varepsilon\,,$$
+en donde $\varepsilon$ es una variable aleatoria con valor esperado 0 y distribución desconocida. El problema de regresión lineal consiste en encontrar el parámetro $\theta$ tal que el conjunto de datos satisfaga la ecuación anterior de manera que $\mathrm{Var}(\varepsilon)$ sea lo más pequeña posible. Esto conlleva al problema de optimización
+\[ \hat{\theta} = \arg\,\min_{\theta} \mathrm{Var}(\varepsilon) = \arg\,\min_{\theta}\mathbb{E}\left((y-\theta^Tx)^2\right).\]
+
+El objetivo de esta pregunta es aplicar el modelo anterior sobre el conjunto de datos \textbf{Diabetes} y estimar el mejor parámetro posible utilizando el método de descenso de gradiente estocástico. 
+\begin{enumerate}
+    \item[1.a] Cargue el conjunto de datos utilizando el siguiente código.
+      \begin{verbatim}
+        from sklearn.datasets import load_diabetes
+
+        df, target = load_diabetes(return_X_y=True,as_frame=True)
+        print(load_diabetes().DESCR)
+        print("Target variable statistcs:\n"+str(target.describe()))
+        df.head()
+    \end{verbatim}
+    Observe la cantidad de variables y el tipo de datos que posee. ¿Que complicaciones pueden surgir de usar un modelo predictivo en un contexto real? Reflexione acerca de la naturaleza del dataset y la tarea que se quiere ejecutar.
+    % Observe la cantidad de variables y el tipo de datos que posee. Normalice los datos para que el modelo a trabajar funcione. Extienda la base de datos para obtener un modelo de regresión lineal, esta vez representado por una función afín de la forma $y_i = \theta^Tx_i + b + \varepsilon_i$, con $\theta\in \mathbb{R}^m,\,b\in \mathbb{R}$.
+\end{enumerate}
+
+Nos referimos a estandarizar cuando forzamos los datos a tener una distribución normal estándar. Para esto, reemplazamos cada punto de dato $x_i$ por:
+
+$$ \tilde x_i = \frac{x_i-\mu}{\sigma}$$
+
+En donde $\mu$ es la media de la columna y $\sigma$ es su desviación estándar.
+
+\begin{enumerate}    
+    \item[1.b] Estandarice los datos (sin usar funciones de pre-procesamiento) para que el modelo a trabajar funcione. Extienda la base de datos (agregando una columna) para obtener un modelo de regresión lineal, esta vez representado por una función afín de la forma $y_i = \theta^Tx_i + b + \varepsilon_i$, con $\theta\in \mathbb{R}^m,\,b\in \mathbb{R}$.
+
+    Nota: no estandarice la columna objetivo.
+    \item[1.c] Separe los datos en un conjunto de entrenamiento y otro de prueba según la proporción 80\% y 20\%,  Justifique brevemente por qué esto es necesario. Le será útil la función \textbf{train\_test\_split} de la biblioteca \textbf{scikit-learn}.
+\end{enumerate}
+
+\newp En lo que sigue justifique sus respuestas graficando la función de costos cada cierta cantidad de iteraciones. Cuando se pida comparar diferentes implementaciones debe realizarlo en base al conjunto de datos de prueba y el error cuadrático medio incurrido con la estimación obtenida. Tanto la cantidad de iteraciones como los parámetros pueden ser escogidos libremente.
+\begin{enumerate}
+  \item[2.] Implemente el algoritmo de descenso de gradiente estocástico para un modelo de regresión lineal, especificando cuál es la función de costos y su gradiente. Considere los siguientes casos
+    \begin{enumerate}
+      \item \emph{Learning rates} constantes.
+      \item \emph{Learning rates} variables (proponga al menos 2).
+    \end{enumerate}
+    Proponga al menos dos en cada caso. Compare los resultados obtenidos para cada elección ¿Cuál es la mejor elección?
+   
+  \item[3.] Modifique el algoritmo anterior para trabajar con \emph{mini-batch}. Pruebe el desempeño (nuevamente en términos del error cuadrático medio para el conjunto de prueba) del algoritmo para distintos tamaños de \emph{mini-batch} y \emph{learning rates} y justifique cual es el mejor ¿Existe alguna relación entre ambos parámetros?
+    
+  \item[4.] Implemente las siguientes variantes de descenso de gradiente estocástico y compare el desempeño de estos con los algoritmos implementados en las partes anteriores
+    \begin{enumerate}
+        \item \textbf{Momentum:} El método consiste en ir generando los pasos de descenso como
+          \[m_{i} = \beta m_{i-1} + (1-\beta)\nabla_{\theta}f(\theta_i,x_{i}),\hspace{0.4cm}m_0 = 0, \]
+        tal que
+        \[\theta_{i+1} = \theta_i -\eta\, m_i,\]
+        donde $\beta\in(0,1)$ (debe ser elegido, asi como también $\eta$).
+      \item \textbf{Adagrad:} El \emph{learning rate} es variable y se genera de la siguiente manera:
+          \[\eta_{i} = \frac{\eta}{\sqrt{v_{i
+          } + c}}, \]
+        donde $c>0$, $\eta>0$ y 
+        \begin{align*}
+          v_{i} ={}& \sum_{j = 1}^{i}\|\nabla_{\theta}f(\theta_j,x_j)\|^2, \hspace{0.3cm}v_0 = 0.\\
+        \end{align*}
+    \end{enumerate}
+
+    \item[5.] (Opcional) Realice una búsqueda de grilla (\textit{gridsearch}) para escoger los mejores hiper-parámetros para Momentum y Adagrad. Dado un \textit{batch size} $m$, reporte los errores del test set en un mapa de calor para valores de $\beta$ y $\nu$ (respectivamente $c$ y $\nu$) de su elección. Repita para otro valor de $m$. Describa los resultados y concluya.
+    
+\end{enumerate}
+
+\section*{Problema 2: Redes Neuronales}
 El objetivo de este problema es explorar el uso de una biblioteca de aprendizaje profundo. Más precisamente, implementaremos modelos de redes neuronales para clasificar imágenes usando la biblioteca \textit{PyTorch}. Para esto usaremos la base de datos \textit{MNIST}, que consiste en dígitos escritos a mano. La tarea consiste en entrenar un modelo que identifique de manera automática el dígito en cuestión. Para importar el conjunto, se debe descargar el archivo \textit{mnist.pkl.gz} y ejecutar el siguiente código.
 
 \begin{verbatim}
-    import pickle
-    import gzip
-    
-    with gzip.open('data/mnist.pkl.gz', "rb") as f:
-            ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding="latin-1")
+    from sklearn.datasets import load_diabetes
+
+    df, target = load_diabetes(return_X_y=True,as_frame=True)
+    print(load_diabetes().DESCR)
+    print("Target variable statistcs:\n"+str(target.describe()))
+    df.head()
 \end{verbatim}
 
 Un \textbf{Tensor} en el contexto de aprendizaje de máquinas, corresponde a la generalización de una matriz a dimensiones más altas, similar al concepto de arreglo de bibliotecas como \textit{numpy}. \textit{PyTorch} utiliza tensores para las computaciones, con la característica especial de que poder operarlos de manera rápida usando GPUs.
@@ -31,7 +98,6 @@ El primer objetivo será definir un modelo que conste de una sola capa lineal, l
     pesos = torch.randn(784, 10) / math.sqrt(784)
     pesos.requires_grad_()
     sesgo = torch.zeros(10, requires_grad=True)
-    
     batch_size = 64
     x_batch = x_train[0:batch_size]
     preds = x_batch @ pesos + sesgo
@@ -39,20 +105,18 @@ El primer objetivo será definir un modelo que conste de una sola capa lineal, l
 
 \textit{PyTorch} guarda la información de los pasos aplicados a tensores. Esto se usa posteriormente para computar los gradientes para cada parámetro, los cuales se usarán en Descenso de Gradiente. Este método se llama Diferenciación Automática.
 
-\newp Necesitamos definir una función de pérdida a minimizar. Esta sección se concentrará en justificar el uso de la función de pérdida entropía cruzada.
-
-\newp Nos gustaría ajustar los parámetros de tal forma que la distribución de probabilidad dada por la red se asemeje lo más posible a la real distribución de los datos. Como solo tenemos observaciones de estos datos, para lo anterior buscaremos el estimador de máxima verosimilitud. Por ende queremos maximizar
+\newp Necesitamos definir una función de pérdida a minimizar. Esta sección se concentrará en justificar el uso de la función de pérdida entropía cruzada. Nos gustaría ajustar los parámetros de tal forma que la distribución de probabilidad dada por la red se asemeje lo más posible a la real distribución de los datos. Como solo tenemos observaciones de estos datos, para lo anterior buscaremos el estimador de máxima verosimilitud. Por ende queremos maximizar
 
 $$ \prod^N_{i=1}p_\theta(y^{(i)}|x^{(i)})$$
 
 donde $y^{(i)}\in\{c_1,\dots,c_k\}$ (las clases posibles) y $\theta$ son los parámetros de la red, que a su vez computa $p_\theta(c_j|x)$ en un paso \textit{forward} dado un punto de dato $x$. En otras palabras
 
-$$ \hat\theta = \argmax_\theta \prod^N_{i=1}p_\theta(y^{(i)}|x^{(i)}) $$
+$$ \hat\theta = \arg\max_\theta \prod^N_{i=1}p_\theta(y^{(i)}|x^{(i)}) $$
 
 \begin{enumerate}
 	% \setcounter{enumi}{1}
 	\item[1.a] Justifique que
-    $$ \hat\theta = \argmax_\theta \frac{1}{N} \sum^N_{i=1} log(P_\theta(y^{(i)}|x^{(i)})) $$
+    $$ \hat\theta = \arg\max_\theta \frac{1}{N} \sum^N_{i=1} log(P_\theta(y^{(i)}|x^{(i)})) $$
 \end{enumerate}
 
 Sean $p$ y $q$ dos distribuciones de probabilidad discreta. La \textbf{entropía cruzada} está dada por 
@@ -64,9 +128,10 @@ Se define entonces la función de pérdida de entropía cruzada por
 $$ L(q,p) = \frac{1}{N}\sum^N_{i=1}H(p_i,q_i) $$
 
 \begin{enumerate}
-	\item[1.b] Demuestre que
-    $$ \hat\theta = \argmin_\theta L(p_\theta,p)$$
+    \item[1.b] Demuestre que
+    $$ \hat\theta = \arg\min_\theta L(p_\theta,p)$$
     donde $p$ es la distribución de probabilidad empírica.
+    \item[1.c] Comente brevemente la relación entre la entropía cruzada y la teoría de la información.
 \end{enumerate}
 
 La función de pérdida de entropía cruzada puede ser accedida en \textit{PyTorch} mediante:
@@ -82,21 +147,32 @@ La función de pérdida de entropía cruzada puede ser accedida en \textit{PyTor
 	\item[2.a] Complete el siguiente código que implementa \textbf{Descenso de Gradiente Mini-batch} para ajustar los parámetros del modelo dada una tasa de aprendizaje.
 	\begin{verbatim}
 	    def DescensoGradiente(pesos,sesgo,tasa):
-            perdidas_epoch = []
-            for i in range():
-                # rellenar
-                loss.backward()
-                with torch.no_grad():
-                    pesos -= pesos.grad * tasa
-                    sesgo -= sesgo.grad * tasa
-                    pesos.grad.zero_()
-                    sesgo.grad.zero_()
-                perdidas_epoch.append(loss.item())
-            return perdidas_epoch
+                perdidas_epoch = []
+                # rellenar acá
+                cantidad_batches = None  # cambiar
+                # ------------
+                for i in range(cantidad_batches):
+                    # rellenar acá
+                    loss = None  # calcular pérdida
+                    # ------------
+                    loss.backward()
+                    with torch.no_grad():
+                        pesos -= pesos.grad * tasa
+                        sesgo -= sesgo.grad * tasa
+                        pesos.grad.zero_()
+                        sesgo.grad.zero_()
+                    perdidas_epoch.append(loss.item())
+                return perdidas_epochnd(loss.item())
+                return perdidas_epoch
     \end{verbatim}
-    \item[2.b] Implemente una función entrenar que tome un número de épocas y ejecute el método anterior en cada iteración, imprimiendo el valor de la función de pérdida. Guarde además estas pérdidas en una lista.
-    \item[2.c] Ejecute el bucle para K épocas y grafique lo encontrado.
-	
+    \item[2.b] Implemente una función entrenar que tome un número de épocas y ejecute el método anterior en cada iteración, imprimiendo el valor de la función de pérdida. Guarde además estas pérdidas en una lista. (A una barrida completa al conjunto de entrenamiento se le llama época (o \textit{epoch} en inglés).)
+    \item[2.c] Ejecute el bucle para K épocas y grafique lo encontrado. Utilice otras métricas para evaluar la calidad de la clasificación, ¿que clases son más y menos fáciles de reconocer con el algoritmo? Le puede ser útil el \href{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html}{reporte de clasificación} de scikit-learn y la siguiente función para obtener las predicciones:
+    \begin{verbatim}
+        logsoftmax = torch.nn.LogSoftmax(dim=0)
+
+        def predicciones(output):
+            return torch.argmax(logsoftmax(output),axis=1)
+    \end{verbatim}
 \end{enumerate}
 
 La biblioteca \textit{PyTorch} nos provee de variadas herramientas que pueden ser útiles para el entrenamiento. Una de ellas es el módulo \href{https://pytorch.org/docs/stable/distributions.html}{torch.distributions}. Esta nos provee de algunas variables aleatorias conocidas de las cuales podemos samplear. Por ejemplo, para samplear de una distribución Gaussiana de dimensión 10, centrada en cero y con diagonal $=I$ ejecutamos:
@@ -139,69 +215,26 @@ Además, usamos el módulo \href{https://pytorch.org/docs/stable/optim.html}{tor
 \end{verbatim}
 
 \begin{itemize}
-    \item[4] En base a lo anterior, re-defina el método entrenar para que tome un optimizador del módulo \textit{optim}, un modelo (sin entrenar) y un número de epocas. Ejecute el método con Descenso de Gradiente y grafique. Escoja dos métodos más del módulo \textit{optim}, entrene modelos con ellos y compare.
-    \item[5] Re-defina el modelo usando una capa intermedia. Entrenelo usando alguna de los optimizadores. ¿Cómo se comparan los resultados de esta nueva red en ambos conjuntos con los modelos anteriores? Justifique.
+    \item[4.a] En base a lo anterior, re-defina el método entrenar para que tome un optimizador del módulo \textit{optim}, un modelo (sin entrenar) y un número de épocas. Ejecute el método con Descenso de Gradiente y grafique. Escoja dos métodos más del módulo \textit{optim}, entrene modelos con ellos y compare.
+    \item[4.b] Re-defina el modelo usando una capa intermedia. Entrenelo usando alguna de los optimizadores. ¿Cómo se comparan los resultados de esta nueva red en ambos conjuntos con los modelos anteriores? Justifique.
+    \item[5] (Opcional)Un tipo de red neuronal que funciona bien para el procesamiento de imágenes son las \textbf{redes convolucionales (\textit{CNN})}. Averigue a que corresponde un \textbf{Núcleo (\textit{Kernel})} en procesamiento digital de imágenes y resuma en un parrafo. Investigue y mencione alguna ventaja de usar redes convolucionales. A continuación complete el siguiente código usando \href{https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html}{redes convolucionales} (en vez de capas lineales) y \href{https://pytorch.org/docs/stable/generated/torch.nn.functional.relu.html}{ReLu} como no linealidad. Pruebe su red del mismo modo que antes y compare los resultados con las partes anteriores.
 \end{itemize}
-
-\section*{Problema 2: Regresión Lineal}
-
-Dado un conjunto de datos $(x_i,y_i)_{i=1}^n\subset\mathbb{R}^m\times\mathbb{R}$, se propone la siguiente relación entre sus componentes
-\begin{equation}\label{reglin}
-  y = \theta^Tx + \varepsilon,
-\end{equation}
-en donde $\varepsilon$ es una variable aleatoria con valor esperado 0 y distribución desconocida. El problema de regresión lineal consiste en encontrar el parámetro $\theta$ tal que el conjunto de datos satisfaga \eqref{reglin} de manera tal que $\mathrm{Var}(\varepsilon)$ sea lo más pequeña posible. Esto conlleva al problema de optimización
-\[ \hat{\theta} = \arg\,\min_{\theta} \mathrm{Var}(\varepsilon) = \arg\,\min_{\theta}\mathbb{E}\left((y-\theta^Tx)^2\right).\]
-
-El objetivo de esta pregunta es aplicar el modelo anterior sobre el conjunto de datos \textbf{Boston Housing Prices} y estimar el mejor parámetro posible utilizando el método de descenso de gradiente estocástico. 
-\begin{enumerate}
-    \item Cargue el conjunto de datos utilizando el siguiente código:
-      \begin{verbatim}
-        from sklearn.datasets import load_boston
-        import pandas as pd
-        
-        data = load_boston()
-        df = pd.DataFrame(data.data, columns = data.feature_names)
-        df['PRICE'] = data.target
-    \end{verbatim}
+\begin{verbatim}
+    class CNN(nn.Module):
+        def __init__(self):
+            super().__init__()
+            # defina acá dos o más transformaciones convolucionales
     
-    Observe la cantidad de variables y el tipo de datos que posee. Normalice los datos para que el modelo a trabajar funcione. Extienda la base de datos para obtener un modelo de regresión lineal, esta vez representado por una función afín de la forma $y_i = \theta^Tx_i + b + \varepsilon_i$, con $\theta\in \mathbb{R}^m,\,b\in \mathbb{R}$.
-\end{enumerate}
+        def forward(self, xb):
+            xb = xb.view(-1, 1, 28, 28)
+            # transforme xb componiendo las capas convolucionales con relu
+            xb = F.avg_pool2d(xb, 4)
+            return xb.view(-1, xb.size(1))
+\end{verbatim}
 
-\begin{enumerate}    
-    \item[2.] Separe los datos en un conjunto de entrenamiento y otro de prueba según la proporción 80\% y 20\%, para esto le será útil la función \texttt{train\_test\_split} de la librería \texttt{sklearn}. Justifique brevemente por qué esto es necesario.
-\end{enumerate}
-
-En lo que sigue justifique sus respuestas graficando la función de costos cada cierta cantidad de iteraciones. Cuando se pida comparar diferentes implementaciones debe realizarlo en base al conjunto de datos de prueba y el error cuadrático medio incurrido con la estimación obtenida. Tanto la cantidad de iteraciones como los parámetros pueden ser escogidos libremente.
-\begin{enumerate}
-  \item[3.] Implemente el algoritmo de descenso de gradiente estocástico para un modelo de regresión lineal, especificando cuál es la función de costos y su gradiente. Considere los siguientes casos
-    \begin{enumerate}
-      \item \emph{Learning rates} constantes.
-      \item \emph{Learning rates} variables (proponga al menos 2).
-    \end{enumerate}
-    Proponga al menos dos en cada caso. Compare los resultados obtenidos para cada elección ¿Cuál es la mejor elección?
-   
-  \item[4.] Modifique el algoritmo anterior para trabajar con \emph{mini-batch}. Pruebe el desempeño (nuevamente en términos del error cuadrático medio para el conjunto de prueba) del algoritmo para distintos tamaños de \emph{mini-batch} y \emph{learning rates} y justifique cual es el mejor ¿Existe alguna relación entre ambos parámetros?
-    
-  \item[5.] Implemente las siguientes variantes de descenso de gradiente estocástico y compare el desempeño de estos con los algoritmos implementados en las partes anteriores
-    \begin{enumerate}
-        \item \textbf{Momentum:} El método consiste en ir generando los pasos de descenso como
-          \[m_{i} = \beta m_{i-1} + (1-\beta)\nabla_{\theta}f(\theta_i,x_{i}),\hspace{0.4cm}m_0 = 0, \]
-        tal que
-        \[\theta_{i+1} = \theta_i -\eta\, m_i,\]
-        donde $\beta\in(0,1)$ (debe ser elegido).
-      \item \textbf{Adagrad:} El \emph{learning rate} es variable y se genera de la siguiente manera:
-          \[\eta_{i} = \frac{\eta}{\sqrt{v_{i
-          } + c}}, \]
-        donde $c>0$, $\eta>0$ y 
-        \begin{align*}
-          v_{i} ={}& \sum_{j = 1}^{i}\|\nabla_{\theta}f(\theta_j,x_j)\|^2, \hspace{0.3cm}v_0 = 0.\\
-        \end{align*}
-    \end{enumerate}
-    
-\end{enumerate}
 
 \iffalse
-\section*{Problema 3: Regresi\'on log\'istica con gradiente estocástico }
+\section*{Problema 3: Regresión logística con gradiente estocástico }
 
 En este problema aplicaremos el algoritmo de descenso de gradiente estocástico a un m\'etodo de clasificación supervisada denominado {\bf regresi\'on log\'istica}.  Consideramos un conjunto de $M$ datos correspondiente a vectores   $\{x^{(m)}\}_{i=1,\dots,M} \subset \mathbb{R}^p$ de caracter\'isticas,  y  sus respectivas etiquetas  $\{y^{(m)}\}_{i=1,\dots,M} \subset \{0,1\}$ que indican si cada uno de ellos pertenece a  una de dos ``clases''  posibles $C_0$ ó $C_1$. El objetivo es usar estos datos para aprender como clasificar correctamente cualquier vector nuevo $x$ de caracter\'isticas  en una de las clases $C_k$, $k=0,1$ (sin ver su etiqueta).
 

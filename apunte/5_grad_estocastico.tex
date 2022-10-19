@@ -349,17 +349,17 @@ con
 $$ m_{t+1}=\beta m_t+(1-\beta)\nabla_\theta f(\theta_t,X_{t+1}), \espacio m_0=0\espacio .$$
 Esto mantiene algo de las direcciones de descenso anteriormente usadas (``olvido exponencial'').
 
-\subsubsubsection{AdaGrad}  %1:05
+\subsubsubsection{AdaGrad}
 AdaGrad consiste en dividir el paso por un factor proporcional a la norma de los gradientes acumulados hasta entonces.
 $$ \theta_{t+1}=\theta_t-\displaystyle \frac{\gamma_t}{\sqrt{v_t+\epsilon}}\nabla_\theta f(\theta,X_{t+1}) \,,$$
 para $\epsilon$ fijo y con
 $$ v_t = \displaystyle \sum^{t-1}_{k=1}\|\nabla_\theta f(\theta,X_k)\|^2\,,\espacio v_1=0\,.$$
-Este método va haciendo que los pasos sean más chicos si hemos dado pasos grandes, evitando salir de buenos mínimos locales. Análogamente, al llegar a una zona plana este factor aumentará, de modo que se pueda salir hacia mejores valores.
+Este método va haciendo que los pasos sean más chicos si hemos dado pasos grandes, evitando salir de buenos mínimos locales. Por otro lado, Adam (\textit{Adaptive momentum estimation}) es una variación de AdaGrad que considera una ventana de gradientes (con una recursión de mayor complejidad que no discutiremos). En este caso, al llegar a una zona plana este factor aumentará pues los últimos gradientes serán pequeños, de modo que aumenta la tasa y se podría salir hacia mejores valores.
 
 \subsubsubsection{Variante Estocástica (Stochastic Gradient Langevin Dynamics)}
 La siguiente variante ``agrega estocasticidad'' para explorar de mejor manera el espacio y evitar mínimos locales. Tomamos
 $$ \theta_{t+1}=\theta_t-\gamma_t\nabla_\theta f(\theta_t,X_{t+1}) + \beta_t \mathcal{N}_t(0,I_d)\,$$
-donde las $ \beta_t\sim \mathcal{N}_t(0,I_d)$ son independientes y representas ruido exógeno. Podemos tomar $\beta_t$ tendiendo a cero (por ejemplo $\beta_t=\sqrt{2\gamma t}$) o bien $\beta_t=\beta$ constante. Con este último, siempre se estará agregando ruido, lo cual puede ser útil para recorrer más el espacio de soluciones.
+donde las $\mathcal{N}_t(0,I_d)$ son independientes y representan ruido exógeno. Podemos tomar $\beta_t$ tendiendo a cero (por ejemplo $\beta_t=\sqrt{2\gamma t}$) o bien $\beta_t=\beta$ constante. Con este último, siempre se estará agregando ruido, lo cual puede ser útil para recorrer más el espacio de soluciones.
 % \newp Estos temas tienen mucha investigación actual. En particular acerca de algoritmos híbridos entre MCMC y Gradiente Estocástico.
 
 \subsubsubsection{Otras variantes}
@@ -368,7 +368,6 @@ Existen más variantes, muchas de las cuales son variantes del método de gradie
     \item RMSprop
     \item NAG (\textit{Nesterov Accelerated Gradient})
     \item AdaDelta
-    \item Adam (\textit{Adaptive momentum estimation})
     \item Adamax
 \end{enumerate}
 Hay teoría que indica cuando podría ser mejor uno u otro. En la práctica se recomienda probar con varios para encontrar la mejor alternativa.
